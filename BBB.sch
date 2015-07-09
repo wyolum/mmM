@@ -1,9 +1,9 @@
 EESchema Schematic File Version 2
+LIBS:uCm
 LIBS:Conn-raspberry
 LIBS:power
-LIBS:uControl
-LIBS:uControl_v3-cache
-EELAYER 27 0
+LIBS:uCm-cache
+EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
@@ -1412,7 +1412,7 @@ F 11 "http://www.digikey.com/product-detail/en/TXS0108EPWR/296-23011-1-ND/177530
 	-1   0    0    -1  
 $EndComp
 $Comp
-L R_10K R15
+L R R15
 U 1 1 52A6192E
 P 2850 4525
 F 0 "R15" H 2750 4675 50  0000 C CNN
@@ -1569,11 +1569,11 @@ F 3 "" H 3225 5825 60  0001 C CNN
 	1    3225 5825
 	-1   0    0    -1  
 $EndComp
-Text Notes 3125 5525 0    40   Italic 8
+Text Notes 3125 5625 0    40   Italic 8
 allows linking \nBBB 5V \nto uC_v3 5V
 Text Label 3125 5400 0    40   ~ 0
 5V0
-Text Notes 3150 4500 0    60   Italic 12
+Text Notes 3150 4700 0    60   Italic 12
 Enable/Disable U6\nfor comm betn\nBBB & uC_v3
 Text Label 2350 5075 0    40   ~ 0
 BBB_OE
@@ -1909,7 +1909,7 @@ F 3 "" H 2900 7500 60  0000 C CNN
 	0    -1   1    0   
 $EndComp
 $Comp
-L R_10K R26
+L R R26
 U 1 1 52C03DD8
 P 2450 7150
 F 0 "R26" H 2350 7300 50  0000 C CNN
@@ -1928,7 +1928,7 @@ F 11 "http://www.digikey.com/product-detail/en/CF18JT10K0/CF18JT10K0CT-ND/202276
 	1    0    0    -1  
 $EndComp
 $Comp
-L R_10K R27
+L R R27
 U 1 1 52C03DF0
 P 3350 7150
 F 0 "R27" H 3250 7300 50  0000 C CNN
@@ -2004,7 +2004,7 @@ Wire Notes Line
 	4150 6600 600  6600
 Wire Notes Line
 	600  6600 600  4000
-Text Notes 650  4100 0    50   ~ 10
+Text Notes 650  4200 0    50   ~ 10
 LEVEL TRANSLATOR\nATMega (5V) <> BBB (3V3)
 Wire Notes Line
 	600  6700 4150 6700
@@ -2014,9 +2014,9 @@ Wire Notes Line
 	4150 7750 600  7750
 Wire Notes Line
 	600  7750 600  6700
-Text Notes 650  6800 0    50   ~ 10
+Text Notes 650  6875 0    50   ~ 10
 Discrete LEVEL TRANSLATOR\nATMega (5V) <> BBB (3V3)
-Text Notes 650  7000 0    40   ~ 8
+Text Notes 650  7150 0    40   ~ 8
 (can use for SPI Select\nbetn ATMega <> BBB)
 Wire Notes Line
 	600  3800 1950 3800
@@ -2034,7 +2034,7 @@ Wire Notes Line
 	600  500  600  1000
 Wire Notes Line
 	600  1000 1950 1000
-Text Notes 650  3700 0    50   ~ 10
+Text Notes 650  3775 0    50   ~ 10
 BBB Buttons\nGeneral purpose
 Text Notes 650  600  0    50   ~ 10
 BBB I2C for Accelerometer

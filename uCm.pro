@@ -1,17 +1,5 @@
-update=01-Jan-14 7:40:15 PM
+update=2015 July 09, Thursday 22:47:03
 last_client=kicad
-[eeschema]
-version=1
-LibDir=
-NetFmtName=PcbnewAdvanced
-RptD_X=0
-RptD_Y=100
-RptLab=1
-LabSize=40
-[eeschema/libraries]
-LibName1=uControl_Libs/Conn-raspberry
-LibName2=uControl_Libs/power
-LibName3=uControl_Libs/uControl
 [cvpcb]
 version=1
 NetIExt=net
@@ -39,5 +27,25 @@ ModuleOutlineThickness="    0.152400"
 [pcbnew/libraries]
 LibDir=
 LibName1=uControl_Libs/uControl
+[eeschema]
+version=1
+LibDir=
+[eeschema/libraries]
+LibName1=uCm_Libs/uCm
+LibName2=uCm_Libs/Conn-raspberry
+LibName3=uCm_Libs/power
+[schematic_editor]
+version=1
+PageLayoutDescrFile=
+PlotDirectoryName=/Users/samatamahidharia/projects-git/uCm/uCm_gerber/
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=
+SpiceForceRefPrefix=0
+SpiceUseNetNumbers=0
+RptD_X=0
+RptD_Y=100
+RptLab=1
+LabSize=60
 [general]
 version=1
