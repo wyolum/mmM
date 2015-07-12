@@ -227,7 +227,7 @@ F 11 "http://www.digikey.com/product-detail/en/R82DC3100AA50J/399-5863-ND/257129
 	1    0    0    -1  
 $EndComp
 Text Notes 4550 3450 0    40   ~ 0
-SW INT1 (ex Blank)
+SW INT1
 $Comp
 L SCREW SC1
 U 1 1 50DADA2B
@@ -258,22 +258,9 @@ F8 "~MOSI" I L 10050 2125 40
 F9 "~SS" I L 10050 2225 40 
 F10 "PC3_Pr1" I L 10050 3725 40 
 F11 "3V3" B L 10050 1925 40 
-F12 "SCL" I L 10050 3325 40 
-F13 "SDA" I L 10050 3425 40 
-F14 "PC2_Pr2" I L 10050 3625 40 
-F15 "PD4_Valve2" I L 10050 2625 40 
 F16 "~PB1_Pump" I L 10050 3125 40 
-F17 "~PD6_Spk" I L 10050 2825 40 
 $EndSheet
 NoConn ~ 8650 5825
-Text Label 9600 3625 0    40   ~ 0
-PC2_Pr2
-Text Label 9600 2825 0    40   ~ 0
-~PD6_Spk
-Text Label 9600 3425 0    40   ~ 0
-SDA
-Text Label 9600 3325 0    40   ~ 0
-SCL
 Text Label 9600 1925 0    40   ~ 0
 3V3
 Text Notes 4550 4550 0    40   ~ 0
@@ -285,19 +272,19 @@ Pressure
 Text Notes 4550 4250 0    40   ~ 0
 CS #1 Pr Sensor
 Text Notes 4550 4150 0    40   ~ 0
-PUMP PWM (ex Pump ~PB1_IO_T)
+PUMP PWM
 Text Notes 4550 4050 0    40   ~ 0
-Blank (ex Pump PB0_IO_R)
+Blank
 Text Notes 4550 3850 0    40   ~ 0
-Blank (ex Pump PD7_IO_X)
+Blank
 Text Notes 4550 3750 0    40   ~ 0
-Speaker PWM (ex Blank)
+Blank
 Text Notes 4550 3650 0    40   ~ 0
 Valve #1 PWM
 Text Notes 4550 3550 0    40   ~ 0
-Valve #2 (ex Flow_Rx)
+Blank
 Text Notes 4550 3350 0    40   ~ 0
-SW INT0 (ex Flow_Tx)
+SW INT0
 Text Label 9600 3125 0    40   ~ 0
 ~PB1_Pump
 Text Label 9600 1725 0    40   ~ 0
@@ -314,8 +301,6 @@ Text Label 9600 2425 0    40   ~ 0
 MISO
 Text Label 9600 3725 0    40   ~ 0
 PC3_Pr1
-Text Label 9600 2625 0    40   ~ 0
-PD4_Valve2
 Text Label 9600 2725 0    40   ~ 0
 ~PD5_Valve
 Text Label 9600 2025 0    40   ~ 0
@@ -428,7 +413,7 @@ RESET
 Text Label 4125 3650 0    40   ~ 0
 ~PD5_Valve
 Text Label 4125 3750 0    40   ~ 0
-~PD6_Spk
+~PD6
 Text Label 4125 3450 0    40   ~ 0
 ~PD3
 Text Label 4125 4050 0    40   ~ 0
@@ -440,7 +425,7 @@ PC0
 Text Label 4125 2350 0    40   ~ 0
 PC1
 Text Label 4125 2450 0    40   ~ 0
-PC2_Pr2
+PC2
 Text Label 4125 2550 0    40   ~ 0
 PC3_Pr1
 Text Label 4125 3150 0    40   ~ 0
@@ -452,7 +437,7 @@ PD2
 Text Label 4125 3850 0    40   ~ 0
 PD7
 Text Label 4125 3550 0    40   ~ 0
-PD4_Valve2
+PD4
 Text Label 4800 650  0    40   ~ 0
 5V0
 Text Label 4125 2650 0    40   ~ 0
@@ -479,7 +464,7 @@ F 3 "" H 2900 3250 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 Text Notes 4550 2250 0    40   ~ 0
-Blank (ex Pulse)
+Blank
 Text Notes 4550 2350 0    40   ~ 0
 Blank
 $Comp
@@ -498,15 +483,9 @@ Wire Wire Line
 Wire Notes Line
 	7025 6300 8000 6300
 Wire Wire Line
-	9600 2825 10050 2825
-Wire Wire Line
-	9600 3325 10050 3325
-Wire Wire Line
 	9600 3125 10050 3125
 Wire Wire Line
 	9600 2725 10050 2725
-Wire Wire Line
-	9600 2625 10050 2625
 Wire Wire Line
 	9600 3725 10050 3725
 Wire Wire Line
@@ -701,10 +680,6 @@ Wire Wire Line
 Wire Wire Line
 	9600 1925 10050 1925
 Wire Wire Line
-	9600 3425 10050 3425
-Wire Wire Line
-	9600 3625 10050 3625
-Wire Wire Line
 	10050 825  9775 825 
 Wire Notes Line
 	8000 4775 7025 4775
@@ -729,7 +704,7 @@ Wire Wire Line
 	725  2475 725  2550
 Connection ~ 975  2550
 Text Notes 4550 2450 0    40   ~ 0
-Analog, from Absolute Pr Sensor
+Blank
 Text Notes 4550 2550 0    40   ~ 0
 Analog, from Gage Pr Sensor
 Text Notes 4550 2850 0    40   ~ 0
@@ -1378,4 +1353,37 @@ Wire Wire Line
 	7500 2875 7775 2875
 Wire Wire Line
 	7500 2975 7775 2975
+$Comp
+L I_O B7
+U 1 1 55A3A3EC
+P 4275 2450
+F 0 "B7" H 4355 2450 40  0000 L CNN
+F 1 "PC1" H 4275 2505 30  0001 C CNN
+F 2 "I_O" H 4275 2450 60  0001 C CNN
+F 3 "" H 4275 2450 60  0000 C CNN
+	1    4275 2450
+	1    0    0    -1  
+$EndComp
+$Comp
+L I_O B13
+U 1 1 55A3A7AC
+P 4275 3550
+F 0 "B13" H 4355 3550 40  0000 L CNN
+F 1 "PB0" H 4275 3605 30  0001 C CNN
+F 2 "I_O" H 4275 3550 60  0001 C CNN
+F 3 "" H 4275 3550 60  0000 C CNN
+	1    4275 3550
+	1    0    0    -1  
+$EndComp
+$Comp
+L I_O B14
+U 1 1 55A3B103
+P 4275 3750
+F 0 "B14" H 4355 3750 40  0000 L CNN
+F 1 "PB0" H 4275 3805 30  0001 C CNN
+F 2 "I_O" H 4275 3750 60  0001 C CNN
+F 3 "" H 4275 3750 60  0000 C CNN
+	1    4275 3750
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
