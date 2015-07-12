@@ -7,7 +7,7 @@ EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 4 5
+Sheet 4 4
 Title "uControl"
 Date "1 jan 2014"
 Rev "1"
@@ -226,10 +226,10 @@ Text HLabel 9050 4500 2    60   Input ~ 0
 Text HLabel 9050 4350 2    60   Input ~ 0
 BAT
 $Comp
-L +BATT #PWR019
+L +BATT #PWR017
 U 1 1 4EC101F0
 P 5300 1850
-F 0 "#PWR019" H 5300 1800 20  0001 C CNN
+F 0 "#PWR017" H 5300 1800 20  0001 C CNN
 F 1 "+BATT" H 5300 1950 30  0000 C CNN
 F 2 "" H 5300 1850 60  0001 C CNN
 F 3 "" H 5300 1850 60  0001 C CNN
