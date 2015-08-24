@@ -1,0 +1,16 @@
+(module vite_3mm (layer F.Cu) (tedit 50D9932E)
+  (descr "vite 2,5mm")
+  (attr smd)
+  (fp_text reference SC1 (at 0 1.0795) (layer F.SilkS) hide
+    (effects (font (size 0.762 0.762) (thickness 0.1016)))
+  )
+  (fp_text value SCREW (at 0.0635 -0.381) (layer F.SilkS) hide
+    (effects (font (size 0.762 0.762) (thickness 0.1016)))
+  )
+  (pad 1 thru_hole circle (at 0 0) (size 6.096 6.096) (drill 3.048) (layers *.Cu *.SilkS *.Mask))
+  (model "uControl_Libs/3D Modules/vite_2mm5.wrl"
+    (at (xyz 0 0 0))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 0 0))
+  )
+)

@@ -1,57 +1,11 @@
-EESchema-LIBRARY Version 2.3  Date: Saturday 14 December 2013 11:39:40 PM IST
+EESchema-LIBRARY Version 2.3
 #encoding utf-8
 #
-# Abso_Pr
+# C-RESCUE-interface
 #
-DEF Abso_Pr P 0 40 Y N 1 F N
-F0 "P" -50 0 40 V V C CNN
-F1 "Abso_Pr" 50 0 40 V V C CNN
-F2 "" 0 0 60 H V C CNN
-F3 "" 0 0 60 H V C CNN
-F4 "Amplified pressure sensor" 0 0 60 H I L CNN
-F5 "HDI Series" 0 100 60 H I L CNN
-F6 "SMD, 1 port axial" 0 200 60 H I L CNN
-F7 "SensorTechnics" 0 300 60 H I L CNN
-F8 "HDIB002AUY8H5" 0 400 60 H I L CNN
-F9 "SensorTechnics" 0 500 60 H I L CNN
-F10 "HDIB002AUY8H5" 0 600 60 H I L CNN
-F11 "http://www.sensortechnics.com/en/products/pressure-sensors-and-transmitters/amplified-pressure-sensors/hdi/" 0 700 60 H I L CNN
-DRAW
-S -100 300 100 -300 0 1 0 N
-X P1 1 -350 250 250 R 50 50 1 1 P I
-X P2 2 -350 150 250 R 50 50 1 1 P I
-X P3 3 -350 50 250 R 50 50 1 1 P I
-X P4 4 -350 -50 250 R 50 50 1 1 P I
-X P5 5 -350 -150 250 R 50 50 1 1 P I
-X P6 6 -350 -250 250 R 50 50 1 1 P I
-ENDDRAW
-ENDDEF
-#
-# BUZZER
-#
-DEF BUZZER SP 0 0 N Y 1 F N
-F0 "SP" 50 185 40 H V C CNN
-F1 "BUZZER" 110 -195 40 H V C CNN
-F2 "" 0 0 60 H V C CNN
-F3 "" 0 0 60 H V C CNN
-DRAW
-S -100 100 0 -100 0 1 0 N
-S -85 15 -15 -15 0 1 0 N
-S -70 25 -30 30 0 1 0 F
-S -30 -25 -70 -30 0 1 0 F
-S 0 150 50 -150 0 1 0 F
-P 2 0 1 0  -50 -30  -50 -70 N
-P 2 0 1 0  -50 30  -50 60 N
-X 1 1 -300 50 200 R 40 40 1 1 I
-X 2 2 -300 -50 200 R 40 40 1 1 I
-ENDDRAW
-ENDDEF
-#
-# C
-#
-DEF C C 0 10 N Y 1 F N
+DEF C-RESCUE-interface C 0 10 N Y 1 F N
 F0 "C" 0 100 40 H V L CNN
-F1 "C" 6 -85 40 H V L CNN
+F1 "C-RESCUE-interface" 6 -85 40 H V L CNN
 F2 "" 38 -150 30 H V C CNN
 F3 "" 0 0 60 H V C CNN
 $FPLIST
@@ -64,36 +18,6 @@ P 2 0 1 20  -80 -30  80 -30 N
 P 2 0 1 20  -80 30  80 30 N
 X ~ 1 0 200 170 D 40 40 1 1 P
 X ~ 2 0 -200 170 U 40 40 1 1 P
-ENDDRAW
-ENDDEF
-#
-# C_POL_1
-#
-DEF C_POL_1 C 0 10 N N 1 F N
-F0 "C" -100 50 40 H V L CNN
-F1 "C_POL_1" 25 -125 40 H V L CNN
-F2 "" 0 0 60 H V C CNN
-F3 "" 0 0 60 H V C CNN
-F4 "CAP ALUM 100UF 16V 20% RADIAL" 0 200 60 H I L CNN
-F5 "100u,16V" 0 300 60 H I L CNN
-F6 "Radial, Can, 6.3mm dia" 0 400 60 H I L CNN
-F7 "Panasonic Electronic Components" 0 500 60 H I L CNN
-F8 "ECE-A1CKA101" 0 600 60 H I L CNN
-F9 "Digikey" 0 700 60 H I L CNN
-F10 "P833-ND" 0 800 60 H I L CNN
-F11 "http://www.digikey.com/product-detail/en/ECE-A1CKA101/P833-ND/44757?cur=USD" 0 900 60 H I L CNN
-$FPLIST
- SM*
- C?
- C1-1
-$ENDFPLIST
-DRAW
-T 0 35 60 60 0 0 0 +  Normal 0 C C
-S -75 -50 75 -75 0 1 0 F
-S -75 0 75 -25 0 1 0 N
-S 25 -75 25 -75 0 1 0 N
-X + 1 0 100 100 D 40 40 1 1 P
-X - 2 0 -150 100 U 40 40 1 1 P
 ENDDRAW
 ENDDEF
 #
@@ -142,6 +66,36 @@ X P4 4 -350 -150 250 R 50 50 1 1 P I
 ENDDRAW
 ENDDEF
 #
+# C_POL_1
+#
+DEF C_POL_1 C 0 10 N N 1 F N
+F0 "C" -100 50 40 H V L CNN
+F1 "C_POL_1" 25 -125 40 H V L CNN
+F2 "" 0 0 60 H V C CNN
+F3 "" 0 0 60 H V C CNN
+F4 "CAP ALUM 100UF 16V 20% RADIAL" 0 200 60 H I L CNN
+F5 "100u,16V" 0 300 60 H I L CNN
+F6 "Radial, Can, 6.3mm dia" 0 400 60 H I L CNN
+F7 "Panasonic Electronic Components" 0 500 60 H I L CNN
+F8 "ECE-A1CKA101" 0 600 60 H I L CNN
+F9 "Digikey" 0 700 60 H I L CNN
+F10 "P833-ND" 0 800 60 H I L CNN
+F11 "http://www.digikey.com/product-detail/en/ECE-A1CKA101/P833-ND/44757?cur=USD" 0 900 60 H I L CNN
+$FPLIST
+ SM*
+ C?
+ C1-1
+$ENDFPLIST
+DRAW
+T 0 35 60 60 0 0 0 +  Normal 0 C C
+S -75 -50 75 -75 0 1 0 F
+S -75 0 75 -25 0 1 0 N
+S 25 -75 25 -75 0 1 0 N
+X + 1 0 100 100 D 40 40 1 1 P
+X - 2 0 -150 100 U 40 40 1 1 P
+ENDDRAW
+ENDDEF
+#
 # D_1N4001
 #
 DEF D_1N4001 D 0 40 N N 1 F N
@@ -169,27 +123,16 @@ X K 2 200 0 150 L 40 40 1 1 P
 ENDDRAW
 ENDDEF
 #
-# FlowMeter
+# GND-RESCUE-interface
 #
-DEF FlowMeter P 0 40 Y N 1 F N
-F0 "P" -50 0 40 V V C CNN
-F1 "FlowMeter" 50 0 40 V V C CNN
+DEF ~GND-RESCUE-interface #PWR 0 0 Y Y 1 F P
+F0 "#PWR" 0 0 30 H I C CNN
+F1 "GND-RESCUE-interface" 0 -70 30 H I C CNN
 F2 "" 0 0 60 H V C CNN
 F3 "" 0 0 60 H V C CNN
-F4 "Mass Flow Meter for Gases" 0 100 60 H I L CNN
-F5 "CMOSens EM1" 0 200 60 H I L CNN
-F6 "G3/8 thread (BSPP" 0 300 60 H I L CNN
-F7 "Sensirion" 0 400 60 H I L CNN
-F8 "EM1NR4R0V_1A" 0 500 60 H I L CNN
-F9 "Sensirion" 0 600 60 H I L CNN
-F10 "EM1NR4R0V_1A" 0 700 60 H I L CNN
-F11 "http://www.sensirion.com/en/products/mass-flow-meters-for-gases/mass-flow-meter-em1/" 0 800 60 H I L CNN
 DRAW
-S -100 200 100 -200 0 1 0 N
-X P1 1 -350 150 250 R 50 50 1 1 P I
-X P2 2 -350 50 250 R 50 50 1 1 P I
-X P3 3 -350 -50 250 R 50 50 1 1 P I
-X P4 4 -350 -150 250 R 50 50 1 1 P I
+P 4 0 1 0  -50 0  0 -50  50 0  -50 0 N
+X GND 1 0 0 0 U 30 30 1 1 W N
 ENDDRAW
 ENDDEF
 #
@@ -218,19 +161,6 @@ X P5 5 -350 -50 250 R 50 50 1 1 P I
 X P6 6 -350 -150 250 R 50 50 1 1 P I
 X P7 7 -350 -250 250 R 50 50 1 1 P I
 X P8 8 -350 -350 250 R 50 50 1 1 P I
-ENDDRAW
-ENDDEF
-#
-# GND
-#
-DEF ~GND #PWR 0 0 Y Y 1 F P
-F0 "#PWR" 0 0 30 H I C CNN
-F1 "GND" 0 -70 30 H I C CNN
-F2 "" 0 0 60 H V C CNN
-F3 "" 0 0 60 H V C CNN
-DRAW
-P 4 0 1 0  -50 0  0 -50  50 0  -50 0 N
-X GND 1 0 0 0 U 30 30 1 1 W N
 ENDDRAW
 ENDDEF
 #
@@ -327,30 +257,21 @@ X 6 6 -350 -250 250 R 60 60 1 1 P I
 ENDDRAW
 ENDDEF
 #
-# R_10k
+# R
 #
-DEF R_10k R 0 0 N Y 1 F N
-F0 "R" 95 0 40 V V C CNN
-F1 "R_10k" 5 0 40 V V C CNN
-F2 "" 0 0 60 H V C CNN
-F3 "" 0 0 60 H V C CNN
-F4 "RES 10K OHM 1/8W 5% CF AXIAL" 0 100 60 H I L CNN
-F5 "0.125W, 1/8W" 0 200 60 H I L CNN
-F6 "Axial" 0 300 60 H I L CNN
-F7 "Stackpole Electronics Inc" 0 400 60 H I L CNN
-F8 "CF18JT10K0" 0 500 60 H I L CNN
-F9 "Digikey" 0 600 60 H I L CNN
-F10 "CF18JT10K0CT-ND" 0 700 60 H I L CNN
-F11 "http://www.digikey.com/product-detail/en/CF18JT10K0/CF18JT10K0CT-ND/2022766?cur=USD" 0 800 60 H I L CNN
+DEF R R 0 0 N Y 1 F N
+F0 "R" 80 0 50 V V C CNN
+F1 "R" 0 0 50 V V C CNN
+F2 "" -70 0 30 V V C CNN
+F3 "" 0 0 30 H V C CNN
 $FPLIST
- R?
- SM0603
- SM0805
+ R_*
+ Resistor_*
 $ENDFPLIST
 DRAW
-S -50 125 50 -125 0 1 0 N
-X ~ 1 0 250 125 D 40 40 1 1 P
-X ~ 2 0 -250 125 U 60 60 1 1 P
+S -40 -100 40 100 0 1 10 N
+X ~ 1 0 150 50 D 60 60 1 1 P
+X ~ 2 0 -150 50 U 60 60 1 1 P
 ENDDRAW
 ENDDEF
 #

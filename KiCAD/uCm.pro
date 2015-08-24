@@ -1,4 +1,4 @@
-update=2015 July 12, Sunday 22:48:23
+update=Sat Aug 22 18:23:13 2015
 last_client=kicad
 [cvpcb]
 version=1
@@ -37,15 +37,12 @@ LibName3=uCm_Libs/power
 [schematic_editor]
 version=1
 PageLayoutDescrFile=
-PlotDirectoryName=/Users/samatamahidharia/projects-git/uCm/uCm_gerber/
+PlotDirectoryName=uCm_gerber/
 SubpartIdSeparator=0
 SubpartFirstId=65
-NetFmtName=
+NetFmtName=Pcbnew
 SpiceForceRefPrefix=0
 SpiceUseNetNumbers=0
-RptD_X=0
-RptD_Y=100
-RptLab=1
 LabSize=60
 [general]
 version=1

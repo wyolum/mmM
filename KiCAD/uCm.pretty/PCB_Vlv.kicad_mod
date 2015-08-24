@@ -1,0 +1,22 @@
+(module PCB_Vlv (layer F.Cu) (tedit 50DAE702)
+  (fp_text reference PCB5 (at -2.413 0) (layer F.SilkS) hide
+    (effects (font (size 1.016 1.016) (thickness 0.127)))
+  )
+  (fp_text value PCB_Vlv (at 4.5212 0) (layer F.SilkS) hide
+    (effects (font (size 1.016 1.016) (thickness 0.127)))
+  )
+  (fp_line (start 0 0) (end 0.508 0) (layer F.SilkS) (width 0.127))
+  (fp_line (start 0 0) (end -0.508 0) (layer F.SilkS) (width 0.127))
+  (fp_line (start 0 0) (end 0 0.508) (layer F.SilkS) (width 0.127))
+  (fp_line (start 0 0) (end 0 -0.508) (layer F.SilkS) (width 0.127))
+  (model "uControl_Libs/3D Modules/PCB_Vlv.wrl"
+    (at (xyz 0 0 -0.03))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 0 0))
+  )
+  (model "uControl_Libs/3D Modules/uC_Power.wrl"
+    (at (xyz 0 0 0))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 0 0))
+  )
+)
