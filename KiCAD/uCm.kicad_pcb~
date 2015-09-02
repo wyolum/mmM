@@ -3,12 +3,12 @@
   (general
     (links 266)
     (no_connects 266)
-    (area 110.936499 47.936499 210.063501 170.100001)
+    (area 110.936499 47.936499 210.274786 170.100001)
     (thickness 1.6)
-    (drawings 14)
+    (drawings 16)
     (tracks 0)
     (zones 0)
-    (modules 100)
+    (modules 102)
     (nets 66)
   )
 
@@ -761,14 +761,14 @@
   )
 
   (module uCm:c_0805 (layer F.Cu) (tedit 520F464D) (tstamp 55D870F9)
-    (at 146 123.5)
+    (at 146 128 180)
     (descr "SMT capacitor, 0805")
     (path /50B2116F/50E2964D)
     (attr smd)
-    (fp_text reference C13 (at 0 -1.651) (layer F.SilkS)
+    (fp_text reference C13 (at 0 -1.651 180) (layer F.SilkS)
       (effects (font (size 0.8 0.8) (thickness 0.1)))
     )
-    (fp_text value 100nF (at 0 1.7145) (layer F.SilkS) hide
+    (fp_text value 100nF (at 0 1.7145 180) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.1)))
     )
     (fp_line (start 0.2 0.7) (end -0.2 0.7) (layer F.SilkS) (width 0.127))
@@ -780,9 +780,9 @@
     (fp_line (start -1.7 -1) (end -1.7 1) (layer F.SilkS) (width 0.127))
     (fp_line (start -1.7 1) (end -1 1) (layer F.SilkS) (width 0.127))
     (fp_line (start -1.7 -1) (end -1 -1) (layer F.SilkS) (width 0.127))
-    (pad 1 smd rect (at 0.9 0) (size 1.15 1.45) (layers F.Cu F.Paste F.Mask)
+    (pad 1 smd rect (at 0.9 0 180) (size 1.15 1.45) (layers F.Cu F.Paste F.Mask)
       (net 3 /Interface/+Vlv))
-    (pad 2 smd rect (at -0.9 0) (size 1.15 1.45) (layers F.Cu F.Paste F.Mask)
+    (pad 2 smd rect (at -0.9 0 180) (size 1.15 1.45) (layers F.Cu F.Paste F.Mask)
       (net 36 GND))
     (model "/home/anool/projects-git/uCm/KiCAD/uCm_Libs/3D Modules/c_0805.wrl"
       (at (xyz 0 0 0))
@@ -854,7 +854,7 @@
   )
 
   (module uCm:c_0805 (layer F.Cu) (tedit 520F464D) (tstamp 55D87108)
-    (at 175 153 270)
+    (at 175.206 152.873 270)
     (descr "SMT capacitor, 0805")
     (path /4FC07407/52ACA876)
     (attr smd)
@@ -885,7 +885,7 @@
   )
 
   (module uCm:C_1210 (layer F.Cu) (tedit 5415D85D) (tstamp 55D8710D)
-    (at 172 153 270)
+    (at 172.031 152.873 270)
     (descr "Capacitor SMD 1210, reflow soldering, AVX (see smccp.pdf)")
     (tags "capacitor 1210")
     (path /4FC07407/52ACA882)
@@ -914,7 +914,7 @@
   )
 
   (module uCm:c_0805 (layer F.Cu) (tedit 520F464D) (tstamp 55D87112)
-    (at 169.5 158.5 90)
+    (at 169.3005 158.588 90)
     (descr "SMT capacitor, 0805")
     (path /4FC07407/52ACA8A2)
     (attr smd)
@@ -945,7 +945,7 @@
   )
 
   (module uCm:c_0805 (layer F.Cu) (tedit 520F464D) (tstamp 55D87117)
-    (at 172 158.5 90)
+    (at 172.2215 158.588 90)
     (descr "SMT capacitor, 0805")
     (path /4FC07407/52ACA8A8)
     (attr smd)
@@ -976,7 +976,7 @@
   )
 
   (module uCm:C_ELCO_SMD (layer F.Cu) (tedit 4FDC3BD3) (tstamp 55D8711C)
-    (at 174.5 165.5 180)
+    (at 174.317 165.3825 180)
     (path /4FC07407/52ACA8CC)
     (attr smd)
     (fp_text reference C22 (at -3.175 2.921 180) (layer F.SilkS)
@@ -1044,7 +1044,7 @@
   )
 
   (module uCm:C_ELCO_SMD (layer F.Cu) (tedit 4FDC3BD3) (tstamp 55D87126)
-    (at 168 165.5 180)
+    (at 168.0305 165.3825 180)
     (path /4FC07407/52ACA8C6)
     (attr smd)
     (fp_text reference C26 (at -3.175 2.921 180) (layer F.SilkS)
@@ -1180,7 +1180,7 @@
   )
 
   (module uCm:C_1206 (layer F.Cu) (tedit 5415D7BD) (tstamp 55D8713A)
-    (at 166.5 158.5 90)
+    (at 166.443 158.588 90)
     (descr "Capacitor SMD 1206, reflow soldering, AVX (see smccp.pdf)")
     (tags "capacitor 1206")
     (path /4FC07407/52ACA87C)
@@ -1209,14 +1209,14 @@
   )
 
   (module uCm:c_0805 (layer F.Cu) (tedit 520F464D) (tstamp 55D8713F)
-    (at 146 135)
+    (at 146 139.5 180)
     (descr "SMT capacitor, 0805")
     (path /50B2116F/55D878FF)
     (attr smd)
-    (fp_text reference C31 (at 0 -1.651) (layer F.SilkS)
+    (fp_text reference C31 (at 0 -1.651 180) (layer F.SilkS)
       (effects (font (size 0.8 0.8) (thickness 0.1)))
     )
-    (fp_text value 100nF (at 0 1.7145) (layer F.SilkS) hide
+    (fp_text value 100nF (at 0 1.7145 180) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.1)))
     )
     (fp_line (start 0.2 0.7) (end -0.2 0.7) (layer F.SilkS) (width 0.127))
@@ -1228,9 +1228,9 @@
     (fp_line (start -1.7 -1) (end -1.7 1) (layer F.SilkS) (width 0.127))
     (fp_line (start -1.7 1) (end -1 1) (layer F.SilkS) (width 0.127))
     (fp_line (start -1.7 -1) (end -1 -1) (layer F.SilkS) (width 0.127))
-    (pad 1 smd rect (at 0.9 0) (size 1.15 1.45) (layers F.Cu F.Paste F.Mask)
+    (pad 1 smd rect (at 0.9 0 180) (size 1.15 1.45) (layers F.Cu F.Paste F.Mask)
       (net 4 /Interface/+Vlv2))
-    (pad 2 smd rect (at -0.9 0) (size 1.15 1.45) (layers F.Cu F.Paste F.Mask)
+    (pad 2 smd rect (at -0.9 0 180) (size 1.15 1.45) (layers F.Cu F.Paste F.Mask)
       (net 36 GND))
     (model "/home/anool/projects-git/uCm/KiCAD/uCm_Libs/3D Modules/c_0805.wrl"
       (at (xyz 0 0 0))
@@ -1240,7 +1240,7 @@
   )
 
   (module uCm:c_0805 (layer F.Cu) (tedit 520F464D) (tstamp 55D87144)
-    (at 149 153 270)
+    (at 149.219 152.873 270)
     (descr "SMT capacitor, 0805")
     (path /4FC07407/52ACCF2C)
     (attr smd)
@@ -1271,7 +1271,7 @@
   )
 
   (module uCm:C_1210 (layer F.Cu) (tedit 5415D85D) (tstamp 55D87149)
-    (at 146 153 270)
+    (at 146.044 152.873 270)
     (descr "Capacitor SMD 1210, reflow soldering, AVX (see smccp.pdf)")
     (tags "capacitor 1210")
     (path /4FC07407/52ACCF38)
@@ -1300,7 +1300,7 @@
   )
 
   (module uCm:c_0805 (layer F.Cu) (tedit 520F464D) (tstamp 55D8714E)
-    (at 143.5 158.5 90)
+    (at 143.3135 158.588 90)
     (descr "SMT capacitor, 0805")
     (path /4FC07407/52ACCF57)
     (attr smd)
@@ -1331,7 +1331,7 @@
   )
 
   (module uCm:c_0805 (layer F.Cu) (tedit 520F464D) (tstamp 55D87153)
-    (at 146 158.5 90)
+    (at 146.2345 158.588 90)
     (descr "SMT capacitor, 0805")
     (path /4FC07407/52ACCF5D)
     (attr smd)
@@ -1362,7 +1362,7 @@
   )
 
   (module uCm:C_ELCO_SMD (layer F.Cu) (tedit 4FDC3BD3) (tstamp 55D87158)
-    (at 148.5 165.5 180)
+    (at 148.33 165.3825 180)
     (path /4FC07407/52ACCF75)
     (attr smd)
     (fp_text reference C36 (at -3.175 2.921 180) (layer F.SilkS)
@@ -1399,7 +1399,7 @@
   )
 
   (module uCm:C_ELCO_SMD (layer F.Cu) (tedit 4FDC3BD3) (tstamp 55D8715D)
-    (at 142 165.5 180)
+    (at 142.0435 165.3825 180)
     (path /4FC07407/52ACCF6F)
     (attr smd)
     (fp_text reference C37 (at -3.175 2.921 180) (layer F.SilkS)
@@ -1436,7 +1436,7 @@
   )
 
   (module uCm:C_1206 (layer F.Cu) (tedit 5415D7BD) (tstamp 55D87162)
-    (at 140.5 158.5 90)
+    (at 140.456 158.588 90)
     (descr "Capacitor SMD 1206, reflow soldering, AVX (see smccp.pdf)")
     (tags "capacitor 1206")
     (path /4FC07407/52ACCF32)
@@ -1465,7 +1465,7 @@
   )
 
   (module uCm:diode-DO214AC (layer F.Cu) (tedit 52C311E3) (tstamp 55D87167)
-    (at 140 128.5 270)
+    (at 140 123 270)
     (descr DIODE)
     (tags DIODE)
     (path /50B2116F/50E2A152)
@@ -1549,15 +1549,15 @@
   )
 
   (module uCm:diode-DO214AC (layer F.Cu) (tedit 52C311E3) (tstamp 55D87171)
-    (at 199.5 160 180)
+    (at 180.453 165.442 90)
     (descr DIODE)
     (tags DIODE)
     (path /4FC07407/50E2A12F)
     (attr smd)
-    (fp_text reference D4 (at 1.751 -2.3735 270) (layer F.SilkS)
+    (fp_text reference D4 (at 1.751 -2.3735 180) (layer F.SilkS)
       (effects (font (size 0.889 0.889) (thickness 0.127)))
     )
-    (fp_text value S1D-13-F (at 0.354 -4.1515 270) (layer F.SilkS) hide
+    (fp_text value S1D-13-F (at 0.354 -4.1515 180) (layer F.SilkS) hide
       (effects (font (size 0.889 0.889) (thickness 0.127)))
     )
     (fp_line (start 0.65 0) (end -0.65 -0.8) (layer F.SilkS) (width 0.1524))
@@ -1579,9 +1579,9 @@
     (fp_line (start 2.25 1.25) (end -2.5 1.25) (layer F.SilkS) (width 0.127))
     (fp_line (start -2.5 1.25) (end -2.5 0.9) (layer F.SilkS) (width 0.127))
     (fp_line (start -2.5 -1.25) (end 2.25 -1.25) (layer F.SilkS) (width 0.127))
-    (pad 2 smd rect (at 2 0 180) (size 2.5 1.7) (layers F.Cu F.Paste F.Mask)
+    (pad 2 smd rect (at 2 0 90) (size 2.5 1.7) (layers F.Cu F.Paste F.Mask)
       (net 7 /Interface/12V))
-    (pad 1 smd rect (at -2 0 180) (size 2.5 1.7) (layers F.Cu F.Paste F.Mask)
+    (pad 1 smd rect (at -2 0 90) (size 2.5 1.7) (layers F.Cu F.Paste F.Mask)
       (net 29 /pwr/PWR_IN))
     (model "/home/anool/projects-git/uCm/KiCAD/uCm_Libs/3D Modules/do214aa.wrl"
       (at (xyz 0 0 0))
@@ -1719,7 +1719,7 @@
   )
 
   (module uCm:diode-DO214AC (layer F.Cu) (tedit 52C311E3) (tstamp 55D8718A)
-    (at 140 140 270)
+    (at 140 134.5 270)
     (descr DIODE)
     (tags DIODE)
     (path /50B2116F/55D878F0)
@@ -1761,7 +1761,7 @@
   )
 
   (module uCm:Header_2 (layer F.Cu) (tedit 51E0EF15) (tstamp 55D87195)
-    (at 166.5 153 270)
+    (at 166.443 153.127 270)
     (descr "Connecteur 2 pins")
     (tags "CONN DEV")
     (path /4FC07407/52ACA888)
@@ -1798,7 +1798,7 @@
   )
 
   (module uCm:Header_2 (layer F.Cu) (tedit 51E0EF15) (tstamp 55D8719A)
-    (at 140.5 153 270)
+    (at 140.456 153.127 270)
     (descr "Connecteur 2 pins")
     (tags "CONN DEV")
     (path /4FC07407/52ACCF3E)
@@ -1835,7 +1835,7 @@
   )
 
   (module uCm:Inductor_SMD3 (layer F.Cu) (tedit 5299A390) (tstamp 55D8719F)
-    (at 181.5 153)
+    (at 181.683 152.873)
     (path /4FC07407/52ACA88F)
     (attr smd)
     (fp_text reference L1 (at -0.012 -2.712) (layer F.SilkS)
@@ -1860,7 +1860,7 @@
   )
 
   (module uCm:Inductor_SMD3 (layer F.Cu) (tedit 5299A390) (tstamp 55D871A4)
-    (at 155.5 153)
+    (at 155.696 152.873)
     (path /4FC07407/52ACCF45)
     (attr smd)
     (fp_text reference L2 (at -0.012 -2.712) (layer F.SilkS)
@@ -2181,7 +2181,7 @@
       (net 55 /Interface/SDA))
     (pad 4 thru_hole rect (at 3.81 0 270) (size 1.778 1.778) (drill 1.016) (layers *.Cu *.Mask F.SilkS)
       (net 36 GND))
-    (model "/home/anool/projects-git/uCm/KiCAD/uCm_Libs/3D Modules/pin_strip_4.wrl"
+    (model "/home/anool/projects-git/uCm/KiCAD/uCm_Libs/3D Modules/pin_strip_4-90.wrl"
       (at (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -2226,7 +2226,7 @@
       (net 55 /Interface/SDA))
     (pad 4 thru_hole rect (at 3.81 0 270) (size 1.778 1.778) (drill 1.016) (layers *.Cu *.Mask F.SilkS)
       (net 36 GND))
-    (model "/home/anool/projects-git/uCm/KiCAD/uCm_Libs/3D Modules/pin_strip_4.wrl"
+    (model "/home/anool/projects-git/uCm/KiCAD/uCm_Libs/3D Modules/pin_strip_4-90.wrl"
       (at (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -2234,7 +2234,7 @@
   )
 
   (module uCm:Header_3 (layer F.Cu) (tedit 51E0EF4A) (tstamp 55D871DA)
-    (at 152.5 128.5 90)
+    (at 152.5 123 90)
     (descr "Connecteur 6 pins")
     (tags "CONN DEV")
     (path /50B2116F/50B75AE4)
@@ -2279,7 +2279,7 @@
   )
 
   (module uCm:Header_2 (layer F.Cu) (tedit 51E0EF15) (tstamp 55D871E0)
-    (at 187 153 90)
+    (at 187 152 90)
     (descr "Connecteur 2 pins")
     (tags "CONN DEV")
     (path /4FC07407/521B769C)
@@ -2316,7 +2316,7 @@
   )
 
   (module uCm:X_Valve_2 (layer F.Cu) (tedit 5230F9BF) (tstamp 55D871E5)
-    (at 134 128.5 180)
+    (at 134 123 180)
     (path /50B2116F/50E2AFA0)
     (attr smd)
     (fp_text reference P14 (at 9.271 6.985 180) (layer F.SilkS)
@@ -2364,7 +2364,7 @@
       (net 5 /Interface/-Vlv))
     (model "/home/anool/projects-git/uCm/KiCAD/uCm_Libs/3D Modules/X_Valve.wrl"
       (at (xyz 0 0 0))
-      (scale (xyz 0.9399999999999999 1 1))
+      (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
   )
@@ -2402,7 +2402,7 @@
   )
 
   (module uCm:Header_3 (layer F.Cu) (tedit 51E0EF4A) (tstamp 55D87206)
-    (at 152.5 140 90)
+    (at 152.5 134.5 90)
     (descr "Connecteur 6 pins")
     (tags "CONN DEV")
     (path /50B2116F/55D8790A)
@@ -2447,7 +2447,7 @@
   )
 
   (module uCm:X_Valve_2 (layer F.Cu) (tedit 5230F9BF) (tstamp 55D8720C)
-    (at 134 140 180)
+    (at 134 134.5 180)
     (path /50B2116F/55D878E1)
     (attr smd)
     (fp_text reference P38 (at 9.271 6.985 180) (layer F.SilkS)
@@ -2495,13 +2495,13 @@
       (net 6 /Interface/-Vlv2))
     (model "/home/anool/projects-git/uCm/KiCAD/uCm_Libs/3D Modules/X_Valve.wrl"
       (at (xyz 0 0 0))
-      (scale (xyz 0.9399999999999999 1 1))
+      (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
   )
 
   (module uCm:SOT223 (layer F.Cu) (tedit 52137F4E) (tstamp 55D87217)
-    (at 146 128.5 90)
+    (at 146 123 90)
     (descr "module CMS SOT223 4 pins")
     (tags "CMS SOT")
     (path /50B2116F/50E2B696)
@@ -2595,7 +2595,7 @@
   )
 
   (module uCm:SOT223 (layer F.Cu) (tedit 52137F4E) (tstamp 55D87225)
-    (at 146 140 90)
+    (at 146 134.5 90)
     (descr "module CMS SOT223 4 pins")
     (tags "CMS SOT")
     (path /50B2116F/55D878D2)
@@ -2857,7 +2857,7 @@
   )
 
   (module uCm:r_0805 (layer F.Cu) (tedit 520F4588) (tstamp 55D87251)
-    (at 178 153 270)
+    (at 177.9365 152.873 270)
     (descr "SMT capacitor, 0805")
     (path /4FC07407/52ACA895)
     (attr smd)
@@ -3025,7 +3025,7 @@
   )
 
   (module uCm:r_0805 (layer F.Cu) (tedit 520F4588) (tstamp 55D8726F)
-    (at 152 153 270)
+    (at 151.9495 152.873 270)
     (descr "SMT capacitor, 0805")
     (path /4FC07407/52ACCF4B)
     (attr smd)
@@ -3102,6 +3102,44 @@
     (pad 2 smd rect (at -0.95 0) (size 1 1.45) (layers F.Cu F.Paste F.Mask)
       (net 36 GND))
     (model "/home/anool/projects-git/uCm/KiCAD/uCm_Libs/3D Modules/r_0805.wrl"
+      (at (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
+  )
+
+  (module uCm:vite_3mm (layer F.Cu) (tedit 50D9932E) (tstamp 55D87286)
+    (at 115 52)
+    (descr "vite 2,5mm")
+    (path /52230B6D)
+    (attr smd)
+    (fp_text reference SC3 (at 0 1.0795) (layer F.SilkS) hide
+      (effects (font (size 0.762 0.762) (thickness 0.1016)))
+    )
+    (fp_text value SCREW (at 0.0635 -0.381) (layer F.SilkS) hide
+      (effects (font (size 0.762 0.762) (thickness 0.1016)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 6.096 6.096) (drill 3.048) (layers *.Cu *.SilkS *.Mask))
+    (model "/home/anool/projects-git/uCm/KiCAD/uCm_Libs/3D Modules/vite_2mm5.wrl"
+      (at (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
+  )
+
+  (module uCm:vite_3mm (layer F.Cu) (tedit 50D9932E) (tstamp 55D8728A)
+    (at 206 52)
+    (descr "vite 2,5mm")
+    (path /522315ED)
+    (attr smd)
+    (fp_text reference SC4 (at 0 1.0795) (layer F.SilkS) hide
+      (effects (font (size 0.762 0.762) (thickness 0.1016)))
+    )
+    (fp_text value SCREW (at 0.0635 -0.381) (layer F.SilkS) hide
+      (effects (font (size 0.762 0.762) (thickness 0.1016)))
+    )
+    (pad 1 thru_hole circle (at 0 0) (size 6.096 6.096) (drill 3.048) (layers *.Cu *.SilkS *.Mask))
+    (model "/home/anool/projects-git/uCm/KiCAD/uCm_Libs/3D Modules/vite_2mm5.wrl"
       (at (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -3450,7 +3488,7 @@
   )
 
   (module uCm:TPS62132 (layer F.Cu) (tedit 528E2FD1) (tstamp 55D872E0)
-    (at 176 158 180)
+    (at 175.968 158.08 180)
     (path /4FC07407/52ACA89C)
     (fp_text reference U3 (at 0 -2.7 180) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -3510,7 +3548,7 @@
   )
 
   (module uCm:TPS62132 (layer F.Cu) (tedit 528E2FD1) (tstamp 55D872F8)
-    (at 150 158 180)
+    (at 149.981 158.08 180)
     (path /4FC07407/52ACCF51)
     (fp_text reference U4 (at 0 -2.7 180) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -3859,25 +3897,36 @@
     (pad "" np_thru_hole circle (at 17 -18) (size 3 3) (drill 3) (layers *.Cu *.Mask F.SilkS)
       (clearance 1.5))
     (model "/home/anool/projects-git/uCm/KiCAD/uCm_Libs/3D Modules/Pump.wrl"
-      (at (xyz 0 0 1))
+      (at (xyz 0 0 0.6))
       (scale (xyz 4 4 4))
+      (rotate (xyz 0 0 0))
+    )
+    (model "/home/anool/projects-git/uCm/KiCAD/uCm_Libs/3D Modules/Pump.wrl"
+      (at (xyz 0 0 0))
+      (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
   )
 
   (gr_line (start 115 170) (end 206 170) (angle 90) (layer Edge.Cuts) (width 0.2))
+  (gr_text [+][-] (at 144.043 153.127 270) (layer F.SilkS)
+    (effects (font (size 1.016 1.016) (thickness 0.2032)))
+  )
+  (gr_text [+][-] (at 167.0935 153.127 270) (layer F.SilkS)
+    (effects (font (size 1.016 1.016) (thickness 0.2032)))
+  )
   (gr_line (start 210 120.7) (end 205.3 125) (angle 90) (layer Edge.Cuts) (width 0.127))
-  (gr_line (start 210 94) (end 210 120.7) (angle 90) (layer Edge.Cuts) (width 0.127))
+  (gr_line (start 210 52) (end 210 120.7) (angle 90) (layer Edge.Cuts) (width 0.127))
   (gr_line (start 205.3 131.5) (end 205.3 125) (angle 90) (layer Edge.Cuts) (width 0.127))
   (gr_line (start 205.3 138) (end 205.3 131.5) (angle 90) (layer Edge.Cuts) (width 0.127))
   (gr_line (start 210 142.2) (end 205.3 138) (angle 90) (layer Edge.Cuts) (width 0.127))
   (gr_line (start 210 166) (end 210 142.2) (angle 90) (layer Edge.Cuts) (width 0.127))
-  (gr_line (start 111 94) (end 111 166) (angle 90) (layer Edge.Cuts) (width 0.127))
-  (gr_line (start 206 90) (end 115 90) (angle 90) (layer Edge.Cuts) (width 0.127))
-  (gr_arc (start 206 94) (end 206 90) (angle 90) (layer Edge.Cuts) (width 0.127))
+  (gr_line (start 111 52) (end 111 166) (angle 90) (layer Edge.Cuts) (width 0.127))
+  (gr_line (start 206 48) (end 115 48) (angle 90) (layer Edge.Cuts) (width 0.127))
+  (gr_arc (start 206 52) (end 206 48) (angle 90) (layer Edge.Cuts) (width 0.127))
   (gr_arc (start 206 166) (end 210 166) (angle 90) (layer Edge.Cuts) (width 0.127))
   (gr_arc (start 115 166) (end 115 170) (angle 90) (layer Edge.Cuts) (width 0.127))
-  (gr_arc (start 115 94) (end 111 94) (angle 90) (layer Edge.Cuts) (width 0.127))
+  (gr_arc (start 115 52) (end 111 52) (angle 90) (layer Edge.Cuts) (width 0.127))
   (gr_line (start 192.4105 94.308) (end 192.474 94.308) (angle 90) (layer Eco1.User) (width 0.127))
 
 )
