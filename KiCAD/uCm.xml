@@ -2,7 +2,7 @@
 <export version="D">
   <design>
     <source>/home/anool/projects-git/uCm/KiCAD/uCm.sch</source>
-    <date>Sat Aug 22 17:41:01 2015</date>
+    <date>Thu Sep  3 17:51:17 2015</date>
     <tool>Eeschema (2015-07-01 BZR 5850)-product</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -60,7 +60,7 @@
   <components>
     <comp ref="P4">
       <value>ICSP</value>
-      <footprint>Header_ISP</footprint>
+      <footprint>uCm:Header_ISP</footprint>
       <fields>
         <field name="Field4">CONN HEADER 6POS .100 STR 15AU</field>
         <field name="Field5">Header, Unshrouded, Male Pin</field>
@@ -77,7 +77,7 @@
     </comp>
     <comp ref="P1">
       <value>AREF</value>
-      <footprint>ShortLink2</footprint>
+      <footprint>uCm:ShortLink2</footprint>
       <fields>
         <field name="Field4">CONN HEADER 50POS .100" SGL GOLD</field>
         <field name="Field5">Header, Unshrouded, Male pin,</field>
@@ -94,7 +94,7 @@
     </comp>
     <comp ref="SW1">
       <value>Reset</value>
-      <footprint>SW_PB_V_H</footprint>
+      <footprint>uCm:SW_PB_V_H</footprint>
       <fields>
         <field name="Field4">SWITCH TACTILE SPST-NO 0.05A 12V</field>
         <field name="Field5">SPST, NO</field>
@@ -111,7 +111,7 @@
     </comp>
     <comp ref="X1">
       <value>16MHz</value>
-      <footprint>Xtal_SMD3</footprint>
+      <footprint>uCm:Xtal_SMD3</footprint>
       <fields>
         <field name="Field4">CER RESONATOR 16.00MHZ</field>
         <field name="Field5">16Mhz Ceramic built in capacitor</field>
@@ -128,7 +128,7 @@
     </comp>
     <comp ref="R3">
       <value>10k</value>
-      <footprint>r_0805</footprint>
+      <footprint>uCm:r_0805</footprint>
       <fields>
         <field name="Field4">RES 10K OHM 1/8W 5% CF AXIAL</field>
         <field name="Field5">0.125W, 1/8W</field>
@@ -145,7 +145,7 @@
     </comp>
     <comp ref="R2">
       <value>10k</value>
-      <footprint>r_0805</footprint>
+      <footprint>uCm:r_0805</footprint>
       <fields>
         <field name="Field4">RES 10K OHM 1/8W 5% CF AXIAL</field>
         <field name="Field5">0.125W, 1/8W</field>
@@ -162,7 +162,7 @@
     </comp>
     <comp ref="R1">
       <value>10k</value>
-      <footprint>r_0805</footprint>
+      <footprint>uCm:r_0805</footprint>
       <fields>
         <field name="Field4">RES 10K OHM 1/8W 5% CF AXIAL</field>
         <field name="Field5">0.125W, 1/8W</field>
@@ -179,7 +179,7 @@
     </comp>
     <comp ref="C3">
       <value>22pF</value>
-      <footprint>c_0603</footprint>
+      <footprint>uCm:c_0603</footprint>
       <fields>
         <field name="Field4">CAP CER 22PF 50V 5% RADIAL</field>
         <field name="Field5">22pF, 50V</field>
@@ -196,7 +196,7 @@
     </comp>
     <comp ref="C2">
       <value>22pF</value>
-      <footprint>c_0603</footprint>
+      <footprint>uCm:c_0603</footprint>
       <fields>
         <field name="Field4">CAP CER 22PF 50V 5% RADIAL</field>
         <field name="Field5">22pF, 50V</field>
@@ -213,7 +213,7 @@
     </comp>
     <comp ref="C4">
       <value>100nF</value>
-      <footprint>c_0805</footprint>
+      <footprint>uCm:c_0805</footprint>
       <fields>
         <field name="Field4">CAP FILM 0.1UF 63VDC RADIAL</field>
         <field name="Field5">100nF, 63V</field>
@@ -230,7 +230,7 @@
     </comp>
     <comp ref="C1">
       <value>100nF</value>
-      <footprint>c_0805</footprint>
+      <footprint>uCm:c_0805</footprint>
       <fields>
         <field name="Field4">CAP FILM 0.1UF 63VDC RADIAL</field>
         <field name="Field5">100nF, 63V</field>
@@ -245,65 +245,58 @@
       <sheetpath names="/" tstamps="/"/>
       <tstamp>50E2940E</tstamp>
     </comp>
-    <comp ref="SC1">
-      <value>SCREW</value>
-      <footprint>vite_3mm</footprint>
-      <libsource lib="uCm" part="SCREW"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>50DADA2B</tstamp>
-    </comp>
     <comp ref="P5">
       <value>FTDI</value>
-      <footprint>Header_FTDI</footprint>
+      <footprint>uCm:Header_FTDI</footprint>
       <libsource lib="uCm" part="CONN_6"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>4FE58ED4</tstamp>
     </comp>
     <comp ref="U7">
       <value>ATMEGA328-AU-ND</value>
-      <footprint>TQFP32</footprint>
+      <footprint>uCm:TQFP32</footprint>
       <libsource lib="uCm" part="ATMEGA328-AU-ND"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>520A592B</tstamp>
     </comp>
     <comp ref="B8">
       <value>PC0</value>
-      <footprint>I_O</footprint>
+      <footprint>uCm:I_O</footprint>
       <libsource lib="uCm" part="I_O"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>520E3AF6</tstamp>
     </comp>
     <comp ref="B9">
       <value>PC1</value>
-      <footprint>I_O</footprint>
+      <footprint>uCm:I_O</footprint>
       <libsource lib="uCm" part="I_O"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>520E3DD3</tstamp>
     </comp>
     <comp ref="B10">
       <value>PC6</value>
-      <footprint>I_O</footprint>
+      <footprint>uCm:I_O</footprint>
       <libsource lib="uCm" part="I_O"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>520E3DD9</tstamp>
     </comp>
     <comp ref="B11">
       <value>PC7</value>
-      <footprint>I_O</footprint>
+      <footprint>uCm:I_O</footprint>
       <libsource lib="uCm" part="I_O"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>520E3ECF</tstamp>
     </comp>
     <comp ref="B12">
       <value>PB0</value>
-      <footprint>I_O</footprint>
+      <footprint>uCm:I_O</footprint>
       <libsource lib="uCm" part="I_O"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>520E5284</tstamp>
     </comp>
     <comp ref="SW2">
       <value>INT0</value>
-      <footprint>SW_PB_V_H</footprint>
+      <footprint>uCm:SW_PB_V_H</footprint>
       <fields>
         <field name="Field4">SWITCH TACTILE SPST-NO 0.05A 12V</field>
         <field name="Field5">SPST, NO</field>
@@ -320,7 +313,7 @@
     </comp>
     <comp ref="SW3">
       <value>INT1</value>
-      <footprint>SW_PB_V_H</footprint>
+      <footprint>uCm:SW_PB_V_H</footprint>
       <fields>
         <field name="Field4">SWITCH TACTILE SPST-NO 0.05A 12V</field>
         <field name="Field5">SPST, NO</field>
@@ -337,7 +330,7 @@
     </comp>
     <comp ref="R22">
       <value>10k</value>
-      <footprint>r_0805</footprint>
+      <footprint>uCm:r_0805</footprint>
       <fields>
         <field name="Field4">RES 10K OHM 1/8W 5% CF AXIAL</field>
         <field name="Field5">0.125W, 1/8W</field>
@@ -354,7 +347,7 @@
     </comp>
     <comp ref="R21">
       <value>10k</value>
-      <footprint>r_0805</footprint>
+      <footprint>uCm:r_0805</footprint>
       <fields>
         <field name="Field4">RES 10K OHM 1/8W 5% CF AXIAL</field>
         <field name="Field5">0.125W, 1/8W</field>
@@ -371,7 +364,7 @@
     </comp>
     <comp ref="C28">
       <value>100nF</value>
-      <footprint>c_0805</footprint>
+      <footprint>uCm:c_0805</footprint>
       <fields>
         <field name="Field4">CAP FILM 0.1UF 63VDC RADIAL</field>
         <field name="Field5">100nF, 63V</field>
@@ -388,91 +381,49 @@
     </comp>
     <comp ref="B4">
       <value>PB0</value>
-      <footprint>I_O</footprint>
+      <footprint>uCm:I_O</footprint>
       <libsource lib="uCm" part="I_O"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>52150F0F</tstamp>
     </comp>
-    <comp ref="SC3">
-      <value>SCREW</value>
-      <footprint>vite_3mm</footprint>
-      <libsource lib="uCm" part="SCREW"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>52230B6D</tstamp>
-    </comp>
-    <comp ref="SC5">
-      <value>SCREW</value>
-      <footprint>vite_3mm</footprint>
-      <libsource lib="uCm" part="SCREW"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>52230B73</tstamp>
-    </comp>
-    <comp ref="SC8">
-      <value>SCREW</value>
-      <footprint>vite_3mm</footprint>
-      <libsource lib="uCm" part="SCREW"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>522315D5</tstamp>
-    </comp>
     <comp ref="SC6">
       <value>SCREW</value>
-      <footprint>vite_3mm</footprint>
+      <footprint>uCm:vite_3mm</footprint>
       <libsource lib="uCm" part="SCREW"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>522315DB</tstamp>
     </comp>
     <comp ref="SC9">
       <value>SCREW</value>
-      <footprint>vite_3mm</footprint>
+      <footprint>uCm:vite_3mm</footprint>
       <libsource lib="uCm" part="SCREW"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>522315E1</tstamp>
     </comp>
-    <comp ref="SC2">
-      <value>SCREW</value>
-      <footprint>vite_3mm</footprint>
-      <libsource lib="uCm" part="SCREW"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>522315E7</tstamp>
-    </comp>
-    <comp ref="SC4">
-      <value>SCREW</value>
-      <footprint>vite_3mm</footprint>
-      <libsource lib="uCm" part="SCREW"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>522315ED</tstamp>
-    </comp>
     <comp ref="SC7">
       <value>SCREW</value>
-      <footprint>vite_3mm</footprint>
+      <footprint>uCm:vite_3mm</footprint>
       <libsource lib="uCm" part="SCREW"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>522315F3</tstamp>
     </comp>
     <comp ref="SC10">
       <value>SCREW</value>
-      <footprint>vite_3mm</footprint>
+      <footprint>uCm:vite_3mm</footprint>
       <libsource lib="uCm" part="SCREW"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>522315F9</tstamp>
     </comp>
     <comp ref="B7">
       <value>PC1</value>
-      <footprint>I_O</footprint>
+      <footprint>uCm:I_O</footprint>
       <libsource lib="uCm" part="I_O"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>55A3A3EC</tstamp>
     </comp>
-    <comp ref="B14">
-      <value>PB0</value>
-      <footprint>I_O</footprint>
-      <libsource lib="uCm" part="I_O"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>55A3B103</tstamp>
-    </comp>
     <comp ref="C27">
       <value>100uF</value>
-      <footprint>C_ELCO_SMD</footprint>
+      <footprint>uCm:C_ELCO_SMD</footprint>
       <fields>
         <field name="Field4">CAP ALUM 100UF 16V 20% RADIAL</field>
         <field name="Field5">100u,16V</field>
@@ -489,7 +440,7 @@
     </comp>
     <comp ref="P9">
       <value>C3SB</value>
-      <footprint>pin_strip_4-90</footprint>
+      <footprint>uCm:pin_strip_4-90</footprint>
       <fields>
         <field name="Field4">CONN HEADER 16POS .100 R/A 30AU</field>
         <field name="Field5">Header, Unshrouded, Male pin,</field>
@@ -506,7 +457,7 @@
     </comp>
     <comp ref="U1">
       <value>TXB0104D</value>
-      <footprint>TXB0104D</footprint>
+      <footprint>uCm:TXB0104D</footprint>
       <fields>
         <field name="Field4">IC VOLT-LEVEL TRANSLATOR 14-SOIC</field>
         <field name="Field5">Translator, Bidirectional</field>
@@ -523,7 +474,7 @@
     </comp>
     <comp ref="R4">
       <value>10k</value>
-      <footprint>r_0805</footprint>
+      <footprint>uCm:r_0805</footprint>
       <fields>
         <field name="Field4">RES 10K OHM 1/8W 5% CF AXIAL</field>
         <field name="Field5">0.125W, 1/8W</field>
@@ -540,7 +491,7 @@
     </comp>
     <comp ref="Q1">
       <value>BCP5416TA</value>
-      <footprint>SOT223</footprint>
+      <footprint>uCm:SOT223</footprint>
       <fields>
         <field name="Field4">TRANS DARL NPN 2A 100V TO220AB</field>
         <field name="Field5">2A, 100V, 2W</field>
@@ -557,7 +508,7 @@
     </comp>
     <comp ref="P17">
       <value>PUMP</value>
-      <footprint>Pump_P54E01R_02</footprint>
+      <footprint>uCm:Pump_P54E01R_02</footprint>
       <fields>
         <field name="Field11">http://www.xavitech.com/products</field>
       </fields>
@@ -567,7 +518,7 @@
     </comp>
     <comp ref="P14">
       <value>X_VALVE</value>
-      <footprint>X_Valve_2</footprint>
+      <footprint>uCm:X_Valve_2</footprint>
       <fields>
         <field name="Field4">Miniature Pneumatic Solenoid Valve</field>
         <field name="Field5">3 Port, Direct-acting poppet style</field>
@@ -584,7 +535,7 @@
     </comp>
     <comp ref="P7">
       <value>GAGE_PR</value>
-      <footprint>HCEM500GUH9P3</footprint>
+      <footprint>uCm:HCEM500GUH9P3</footprint>
       <fields>
         <field name="Field4">Miniature amplified pressure sensor</field>
         <field name="Field5">HCE Series</field>
@@ -601,7 +552,7 @@
     </comp>
     <comp ref="D1">
       <value>S1D-13-F</value>
-      <footprint>diode-DO214AC</footprint>
+      <footprint>uCm:diode-DO214AC</footprint>
       <fields>
         <field name="Field4">DIODE GEN PURPOSE 50V 1A DO41</field>
         <field name="Field5">50V, 1A</field>
@@ -618,7 +569,7 @@
     </comp>
     <comp ref="C17">
       <value>100nF</value>
-      <footprint>c_0805</footprint>
+      <footprint>uCm:c_0805</footprint>
       <fields>
         <field name="Field4">CAP FILM 0.1UF 63VDC RADIAL</field>
         <field name="Field5">100nF, 63V</field>
@@ -635,7 +586,7 @@
     </comp>
     <comp ref="C13">
       <value>100nF</value>
-      <footprint>c_0805</footprint>
+      <footprint>uCm:c_0805</footprint>
       <fields>
         <field name="Field4">CAP FILM 0.1UF 63VDC RADIAL</field>
         <field name="Field5">100nF, 63V</field>
@@ -652,7 +603,7 @@
     </comp>
     <comp ref="C11">
       <value>100nF</value>
-      <footprint>c_0805</footprint>
+      <footprint>uCm:c_0805</footprint>
       <fields>
         <field name="Field4">CAP FILM 0.1UF 63VDC RADIAL</field>
         <field name="Field5">100nF, 63V</field>
@@ -669,7 +620,7 @@
     </comp>
     <comp ref="C10">
       <value>100nF</value>
-      <footprint>c_0805</footprint>
+      <footprint>uCm:c_0805</footprint>
       <fields>
         <field name="Field4">CAP FILM 0.1UF 63VDC RADIAL</field>
         <field name="Field5">100nF, 63V</field>
@@ -686,7 +637,7 @@
     </comp>
     <comp ref="C9">
       <value>100nF</value>
-      <footprint>c_0805</footprint>
+      <footprint>uCm:c_0805</footprint>
       <fields>
         <field name="Field4">CAP FILM 0.1UF 63VDC RADIAL</field>
         <field name="Field5">100nF, 63V</field>
@@ -703,7 +654,7 @@
     </comp>
     <comp ref="C8">
       <value>100nF</value>
-      <footprint>c_0805</footprint>
+      <footprint>uCm:c_0805</footprint>
       <fields>
         <field name="Field4">CAP FILM 0.1UF 63VDC RADIAL</field>
         <field name="Field5">100nF, 63V</field>
@@ -720,7 +671,7 @@
     </comp>
     <comp ref="C7">
       <value>100nF</value>
-      <footprint>c_0805</footprint>
+      <footprint>uCm:c_0805</footprint>
       <fields>
         <field name="Field4">CAP FILM 0.1UF 63VDC RADIAL</field>
         <field name="Field5">100nF, 63V</field>
@@ -737,21 +688,21 @@
     </comp>
     <comp ref="P10">
       <value>C3SB</value>
-      <footprint>pin_strip_4-90</footprint>
+      <footprint>uCm:pin_strip_4-90</footprint>
       <libsource lib="uCm" part="CONN_4"/>
       <sheetpath names="/Interface/" tstamps="/50B2116F/"/>
       <tstamp>50CEC0D0</tstamp>
     </comp>
     <comp ref="P11">
       <value>VSel_Vlv</value>
-      <footprint>Header_3</footprint>
+      <footprint>uCm:Header_3</footprint>
       <libsource lib="uCm" part="CONN_3"/>
       <sheetpath names="/Interface/" tstamps="/50B2116F/"/>
       <tstamp>50B75AE4</tstamp>
     </comp>
     <comp ref="Q2">
       <value>BCP5416TA</value>
-      <footprint>SOT223</footprint>
+      <footprint>uCm:SOT223</footprint>
       <fields>
         <field name="Field4">TRANS DARL NPN 2A 100V TO220AB</field>
         <field name="Field5">2A, 100V, 2W</field>
@@ -774,7 +725,7 @@
     </comp>
     <comp ref="R5">
       <value>4k7</value>
-      <footprint>r_0805</footprint>
+      <footprint>uCm:r_0805</footprint>
       <fields>
         <field name="Field4">RES 10K OHM 1/8W 5% CF AXIAL</field>
         <field name="Field5">0.125W, 1/8W</field>
@@ -791,7 +742,7 @@
     </comp>
     <comp ref="C29">
       <value>100nF</value>
-      <footprint>c_0805</footprint>
+      <footprint>uCm:c_0805</footprint>
       <fields>
         <field name="Field4">CAP FILM 0.1UF 63VDC RADIAL</field>
         <field name="Field5">100nF, 63V</field>
@@ -808,7 +759,7 @@
     </comp>
     <comp ref="Q3">
       <value>BCP5416TA</value>
-      <footprint>SOT223</footprint>
+      <footprint>uCm:SOT223</footprint>
       <fields>
         <field name="Field4">TRANS DARL NPN 2A 100V TO220AB</field>
         <field name="Field5">2A, 100V, 2W</field>
@@ -825,7 +776,7 @@
     </comp>
     <comp ref="P38">
       <value>X_VALVE2</value>
-      <footprint>X_Valve_2</footprint>
+      <footprint>uCm:X_Valve_2</footprint>
       <fields>
         <field name="Field4">Miniature Pneumatic Solenoid Valve</field>
         <field name="Field5">3 Port, Direct-acting poppet style</field>
@@ -842,7 +793,7 @@
     </comp>
     <comp ref="D9">
       <value>S1D-13-F</value>
-      <footprint>diode-DO214AC</footprint>
+      <footprint>uCm:diode-DO214AC</footprint>
       <fields>
         <field name="Field4">DIODE GEN PURPOSE 50V 1A DO41</field>
         <field name="Field5">50V, 1A</field>
@@ -859,7 +810,7 @@
     </comp>
     <comp ref="C31">
       <value>100nF</value>
-      <footprint>c_0805</footprint>
+      <footprint>uCm:c_0805</footprint>
       <fields>
         <field name="Field4">CAP FILM 0.1UF 63VDC RADIAL</field>
         <field name="Field5">100nF, 63V</field>
@@ -876,14 +827,89 @@
     </comp>
     <comp ref="P34">
       <value>VSel_Vlv2</value>
-      <footprint>Header_3</footprint>
+      <footprint>uCm:Header_3</footprint>
       <libsource lib="uCm" part="CONN_3"/>
       <sheetpath names="/Interface/" tstamps="/50B2116F/"/>
       <tstamp>55D8790A</tstamp>
     </comp>
+    <comp ref="C14">
+      <value>100nF</value>
+      <footprint>uCm:c_0805</footprint>
+      <fields>
+        <field name="Field4">CAP FILM 0.1UF 63VDC RADIAL</field>
+        <field name="Field5">100nF, 63V</field>
+        <field name="Field6">R82</field>
+        <field name="Field7">Kemet</field>
+        <field name="Field8">R82DC3100AA50J</field>
+        <field name="Field9">Digikey</field>
+        <field name="Field10">399-5863-ND</field>
+        <field name="Field11">http://www.digikey.com/product-detail/en/R82DC3100AA50J/399-5863-ND/2571298?cur=USD</field>
+      </fields>
+      <libsource lib="uCm" part="C"/>
+      <sheetpath names="/Interface/" tstamps="/50B2116F/"/>
+      <tstamp>55D89642</tstamp>
+    </comp>
+    <comp ref="Q4">
+      <value>BCP5416TA</value>
+      <footprint>uCm:SOT223</footprint>
+      <fields>
+        <field name="Field4">TRANS DARL NPN 2A 100V TO220AB</field>
+        <field name="Field5">2A, 100V, 2W</field>
+        <field name="Field6">TO-220-3</field>
+        <field name="Field7">ON Semiconductor</field>
+        <field name="Field8">TIP112G</field>
+        <field name="Field9">Digikey</field>
+        <field name="Field10">TIP112GOS-ND</field>
+        <field name="Field11">http://www.digikey.com/scripts/dksearch/dksus.dll?vendor=0&amp;keywords=TIP112G</field>
+      </fields>
+      <libsource lib="uCm" part="NPN_TIP112G"/>
+      <sheetpath names="/Interface/" tstamps="/50B2116F/"/>
+      <tstamp>55D89659</tstamp>
+    </comp>
+    <comp ref="D3">
+      <value>S1D-13-F</value>
+      <footprint>uCm:diode-DO214AC</footprint>
+      <fields>
+        <field name="Field4">DIODE GEN PURPOSE 50V 1A DO41</field>
+        <field name="Field5">50V, 1A</field>
+        <field name="Field6">DO-204AL, DO-41, Axial</field>
+        <field name="Field7">Fairchild Semiconductor</field>
+        <field name="Field8">1N4001</field>
+        <field name="Field9">Digikey</field>
+        <field name="Field10">1N4001FSCT-ND</field>
+        <field name="Field11">http://www.digikey.com/product-detail/en/1N4001/1N4001FSCT-ND/1532742</field>
+      </fields>
+      <libsource lib="uCm" part="D_1N4001"/>
+      <sheetpath names="/Interface/" tstamps="/50B2116F/"/>
+      <tstamp>55D89668</tstamp>
+    </comp>
+    <comp ref="R6">
+      <value>1k</value>
+      <footprint>uCm:r_0805</footprint>
+      <fields>
+        <field name="Field4">RES 10K OHM 1/8W 5% CF AXIAL</field>
+        <field name="Field5">0.125W, 1/8W</field>
+        <field name="Field6">Axial</field>
+        <field name="Field7">Stackpole Electronics Inc</field>
+        <field name="Field8">CF18JT10K0</field>
+        <field name="Field9">Digikey</field>
+        <field name="Field10">CF18JT10K0CT-ND</field>
+        <field name="Field11">http://www.digikey.com/product-detail/en/CF18JT10K0/CF18JT10K0CT-ND/2022766?cur=USD</field>
+      </fields>
+      <libsource lib="uCm" part="R_10k"/>
+      <sheetpath names="/Interface/" tstamps="/50B2116F/"/>
+      <tstamp>55D89683</tstamp>
+    </comp>
+    <comp ref="SP1">
+      <value>BUZZER</value>
+      <footprint>uCm:Speaker</footprint>
+      <libsource lib="uCm" part="BUZZER"/>
+      <sheetpath names="/Interface/" tstamps="/50B2116F/"/>
+      <tstamp>55D8968A</tstamp>
+    </comp>
     <comp ref="R10">
       <value>1k</value>
-      <footprint>r_0805</footprint>
+      <footprint>uCm:r_0805</footprint>
       <fields>
         <field name="Field4">RES 1k OHM 1/8W 5% CF AXIAL</field>
         <field name="Field5">0.125W, 1/8W</field>
@@ -900,7 +926,7 @@
     </comp>
     <comp ref="R13">
       <value>1k</value>
-      <footprint>r_0805</footprint>
+      <footprint>uCm:r_0805</footprint>
       <fields>
         <field name="Field4">RES 1k OHM 1/8W 5% CF AXIAL</field>
         <field name="Field5">0.125W, 1/8W</field>
@@ -917,7 +943,7 @@
     </comp>
     <comp ref="R9">
       <value>120E</value>
-      <footprint>r_0805</footprint>
+      <footprint>uCm:r_0805</footprint>
       <fields>
         <field name="Field4">RES 120 OHM 1/8W 5% CF AXIAL</field>
         <field name="Field5">0.125W, 1/8W</field>
@@ -934,7 +960,7 @@
     </comp>
     <comp ref="R8">
       <value>330E</value>
-      <footprint>r_0805</footprint>
+      <footprint>uCm:r_0805</footprint>
       <fields>
         <field name="Field4">RES 330 OHM 1/8W 5% CF AXIAL</field>
         <field name="Field5">0.125W, 1/8W</field>
@@ -951,7 +977,7 @@
     </comp>
     <comp ref="P24">
       <value>PWR_IN</value>
-      <footprint>JACK_ALIM</footprint>
+      <footprint>uCm:JACK_ALIM</footprint>
       <fields>
         <field name="Field4">CONN POWER JACK MALE 2.5MM CLSD</field>
         <field name="Field5">Jack, Male</field>
@@ -968,7 +994,7 @@
     </comp>
     <comp ref="D7">
       <value>BLINK</value>
-      <footprint>led_0805</footprint>
+      <footprint>uCm:led_0805</footprint>
       <fields>
         <field name="Field4">LED SS 5MM 625NM RED DIFF</field>
         <field name="Field5">2V, 10mA</field>
@@ -985,7 +1011,7 @@
     </comp>
     <comp ref="D8">
       <value>12V</value>
-      <footprint>led_0805</footprint>
+      <footprint>uCm:led_0805</footprint>
       <fields>
         <field name="Field4">LED SS 5MM 625NM RED DIFF</field>
         <field name="Field5">2V, 10mA</field>
@@ -1002,7 +1028,7 @@
     </comp>
     <comp ref="D6">
       <value>3V3</value>
-      <footprint>led_0805</footprint>
+      <footprint>uCm:led_0805</footprint>
       <fields>
         <field name="Field4">LED SS 5MM 625NM RED DIFF</field>
         <field name="Field5">2V, 10mA</field>
@@ -1019,7 +1045,7 @@
     </comp>
     <comp ref="D5">
       <value>5V0</value>
-      <footprint>led_0805</footprint>
+      <footprint>uCm:led_0805</footprint>
       <fields>
         <field name="Field4">LED SS 5MM 625NM RED DIFF</field>
         <field name="Field5">2V, 10mA</field>
@@ -1036,7 +1062,7 @@
     </comp>
     <comp ref="D4">
       <value>S1D-13-F</value>
-      <footprint>diode-DO214AC</footprint>
+      <footprint>uCm:diode-DO214AC</footprint>
       <fields>
         <field name="Field4">DIODE GEN PURPOSE 50V 1A DO41</field>
         <field name="Field5">50V, 1A</field>
@@ -1053,70 +1079,70 @@
     </comp>
     <comp ref="G4">
       <value>Logo_OH</value>
-      <footprint>OSHW_6mm</footprint>
+      <footprint>uCm:OSHW_6mm</footprint>
       <libsource lib="uCm" part="PCB"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
       <tstamp>4FC075DD</tstamp>
     </comp>
     <comp ref="G3">
       <value>Logo_OH</value>
-      <footprint>OSHW_6mm</footprint>
+      <footprint>uCm:OSHW_6mm</footprint>
       <libsource lib="uCm" part="PCB"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
       <tstamp>4FC075CE</tstamp>
     </comp>
     <comp ref="G2">
       <value>Logo_Wyolum</value>
-      <footprint>Logo-WL3</footprint>
+      <footprint>uCm:Logo-WL3</footprint>
       <libsource lib="uCm" part="PCB"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
       <tstamp>4FC075C2</tstamp>
     </comp>
     <comp ref="G1">
       <value>Logo_Wyolum</value>
-      <footprint>Logo-WL3</footprint>
+      <footprint>uCm:Logo-WL3</footprint>
       <libsource lib="uCm" part="PCB"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
       <tstamp>4FC075A6</tstamp>
     </comp>
     <comp ref="P13">
       <value>PWR_IN</value>
-      <footprint>Header_2</footprint>
+      <footprint>uCm:Header_2</footprint>
       <libsource lib="uCm" part="CONN_2"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
       <tstamp>521B769C</tstamp>
     </comp>
     <comp ref="C18">
       <value>100nF</value>
-      <footprint>c_0805</footprint>
+      <footprint>uCm:c_0805</footprint>
       <libsource lib="uCm" part="CAP_NP"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
       <tstamp>52ACA876</tstamp>
     </comp>
     <comp ref="C30">
       <value>10uF X7R</value>
-      <footprint>c_1206</footprint>
+      <footprint>uCm:C_1206</footprint>
       <libsource lib="uCm" part="CAP_POL"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
       <tstamp>52ACA87C</tstamp>
     </comp>
     <comp ref="C19">
       <value>22uF X7R</value>
-      <footprint>c_1210</footprint>
+      <footprint>uCm:C_1210</footprint>
       <libsource lib="uCm" part="CAP_POL"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
       <tstamp>52ACA882</tstamp>
     </comp>
     <comp ref="J1">
       <value>5V_EXT</value>
-      <footprint>Header_2</footprint>
+      <footprint>uCm:Header_2</footprint>
       <libsource lib="uCm" part="CONN_2"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
       <tstamp>52ACA888</tstamp>
     </comp>
     <comp ref="L1">
       <value>2u2H,3.0A</value>
-      <footprint>Inductor_SMD3</footprint>
+      <footprint>uCm:Inductor_SMD3</footprint>
       <fields>
         <field name="Mfr_PN">XFL4020-222MEB, Coilcraft</field>
       </fields>
@@ -1126,77 +1152,77 @@
     </comp>
     <comp ref="R7">
       <value>100k</value>
-      <footprint>r_0805</footprint>
+      <footprint>uCm:r_0805</footprint>
       <libsource lib="uCm" part="R"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
       <tstamp>52ACA895</tstamp>
     </comp>
     <comp ref="U3">
       <value>TPS62133</value>
-      <footprint>TPS62132</footprint>
+      <footprint>uCm:TPS62132</footprint>
       <libsource lib="uCm" part="TPS62132"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
       <tstamp>52ACA89C</tstamp>
     </comp>
     <comp ref="C20">
       <value>100nF</value>
-      <footprint>c_0805</footprint>
+      <footprint>uCm:c_0805</footprint>
       <libsource lib="uCm" part="CAP_NP"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
       <tstamp>52ACA8A2</tstamp>
     </comp>
     <comp ref="C21">
       <value>3.3nF</value>
-      <footprint>c_0805</footprint>
+      <footprint>uCm:c_0805</footprint>
       <libsource lib="uCm" part="CAP_NP"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
       <tstamp>52ACA8A8</tstamp>
     </comp>
     <comp ref="C26">
       <value>100uF</value>
-      <footprint>C_ELCO_SMD</footprint>
+      <footprint>uCm:C_ELCO_SMD</footprint>
       <libsource lib="uCm" part="CAP_POL"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
       <tstamp>52ACA8C6</tstamp>
     </comp>
     <comp ref="C22">
       <value>100uF</value>
-      <footprint>C_ELCO_SMD</footprint>
+      <footprint>uCm:C_ELCO_SMD</footprint>
       <libsource lib="uCm" part="CAP_POL"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
       <tstamp>52ACA8CC</tstamp>
     </comp>
     <comp ref="C32">
       <value>100nF</value>
-      <footprint>c_0805</footprint>
+      <footprint>uCm:c_0805</footprint>
       <libsource lib="uCm" part="CAP_NP"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
       <tstamp>52ACCF2C</tstamp>
     </comp>
     <comp ref="C38">
       <value>10uF X7R</value>
-      <footprint>c_1206</footprint>
+      <footprint>uCm:C_1206</footprint>
       <libsource lib="uCm" part="CAP_POL"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
       <tstamp>52ACCF32</tstamp>
     </comp>
     <comp ref="C33">
       <value>22uF X7R</value>
-      <footprint>c_1210</footprint>
+      <footprint>uCm:C_1210</footprint>
       <libsource lib="uCm" part="CAP_POL"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
       <tstamp>52ACCF38</tstamp>
     </comp>
     <comp ref="J2">
       <value>3V3_EXT</value>
-      <footprint>Header_2</footprint>
+      <footprint>uCm:Header_2</footprint>
       <libsource lib="uCm" part="CONN_2"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
       <tstamp>52ACCF3E</tstamp>
     </comp>
     <comp ref="L2">
       <value>2u2H,3.0A</value>
-      <footprint>Inductor_SMD3</footprint>
+      <footprint>uCm:Inductor_SMD3</footprint>
       <fields>
         <field name="Mfr_PN">XFL4020-222MEB, Coilcraft</field>
       </fields>
@@ -1206,49 +1232,49 @@
     </comp>
     <comp ref="R14">
       <value>100k</value>
-      <footprint>r_0805</footprint>
+      <footprint>uCm:r_0805</footprint>
       <libsource lib="uCm" part="R"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
       <tstamp>52ACCF4B</tstamp>
     </comp>
     <comp ref="U4">
       <value>TPS62132</value>
-      <footprint>TPS62132</footprint>
+      <footprint>uCm:TPS62132</footprint>
       <libsource lib="uCm" part="TPS62132"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
       <tstamp>52ACCF51</tstamp>
     </comp>
     <comp ref="C34">
       <value>100nF</value>
-      <footprint>c_0805</footprint>
+      <footprint>uCm:c_0805</footprint>
       <libsource lib="uCm" part="CAP_NP"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
       <tstamp>52ACCF57</tstamp>
     </comp>
     <comp ref="C35">
       <value>3.3nF</value>
-      <footprint>c_0805</footprint>
+      <footprint>uCm:c_0805</footprint>
       <libsource lib="uCm" part="CAP_NP"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
       <tstamp>52ACCF5D</tstamp>
     </comp>
     <comp ref="C37">
       <value>100uF</value>
-      <footprint>C_ELCO_SMD</footprint>
+      <footprint>uCm:C_ELCO_SMD</footprint>
       <libsource lib="uCm" part="CAP_POL"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
       <tstamp>52ACCF6F</tstamp>
     </comp>
     <comp ref="C36">
       <value>100uF</value>
-      <footprint>C_ELCO_SMD</footprint>
+      <footprint>uCm:C_ELCO_SMD</footprint>
       <libsource lib="uCm" part="CAP_POL"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
       <tstamp>52ACCF75</tstamp>
     </comp>
     <comp ref="U5">
       <value>DS3231N</value>
-      <footprint>DS3231</footprint>
+      <footprint>uCm:DS3231</footprint>
       <fields>
         <field name="Field4">IC RTC W/TCXO 16-SOIC</field>
         <field name="Field5">Clock/Calendar</field>
@@ -1265,7 +1291,7 @@
     </comp>
     <comp ref="R11">
       <value>10k</value>
-      <footprint>r_0805</footprint>
+      <footprint>uCm:r_0805</footprint>
       <fields>
         <field name="Field4">RES 10K OHM 1/8W 5% CF AXIAL</field>
         <field name="Field5">0.125W, 1/8W</field>
@@ -1282,7 +1308,7 @@
     </comp>
     <comp ref="C23">
       <value>100nF</value>
-      <footprint>c_0805</footprint>
+      <footprint>uCm:c_0805</footprint>
       <fields>
         <field name="Field4">CAP FILM 0.1UF 63VDC RADIAL</field>
         <field name="Field5">100nF, 63V</field>
@@ -1315,7 +1341,7 @@
     </comp>
     <comp ref="BT1">
       <value>BATT_HOLDER</value>
-      <footprint>CR2032</footprint>
+      <footprint>uCm:CR2032</footprint>
       <fields>
         <field name="Field4">HOLDER BATTERY COIN 20MM DIA THM</field>
         <field name="Field5">Coin Cell, Retainer</field>
@@ -1332,21 +1358,21 @@
     </comp>
     <comp ref="B3">
       <value>I_O</value>
-      <footprint>I_O</footprint>
+      <footprint>uCm:I_O</footprint>
       <libsource lib="uCm" part="I_O"/>
       <sheetpath names="/rtc/" tstamps="/4E1FEA4E/"/>
       <tstamp>4E1FEBD4</tstamp>
     </comp>
     <comp ref="B2">
       <value>I_O</value>
-      <footprint>I_O</footprint>
+      <footprint>uCm:I_O</footprint>
       <libsource lib="uCm" part="I_O"/>
       <sheetpath names="/rtc/" tstamps="/4E1FEA4E/"/>
       <tstamp>4E1FEBCE</tstamp>
     </comp>
     <comp ref="B1">
       <value>I_O</value>
-      <footprint>I_O</footprint>
+      <footprint>uCm:I_O</footprint>
       <libsource lib="uCm" part="I_O"/>
       <sheetpath names="/rtc/" tstamps="/4E1FEA4E/"/>
       <tstamp>4E1FEBC6</tstamp>
@@ -1427,6 +1453,16 @@
       <pins>
         <pin num="+" name="+" type="passive"/>
         <pin num="-" name="-" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="uCm" part="BUZZER">
+      <fields>
+        <field name="Reference">SP</field>
+        <field name="Value">BUZZER</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="input"/>
+        <pin num="2" name="2" type="input"/>
       </pins>
     </libpart>
     <libpart lib="uCm" part="C">
@@ -2026,50 +2062,50 @@
     </library>
   </libraries>
   <nets>
-    <net code="1" name="/PC2">
-      <node ref="B7" pin="1"/>
-      <node ref="U7" pin="25"/>
-    </net>
-    <net code="2" name="/PC1">
-      <node ref="B9" pin="1"/>
-      <node ref="U7" pin="24"/>
-    </net>
-    <net code="3" name="/rtc/SQR">
-      <node ref="U5" pin="3"/>
-      <node ref="R11" pin="2"/>
-      <node ref="B1" pin="1"/>
-    </net>
-    <net code="4" name="/PB6">
-      <node ref="U7" pin="7"/>
-      <node ref="C2" pin="1"/>
-      <node ref="X1" pin="1"/>
-    </net>
-    <net code="5" name="/rtc/SCL">
-      <node ref="U7" pin="28"/>
-      <node ref="R3" pin="2"/>
-      <node ref="U5" pin="16"/>
-    </net>
-    <net code="6" name="/~PD6">
-      <node ref="B14" pin="1"/>
-      <node ref="U7" pin="10"/>
-    </net>
-    <net code="7" name="/PD7">
-      <node ref="B4" pin="1"/>
+    <net code="1" name="/PD7">
       <node ref="U7" pin="11"/>
+      <node ref="B4" pin="1"/>
     </net>
-    <net code="8" name="/PB0">
+    <net code="2" name="/PB0">
       <node ref="B12" pin="1"/>
       <node ref="U7" pin="12"/>
     </net>
-    <net code="9" name="/PC0">
-      <node ref="U7" pin="23"/>
+    <net code="3" name="/PC0">
       <node ref="B8" pin="1"/>
+      <node ref="U7" pin="23"/>
+    </net>
+    <net code="4" name="/PC1">
+      <node ref="B9" pin="1"/>
+      <node ref="U7" pin="24"/>
+    </net>
+    <net code="5" name="/PC2">
+      <node ref="U7" pin="25"/>
+      <node ref="B7" pin="1"/>
+    </net>
+    <net code="6" name="/rtc/SQR">
+      <node ref="B1" pin="1"/>
+      <node ref="U5" pin="3"/>
+      <node ref="R11" pin="2"/>
+    </net>
+    <net code="7" name="/PB6">
+      <node ref="U7" pin="7"/>
+      <node ref="X1" pin="1"/>
+      <node ref="C2" pin="1"/>
+    </net>
+    <net code="8" name="/PB7">
+      <node ref="C3" pin="1"/>
+      <node ref="X1" pin="2"/>
+      <node ref="U7" pin="8"/>
+    </net>
+    <net code="9" name="/TXD">
+      <node ref="U7" pin="31"/>
+      <node ref="P5" pin="5"/>
     </net>
     <net code="10" name="/Interface/SCK">
-      <node ref="P4" pin="3"/>
       <node ref="R10" pin="1"/>
-      <node ref="U1" pin="12"/>
+      <node ref="P4" pin="3"/>
       <node ref="U7" pin="17"/>
+      <node ref="U1" pin="12"/>
     </net>
     <net code="11" name="/RESET">
       <node ref="U7" pin="29"/>
@@ -2080,133 +2116,140 @@
     </net>
     <net code="12" name="/Interface/~MOSI">
       <node ref="P4" pin="4"/>
-      <node ref="U7" pin="15"/>
       <node ref="U1" pin="10"/>
+      <node ref="U7" pin="15"/>
     </net>
     <net code="13" name="/RXD">
-      <node ref="U7" pin="30"/>
       <node ref="P5" pin="4"/>
+      <node ref="U7" pin="30"/>
     </net>
-    <net code="14" name="/Interface/MISO">
-      <node ref="U1" pin="13"/>
-      <node ref="U7" pin="16"/>
-      <node ref="P4" pin="1"/>
-    </net>
-    <net code="15" name="+3.3V">
-      <node ref="R14" pin="2"/>
-      <node ref="L2" pin="2"/>
-      <node ref="P1" pin="1"/>
-      <node ref="U4" pin="14"/>
-      <node ref="P7" pin="1"/>
-      <node ref="C33" pin="1"/>
-      <node ref="J2" pin="1"/>
-      <node ref="R9" pin="1"/>
-      <node ref="C10" pin="1"/>
-      <node ref="U1" pin="8"/>
-      <node ref="C8" pin="1"/>
-      <node ref="R4" pin="2"/>
-      <node ref="U1" pin="1"/>
-      <node ref="C32" pin="2"/>
-    </net>
-    <net code="16" name="/Interface/12V">
-      <node ref="C17" pin="1"/>
-      <node ref="R13" pin="1"/>
-      <node ref="D4" pin="2"/>
-      <node ref="P17" pin="2"/>
-      <node ref="U4" pin="10"/>
-      <node ref="U4" pin="11"/>
-      <node ref="C22" pin="1"/>
-      <node ref="C20" pin="2"/>
-      <node ref="U3" pin="13"/>
-      <node ref="U3" pin="12"/>
-      <node ref="C36" pin="1"/>
-      <node ref="C27" pin="1"/>
-      <node ref="C38" pin="1"/>
-      <node ref="C30" pin="1"/>
-      <node ref="P11" pin="3"/>
-      <node ref="U3" pin="11"/>
-      <node ref="C37" pin="1"/>
-      <node ref="C34" pin="2"/>
-      <node ref="C26" pin="1"/>
-      <node ref="U3" pin="10"/>
-      <node ref="P34" pin="3"/>
-      <node ref="U4" pin="13"/>
-      <node ref="U4" pin="12"/>
-    </net>
-    <net code="17" name="/rtc/32k">
-      <node ref="B3" pin="1"/>
-      <node ref="U5" pin="1"/>
-    </net>
-    <net code="18" name="/rtc/SDA">
-      <node ref="U5" pin="15"/>
-      <node ref="R2" pin="2"/>
-      <node ref="U7" pin="27"/>
-    </net>
-    <net code="19" name="/PB7">
-      <node ref="U7" pin="8"/>
-      <node ref="C3" pin="1"/>
-      <node ref="X1" pin="2"/>
-    </net>
-    <net code="20" name="/rtc/RST">
+    <net code="14" name="/rtc/RST">
       <node ref="B2" pin="1"/>
       <node ref="U5" pin="4"/>
     </net>
-    <net code="21" name="/rtc/BAT">
-      <node ref="BT1" pin="+"/>
-      <node ref="C23" pin="1"/>
+    <net code="15" name="/rtc/32k">
+      <node ref="U5" pin="1"/>
+      <node ref="B3" pin="1"/>
+    </net>
+    <net code="16" name="/rtc/BAT">
       <node ref="U5" pin="14"/>
+      <node ref="C23" pin="1"/>
+      <node ref="BT1" pin="+"/>
     </net>
-    <net code="22" name="/TXD">
-      <node ref="U7" pin="31"/>
-      <node ref="P5" pin="5"/>
+    <net code="17" name="/Interface/SDA">
+      <node ref="P9" pin="3"/>
+      <node ref="U7" pin="27"/>
+      <node ref="R2" pin="2"/>
+      <node ref="U5" pin="15"/>
+      <node ref="P10" pin="3"/>
     </net>
-    <net code="23" name="/Interface/PD4_Valve2">
+    <net code="18" name="/Interface/SCL">
+      <node ref="R3" pin="2"/>
+      <node ref="P9" pin="2"/>
+      <node ref="U7" pin="28"/>
+      <node ref="U5" pin="16"/>
+      <node ref="P10" pin="2"/>
+    </net>
+    <net code="19" name="/Interface/~PD6_Spk">
+      <node ref="U7" pin="10"/>
+      <node ref="Q4" pin="1"/>
+    </net>
+    <net code="20" name="/Interface/PD4_Valve2">
       <node ref="U7" pin="2"/>
-      <node ref="Q3" pin="1"/>
+      <node ref="Q1" pin="1"/>
     </net>
-    <net code="24" name="/Interface/5V0">
-      <node ref="L1" pin="2"/>
-      <node ref="R7" pin="2"/>
-      <node ref="J1" pin="1"/>
-      <node ref="C19" pin="1"/>
-      <node ref="C18" pin="2"/>
-      <node ref="P10" pin="1"/>
-      <node ref="P9" pin="1"/>
-      <node ref="C7" pin="1"/>
+    <net code="21" name="+3.3V">
+      <node ref="L2" pin="2"/>
+      <node ref="U1" pin="1"/>
+      <node ref="C8" pin="1"/>
+      <node ref="J2" pin="1"/>
+      <node ref="C32" pin="2"/>
+      <node ref="R4" pin="2"/>
+      <node ref="U4" pin="14"/>
+      <node ref="R14" pin="2"/>
+      <node ref="C33" pin="1"/>
+      <node ref="U1" pin="8"/>
+      <node ref="P1" pin="1"/>
+      <node ref="R9" pin="1"/>
+      <node ref="P7" pin="1"/>
+      <node ref="C10" pin="1"/>
+    </net>
+    <net code="22" name="/Interface/5V0">
       <node ref="P11" pin="1"/>
       <node ref="U1" pin="14"/>
-      <node ref="C9" pin="1"/>
-      <node ref="C11" pin="1"/>
-      <node ref="U3" pin="14"/>
-      <node ref="R8" pin="1"/>
-      <node ref="R5" pin="1"/>
-      <node ref="P34" pin="1"/>
-      <node ref="U7" pin="4"/>
-      <node ref="U7" pin="6"/>
-      <node ref="SW2" pin="2"/>
+      <node ref="P10" pin="1"/>
       <node ref="SW3" pin="2"/>
-      <node ref="P4" pin="2"/>
-      <node ref="U5" pin="2"/>
-      <node ref="C1" pin="1"/>
-      <node ref="C28" pin="1"/>
-      <node ref="R3" pin="1"/>
-      <node ref="U7" pin="18"/>
-      <node ref="P1" pin="3"/>
       <node ref="R11" pin="1"/>
+      <node ref="C7" pin="1"/>
+      <node ref="U5" pin="2"/>
+      <node ref="C9" pin="1"/>
+      <node ref="R5" pin="1"/>
+      <node ref="C11" pin="1"/>
+      <node ref="C19" pin="1"/>
       <node ref="R1" pin="1"/>
       <node ref="R2" pin="1"/>
+      <node ref="R3" pin="1"/>
+      <node ref="P34" pin="1"/>
+      <node ref="P1" pin="3"/>
+      <node ref="R6" pin="1"/>
+      <node ref="SW2" pin="2"/>
+      <node ref="P4" pin="2"/>
+      <node ref="SP1" pin="1"/>
+      <node ref="C18" pin="2"/>
+      <node ref="U7" pin="18"/>
+      <node ref="U3" pin="14"/>
+      <node ref="C14" pin="1"/>
+      <node ref="C28" pin="1"/>
+      <node ref="D3" pin="2"/>
+      <node ref="R8" pin="1"/>
+      <node ref="J1" pin="1"/>
+      <node ref="L1" pin="2"/>
+      <node ref="R7" pin="2"/>
+      <node ref="P9" pin="1"/>
+      <node ref="U7" pin="6"/>
+      <node ref="U7" pin="4"/>
+    </net>
+    <net code="23" name="/Interface/MISO">
+      <node ref="U7" pin="16"/>
+      <node ref="U1" pin="13"/>
+      <node ref="P4" pin="1"/>
+    </net>
+    <net code="24" name="/Interface/~SS">
+      <node ref="U1" pin="11"/>
+      <node ref="U7" pin="14"/>
     </net>
     <net code="25" name="/PC7">
       <node ref="U7" pin="22"/>
       <node ref="B11" pin="1"/>
     </net>
-    <net code="26" name="/Interface/~SS">
-      <node ref="U1" pin="11"/>
-      <node ref="U7" pin="14"/>
-    </net>
-    <net code="27" name="/PC6">
+    <net code="26" name="/PC6">
       <node ref="U7" pin="19"/>
       <node ref="B10" pin="1"/>
+    </net>
+    <net code="27" name="/Interface/12V">
+      <node ref="C26" pin="1"/>
+      <node ref="C36" pin="1"/>
+      <node ref="U4" pin="10"/>
+      <node ref="U4" pin="12"/>
+      <node ref="U4" pin="13"/>
+      <node ref="C38" pin="1"/>
+      <node ref="C34" pin="2"/>
+      <node ref="U4" pin="11"/>
+      <node ref="C37" pin="1"/>
+      <node ref="U3" pin="11"/>
+      <node ref="C27" pin="1"/>
+      <node ref="U3" pin="13"/>
+      <node ref="U3" pin="12"/>
+      <node ref="U3" pin="10"/>
+      <node ref="C20" pin="2"/>
+      <node ref="C22" pin="1"/>
+      <node ref="D4" pin="2"/>
+      <node ref="P34" pin="3"/>
+      <node ref="P17" pin="2"/>
+      <node ref="C17" pin="1"/>
+      <node ref="P11" pin="3"/>
+      <node ref="R13" pin="1"/>
+      <node ref="C30" pin="1"/>
     </net>
     <net code="28" name="Net-(P5-Pad3)">
       <node ref="P5" pin="3"/>
@@ -2216,19 +2259,20 @@
       <node ref="P5" pin="6"/>
     </net>
     <net code="30" name="/Interface/~PB1_Pump">
-      <node ref="Q2" pin="1"/>
       <node ref="U7" pin="13"/>
+      <node ref="Q2" pin="1"/>
     </net>
     <net code="31" name="/Interface/PC3_Pr1">
       <node ref="U7" pin="26"/>
       <node ref="P7" pin="3"/>
     </net>
     <net code="32" name="/Interface/~PD5_Valve">
+      <node ref="Q3" pin="1"/>
       <node ref="U7" pin="9"/>
-      <node ref="Q1" pin="1"/>
     </net>
     <net code="33" name="/AREF">
       <node ref="U7" pin="20"/>
+      <node ref="C1" pin="1"/>
       <node ref="P1" pin="2"/>
     </net>
     <net code="34" name="/PD2">
@@ -2237,217 +2281,217 @@
       <node ref="R21" pin="1"/>
     </net>
     <net code="35" name="/~PD3">
-      <node ref="U7" pin="1"/>
       <node ref="SW3" pin="1"/>
       <node ref="R22" pin="1"/>
+      <node ref="U7" pin="1"/>
     </net>
     <net code="36" name="GND">
-      <node ref="P7" pin="2"/>
-      <node ref="C13" pin="2"/>
-      <node ref="C11" pin="2"/>
-      <node ref="C10" pin="2"/>
-      <node ref="C35" pin="1"/>
-      <node ref="C34" pin="1"/>
-      <node ref="U4" pin="16"/>
       <node ref="U4" pin="15"/>
-      <node ref="P5" pin="1"/>
-      <node ref="P5" pin="2"/>
-      <node ref="Q2" pin="3"/>
-      <node ref="Q3" pin="3"/>
-      <node ref="C36" pin="2"/>
-      <node ref="C31" pin="2"/>
-      <node ref="C28" pin="2"/>
-      <node ref="P9" pin="4"/>
-      <node ref="U1" pin="7"/>
-      <node ref="R4" pin="1"/>
-      <node ref="Q1" pin="3"/>
-      <node ref="R21" pin="2"/>
-      <node ref="R22" pin="2"/>
-      <node ref="C9" pin="2"/>
-      <node ref="C8" pin="2"/>
-      <node ref="C7" pin="2"/>
-      <node ref="P10" pin="4"/>
-      <node ref="U4" pin="5"/>
-      <node ref="C32" pin="1"/>
-      <node ref="C38" pin="2"/>
-      <node ref="C33" pin="2"/>
-      <node ref="J2" pin="2"/>
-      <node ref="U3" pin="8"/>
+      <node ref="U4" pin="16"/>
+      <node ref="C34" pin="1"/>
+      <node ref="C35" pin="1"/>
+      <node ref="C11" pin="2"/>
       <node ref="U4" pin="6"/>
-      <node ref="U4" pin="7"/>
       <node ref="U4" pin="8"/>
-      <node ref="U3" pin="7"/>
-      <node ref="U3" pin="6"/>
-      <node ref="U3" pin="5"/>
-      <node ref="C23" pin="2"/>
-      <node ref="U5" pin="7"/>
-      <node ref="C30" pin="2"/>
-      <node ref="C18" pin="1"/>
-      <node ref="U3" pin="15"/>
-      <node ref="U3" pin="16"/>
-      <node ref="P13" pin="2"/>
-      <node ref="BT1" pin="-"/>
-      <node ref="C20" pin="1"/>
-      <node ref="U5" pin="8"/>
-      <node ref="C21" pin="1"/>
-      <node ref="U5" pin="6"/>
-      <node ref="U5" pin="9"/>
-      <node ref="C26" pin="2"/>
-      <node ref="U5" pin="12"/>
-      <node ref="U5" pin="10"/>
-      <node ref="C22" pin="2"/>
-      <node ref="U5" pin="11"/>
-      <node ref="U5" pin="13"/>
-      <node ref="X1" pin="3"/>
-      <node ref="P24" pin="2"/>
-      <node ref="P24" pin="3"/>
-      <node ref="J1" pin="2"/>
-      <node ref="D7" pin="2"/>
-      <node ref="D8" pin="2"/>
-      <node ref="D6" pin="2"/>
-      <node ref="C19" pin="2"/>
-      <node ref="D5" pin="2"/>
-      <node ref="U5" pin="5"/>
+      <node ref="Q3" pin="3"/>
+      <node ref="Q2" pin="3"/>
+      <node ref="U4" pin="7"/>
+      <node ref="U4" pin="5"/>
+      <node ref="C36" pin="2"/>
+      <node ref="C14" pin="2"/>
+      <node ref="U1" pin="7"/>
+      <node ref="P10" pin="4"/>
+      <node ref="C7" pin="2"/>
+      <node ref="C8" pin="2"/>
+      <node ref="C9" pin="2"/>
+      <node ref="Q4" pin="3"/>
+      <node ref="C10" pin="2"/>
+      <node ref="C13" pin="2"/>
+      <node ref="P9" pin="4"/>
+      <node ref="C31" pin="2"/>
+      <node ref="R4" pin="1"/>
+      <node ref="P7" pin="2"/>
+      <node ref="Q1" pin="3"/>
+      <node ref="J2" pin="2"/>
+      <node ref="C33" pin="2"/>
+      <node ref="C38" pin="2"/>
+      <node ref="C32" pin="1"/>
+      <node ref="P4" pin="6"/>
       <node ref="C1" pin="2"/>
       <node ref="C2" pin="2"/>
-      <node ref="C37" pin="2"/>
-      <node ref="C3" pin="2"/>
-      <node ref="SW1" pin="1"/>
-      <node ref="P4" pin="6"/>
+      <node ref="U7" pin="21"/>
       <node ref="U7" pin="5"/>
       <node ref="U7" pin="3"/>
-      <node ref="U7" pin="21"/>
+      <node ref="D8" pin="2"/>
+      <node ref="U5" pin="11"/>
+      <node ref="U5" pin="12"/>
+      <node ref="C37" pin="2"/>
+      <node ref="C23" pin="2"/>
+      <node ref="P24" pin="2"/>
+      <node ref="P24" pin="3"/>
+      <node ref="BT1" pin="-"/>
+      <node ref="D7" pin="2"/>
+      <node ref="U5" pin="10"/>
+      <node ref="D6" pin="2"/>
+      <node ref="D5" pin="2"/>
+      <node ref="SW1" pin="1"/>
+      <node ref="U5" pin="13"/>
+      <node ref="U5" pin="5"/>
+      <node ref="U5" pin="6"/>
+      <node ref="U5" pin="7"/>
+      <node ref="P13" pin="2"/>
+      <node ref="U5" pin="8"/>
+      <node ref="U5" pin="9"/>
+      <node ref="C18" pin="1"/>
+      <node ref="C30" pin="2"/>
+      <node ref="C21" pin="1"/>
+      <node ref="C26" pin="2"/>
+      <node ref="C22" pin="2"/>
+      <node ref="C28" pin="2"/>
+      <node ref="U3" pin="6"/>
+      <node ref="U3" pin="7"/>
+      <node ref="U3" pin="8"/>
+      <node ref="U3" pin="15"/>
+      <node ref="U3" pin="16"/>
+      <node ref="C20" pin="1"/>
+      <node ref="U3" pin="5"/>
+      <node ref="P5" pin="2"/>
+      <node ref="P5" pin="1"/>
+      <node ref="C3" pin="2"/>
+      <node ref="X1" pin="3"/>
+      <node ref="J1" pin="2"/>
+      <node ref="C19" pin="2"/>
+      <node ref="R21" pin="2"/>
+      <node ref="R22" pin="2"/>
     </net>
-    <net code="37" name="Net-(L1-Pad1)">
-      <node ref="U3" pin="2"/>
-      <node ref="L1" pin="1"/>
-      <node ref="U3" pin="1"/>
-      <node ref="U3" pin="3"/>
-    </net>
-    <net code="38" name="Net-(R7-Pad1)">
-      <node ref="R7" pin="1"/>
-      <node ref="U3" pin="4"/>
-    </net>
-    <net code="39" name="/pwr/PWR_IN">
-      <node ref="P24" pin="1"/>
-      <node ref="D4" pin="1"/>
-      <node ref="P13" pin="1"/>
-    </net>
-    <net code="40" name="Net-(C21-Pad2)">
-      <node ref="U3" pin="9"/>
-      <node ref="C21" pin="2"/>
-    </net>
-    <net code="41" name="Net-(D5-Pad1)">
-      <node ref="D5" pin="1"/>
+    <net code="37" name="Net-(D5-Pad1)">
       <node ref="R8" pin="2"/>
+      <node ref="D5" pin="1"/>
     </net>
-    <net code="42" name="Net-(D6-Pad1)">
-      <node ref="D6" pin="1"/>
+    <net code="38" name="Net-(D6-Pad1)">
       <node ref="R9" pin="2"/>
+      <node ref="D6" pin="1"/>
     </net>
-    <net code="43" name="Net-(D8-Pad1)">
-      <node ref="D8" pin="1"/>
+    <net code="39" name="Net-(D8-Pad1)">
       <node ref="R13" pin="2"/>
+      <node ref="D8" pin="1"/>
     </net>
-    <net code="44" name="Net-(D7-Pad1)">
+    <net code="40" name="/pwr/PWR_IN">
+      <node ref="P24" pin="1"/>
+      <node ref="P13" pin="1"/>
+      <node ref="D4" pin="1"/>
+    </net>
+    <net code="41" name="Net-(D7-Pad1)">
       <node ref="D7" pin="1"/>
       <node ref="R10" pin="2"/>
     </net>
-    <net code="45" name="Net-(C35-Pad2)">
-      <node ref="U4" pin="9"/>
-      <node ref="C35" pin="2"/>
+    <net code="42" name="Net-(C21-Pad2)">
+      <node ref="C21" pin="2"/>
+      <node ref="U3" pin="9"/>
     </net>
-    <net code="46" name="Net-(R14-Pad1)">
+    <net code="43" name="Net-(R7-Pad1)">
+      <node ref="U3" pin="4"/>
+      <node ref="R7" pin="1"/>
+    </net>
+    <net code="44" name="Net-(L1-Pad1)">
+      <node ref="L1" pin="1"/>
+      <node ref="U3" pin="2"/>
+      <node ref="U3" pin="3"/>
+      <node ref="U3" pin="1"/>
+    </net>
+    <net code="45" name="Net-(R14-Pad1)">
       <node ref="R14" pin="1"/>
       <node ref="U4" pin="4"/>
     </net>
+    <net code="46" name="Net-(C35-Pad2)">
+      <node ref="U4" pin="9"/>
+      <node ref="C35" pin="2"/>
+    </net>
     <net code="47" name="Net-(L2-Pad1)">
       <node ref="L2" pin="1"/>
-      <node ref="U4" pin="1"/>
-      <node ref="U4" pin="2"/>
       <node ref="U4" pin="3"/>
+      <node ref="U4" pin="2"/>
+      <node ref="U4" pin="1"/>
     </net>
     <net code="48" name="/Interface/P_MOSI">
       <node ref="U1" pin="5"/>
       <node ref="P7" pin="8"/>
     </net>
     <net code="49" name="/Interface/-Vlv">
-      <node ref="P14" pin="2"/>
-      <node ref="Q1" pin="2"/>
       <node ref="D1" pin="1"/>
+      <node ref="Q1" pin="2"/>
+      <node ref="P14" pin="1"/>
     </net>
-    <net code="50" name="/Interface/SDA">
-      <node ref="P10" pin="3"/>
-      <node ref="P9" pin="3"/>
+    <net code="50" name="Net-(C17-Pad2)">
+      <node ref="C29" pin="2"/>
+      <node ref="C27" pin="2"/>
+      <node ref="P17" pin="1"/>
+      <node ref="C17" pin="2"/>
+      <node ref="Q2" pin="2"/>
     </net>
-    <net code="51" name="/Interface/SCL">
-      <node ref="P9" pin="2"/>
-      <node ref="P10" pin="2"/>
+    <net code="51" name="Net-(U1-Pad9)">
+      <node ref="U1" pin="9"/>
     </net>
     <net code="52" name="Net-(U1-Pad6)">
       <node ref="U1" pin="6"/>
     </net>
-    <net code="53" name="Net-(U1-Pad9)">
-      <node ref="U1" pin="9"/>
-    </net>
-    <net code="54" name="/Interface/+Vlv">
-      <node ref="C13" pin="1"/>
-      <node ref="P11" pin="2"/>
-      <node ref="D1" pin="2"/>
-      <node ref="P14" pin="1"/>
-    </net>
-    <net code="55" name="Net-(P17-Pad5)">
-      <node ref="P17" pin="5"/>
-    </net>
-    <net code="56" name="Net-(P17-Pad3)">
-      <node ref="P17" pin="3"/>
-    </net>
-    <net code="57" name="Net-(P17-Pad6)">
-      <node ref="P17" pin="6"/>
-    </net>
-    <net code="58" name="Net-(P7-Pad7)">
-      <node ref="P7" pin="7"/>
-    </net>
-    <net code="59" name="/Interface/-Vlv2">
-      <node ref="Q3" pin="2"/>
-      <node ref="P38" pin="2"/>
-      <node ref="D9" pin="1"/>
-    </net>
-    <net code="60" name="/Interface/+Vlv2">
-      <node ref="C31" pin="1"/>
-      <node ref="D9" pin="2"/>
-      <node ref="P34" pin="2"/>
-      <node ref="P38" pin="1"/>
-    </net>
-    <net code="61" name="Net-(P18-Pad2)">
-      <node ref="P18" pin="2"/>
-    </net>
-    <net code="62" name="Net-(P18-Pad1)">
-      <node ref="P18" pin="1"/>
-    </net>
-    <net code="63" name="/Interface/P_MISO">
+    <net code="53" name="/Interface/P_MISO">
       <node ref="U1" pin="2"/>
       <node ref="P7" pin="4"/>
     </net>
-    <net code="64" name="/Interface/P_SS">
-      <node ref="P7" pin="6"/>
+    <net code="54" name="Net-(P18-Pad2)">
+      <node ref="P18" pin="2"/>
+    </net>
+    <net code="55" name="Net-(P18-Pad1)">
+      <node ref="P18" pin="1"/>
+    </net>
+    <net code="56" name="/Interface/P_SS">
       <node ref="U1" pin="4"/>
+      <node ref="P7" pin="6"/>
     </net>
-    <net code="65" name="/Interface/P_SCK">
-      <node ref="P7" pin="5"/>
+    <net code="57" name="Net-(P7-Pad7)">
+      <node ref="P7" pin="7"/>
+    </net>
+    <net code="58" name="/Interface/P_SCK">
       <node ref="U1" pin="3"/>
+      <node ref="P7" pin="5"/>
     </net>
-    <net code="66" name="Net-(C17-Pad2)">
-      <node ref="C29" pin="2"/>
-      <node ref="P17" pin="1"/>
-      <node ref="C17" pin="2"/>
-      <node ref="Q2" pin="2"/>
-      <node ref="C27" pin="2"/>
+    <net code="59" name="Net-(P17-Pad6)">
+      <node ref="P17" pin="6"/>
     </net>
-    <net code="67" name="/Interface/Pump">
+    <net code="60" name="Net-(P17-Pad5)">
+      <node ref="P17" pin="5"/>
+    </net>
+    <net code="61" name="Net-(P17-Pad3)">
+      <node ref="P17" pin="3"/>
+    </net>
+    <net code="62" name="/Interface/+Vlv">
+      <node ref="P14" pin="2"/>
+      <node ref="P11" pin="2"/>
+      <node ref="C13" pin="1"/>
+      <node ref="D1" pin="2"/>
+    </net>
+    <net code="63" name="/Interface/+Vlv2">
+      <node ref="P38" pin="2"/>
+      <node ref="D9" pin="2"/>
+      <node ref="C31" pin="1"/>
+      <node ref="P34" pin="2"/>
+    </net>
+    <net code="64" name="/Interface/Spk">
+      <node ref="Q4" pin="2"/>
+      <node ref="D3" pin="1"/>
+      <node ref="SP1" pin="2"/>
+      <node ref="R6" pin="2"/>
+    </net>
+    <net code="65" name="/Interface/Pump">
       <node ref="P17" pin="4"/>
-      <node ref="R5" pin="2"/>
       <node ref="C29" pin="1"/>
+      <node ref="R5" pin="2"/>
+    </net>
+    <net code="66" name="/Interface/-Vlv2">
+      <node ref="D9" pin="1"/>
+      <node ref="Q3" pin="2"/>
+      <node ref="P38" pin="1"/>
     </net>
   </nets>
 </export>

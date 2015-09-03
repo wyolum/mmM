@@ -210,35 +210,24 @@ $EndComp
 $Comp
 L C C1
 U 1 1 50E2940E
-P 1800 1450
-F 0 "C1" H 1800 1550 50  0000 L CNN
-F 1 "100nF" H 1800 1350 50  0000 L CNN
-F 2 "uCm:c_0805" H 1800 1450 50  0001 C CNN
-F 3 "" H 1800 1450 60  0001 C CNN
-F 4 "CAP FILM 0.1UF 63VDC RADIAL" H 1800 1650 60  0001 L CNN "Field4"
-F 5 "100nF, 63V" H 1800 1750 60  0001 L CNN "Field5"
-F 6 "R82" H 1800 1850 60  0001 L CNN "Field6"
-F 7 "Kemet" H 1800 1950 60  0001 L CNN "Field7"
-F 8 "R82DC3100AA50J" H 1800 2050 60  0001 L CNN "Field8"
-F 9 "Digikey" H 1800 2150 60  0001 L CNN "Field9"
-F 10 "399-5863-ND" H 1800 2250 60  0001 L CNN "Field10"
-F 11 "http://www.digikey.com/product-detail/en/R82DC3100AA50J/399-5863-ND/2571298?cur=USD" H 1800 2350 60  0001 L CNN "Field11"
-	1    1800 1450
+P 1200 2050
+F 0 "C1" H 1200 2150 50  0000 L CNN
+F 1 "100nF" H 1200 1950 50  0000 L CNN
+F 2 "uCm:c_0805" H 1200 2050 50  0001 C CNN
+F 3 "" H 1200 2050 60  0001 C CNN
+F 4 "CAP FILM 0.1UF 63VDC RADIAL" H 1200 2250 60  0001 L CNN "Field4"
+F 5 "100nF, 63V" H 1200 2350 60  0001 L CNN "Field5"
+F 6 "R82" H 1200 2450 60  0001 L CNN "Field6"
+F 7 "Kemet" H 1200 2550 60  0001 L CNN "Field7"
+F 8 "R82DC3100AA50J" H 1200 2650 60  0001 L CNN "Field8"
+F 9 "Digikey" H 1200 2750 60  0001 L CNN "Field9"
+F 10 "399-5863-ND" H 1200 2850 60  0001 L CNN "Field10"
+F 11 "http://www.digikey.com/product-detail/en/R82DC3100AA50J/399-5863-ND/2571298?cur=USD" H 1200 2950 60  0001 L CNN "Field11"
+	1    1200 2050
 	1    0    0    -1  
 $EndComp
 Text Notes 4550 3450 0    40   ~ 0
 SW INT1
-$Comp
-L SCREW SC1
-U 1 1 50DADA2B
-P 5125 6475
-F 0 "SC1" H 5125 6375 40  0000 C CNN
-F 1 "SCREW" H 5125 6575 40  0001 C CNN
-F 2 "uCm:vite_3mm" H 5125 6675 40  0001 C CNN
-F 3 "" H 5125 6475 60  0001 C CNN
-	1    5125 6475
-	1    0    0    -1  
-$EndComp
 Text Notes 5075 7375 0    40   ~ 0
 Mounting Holes
 Text Label 9775 825  0    40   ~ 0
@@ -261,6 +250,8 @@ F11 "3V3" B L 10050 1925 40
 F12 "~PB1_Pump" I L 10050 3125 40 
 F13 "PD4_Valve2" I L 10050 2625 40 
 F14 "~PD6_Spk" I L 10050 2825 40 
+F15 "SCL" I L 10050 3325 40 
+F16 "SDA" I L 10050 3425 40 
 $EndSheet
 NoConn ~ 8650 5825
 Text Label 9600 1925 0    40   ~ 0
@@ -282,9 +273,9 @@ Blank
 Text Notes 4550 3750 0    40   ~ 0
 Speaker PWM
 Text Notes 4550 3650 0    40   ~ 0
-Valve #1 PWM
+Valve #2 PWM
 Text Notes 4550 3550 0    40   ~ 0
-Valve #2
+Valve #1
 Text Notes 4550 3350 0    40   ~ 0
 SW INT0
 Text Label 9600 3125 0    40   ~ 0
@@ -481,7 +472,9 @@ F 3 "" H 725 2475 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	750  3050 1250 3050
+	750  3050 825  3050
+Wire Wire Line
+	825  3050 1250 3050
 Wire Notes Line
 	7025 6300 8000 6300
 Wire Wire Line
@@ -503,18 +496,24 @@ Wire Wire Line
 Wire Wire Line
 	875  1775 875  1675
 Wire Wire Line
-	975  1675 975  2550
+	975  1675 975  1875
+Wire Wire Line
+	975  1875 975  2550
 Wire Wire Line
 	825  3300 875  3300
 Wire Wire Line
-	825  2800 825  3300
+	825  2800 825  3050
+Wire Wire Line
+	825  3050 825  3300
 Wire Wire Line
 	825  2800 875  2800
 Connection ~ 1400 2800
 Wire Wire Line
-	1275 2800 1925 2800
+	1275 2800 1400 2800
 Wire Wire Line
-	1800 4975 1800 1575
+	1400 2800 1925 2800
+Wire Wire Line
+	1800 4975 1800 2450
 Wire Wire Line
 	8950 5000 8950 5350
 Wire Wire Line
@@ -532,7 +531,9 @@ Wire Wire Line
 Wire Wire Line
 	7725 5825 7725 5300
 Wire Wire Line
-	8450 5000 8450 5825
+	8450 5000 8450 5700
+Wire Wire Line
+	8450 5700 8450 5825
 Wire Wire Line
 	8850 5825 8850 5000
 Wire Wire Line
@@ -544,7 +545,9 @@ Wire Wire Line
 Wire Wire Line
 	9775 1025 10050 1025
 Wire Wire Line
-	2950 4850 2950 5100
+	2950 4850 2950 4975
+Wire Wire Line
+	2950 4975 2950 5100
 Wire Wire Line
 	3900 2750 4800 2750
 Wire Wire Line
@@ -584,9 +587,6 @@ Wire Wire Line
 Wire Wire Line
 	4125 4550 3900 4550
 Wire Wire Line
-	1800 800  1800 1325
-Connection ~ 1800 800 
-Wire Wire Line
 	1575 4650 1575 4975
 Connection ~ 1800 4975
 Wire Wire Line
@@ -619,13 +619,17 @@ Wire Wire Line
 Wire Wire Line
 	3900 3650 4125 3650
 Wire Wire Line
-	4800 650  4800 1200
+	4800 650  4800 800 
+Wire Wire Line
+	4800 800  4800 1200
 Wire Wire Line
 	9675 5700 10050 5700
 Wire Wire Line
 	9675 5600 10050 5600
 Wire Wire Line
-	1575 1700 1575 4050
+	1575 1700 1575 2250
+Wire Wire Line
+	1575 2250 1575 4050
 Connection ~ 1575 2250
 Wire Wire Line
 	1925 3300 1925 3150
@@ -638,9 +642,13 @@ Wire Wire Line
 Wire Wire Line
 	9675 6000 10050 6000
 Wire Wire Line
-	725  2550 2000 2550
+	725  2550 975  2550
 Wire Wire Line
-	2900 800  2900 1850
+	975  2550 2000 2550
+Wire Wire Line
+	2900 800  2900 1225
+Wire Wire Line
+	2900 1225 2900 1850
 Connection ~ 2900 800 
 Wire Wire Line
 	9775 925  10050 925 
@@ -655,15 +663,24 @@ Wire Wire Line
 Connection ~ 8450 5700
 Wire Wire Line
 	2000 2450 1800 2450
-Connection ~ 1800 2450
 Wire Wire Line
-	1275 3300 1925 3300
+	1275 3300 1400 3300
+Wire Wire Line
+	1400 3300 1925 3300
 Connection ~ 1400 3300
 Connection ~ 825  3050
 Wire Wire Line
 	750  3050 750  4975
 Wire Wire Line
-	750  4975 5900 4975
+	750  4975 1575 4975
+Wire Wire Line
+	1575 4975 1800 4975
+Wire Wire Line
+	1800 4975 2850 4975
+Wire Wire Line
+	2850 4975 2950 4975
+Wire Wire Line
+	2950 4975 5900 4975
 Connection ~ 1575 4975
 Wire Wire Line
 	1075 1675 1075 1775
@@ -692,12 +709,24 @@ Connection ~ 2850 4975
 Wire Wire Line
 	2950 1850 2950 1950
 Wire Wire Line
-	2850 1850 2950 1850
+	2850 1850 2900 1850
+Wire Wire Line
+	2900 1850 2950 1850
 Wire Wire Line
 	2850 1950 2850 1850
 Connection ~ 2900 1850
 Wire Wire Line
-	1425 800  5900 800 
+	1425 800  1575 800 
+Wire Wire Line
+	1575 800  1800 800 
+Wire Wire Line
+	1800 800  2900 800 
+Wire Wire Line
+	2900 800  4600 800 
+Wire Wire Line
+	4600 800  4800 800 
+Wire Wire Line
+	4800 800  5900 800 
 Wire Wire Line
 	1425 800  1425 2650
 Wire Wire Line
@@ -861,13 +890,19 @@ F 11 "http://www.digikey.com/product-detail/en/CF18JT10K0/CF18JT10K0CT-ND/202276
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	6000 3050 6000 3650
+	6000 3050 6000 3450
 Wire Wire Line
-	5800 3050 5800 3650
+	6000 3450 6000 3650
+Wire Wire Line
+	5800 3050 5800 3350
+Wire Wire Line
+	5800 3350 5800 3650
 Wire Wire Line
 	5800 4150 5800 4250
 Wire Wire Line
-	5800 4250 6000 4250
+	5800 4250 5900 4250
+Wire Wire Line
+	5900 4250 6000 4250
 Wire Wire Line
 	6000 4250 6000 4150
 Connection ~ 5800 3350
@@ -875,7 +910,9 @@ Connection ~ 6000 3450
 Wire Wire Line
 	5800 2450 5800 2300
 Wire Wire Line
-	5800 2300 6000 2300
+	5800 2300 5900 2300
+Wire Wire Line
+	5900 2300 6000 2300
 Wire Wire Line
 	6000 2300 6000 2450
 Wire Wire Line
@@ -937,39 +974,6 @@ F 3 "" H 4275 3850 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SCREW SC3
-U 1 1 52230B6D
-P 5125 6675
-F 0 "SC3" H 5125 6575 40  0000 C CNN
-F 1 "SCREW" H 5125 6775 40  0001 C CNN
-F 2 "uCm:vite_3mm" H 5125 6875 40  0001 C CNN
-F 3 "" H 5125 6675 60  0001 C CNN
-	1    5125 6675
-	1    0    0    -1  
-$EndComp
-$Comp
-L SCREW SC5
-U 1 1 52230B73
-P 5125 6875
-F 0 "SC5" H 5125 6775 40  0000 C CNN
-F 1 "SCREW" H 5125 6975 40  0001 C CNN
-F 2 "uCm:vite_3mm" H 5125 7075 40  0001 C CNN
-F 3 "" H 5125 6875 60  0001 C CNN
-	1    5125 6875
-	1    0    0    -1  
-$EndComp
-$Comp
-L SCREW SC8
-U 1 1 522315D5
-P 5125 7075
-F 0 "SC8" H 5125 6975 40  0000 C CNN
-F 1 "SCREW" H 5125 7175 40  0001 C CNN
-F 2 "uCm:vite_3mm" H 5125 7275 40  0001 C CNN
-F 3 "" H 5125 7075 60  0001 C CNN
-	1    5125 7075
-	1    0    0    -1  
-$EndComp
-$Comp
 L SCREW SC6
 U 1 1 522315DB
 P 5325 6875
@@ -989,28 +993,6 @@ F 1 "SCREW" H 5325 7175 40  0001 C CNN
 F 2 "uCm:vite_3mm" H 5325 7275 40  0001 C CNN
 F 3 "" H 5325 7075 60  0001 C CNN
 	1    5325 7075
-	1    0    0    -1  
-$EndComp
-$Comp
-L SCREW SC2
-U 1 1 522315E7
-P 5525 6475
-F 0 "SC2" H 5525 6375 40  0000 C CNN
-F 1 "SCREW" H 5525 6575 40  0001 C CNN
-F 2 "uCm:vite_3mm" H 5525 6675 40  0001 C CNN
-F 3 "" H 5525 6475 60  0001 C CNN
-	1    5525 6475
-	1    0    0    -1  
-$EndComp
-$Comp
-L SCREW SC4
-U 1 1 522315ED
-P 5525 6675
-F 0 "SC4" H 5525 6575 40  0000 C CNN
-F 1 "SCREW" H 5525 6775 40  0001 C CNN
-F 2 "uCm:vite_3mm" H 5525 6875 40  0001 C CNN
-F 3 "" H 5525 6675 60  0001 C CNN
-	1    5525 6675
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1056,4 +1038,30 @@ Wire Wire Line
 	10050 2825 9600 2825
 Text Label 9600 2825 0    40   ~ 0
 ~PD6_Spk
+Wire Wire Line
+	10050 3325 9600 3325
+Wire Wire Line
+	10050 3425 9600 3425
+Text Label 9600 3425 0    40   ~ 0
+SDA
+Text Label 9600 3325 0    40   ~ 0
+SCL
+$Comp
+L GND #PWR?
+U 1 1 55E8B5A9
+P 1200 2250
+F 0 "#PWR?" H 1200 2250 30  0001 C CNN
+F 1 "GND" H 1200 2180 30  0001 C CNN
+F 2 "" H 1200 2250 60  0001 C CNN
+F 3 "" H 1200 2250 60  0001 C CNN
+	1    1200 2250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1200 1925 1200 1875
+Wire Wire Line
+	1200 1875 975  1875
+Connection ~ 975  1875
+Wire Wire Line
+	1200 2175 1200 2250
 $EndSCHEMATC
