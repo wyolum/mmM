@@ -1,21 +1,17 @@
-(module r_0805 (layer F.Cu) (tedit 520F4588)
+(module r_0805 locked (layer F.Cu) (tedit 55E98C86)
   (descr "SMT capacitor, 0805")
   (attr smd)
-  (fp_text reference r_0805 (at 0 -1.651) (layer F.SilkS)
-    (effects (font (size 0.8 0.8) (thickness 0.1)))
+  (fp_text reference R14 (at -2.75 0 90) (layer F.SilkS)
+    (effects (font (size 0.8 0.8) (thickness 0.12)))
   )
-  (fp_text value C*** (at 0 1.7145) (layer F.SilkS) hide
-    (effects (font (size 0.8 0.8) (thickness 0.1)))
+  (fp_text value 100k (at 0 1.7145) (layer F.SilkS) hide
+    (effects (font (size 0.8 0.8) (thickness 0.12)))
   )
-  (fp_line (start 1.7 1) (end -1.7 1) (layer F.SilkS) (width 0.127))
-  (fp_line (start -1.7 -1) (end 1.7 -1) (layer F.SilkS) (width 0.127))
-  (fp_line (start 1.7 -1) (end 1.7 1) (layer F.SilkS) (width 0.127))
-  (fp_line (start -1.7 -1) (end -1.7 1) (layer F.SilkS) (width 0.127))
   (fp_line (start 0.4 0.7) (end -0.4 0.7) (layer F.SilkS) (width 0.127))
   (fp_line (start -0.4 -0.7) (end 0.4 -0.7) (layer F.SilkS) (width 0.127))
   (pad 1 smd rect (at 0.95 0) (size 1 1.45) (layers F.Cu F.Paste F.Mask))
   (pad 2 smd rect (at -0.95 0) (size 1 1.45) (layers F.Cu F.Paste F.Mask))
-  (model "uControl_Libs/3D Modules/r_0805.wrl"
+  (model "/home/anool/projects-git/uCm/KiCAD/uCm_Libs/3D Modules/r_0805.wrl"
     (at (xyz 0 0 0))
     (scale (xyz 1 1 1))
     (rotate (xyz 0 0 0))

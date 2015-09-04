@@ -300,18 +300,6 @@ F 11 "http://www.digikey.com/scripts/dksearch/dksus.dll?vendor=0&keywords=TIP112
 	1    0    0    -1  
 $EndComp
 $Comp
-L Pump P17
-U 1 1 50E2B32E
-P 4600 5600
-F 0 "P17" V 4550 5600 40  0000 C CNN
-F 1 "PUMP" V 4650 5600 40  0000 C CNN
-F 2 "uCm:Pump_P54E01R_02" V 4750 5600 60  0001 C CNN
-F 3 "" H 4600 5600 60  0001 C CNN
-F 4 "http://www.xavitech.com/products" H 4600 6400 60  0001 L CNN "Field11"
-	1    4600 5600
-	1    0    0    -1  
-$EndComp
-$Comp
 L X_VALVE P14
 U 1 1 50E2AFA0
 P 6950 1125
@@ -779,7 +767,6 @@ Wire Wire Line
 Wire Wire Line
 	4000 5650 4000 6275
 NoConn ~ 4250 5750
-NoConn ~ 4250 5850
 Wire Notes Line
 	5575 7100 5575 5200
 Wire Wire Line
@@ -1141,4 +1128,17 @@ Text HLabel 8900 1100 0    40   Input ~ 0
 SCL
 Text HLabel 8900 1200 0    40   Input ~ 0
 SDA
+Text Label 3250 6925 0    40   ~ 0
+Pump_Ret
+$Comp
+L CONN_5 P17
+U 1 1 55E98293
+P 4600 5550
+F 0 "P17" V 4550 5550 40  0000 C CNN
+F 1 "PUMP" V 4650 5550 40  0000 C CNN
+F 2 "uCm:Pump_P54E01R_02" H 4600 5500 60  0001 C CNN
+F 3 "http://www.xavitech.com/products" H 4600 5500 60  0001 C CNN
+	1    4600 5550
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
