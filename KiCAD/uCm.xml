@@ -2,7 +2,7 @@
 <export version="D">
   <design>
     <source>/home/anool/projects-git/uCm/KiCAD/uCm.sch</source>
-    <date>Fri Sep  4 18:23:40 2015</date>
+    <date>Sat Sep  5 15:35:08 2015</date>
     <tool>Eeschema (2015-07-01 BZR 5850)-product</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -1377,313 +1377,6 @@
     </comp>
   </components>
   <libparts>
-    <libpart lib="uCm" part="CONN_2">
-      <fields>
-        <field name="Reference">P</field>
-        <field name="Value">CONN_2</field>
-      </fields>
-      <pins>
-        <pin num="1" name="P1" type="passive"/>
-        <pin num="2" name="PM" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="uCm" part="DS3231N">
-      <fields>
-        <field name="Reference">U</field>
-        <field name="Value">DS3231N</field>
-        <field name="Field4">IC RTC W/TCXO 16-SOIC</field>
-        <field name="Field5">Clock/Calendar</field>
-        <field name="Field6">16-SOIC (0.295", 7.50mm Width)</field>
-        <field name="Field7">Maxim Integrated</field>
-        <field name="Field8">DS3231S#</field>
-        <field name="Field9">Digikey</field>
-        <field name="Field10">DS3231S#-ND</field>
-        <field name="Field11">http://www.digikey.com/product-detail/en/DS3231S%23/DS3231S%23-ND/1197574</field>
-      </fields>
-      <pins>
-        <pin num="1" name="32KHz" type="output"/>
-        <pin num="2" name="Vcc" type="power_in"/>
-        <pin num="3" name="!(INT)/SQR" type="output"/>
-        <pin num="4" name="!(Reset)" type="BiDi"/>
-        <pin num="5" name="NC" type="passive"/>
-        <pin num="6" name="NC" type="passive"/>
-        <pin num="7" name="NC" type="passive"/>
-        <pin num="8" name="NC" type="passive"/>
-        <pin num="9" name="NC" type="passive"/>
-        <pin num="10" name="NC" type="passive"/>
-        <pin num="11" name="NC" type="passive"/>
-        <pin num="12" name="NC" type="passive"/>
-        <pin num="13" name="GND" type="power_in"/>
-        <pin num="14" name="Vbat" type="power_in"/>
-        <pin num="15" name="SDA" type="BiDi"/>
-        <pin num="16" name="SCL" type="input"/>
-      </pins>
-    </libpart>
-    <libpart lib="uCm" part="BUZZER">
-      <fields>
-        <field name="Reference">SP</field>
-        <field name="Value">BUZZER</field>
-      </fields>
-      <pins>
-        <pin num="1" name="1" type="input"/>
-        <pin num="2" name="2" type="input"/>
-      </pins>
-    </libpart>
-    <libpart lib="uCm" part="PCB">
-      <fields>
-        <field name="Reference">PCB</field>
-        <field name="Value">PCB</field>
-      </fields>
-    </libpart>
-    <libpart lib="uCm" part="I_O">
-      <fields>
-        <field name="Reference">B</field>
-        <field name="Value">I_O</field>
-      </fields>
-      <pins>
-        <pin num="1" name="1" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="uCm" part="V_IN">
-      <fields>
-        <field name="Reference">P</field>
-        <field name="Value">V_IN</field>
-        <field name="Field4">CONN POWER JACK MALE 2.5MM CLSD</field>
-        <field name="Field5">Jack, Male</field>
-        <field name="Field6">2.5mm ID, 5.5mm OD</field>
-        <field name="Field7">CUI Inc</field>
-        <field name="Field8">PJ-002B</field>
-        <field name="Field9">Digikey</field>
-        <field name="Field10">CP-002B-ND</field>
-        <field name="Field11">http://www.digikey.com/product-detail/en/PJ-002B/CP-002B-ND/96965?cur=USD</field>
-      </fields>
-      <pins>
-        <pin num="1" name="+" type="passive"/>
-        <pin num="2" name="-" type="passive"/>
-        <pin num="3" name="S" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="uCm" part="CAP_NP">
-      <fields>
-        <field name="Reference">C?</field>
-        <field name="Value">CAP_NP</field>
-      </fields>
-      <pins>
-        <pin num="1" name="~" type="passive"/>
-        <pin num="2" name="~" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="uCm" part="SW_PUSH">
-      <fields>
-        <field name="Reference">SW</field>
-        <field name="Value">SW_PUSH</field>
-        <field name="Field4">SWITCH TACTILE SPST-NO 0.05A 12V</field>
-        <field name="Field5">SPST, NO</field>
-        <field name="Field6">Top actuated 6.00mm x 6.00mm</field>
-        <field name="Field7">TE Connectivity</field>
-        <field name="Field8">FSM2JH</field>
-        <field name="Field9">Digikey</field>
-        <field name="Field10">450-1649-ND</field>
-        <field name="Field11">http://www.digikey.com/product-detail/en/FSM2JH/450-1649-ND/1632535?cur=USD</field>
-      </fields>
-      <pins>
-        <pin num="1" name="1" type="passive"/>
-        <pin num="2" name="2" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="uCm" part="CONN_3">
-      <fields>
-        <field name="Reference">P</field>
-        <field name="Value">CONN_3</field>
-        <field name="Field4">CONN HEADER 50POS .100" SGL GOLD</field>
-        <field name="Field5">Header, Unshrouded, Male pin,</field>
-        <field name="Field6">0.1" pitch x 50 nos</field>
-        <field name="Field7">Samtec Inc</field>
-        <field name="Field8">TSW-150-07-L-S</field>
-        <field name="Field9">Digikey</field>
-        <field name="Field10">SAM1031-50-ND</field>
-        <field name="Field11">http://www.digikey.com/scripts/DkSearch/dksus.dll?WT.z_header=search_go&amp;lang=en&amp;keywords=SAM1031-50-ND&amp;x=15&amp;y=16&amp;cur=USD</field>
-      </fields>
-      <pins>
-        <pin num="1" name="P1" type="passive"/>
-        <pin num="2" name="P2" type="passive"/>
-        <pin num="3" name="P3" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="uCm" part="R">
-      <footprints>
-        <fp>R?</fp>
-        <fp>SM0603</fp>
-        <fp>SM0805</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">R</field>
-        <field name="Value">R</field>
-      </fields>
-      <pins>
-        <pin num="1" name="~" type="passive"/>
-        <pin num="2" name="~" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="uCm" part="R_10k">
-      <footprints>
-        <fp>R?</fp>
-        <fp>SM0603</fp>
-        <fp>SM0805</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">R</field>
-        <field name="Value">R_10k</field>
-        <field name="Field4">RES 10K OHM 1/8W 5% CF AXIAL</field>
-        <field name="Field5">0.125W, 1/8W</field>
-        <field name="Field6">Axial</field>
-        <field name="Field7">Stackpole Electronics Inc</field>
-        <field name="Field8">CF18JT10K0</field>
-        <field name="Field9">Digikey</field>
-        <field name="Field10">CF18JT10K0CT-ND</field>
-        <field name="Field11">http://www.digikey.com/product-detail/en/CF18JT10K0/CF18JT10K0CT-ND/2022766?cur=USD</field>
-      </fields>
-      <pins>
-        <pin num="1" name="~" type="passive"/>
-        <pin num="2" name="~" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="uCm" part="SCREW">
-      <fields>
-        <field name="Reference">SC</field>
-        <field name="Value">SCREW</field>
-      </fields>
-    </libpart>
-    <libpart lib="uCm" part="Gage_Pr">
-      <fields>
-        <field name="Reference">P</field>
-        <field name="Value">Gage_Pr</field>
-        <field name="Field4">Miniature amplified pressure sensor</field>
-        <field name="Field5">HCE Series</field>
-        <field name="Field6">SMD single port, barbed port</field>
-        <field name="Field7">SensorTechnics</field>
-        <field name="Field8">HCEM500GUH9P3</field>
-        <field name="Field9">SensorTechnics</field>
-        <field name="Field10">HCEM500GUH9P3</field>
-        <field name="Field11">http://www.sensortechnics.com/en/products/pressure-sensors-and-transmitters/amplified-pressure-sensors/hce/</field>
-      </fields>
-      <pins>
-        <pin num="1" name="P1" type="passive"/>
-        <pin num="2" name="P2" type="passive"/>
-        <pin num="3" name="P3" type="passive"/>
-        <pin num="4" name="P4" type="passive"/>
-        <pin num="5" name="P5" type="passive"/>
-        <pin num="6" name="P6" type="passive"/>
-        <pin num="7" name="P7" type="passive"/>
-        <pin num="8" name="P8" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="uCm" part="R_1k00">
-      <footprints>
-        <fp>R?</fp>
-        <fp>SM0603</fp>
-        <fp>SM0805</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">R</field>
-        <field name="Value">R_1k00</field>
-        <field name="Field4">RES 1k OHM 1/8W 5% CF AXIAL</field>
-        <field name="Field5">0.125W, 1/8W</field>
-        <field name="Field6">Axial</field>
-        <field name="Field7">Stackpole Electronics Inc</field>
-        <field name="Field8">CF18JT1K00</field>
-        <field name="Field9">Digikey</field>
-        <field name="Field10">CF18JT1K00CT-ND</field>
-        <field name="Field11">http://www.digikey.com/product-detail/en/CF18JT1K00/CF18JT1K00CT-ND/2022742</field>
-      </fields>
-      <pins>
-        <pin num="1" name="~" type="passive"/>
-        <pin num="2" name="~" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="uCm" part="R_330">
-      <footprints>
-        <fp>R?</fp>
-        <fp>SM0603</fp>
-        <fp>SM0805</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">R</field>
-        <field name="Value">R_330</field>
-        <field name="Field4">RES 330 OHM 1/8W 5% CF AXIAL</field>
-        <field name="Field5">0.125W, 1/8W</field>
-        <field name="Field6">Axial</field>
-        <field name="Field7">Stackpole Electronics Inc</field>
-        <field name="Field8">CF18JT330R</field>
-        <field name="Field9">Digikey</field>
-        <field name="Field10">CF18JT330RCT-ND</field>
-        <field name="Field11">http://www.digikey.com/product-detail/en/CF18JT330R/CF18JT330RCT-ND/2022730</field>
-      </fields>
-      <pins>
-        <pin num="1" name="~" type="passive"/>
-        <pin num="2" name="~" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="uCm" part="C">
-      <footprints>
-        <fp>SM*</fp>
-        <fp>C?</fp>
-        <fp>C1-1</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">C</field>
-        <field name="Value">C</field>
-        <field name="Field4">CAP FILM 0.1UF 63VDC RADIAL</field>
-        <field name="Field5">100nF, 63V</field>
-        <field name="Field6">R82</field>
-        <field name="Field7">Kemet</field>
-        <field name="Field8">R82DC3100AA50J</field>
-        <field name="Field9">Digikey</field>
-        <field name="Field10">399-5863-ND</field>
-        <field name="Field11">http://www.digikey.com/product-detail/en/R82DC3100AA50J/399-5863-ND/2571298?cur=USD</field>
-      </fields>
-      <pins>
-        <pin num="1" name="~" type="passive"/>
-        <pin num="2" name="~" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="uCm" part="R_120">
-      <footprints>
-        <fp>R?</fp>
-        <fp>SM0603</fp>
-        <fp>SM0805</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">R</field>
-        <field name="Value">R_120</field>
-        <field name="Field4">RES 120 OHM 1/8W 5% CF AXIAL</field>
-        <field name="Field5">0.125W, 1/8W</field>
-        <field name="Field6">Axial</field>
-        <field name="Field7">Stackpole Electronics Inc</field>
-        <field name="Field8">CF18JT120R</field>
-        <field name="Field9">Digikey</field>
-        <field name="Field10">CF18JT120RCT-ND</field>
-        <field name="Field11">http://www.digikey.com/product-detail/en/CF18JT120R/CF18JT120RCT-ND/2022720</field>
-      </fields>
-      <pins>
-        <pin num="1" name="~" type="passive"/>
-        <pin num="2" name="~" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="uCm" part="BATT_COIN">
-      <fields>
-        <field name="Reference">BT</field>
-        <field name="Value">BATT_COIN</field>
-        <field name="Field4">BATTERY LITHIUM COIN 3V 20MM</field>
-        <field name="Field5">Lithium, 3V, 225mAh</field>
-        <field name="Field6">CR2032</field>
-        <field name="Field7">Panasonic - BSG</field>
-        <field name="Field8">CR2032</field>
-        <field name="Field9">Digikey</field>
-        <field name="Field10">P189-ND</field>
-        <field name="Field11">http://www.digikey.com/product-detail/en/CR2032/P189-ND/31939?cur=USD</field>
-      </fields>
-    </libpart>
     <libpart lib="uCm" part="ATMEGA328-AU-ND">
       <footprints>
         <fp>TQFP32</fp>
@@ -1728,6 +1421,163 @@
         <pin num="32" name="PD2(INT0)" type="BiDi"/>
       </pins>
     </libpart>
+    <libpart lib="uCm" part="BATT_COIN">
+      <fields>
+        <field name="Reference">BT</field>
+        <field name="Value">BATT_COIN</field>
+        <field name="Field4">BATTERY LITHIUM COIN 3V 20MM</field>
+        <field name="Field5">Lithium, 3V, 225mAh</field>
+        <field name="Field6">CR2032</field>
+        <field name="Field7">Panasonic - BSG</field>
+        <field name="Field8">CR2032</field>
+        <field name="Field9">Digikey</field>
+        <field name="Field10">P189-ND</field>
+        <field name="Field11">http://www.digikey.com/product-detail/en/CR2032/P189-ND/31939?cur=USD</field>
+      </fields>
+    </libpart>
+    <libpart lib="uCm" part="BATT_HOLDER">
+      <fields>
+        <field name="Reference">BT</field>
+        <field name="Value">BATT_HOLDER</field>
+        <field name="Field4">HOLDER BATTERY COIN 20MM DIA THM</field>
+        <field name="Field5">Coin Cell, Retainer</field>
+        <field name="Field6">Coin, 20.0mm</field>
+        <field name="Field7">Keystone Electronics</field>
+        <field name="Field8">3003</field>
+        <field name="Field9">Digikey</field>
+        <field name="Field10">3003K-ND</field>
+        <field name="Field11">http://www.digikey.com/scripts/DkSearch/dksus.dll?x=0&amp;y=0&amp;lang=en&amp;KeyWords=3003K-ND&amp;cur=USD</field>
+      </fields>
+      <pins>
+        <pin num="+" name="+" type="passive"/>
+        <pin num="-" name="-" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="uCm" part="BUZZER">
+      <fields>
+        <field name="Reference">SP</field>
+        <field name="Value">BUZZER</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="input"/>
+        <pin num="2" name="2" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="uCm" part="C">
+      <footprints>
+        <fp>SM*</fp>
+        <fp>C?</fp>
+        <fp>C1-1</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C</field>
+        <field name="Field4">CAP FILM 0.1UF 63VDC RADIAL</field>
+        <field name="Field5">100nF, 63V</field>
+        <field name="Field6">R82</field>
+        <field name="Field7">Kemet</field>
+        <field name="Field8">R82DC3100AA50J</field>
+        <field name="Field9">Digikey</field>
+        <field name="Field10">399-5863-ND</field>
+        <field name="Field11">http://www.digikey.com/product-detail/en/R82DC3100AA50J/399-5863-ND/2571298?cur=USD</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="uCm" part="C1">
+      <footprints>
+        <fp>SM*</fp>
+        <fp>C?</fp>
+        <fp>C1-1</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C1</field>
+        <field name="Field4">CAP CER 22PF 50V 5% RADIAL</field>
+        <field name="Field5">22pF, 50V</field>
+        <field name="Field6">Radial</field>
+        <field name="Field7">Vishay BC Components</field>
+        <field name="Field8">K220J15C0GF5TH5</field>
+        <field name="Field9">Digikey</field>
+        <field name="Field10">BC1034CT-ND</field>
+        <field name="Field11">http://www.digikey.com/product-detail/en/K220J15C0GF5TH5/BC1034CT-ND/286656?cur=USD</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="uCm" part="CAP_NP">
+      <fields>
+        <field name="Reference">C?</field>
+        <field name="Value">CAP_NP</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="uCm" part="CAP_POL">
+      <fields>
+        <field name="Reference">C?</field>
+        <field name="Value">CAP_POL</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="uCm" part="CONN_2">
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">CONN_2</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="PM" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="uCm" part="CONN_3">
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">CONN_3</field>
+        <field name="Field4">CONN HEADER 50POS .100" SGL GOLD</field>
+        <field name="Field5">Header, Unshrouded, Male pin,</field>
+        <field name="Field6">0.1" pitch x 50 nos</field>
+        <field name="Field7">Samtec Inc</field>
+        <field name="Field8">TSW-150-07-L-S</field>
+        <field name="Field9">Digikey</field>
+        <field name="Field10">SAM1031-50-ND</field>
+        <field name="Field11">http://www.digikey.com/scripts/DkSearch/dksus.dll?WT.z_header=search_go&amp;lang=en&amp;keywords=SAM1031-50-ND&amp;x=15&amp;y=16&amp;cur=USD</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="P2" type="passive"/>
+        <pin num="3" name="P3" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="uCm" part="CONN_4">
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">CONN_4</field>
+        <field name="Field4">CONN HEADER 16POS .100 R/A 30AU</field>
+        <field name="Field5">Header, Unshrouded, Male pin,</field>
+        <field name="Field6">0.1" right angle</field>
+        <field name="Field7">FCI</field>
+        <field name="Field8">68016-116HLF</field>
+        <field name="Field9">Digikey</field>
+        <field name="Field10">609-3317-ND</field>
+        <field name="Field11">http://www.digikey.com/product-detail/en/68016-116HLF/609-3317-ND/1878554</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="P2" type="passive"/>
+        <pin num="3" name="P3" type="passive"/>
+        <pin num="4" name="P4" type="passive"/>
+      </pins>
+    </libpart>
     <libpart lib="uCm" part="CONN_5">
       <fields>
         <field name="Reference">P</field>
@@ -1741,34 +1591,37 @@
         <pin num="5" name="5" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="uCm" part="TXB0104D">
+    <libpart lib="uCm" part="CONN_6">
       <fields>
-        <field name="Reference">U</field>
-        <field name="Value">TXB0104D</field>
-        <field name="Field4">IC VOLT-LEVEL TRANSLATOR 14-SOIC</field>
-        <field name="Field5">Translator, Bidirectional</field>
-        <field name="Field6">14-SOIC (0.154", 3.90mm Width)</field>
-        <field name="Field7">Texas Instruments</field>
-        <field name="Field8">TXB0104DR</field>
-        <field name="Field9">Digikey</field>
-        <field name="Field10">296-21928-1-ND</field>
-        <field name="Field11">http://www.digikey.com/product-detail/en/TXB0104DR/296-21928-1-ND/1629281</field>
+        <field name="Reference">P</field>
+        <field name="Value">CONN_6</field>
       </fields>
       <pins>
-        <pin num="1" name="VCCA" type="passive"/>
-        <pin num="2" name="A1" type="BiDi"/>
-        <pin num="3" name="A2" type="BiDi"/>
-        <pin num="4" name="A3" type="BiDi"/>
-        <pin num="5" name="A4" type="BiDi"/>
-        <pin num="6" name="NC" type="BiDi"/>
-        <pin num="7" name="GND" type="passive"/>
-        <pin num="8" name="OE" type="passive"/>
-        <pin num="9" name="NC" type="BiDi"/>
-        <pin num="10" name="B4" type="passive"/>
-        <pin num="11" name="B3" type="passive"/>
-        <pin num="12" name="B2" type="passive"/>
-        <pin num="13" name="B1" type="passive"/>
-        <pin num="14" name="VCCB" type="passive"/>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+        <pin num="3" name="3" type="passive"/>
+        <pin num="4" name="4" type="passive"/>
+        <pin num="5" name="5" type="passive"/>
+        <pin num="6" name="6" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="uCm" part="CRYSTAL">
+      <fields>
+        <field name="Reference">X</field>
+        <field name="Value">CRYSTAL</field>
+        <field name="Field4">CER RESONATOR 16.00MHZ</field>
+        <field name="Field5">16Mhz Ceramic built in capacitor</field>
+        <field name="Field6">Radial - 3 Lead, 2.50mm Pitch</field>
+        <field name="Field7">ECS Inc</field>
+        <field name="Field8">ZTT-16.00MX</field>
+        <field name="Field9">Digikey</field>
+        <field name="Field10">X908-ND</field>
+        <field name="Field11">http://www.digikey.com/product-detail/en/ZTT-16.00MX/X908-ND/170095?cur=USD</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+        <pin num="3" name="3" type="passive"/>
       </pins>
     </libpart>
     <libpart lib="uCm" part="C_POL_1">
@@ -1792,6 +1645,125 @@
       <pins>
         <pin num="1" name="+" type="passive"/>
         <pin num="2" name="-" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="uCm" part="DS3231N">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">DS3231N</field>
+        <field name="Field4">IC RTC W/TCXO 16-SOIC</field>
+        <field name="Field5">Clock/Calendar</field>
+        <field name="Field6">16-SOIC (0.295", 7.50mm Width)</field>
+        <field name="Field7">Maxim Integrated</field>
+        <field name="Field8">DS3231S#</field>
+        <field name="Field9">Digikey</field>
+        <field name="Field10">DS3231S#-ND</field>
+        <field name="Field11">http://www.digikey.com/product-detail/en/DS3231S%23/DS3231S%23-ND/1197574</field>
+      </fields>
+      <pins>
+        <pin num="1" name="32KHz" type="output"/>
+        <pin num="2" name="Vcc" type="power_in"/>
+        <pin num="3" name="!(INT)/SQR" type="output"/>
+        <pin num="4" name="!(Reset)" type="BiDi"/>
+        <pin num="5" name="NC" type="passive"/>
+        <pin num="6" name="NC" type="passive"/>
+        <pin num="7" name="NC" type="passive"/>
+        <pin num="8" name="NC" type="passive"/>
+        <pin num="9" name="NC" type="passive"/>
+        <pin num="10" name="NC" type="passive"/>
+        <pin num="11" name="NC" type="passive"/>
+        <pin num="12" name="NC" type="passive"/>
+        <pin num="13" name="GND" type="power_in"/>
+        <pin num="14" name="Vbat" type="power_in"/>
+        <pin num="15" name="SDA" type="BiDi"/>
+        <pin num="16" name="SCL" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="uCm" part="D_1N4001">
+      <footprints>
+        <fp>D?</fp>
+        <fp>S*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">D_1N4001</field>
+        <field name="Field4">DIODE GEN PURPOSE 50V 1A DO41</field>
+        <field name="Field5">50V, 1A</field>
+        <field name="Field6">DO-204AL, DO-41, Axial</field>
+        <field name="Field7">Fairchild Semiconductor</field>
+        <field name="Field8">1N4001</field>
+        <field name="Field9">Digikey</field>
+        <field name="Field10">1N4001FSCT-ND</field>
+        <field name="Field11">http://www.digikey.com/product-detail/en/1N4001/1N4001FSCT-ND/1532742</field>
+      </fields>
+      <pins>
+        <pin num="1" name="A" type="passive"/>
+        <pin num="2" name="K" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="uCm" part="Gage_Pr">
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">Gage_Pr</field>
+        <field name="Field4">Miniature amplified pressure sensor</field>
+        <field name="Field5">HCE Series</field>
+        <field name="Field6">SMD single port, barbed port</field>
+        <field name="Field7">SensorTechnics</field>
+        <field name="Field8">HCEM500GUH9P3</field>
+        <field name="Field9">SensorTechnics</field>
+        <field name="Field10">HCEM500GUH9P3</field>
+        <field name="Field11">http://www.sensortechnics.com/en/products/pressure-sensors-and-transmitters/amplified-pressure-sensors/hce/</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="P2" type="passive"/>
+        <pin num="3" name="P3" type="passive"/>
+        <pin num="4" name="P4" type="passive"/>
+        <pin num="5" name="P5" type="passive"/>
+        <pin num="6" name="P6" type="passive"/>
+        <pin num="7" name="P7" type="passive"/>
+        <pin num="8" name="P8" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="uCm" part="INDUCTOR">
+      <fields>
+        <field name="Reference">L</field>
+        <field name="Value">INDUCTOR</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="uCm" part="ISP">
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">ISP</field>
+        <field name="Field4">CONN HEADER 6POS .100 STR 15AU</field>
+        <field name="Field5">Header, Unshrouded, Male Pin</field>
+        <field name="Field6">6 pos, 2 row, 0.1"</field>
+        <field name="Field7">FCI</field>
+        <field name="Field8">67996-206HLF</field>
+        <field name="Field9">Digikey</field>
+        <field name="Field10">609-3210-ND</field>
+        <field name="Field11">http://www.digikey.com/scripts/DkSearch/dksus.dll?vendor=0&amp;keywords=609-3210-ND</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+        <pin num="3" name="3" type="passive"/>
+        <pin num="4" name="4" type="passive"/>
+        <pin num="5" name="5" type="passive"/>
+        <pin num="6" name="6" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="uCm" part="I_O">
+      <fields>
+        <field name="Reference">B</field>
+        <field name="Value">I_O</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
       </pins>
     </libpart>
     <libpart lib="uCm" part="LED">
@@ -1844,180 +1816,141 @@
         <pin num="3" name="E" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="uCm" part="BATT_HOLDER">
+    <libpart lib="uCm" part="PCB">
       <fields>
-        <field name="Reference">BT</field>
-        <field name="Value">BATT_HOLDER</field>
-        <field name="Field4">HOLDER BATTERY COIN 20MM DIA THM</field>
-        <field name="Field5">Coin Cell, Retainer</field>
-        <field name="Field6">Coin, 20.0mm</field>
-        <field name="Field7">Keystone Electronics</field>
-        <field name="Field8">3003</field>
-        <field name="Field9">Digikey</field>
-        <field name="Field10">3003K-ND</field>
-        <field name="Field11">http://www.digikey.com/scripts/DkSearch/dksus.dll?x=0&amp;y=0&amp;lang=en&amp;KeyWords=3003K-ND&amp;cur=USD</field>
+        <field name="Reference">PCB</field>
+        <field name="Value">PCB</field>
       </fields>
-      <pins>
-        <pin num="+" name="+" type="passive"/>
-        <pin num="-" name="-" type="passive"/>
-      </pins>
     </libpart>
-    <libpart lib="uCm" part="C1">
+    <libpart lib="uCm" part="R">
       <footprints>
-        <fp>SM*</fp>
-        <fp>C?</fp>
-        <fp>C1-1</fp>
+        <fp>R?</fp>
+        <fp>SM0603</fp>
+        <fp>SM0805</fp>
       </footprints>
       <fields>
-        <field name="Reference">C</field>
-        <field name="Value">C1</field>
-        <field name="Field4">CAP CER 22PF 50V 5% RADIAL</field>
-        <field name="Field5">22pF, 50V</field>
-        <field name="Field6">Radial</field>
-        <field name="Field7">Vishay BC Components</field>
-        <field name="Field8">K220J15C0GF5TH5</field>
-        <field name="Field9">Digikey</field>
-        <field name="Field10">BC1034CT-ND</field>
-        <field name="Field11">http://www.digikey.com/product-detail/en/K220J15C0GF5TH5/BC1034CT-ND/286656?cur=USD</field>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
       </fields>
       <pins>
         <pin num="1" name="~" type="passive"/>
         <pin num="2" name="~" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="uCm" part="CONN_6">
-      <fields>
-        <field name="Reference">P</field>
-        <field name="Value">CONN_6</field>
-      </fields>
-      <pins>
-        <pin num="1" name="1" type="passive"/>
-        <pin num="2" name="2" type="passive"/>
-        <pin num="3" name="3" type="passive"/>
-        <pin num="4" name="4" type="passive"/>
-        <pin num="5" name="5" type="passive"/>
-        <pin num="6" name="6" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="uCm" part="D_1N4001">
+    <libpart lib="uCm" part="R_10k">
       <footprints>
-        <fp>D?</fp>
-        <fp>S*</fp>
+        <fp>R?</fp>
+        <fp>SM0603</fp>
+        <fp>SM0805</fp>
       </footprints>
       <fields>
-        <field name="Reference">D</field>
-        <field name="Value">D_1N4001</field>
-        <field name="Field4">DIODE GEN PURPOSE 50V 1A DO41</field>
-        <field name="Field5">50V, 1A</field>
-        <field name="Field6">DO-204AL, DO-41, Axial</field>
-        <field name="Field7">Fairchild Semiconductor</field>
-        <field name="Field8">1N4001</field>
+        <field name="Reference">R</field>
+        <field name="Value">R_10k</field>
+        <field name="Field4">RES 10K OHM 1/8W 5% CF AXIAL</field>
+        <field name="Field5">0.125W, 1/8W</field>
+        <field name="Field6">Axial</field>
+        <field name="Field7">Stackpole Electronics Inc</field>
+        <field name="Field8">CF18JT10K0</field>
         <field name="Field9">Digikey</field>
-        <field name="Field10">1N4001FSCT-ND</field>
-        <field name="Field11">http://www.digikey.com/product-detail/en/1N4001/1N4001FSCT-ND/1532742</field>
-      </fields>
-      <pins>
-        <pin num="1" name="A" type="passive"/>
-        <pin num="2" name="K" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="uCm" part="CONN_4">
-      <fields>
-        <field name="Reference">P</field>
-        <field name="Value">CONN_4</field>
-        <field name="Field4">CONN HEADER 16POS .100 R/A 30AU</field>
-        <field name="Field5">Header, Unshrouded, Male pin,</field>
-        <field name="Field6">0.1" right angle</field>
-        <field name="Field7">FCI</field>
-        <field name="Field8">68016-116HLF</field>
-        <field name="Field9">Digikey</field>
-        <field name="Field10">609-3317-ND</field>
-        <field name="Field11">http://www.digikey.com/product-detail/en/68016-116HLF/609-3317-ND/1878554</field>
-      </fields>
-      <pins>
-        <pin num="1" name="P1" type="passive"/>
-        <pin num="2" name="P2" type="passive"/>
-        <pin num="3" name="P3" type="passive"/>
-        <pin num="4" name="P4" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="uCm" part="CAP_POL">
-      <fields>
-        <field name="Reference">C?</field>
-        <field name="Value">CAP_POL</field>
+        <field name="Field10">CF18JT10K0CT-ND</field>
+        <field name="Field11">http://www.digikey.com/product-detail/en/CF18JT10K0/CF18JT10K0CT-ND/2022766?cur=USD</field>
       </fields>
       <pins>
         <pin num="1" name="~" type="passive"/>
         <pin num="2" name="~" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="uCm" part="CRYSTAL">
+    <libpart lib="uCm" part="R_120">
+      <footprints>
+        <fp>R?</fp>
+        <fp>SM0603</fp>
+        <fp>SM0805</fp>
+      </footprints>
       <fields>
-        <field name="Reference">X</field>
-        <field name="Value">CRYSTAL</field>
-        <field name="Field4">CER RESONATOR 16.00MHZ</field>
-        <field name="Field5">16Mhz Ceramic built in capacitor</field>
-        <field name="Field6">Radial - 3 Lead, 2.50mm Pitch</field>
-        <field name="Field7">ECS Inc</field>
-        <field name="Field8">ZTT-16.00MX</field>
+        <field name="Reference">R</field>
+        <field name="Value">R_120</field>
+        <field name="Field4">RES 120 OHM 1/8W 5% CF AXIAL</field>
+        <field name="Field5">0.125W, 1/8W</field>
+        <field name="Field6">Axial</field>
+        <field name="Field7">Stackpole Electronics Inc</field>
+        <field name="Field8">CF18JT120R</field>
         <field name="Field9">Digikey</field>
-        <field name="Field10">X908-ND</field>
-        <field name="Field11">http://www.digikey.com/product-detail/en/ZTT-16.00MX/X908-ND/170095?cur=USD</field>
+        <field name="Field10">CF18JT120RCT-ND</field>
+        <field name="Field11">http://www.digikey.com/product-detail/en/CF18JT120R/CF18JT120RCT-ND/2022720</field>
       </fields>
       <pins>
-        <pin num="1" name="1" type="passive"/>
-        <pin num="2" name="2" type="passive"/>
-        <pin num="3" name="3" type="passive"/>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="uCm" part="INDUCTOR">
+    <libpart lib="uCm" part="R_1k00">
+      <footprints>
+        <fp>R?</fp>
+        <fp>SM0603</fp>
+        <fp>SM0805</fp>
+      </footprints>
       <fields>
-        <field name="Reference">L</field>
-        <field name="Value">INDUCTOR</field>
-      </fields>
-      <pins>
-        <pin num="1" name="1" type="passive"/>
-        <pin num="2" name="2" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="uCm" part="ISP">
-      <fields>
-        <field name="Reference">P</field>
-        <field name="Value">ISP</field>
-        <field name="Field4">CONN HEADER 6POS .100 STR 15AU</field>
-        <field name="Field5">Header, Unshrouded, Male Pin</field>
-        <field name="Field6">6 pos, 2 row, 0.1"</field>
-        <field name="Field7">FCI</field>
-        <field name="Field8">67996-206HLF</field>
+        <field name="Reference">R</field>
+        <field name="Value">R_1k00</field>
+        <field name="Field4">RES 1k OHM 1/8W 5% CF AXIAL</field>
+        <field name="Field5">0.125W, 1/8W</field>
+        <field name="Field6">Axial</field>
+        <field name="Field7">Stackpole Electronics Inc</field>
+        <field name="Field8">CF18JT1K00</field>
         <field name="Field9">Digikey</field>
-        <field name="Field10">609-3210-ND</field>
-        <field name="Field11">http://www.digikey.com/scripts/DkSearch/dksus.dll?vendor=0&amp;keywords=609-3210-ND</field>
+        <field name="Field10">CF18JT1K00CT-ND</field>
+        <field name="Field11">http://www.digikey.com/product-detail/en/CF18JT1K00/CF18JT1K00CT-ND/2022742</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="uCm" part="R_330">
+      <footprints>
+        <fp>R?</fp>
+        <fp>SM0603</fp>
+        <fp>SM0805</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R_330</field>
+        <field name="Field4">RES 330 OHM 1/8W 5% CF AXIAL</field>
+        <field name="Field5">0.125W, 1/8W</field>
+        <field name="Field6">Axial</field>
+        <field name="Field7">Stackpole Electronics Inc</field>
+        <field name="Field8">CF18JT330R</field>
+        <field name="Field9">Digikey</field>
+        <field name="Field10">CF18JT330RCT-ND</field>
+        <field name="Field11">http://www.digikey.com/product-detail/en/CF18JT330R/CF18JT330RCT-ND/2022730</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="uCm" part="SCREW">
+      <fields>
+        <field name="Reference">SC</field>
+        <field name="Value">SCREW</field>
+      </fields>
+    </libpart>
+    <libpart lib="uCm" part="SW_PUSH">
+      <fields>
+        <field name="Reference">SW</field>
+        <field name="Value">SW_PUSH</field>
+        <field name="Field4">SWITCH TACTILE SPST-NO 0.05A 12V</field>
+        <field name="Field5">SPST, NO</field>
+        <field name="Field6">Top actuated 6.00mm x 6.00mm</field>
+        <field name="Field7">TE Connectivity</field>
+        <field name="Field8">FSM2JH</field>
+        <field name="Field9">Digikey</field>
+        <field name="Field10">450-1649-ND</field>
+        <field name="Field11">http://www.digikey.com/product-detail/en/FSM2JH/450-1649-ND/1632535?cur=USD</field>
       </fields>
       <pins>
         <pin num="1" name="1" type="passive"/>
         <pin num="2" name="2" type="passive"/>
-        <pin num="3" name="3" type="passive"/>
-        <pin num="4" name="4" type="passive"/>
-        <pin num="5" name="5" type="passive"/>
-        <pin num="6" name="6" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="uCm" part="X_VALVE">
-      <fields>
-        <field name="Reference">P</field>
-        <field name="Value">X_VALVE</field>
-        <field name="Field4">Miniature Pneumatic Solenoid Valve</field>
-        <field name="Field5">3 Port, Direct-acting poppet style</field>
-        <field name="Field6">8mm Solenoid Valve</field>
-        <field name="Field7">Parker Hannifin Corporation</field>
-        <field name="Field8">X-1-05-S-F</field>
-        <field name="Field9">Parker Hannifin Corporation</field>
-        <field name="Field10">X-1-05-S-F</field>
-        <field name="Field11">http://ph.parker.com/webapp/wcs/stores/servlet/Product2_10151_12051_12163_-1_14107_14097___ProductDisplay</field>
-      </fields>
-      <pins>
-        <pin num="1" name="P1" type="passive"/>
-        <pin num="2" name="PM" type="passive"/>
       </pins>
     </libpart>
     <libpart lib="uCm" part="TPS62132">
@@ -2042,6 +1975,73 @@
         <pin num="14" name="VOS" type="input"/>
         <pin num="15" name="PGND" type="input"/>
         <pin num="16" name="PGND" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="uCm" part="TXB0104D">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">TXB0104D</field>
+        <field name="Field4">IC VOLT-LEVEL TRANSLATOR 14-SOIC</field>
+        <field name="Field5">Translator, Bidirectional</field>
+        <field name="Field6">14-SOIC (0.154", 3.90mm Width)</field>
+        <field name="Field7">Texas Instruments</field>
+        <field name="Field8">TXB0104DR</field>
+        <field name="Field9">Digikey</field>
+        <field name="Field10">296-21928-1-ND</field>
+        <field name="Field11">http://www.digikey.com/product-detail/en/TXB0104DR/296-21928-1-ND/1629281</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VCCA" type="passive"/>
+        <pin num="2" name="A1" type="BiDi"/>
+        <pin num="3" name="A2" type="BiDi"/>
+        <pin num="4" name="A3" type="BiDi"/>
+        <pin num="5" name="A4" type="BiDi"/>
+        <pin num="6" name="NC" type="BiDi"/>
+        <pin num="7" name="GND" type="passive"/>
+        <pin num="8" name="OE" type="passive"/>
+        <pin num="9" name="NC" type="BiDi"/>
+        <pin num="10" name="B4" type="passive"/>
+        <pin num="11" name="B3" type="passive"/>
+        <pin num="12" name="B2" type="passive"/>
+        <pin num="13" name="B1" type="passive"/>
+        <pin num="14" name="VCCB" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="uCm" part="V_IN">
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">V_IN</field>
+        <field name="Field4">CONN POWER JACK MALE 2.5MM CLSD</field>
+        <field name="Field5">Jack, Male</field>
+        <field name="Field6">2.5mm ID, 5.5mm OD</field>
+        <field name="Field7">CUI Inc</field>
+        <field name="Field8">PJ-002B</field>
+        <field name="Field9">Digikey</field>
+        <field name="Field10">CP-002B-ND</field>
+        <field name="Field11">http://www.digikey.com/product-detail/en/PJ-002B/CP-002B-ND/96965?cur=USD</field>
+      </fields>
+      <pins>
+        <pin num="1" name="+" type="passive"/>
+        <pin num="2" name="-" type="passive"/>
+        <pin num="3" name="S" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="uCm" part="X_VALVE">
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">X_VALVE</field>
+        <field name="Field4">Miniature Pneumatic Solenoid Valve</field>
+        <field name="Field5">3 Port, Direct-acting poppet style</field>
+        <field name="Field6">8mm Solenoid Valve</field>
+        <field name="Field7">Parker Hannifin Corporation</field>
+        <field name="Field8">X-1-05-S-F</field>
+        <field name="Field9">Parker Hannifin Corporation</field>
+        <field name="Field10">X-1-05-S-F</field>
+        <field name="Field11">http://ph.parker.com/webapp/wcs/stores/servlet/Product2_10151_12051_12163_-1_14107_14097___ProductDisplay</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="PM" type="passive"/>
       </pins>
     </libpart>
   </libparts>
