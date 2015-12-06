@@ -1,4 +1,4 @@
-update=Sat Sep  5 15:44:05 2015
+update=Sun Dec  6 19:32:42 2015
 last_client=kicad
 [cvpcb]
 version=1
@@ -27,13 +27,6 @@ ModuleOutlineThickness="    0.152400"
 [pcbnew/libraries]
 LibDir=
 LibName1=uControl_Libs/uControl
-[eeschema]
-version=1
-LibDir=
-[eeschema/libraries]
-LibName1=uCm_Libs/uCm
-LibName2=uCm_Libs/Conn-raspberry
-LibName3=uCm_Libs/power
 [schematic_editor]
 version=1
 PageLayoutDescrFile=
@@ -44,5 +37,11 @@ NetFmtName=Pcbnew
 SpiceForceRefPrefix=0
 SpiceUseNetNumbers=0
 LabSize=60
+[eeschema]
+version=1
+LibDir=
+[eeschema/libraries]
+LibName1=uCm_Libs/uCm
+LibName2=uCm_Libs/power
 [general]
 version=1
