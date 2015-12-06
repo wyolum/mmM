@@ -2,7 +2,7 @@
 <export version="D">
   <design>
     <source>/home/samata/projects-git/uCm/KiCAD/uCm.sch</source>
-    <date>Sun Dec  6 21:28:58 2015</date>
+    <date>Sun Dec  6 23:41:27 2015</date>
     <tool>Eeschema 4.0.0-2.201511301921+6191~38~ubuntu15.10.1-stable</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -294,6 +294,7 @@
     </comp>
     <comp ref="C1">
       <value>100n</value>
+      <footprint>uCm:c_0805</footprint>
       <fields>
         <field name="manf#">CL21B104KCC5PNC</field>
       </fields>
@@ -303,6 +304,7 @@
     </comp>
     <comp ref="C4">
       <value>100n</value>
+      <footprint>uCm:c_0805</footprint>
       <fields>
         <field name="manf#">CL21B104KCC5PNC</field>
       </fields>
@@ -312,7 +314,7 @@
     </comp>
     <comp ref="C27">
       <value>100uF</value>
-      <footprint>uCm:C_ELCO_SMD</footprint>
+      <footprint>uCm:C_ELCO_SMD_6x8</footprint>
       <fields>
         <field name="manf#">UWT1V101MCL1GS</field>
       </fields>
@@ -381,10 +383,10 @@
       <tstamp>50E2ABAC</tstamp>
     </comp>
     <comp ref="D1">
-      <value>S1D-13-F</value>
-      <footprint>uCm:diode-DO214AC</footprint>
+      <value>ES1D-13-F</value>
+      <footprint>uCm:Diode-SMA</footprint>
       <fields>
-        <field name="manf#">S1D-13-F</field>
+        <field name="manf#">ES1D-13-F</field>
       </fields>
       <libsource lib="uCm" part="D_1N4001"/>
       <sheetpath names="/Interface/" tstamps="/50B2116F/"/>
@@ -537,10 +539,10 @@
       <tstamp>55D878E1</tstamp>
     </comp>
     <comp ref="D9">
-      <value>S1D-13-F</value>
-      <footprint>uCm:diode-DO214AC</footprint>
+      <value>ES1D-13-F</value>
+      <footprint>uCm:Diode-SMA</footprint>
       <fields>
-        <field name="manf#">S1D-13-F</field>
+        <field name="manf#">ES1D-13-F</field>
       </fields>
       <libsource lib="uCm" part="D_1N4001"/>
       <sheetpath names="/Interface/" tstamps="/50B2116F/"/>
@@ -587,10 +589,10 @@
       <tstamp>55D89659</tstamp>
     </comp>
     <comp ref="D3">
-      <value>S1D-13-F</value>
-      <footprint>uCm:diode-DO214AC</footprint>
+      <value>ES1D-13-F</value>
+      <footprint>uCm:Diode-SMA</footprint>
       <fields>
-        <field name="manf#">S1D-13-F</field>
+        <field name="manf#">ES1D-13-F</field>
       </fields>
       <libsource lib="uCm" part="D_1N4001"/>
       <sheetpath names="/Interface/" tstamps="/50B2116F/"/>
@@ -718,10 +720,10 @@
       <tstamp>50E2A42C</tstamp>
     </comp>
     <comp ref="D4">
-      <value>S1D-13-F</value>
-      <footprint>uCm:diode-DO214AC</footprint>
+      <value>ES1D-13-F</value>
+      <footprint>uCm:Diode-SMA</footprint>
       <fields>
-        <field name="manf#">S1D-13-F</field>
+        <field name="manf#">ES1D-13-F</field>
       </fields>
       <libsource lib="uCm" part="D_1N4001"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
@@ -816,10 +818,10 @@
       <tstamp>56642351</tstamp>
     </comp>
     <comp ref="D2">
-      <value>SK35</value>
-      <footprint>uCm:Diode-SMA_Handsoldering</footprint>
+      <value>SS35</value>
+      <footprint>uCm:DO-214AB</footprint>
       <fields>
-        <field name="manf#">SK35-7-F</field>
+        <field name="manf#">SS35</field>
       </fields>
       <libsource lib="uCm" part="D_Schottky"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
@@ -844,7 +846,7 @@
     </comp>
     <comp ref="C6">
       <value>330uF 25V</value>
-      <footprint>uCm:C_ELCO_SMD</footprint>
+      <footprint>uCm:C_ELCO_SMD_8x10</footprint>
       <fields>
         <field name="manf#">UCL1E331MNL1GS</field>
       </fields>
@@ -854,7 +856,7 @@
     </comp>
     <comp ref="L2">
       <value>33uH</value>
-      <footprint>uCm:Choke_SMD_Wuerth-WE-PD-Typ-M-Typ-S_Handsoldering</footprint>
+      <footprint>uCm:Ind_Schott_330uH</footprint>
       <fields>
         <field name="manf#">34595</field>
       </fields>
@@ -873,10 +875,10 @@
       <tstamp>5664E6ED</tstamp>
     </comp>
     <comp ref="D10">
-      <value>SK35</value>
-      <footprint>uCm:Diode-SMA_Handsoldering</footprint>
+      <value>SS35</value>
+      <footprint>uCm:DO-214AB</footprint>
       <fields>
-        <field name="manf#">SK35-7-F</field>
+        <field name="manf#">SS35</field>
       </fields>
       <libsource lib="uCm" part="D_Schottky"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
@@ -901,7 +903,7 @@
     </comp>
     <comp ref="L1">
       <value>33uH</value>
-      <footprint>uCm:Choke_SMD_Wuerth-WE-PD-Typ-M-Typ-S_Handsoldering</footprint>
+      <footprint>uCm:Ind_Schott_330uH</footprint>
       <fields>
         <field name="manf#">34595</field>
       </fields>
@@ -911,7 +913,7 @@
     </comp>
     <comp ref="C5">
       <value>330uF 25V</value>
-      <footprint>uCm:C_ELCO_SMD</footprint>
+      <footprint>uCm:C_ELCO_SMD_8x10</footprint>
       <fields>
         <field name="manf#">UCL1E331MNL1GS</field>
       </fields>
