@@ -197,17 +197,17 @@ F 4 "ES1D-13-F" H 2375 1650 60  0001 C CNN "manf#"
 $EndComp
 Text Label 7925 875  0    40   ~ 0
 12V
-Text HLabel 5800 3950 2    40   BiDi ~ 0
+Text HLabel 5550 3950 2    40   BiDi ~ 0
 3V3
 $Comp
 L +3.3V #PWR012
 U 1 1 50DD3EAC
-P 5650 3875
-F 0 "#PWR012" H 5650 3835 30  0001 C CNN
-F 1 "+3.3V" H 5650 3985 30  0000 C CNN
-F 2 "" H 5650 3875 60  0001 C CNN
-F 3 "" H 5650 3875 60  0001 C CNN
-	1    5650 3875
+P 5400 3875
+F 0 "#PWR012" H 5400 3835 30  0001 C CNN
+F 1 "+3.3V" H 5400 3985 30  0000 C CNN
+F 2 "" H 5400 3875 60  0001 C CNN
+F 3 "" H 5400 3875 60  0001 C CNN
+	1    5400 3875
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -313,18 +313,6 @@ F 4 "PRPC002SFAN-RC" V 1175 2375 60  0001 C CNN "manf#"
 	1    1175 2375
 	-1   0    0    -1  
 $EndComp
-$Comp
-L CONN_2 J1
-U 1 1 52ACA888
-P 6275 2075
-F 0 "J1" V 6225 2075 40  0000 C CNN
-F 1 "5V_EXT" V 6325 2075 40  0000 C CNN
-F 2 "uCm:Header_2" H 6275 1975 60  0001 C CNN
-F 3 "" H 6275 1975 60  0000 C CNN
-F 4 "PRPC002SFAN-RC" V 6275 2075 60  0001 C CNN "manf#"
-	1    6275 2075
-	1    0    0    -1  
-$EndComp
 Wire Notes Line
 	600  3075 6725 3075
 Wire Notes Line
@@ -333,18 +321,6 @@ Wire Notes Line
 	6725 3075 6725 5325
 Text Notes 600  3075 0    60   Italic 12
 3V3 Regulator for uControl
-$Comp
-L CONN_2 J2
-U 1 1 52ACCF3E
-P 6275 4375
-F 0 "J2" V 6225 4375 40  0000 C CNN
-F 1 "3V3_EXT" V 6325 4375 40  0000 C CNN
-F 2 "uCm:Header_2" H 6275 4275 60  0001 C CNN
-F 3 "" H 6275 4275 60  0000 C CNN
-F 4 "PRPC002SFAN-RC" V 6275 4375 60  0001 C CNN "manf#"
-	1    6275 4375
-	1    0    0    -1  
-$EndComp
 $Comp
 L LM2675-5.0 U2
 U 1 1 56642335
@@ -405,7 +381,7 @@ Connection ~ 4550 1650
 Wire Wire Line
 	5050 1100 5050 1900
 Wire Wire Line
-	4850 1650 5800 1650
+	4850 1650 5550 1650
 Wire Wire Line
 	2650 900  2650 1900
 Wire Wire Line
@@ -413,7 +389,7 @@ Wire Wire Line
 Wire Wire Line
 	2650 2475 2650 2200
 Wire Wire Line
-	1525 2475 5800 2475
+	1525 2475 5550 2475
 Wire Wire Line
 	5050 2475 5050 2200
 Wire Wire Line
@@ -484,38 +460,38 @@ Connection ~ 2100 1650
 $Comp
 L PWR_FLAG #FLG016
 U 1 1 56649F69
-P 5475 2375
-F 0 "#FLG016" H 5475 2645 30  0001 C CNN
-F 1 "PWR_FLAG" H 5475 2605 30  0000 C CNN
-F 2 "" H 5475 2375 60  0000 C CNN
-F 3 "" H 5475 2375 60  0000 C CNN
-	1    5475 2375
+P 5225 2375
+F 0 "#FLG016" H 5225 2645 30  0001 C CNN
+F 1 "PWR_FLAG" H 5225 2605 30  0000 C CNN
+F 2 "" H 5225 2375 60  0000 C CNN
+F 3 "" H 5225 2375 60  0000 C CNN
+	1    5225 2375
 	1    0    0    -1  
 $EndComp
 Text HLabel 5800 900  2    40   BiDi ~ 0
 12V
-Text HLabel 5800 2475 2    40   BiDi ~ 0
+Text HLabel 5550 2475 2    40   BiDi ~ 0
 GND
-Text HLabel 5800 1650 2    40   BiDi ~ 0
+Text HLabel 5550 1650 2    40   BiDi ~ 0
 5V0
 Wire Wire Line
 	5800 900  2650 900 
 Connection ~ 5050 2475
 Wire Wire Line
-	5475 2375 5475 2475
-Connection ~ 5475 2475
+	5225 2375 5225 2475
+Connection ~ 5225 2475
 Text Label 5225 1650 0    40   ~ 0
 5V0
 Wire Wire Line
-	5925 2175 5650 2175
+	6125 2075 5400 2075
 Wire Wire Line
-	5650 2175 5650 2475
-Connection ~ 5650 2475
+	5400 2075 5400 2475
+Connection ~ 5400 2475
 Wire Wire Line
-	5925 1975 5650 1975
+	6125 1975 5400 1975
 Wire Wire Line
-	5650 1975 5650 1650
-Connection ~ 5650 1650
+	5400 1975 5400 1650
+Connection ~ 5400 1650
 $Comp
 L GND #PWR017
 U 1 1 5664E6C9
@@ -599,11 +575,11 @@ Connection ~ 4550 3950
 Wire Wire Line
 	5050 3400 5050 4200
 Wire Wire Line
-	4850 3950 5800 3950
+	4850 3950 5550 3950
 Wire Wire Line
-	2650 3950 3150 3950
+	2375 3950 3150 3950
 Wire Wire Line
-	2650 4775 5800 4775
+	2650 4775 5550 4775
 Wire Wire Line
 	5050 4775 5050 4500
 Wire Wire Line
@@ -648,19 +624,19 @@ Wire Wire Line
 	3900 4425 3900 4300
 Text Label 2875 3950 0    40   ~ 0
 12V
-Text HLabel 5800 4775 2    40   BiDi ~ 0
+Text HLabel 5550 4775 2    40   BiDi ~ 0
 GND
 Connection ~ 5050 4775
 Wire Wire Line
-	5925 4475 5650 4475
+	6125 4375 5400 4375
 Wire Wire Line
-	5650 4475 5650 4775
-Connection ~ 5650 4775
+	5400 4375 5400 4775
+Connection ~ 5400 4775
 Wire Wire Line
-	5650 4275 5925 4275
+	5400 4275 6125 4275
 Wire Wire Line
-	5650 3875 5650 4275
-Connection ~ 5650 3950
+	5400 3875 5400 4275
+Connection ~ 5400 3950
 Text Label 5200 3950 0    40   ~ 0
 3V3
 Wire Notes Line
@@ -700,7 +676,7 @@ L CP C5
 U 1 1 56652F17
 P 2650 2050
 F 0 "C5" H 2675 2150 50  0000 L CNN
-F 1 "330uF 25V" H 2675 1950 50  0000 L CNN
+F 1 "330uF 25V" H 2200 1925 50  0000 L CNN
 F 2 "uCm:C_ELCO_SMD_8x10" H 2688 1900 30  0001 C CNN
 F 3 "" H 2650 2050 60  0000 C CNN
 F 4 "UCL1E331MNL1GS" H 2650 2050 60  0001 C CNN "manf#"
@@ -719,6 +695,59 @@ F 3 "" H 2800 1500 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	2800 1500 2800 1650
+	2800 1500 2800 2725
 Connection ~ 2800 1650
+$Comp
+L CONN_3 J2
+U 1 1 5665ADBC
+P 6475 4375
+F 0 "J2" V 6425 4375 50  0000 C CNN
+F 1 "3V3_EXT" V 6525 4375 50  0000 C CNN
+F 2 "uCm:Header_3" H 6475 4375 60  0001 C CNN
+F 3 "" H 6475 4375 60  0000 C CNN
+F 4 "CONN HEADER 50POS .100\" SGL GOLD" H 6475 4475 60  0001 L CNN "Field4"
+F 5 "Header, Unshrouded, Male pin," H 6475 4575 60  0001 L CNN "Field5"
+F 6 "0.1\" pitch x 50 nos" H 6475 4675 60  0001 L CNN "Field6"
+F 7 "Samtec Inc" H 6475 4775 60  0001 L CNN "Field7"
+F 8 "TSW-150-07-L-S" H 6475 4875 60  0001 L CNN "Field8"
+F 9 "Digikey" H 6475 4975 60  0001 L CNN "Field9"
+F 10 "SAM1031-50-ND" H 6475 5075 60  0001 L CNN "Field10"
+F 11 "http://www.digikey.com/scripts/DkSearch/dksus.dll?WT.z_header=search_go&lang=en&keywords=SAM1031-50-ND&x=15&y=16&cur=USD" H 6475 5175 60  0001 L CNN "Field11"
+	1    6475 4375
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2375 3950 2375 5100
+Wire Wire Line
+	2375 5100 5925 5100
+Wire Wire Line
+	5925 5100 5925 4475
+Wire Wire Line
+	5925 4475 6125 4475
+Connection ~ 2650 3950
+$Comp
+L CONN_3 J1
+U 1 1 5665B6DA
+P 6475 2075
+F 0 "J1" V 6425 2075 50  0000 C CNN
+F 1 "5V_EXT" V 6525 2075 50  0000 C CNN
+F 2 "uCm:Header_3" H 6475 2075 60  0001 C CNN
+F 3 "" H 6475 2075 60  0000 C CNN
+F 4 "CONN HEADER 50POS .100\" SGL GOLD" H 6475 2175 60  0001 L CNN "Field4"
+F 5 "Header, Unshrouded, Male pin," H 6475 2275 60  0001 L CNN "Field5"
+F 6 "0.1\" pitch x 50 nos" H 6475 2375 60  0001 L CNN "Field6"
+F 7 "Samtec Inc" H 6475 2475 60  0001 L CNN "Field7"
+F 8 "TSW-150-07-L-S" H 6475 2575 60  0001 L CNN "Field8"
+F 9 "Digikey" H 6475 2675 60  0001 L CNN "Field9"
+F 10 "SAM1031-50-ND" H 6475 2775 60  0001 L CNN "Field10"
+F 11 "http://www.digikey.com/scripts/DkSearch/dksus.dll?WT.z_header=search_go&lang=en&keywords=SAM1031-50-ND&x=15&y=16&cur=USD" H 6475 2875 60  0001 L CNN "Field11"
+	1    6475 2075
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2800 2725 5925 2725
+Wire Wire Line
+	5925 2725 5925 2175
+Wire Wire Line
+	5925 2175 6125 2175
 $EndSCHEMATC

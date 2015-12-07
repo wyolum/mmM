@@ -98,8 +98,6 @@ Wire Wire Line
 Wire Wire Line
 	3325 875  1050 875 
 Wire Wire Line
-	1050 775  3325 775 
-Wire Wire Line
 	1050 975  3325 975 
 Wire Wire Line
 	4950 2025 4625 2025
@@ -153,7 +151,7 @@ Wire Wire Line
 Wire Wire Line
 	1450 1525 1450 1650
 Wire Wire Line
-	2425 1150 2425 2300
+	2425 775  2425 2300
 Connection ~ 2425 1700
 Wire Notes Line
 	7225 2475 7225 575 
@@ -231,7 +229,7 @@ U 1 1 50E2BDB8
 P 1900 2100
 F 0 "U1" H 1900 2500 40  0000 C CNN
 F 1 "TXB0104D" H 1900 2400 40  0000 C CNN
-F 2 "uCm:TXB0104D" H 1900 2500 40  0001 C CNN
+F 2 "uCm:TXB0104D_null" H 1900 2500 40  0001 C CNN
 F 3 "" H 1900 2100 60  0001 C CNN
 F 4 "TXB0104DR" H 1900 2100 60  0001 C CNN "manf#"
 	1    1900 2100
@@ -241,7 +239,7 @@ $Comp
 L R R4
 U 1 1 50E2B821
 P 2425 2550
-F 0 "R4" H 2375 2700 50  0000 C CNN
+F 0 "R4" H 2375 2725 50  0000 C CNN
 F 1 "10k" V 2430 2550 50  0000 C CNN
 F 2 "uCm:r_0805" V 2530 2550 50  0001 C CNN
 F 3 "" H 2425 2550 60  0001 C CNN
@@ -451,7 +449,7 @@ NoConn ~ 1550 2300
 Text Label 1625 1150 0    40   ~ 0
 5V0
 Text Label 2150 1150 0    40   ~ 0
-3V3
+3V3_PR
 Text HLabel 4425 1300 0    40   BiDi ~ 0
 5V0
 Text Label 5250 1225 0    40   ~ 0
@@ -538,7 +536,7 @@ PC3_Pr1
 Text Label 2950 875  0    40   ~ 0
 GND
 Text Label 2950 775  0    40   ~ 0
-3V3
+3V3_PR
 Text Notes 4500 6000 0    30   ~ 0
 Pump [P54E01R]\nFootprint
 Text Notes 5100 5675 0    30   ~ 0
@@ -965,4 +963,23 @@ Text Notes 6250 2450 0    59   ~ 0
 Current : 200mA max
 Text Notes 6200 4500 0    59   ~ 0
 Current : 200mA max
+Wire Wire Line
+	2050 775  3325 775 
+$Comp
+L R R7
+U 1 1 5665D2FA
+P 1800 775
+F 0 "R7" V 1750 975 50  0000 C CNN
+F 1 "Zero" V 1805 775 50  0000 C CNN
+F 2 "uCm:r_0805" V 1905 775 50  0001 C CNN
+F 3 "" H 1800 775 60  0001 C CNN
+F 4 "RMCF0805ZT0R00" H 1800 775 60  0001 C CNN "manf#"
+	1    1800 775 
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	1550 775  1050 775 
+Connection ~ 2425 775 
+Text Notes 700  2975 0    47   ~ 0
+If using HCE...5, DNP\nU1, R4, R7\nand\nShort U1 pins\n1<>14, 2<>13, 3<>12, \n4<>11, 5<>10
 $EndSCHEMATC
