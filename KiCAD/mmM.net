@@ -1,7 +1,7 @@
 (export (version D)
   (design
-    (source /home/samata/projects-git/uCm/KiCAD/mmM.sch)
-    (date "Tue Dec  8 20:54:50 2015")
+    (source /home/samata/projects-git/mmM/KiCAD/mmM.sch)
+    (date "Wed Dec  9 00:02:27 2015")
     (tool "Eeschema 4.0.0-2.201511301921+6191~38~ubuntu15.10.1-stable")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -127,7 +127,7 @@
       (sheetpath (names /) (tstamps /))
       (tstamp 4FE58ED4))
     (comp (ref U7)
-      (value ATMEGA328-AU-ND)
+      (value ATMEGA328P-AU-ND)
       (footprint mmM:TQFP32)
       (fields
         (field (name manf#) ATMEGA328-AU))
@@ -241,7 +241,7 @@
       (sheetpath (names /) (tstamps /))
       (tstamp 55A3A3EC))
     (comp (ref C1)
-      (value 100n)
+      (value 100nF)
       (footprint mmM:c_0805)
       (fields
         (field (name manf#) CL21B104KCC5PNC))
@@ -249,7 +249,7 @@
       (sheetpath (names /) (tstamps /))
       (tstamp 5664C0BB))
     (comp (ref C4)
-      (value 100n)
+      (value 100nF)
       (footprint mmM:c_0805)
       (fields
         (field (name manf#) CL21B104KCC5PNC))
@@ -504,7 +504,6 @@
     (comp (ref P17)
       (value PUMP)
       (footprint mmM:Pump_P54E01R_02)
-      (datasheet http://www.xavitech.com/products)
       (fields
         (field (name manf#) P54E01R))
       (libsource (lib mmM) (part CONN_5))
@@ -742,14 +741,7 @@
       (value 3V3_EXT)
       (footprint mmM:Header_3)
       (fields
-        (field (name Field4) "CONN HEADER 50POS .100\" SGL GOLD")
-        (field (name Field5) "Header, Unshrouded, Male pin,")
-        (field (name Field6) "0.1\" pitch x 50 nos")
-        (field (name Field7) "Samtec Inc")
-        (field (name Field8) TSW-150-07-L-S)
-        (field (name Field9) Digikey)
-        (field (name Field10) SAM1031-50-ND)
-        (field (name Field11) http://www.digikey.com/scripts/DkSearch/dksus.dll?WT.z_header=search_go&lang=en&keywords=SAM1031-50-ND&x=15&y=16&cur=USD))
+        (field (name manf#) PREC003SAAN-RC))
       (libsource (lib mmM) (part CONN_3))
       (sheetpath (names /pwr/) (tstamps /4FC07407/))
       (tstamp 5665ADBC))
@@ -757,14 +749,7 @@
       (value 5V_EXT)
       (footprint mmM:Header_3)
       (fields
-        (field (name Field4) "CONN HEADER 50POS .100\" SGL GOLD")
-        (field (name Field5) "Header, Unshrouded, Male pin,")
-        (field (name Field6) "0.1\" pitch x 50 nos")
-        (field (name Field7) "Samtec Inc")
-        (field (name Field8) TSW-150-07-L-S)
-        (field (name Field9) Digikey)
-        (field (name Field10) SAM1031-50-ND)
-        (field (name Field11) http://www.digikey.com/scripts/DkSearch/dksus.dll?WT.z_header=search_go&lang=en&keywords=SAM1031-50-ND&x=15&y=16&cur=USD))
+        (field (name manf#) PREC003SAAN-RC))
       (libsource (lib mmM) (part CONN_3))
       (sheetpath (names /pwr/) (tstamps /4FC07407/))
       (tstamp 5665B6DA))
@@ -1392,7 +1377,7 @@
         (pin (num 2) (name PM) (type passive)))))
   (libraries
     (library (logical mmM)
-      (uri /home/samata/projects-git/uCm/KiCAD/mmM_Libs/mmM.lib)))
+      (uri /home/samata/projects-git/mmM/KiCAD/mmM_Libs/mmM.lib)))
   (nets
     (net (code 1) (name /PC1)
       (node (ref B9) (pin 1))

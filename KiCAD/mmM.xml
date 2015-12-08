@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <export version="D">
   <design>
-    <source>/home/samata/projects-git/uCm/KiCAD/mmM.sch</source>
-    <date>Tue Dec  8 20:46:52 2015</date>
+    <source>/home/samata/projects-git/mmM/KiCAD/mmM.sch</source>
+    <date>Wed Dec  9 00:02:30 2015</date>
     <tool>Eeschema 4.0.0-2.201511301921+6191~38~ubuntu15.10.1-stable</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -60,7 +60,7 @@
   <components>
     <comp ref="P4">
       <value>ICSP</value>
-      <footprint>uCm:Header_ISP</footprint>
+      <footprint>mmM:Header_ISP</footprint>
       <fields>
         <field name="manf#">PREC003DAAN-RC</field>
       </fields>
@@ -70,14 +70,14 @@
     </comp>
     <comp ref="P1">
       <value>AREF</value>
-      <footprint>uCm:ShortLink2</footprint>
+      <footprint>mmM:ShortLink2</footprint>
       <libsource lib="mmM" part="CONN_3"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>50E3CCEE</tstamp>
     </comp>
     <comp ref="SW1">
       <value>Reset</value>
-      <footprint>uCm:SW_PB_V_H</footprint>
+      <footprint>mmM:SW_PB_V_H</footprint>
       <fields>
         <field name="manf#">FSMRA3JH</field>
       </fields>
@@ -87,7 +87,7 @@
     </comp>
     <comp ref="X1">
       <value>16MHz</value>
-      <footprint>uCm:Xtal_SMD3</footprint>
+      <footprint>mmM:Xtal_SMD3</footprint>
       <fields>
         <field name="manf#">TSX-3225 16.0000MF09Z-AC3</field>
       </fields>
@@ -97,7 +97,7 @@
     </comp>
     <comp ref="R3">
       <value>10k</value>
-      <footprint>uCm:r_0805</footprint>
+      <footprint>mmM:r_0805</footprint>
       <fields>
         <field name="manf#">RMCF0805JT10K0</field>
       </fields>
@@ -107,7 +107,7 @@
     </comp>
     <comp ref="R2">
       <value>10k</value>
-      <footprint>uCm:r_0805</footprint>
+      <footprint>mmM:r_0805</footprint>
       <fields>
         <field name="manf#">RMCF0805JT10K0</field>
       </fields>
@@ -117,7 +117,7 @@
     </comp>
     <comp ref="R1">
       <value>10k</value>
-      <footprint>uCm:r_0805</footprint>
+      <footprint>mmM:r_0805</footprint>
       <fields>
         <field name="manf#">RMCF0805JT10K0</field>
       </fields>
@@ -127,7 +127,7 @@
     </comp>
     <comp ref="C3">
       <value>22pF</value>
-      <footprint>uCm:c_0603</footprint>
+      <footprint>mmM:c_0603</footprint>
       <fields>
         <field name="manf#">CL10C220JB8NNNC</field>
       </fields>
@@ -137,7 +137,7 @@
     </comp>
     <comp ref="C2">
       <value>22pF</value>
-      <footprint>uCm:c_0603</footprint>
+      <footprint>mmM:c_0603</footprint>
       <fields>
         <field name="manf#">CL10C220JB8NNNC</field>
       </fields>
@@ -147,7 +147,7 @@
     </comp>
     <comp ref="P5">
       <value>FTDI</value>
-      <footprint>uCm:Header_FTDI</footprint>
+      <footprint>mmM:Header_FTDI</footprint>
       <fields>
         <field name="manf#">PREC006SAAN-RC</field>
       </fields>
@@ -156,8 +156,8 @@
       <tstamp>4FE58ED4</tstamp>
     </comp>
     <comp ref="U7">
-      <value>ATMEGA328-AU-ND</value>
-      <footprint>uCm:TQFP32</footprint>
+      <value>ATMEGA328P-AU-ND</value>
+      <footprint>mmM:TQFP32</footprint>
       <fields>
         <field name="manf#">ATMEGA328-AU</field>
       </fields>
@@ -167,42 +167,42 @@
     </comp>
     <comp ref="B8">
       <value>PC0</value>
-      <footprint>uCm:I_O</footprint>
+      <footprint>mmM:I_O</footprint>
       <libsource lib="mmM" part="I_O"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>520E3AF6</tstamp>
     </comp>
     <comp ref="B9">
       <value>PC1</value>
-      <footprint>uCm:I_O</footprint>
+      <footprint>mmM:I_O</footprint>
       <libsource lib="mmM" part="I_O"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>520E3DD3</tstamp>
     </comp>
     <comp ref="B10">
       <value>PC6</value>
-      <footprint>uCm:I_O</footprint>
+      <footprint>mmM:I_O</footprint>
       <libsource lib="mmM" part="I_O"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>520E3DD9</tstamp>
     </comp>
     <comp ref="B11">
       <value>PC7</value>
-      <footprint>uCm:I_O</footprint>
+      <footprint>mmM:I_O</footprint>
       <libsource lib="mmM" part="I_O"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>520E3ECF</tstamp>
     </comp>
     <comp ref="B12">
       <value>PB0</value>
-      <footprint>uCm:I_O</footprint>
+      <footprint>mmM:I_O</footprint>
       <libsource lib="mmM" part="I_O"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>520E5284</tstamp>
     </comp>
     <comp ref="SW2">
       <value>INT0</value>
-      <footprint>uCm:SW_PB_V_H</footprint>
+      <footprint>mmM:SW_PB_V_H</footprint>
       <fields>
         <field name="manf#">FSMRA3JH</field>
       </fields>
@@ -212,7 +212,7 @@
     </comp>
     <comp ref="SW3">
       <value>INT1</value>
-      <footprint>uCm:SW_PB_V_H</footprint>
+      <footprint>mmM:SW_PB_V_H</footprint>
       <fields>
         <field name="manf#">FSMRA3JH</field>
       </fields>
@@ -222,7 +222,7 @@
     </comp>
     <comp ref="R22">
       <value>10k</value>
-      <footprint>uCm:r_0805</footprint>
+      <footprint>mmM:r_0805</footprint>
       <fields>
         <field name="manf#">RMCF0805JT10K0</field>
       </fields>
@@ -232,7 +232,7 @@
     </comp>
     <comp ref="R21">
       <value>10k</value>
-      <footprint>uCm:r_0805</footprint>
+      <footprint>mmM:r_0805</footprint>
       <fields>
         <field name="manf#">RMCF0805JT10K0</field>
       </fields>
@@ -242,7 +242,7 @@
     </comp>
     <comp ref="C28">
       <value>100nF</value>
-      <footprint>uCm:c_0805</footprint>
+      <footprint>mmM:c_0805</footprint>
       <fields>
         <field name="manf#">CL21B104KCC5PNC</field>
       </fields>
@@ -252,49 +252,49 @@
     </comp>
     <comp ref="B4">
       <value>PB0</value>
-      <footprint>uCm:I_O</footprint>
+      <footprint>mmM:I_O</footprint>
       <libsource lib="mmM" part="I_O"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>52150F0F</tstamp>
     </comp>
     <comp ref="SC6">
       <value>SCREW</value>
-      <footprint>uCm:vite_3mm</footprint>
+      <footprint>mmM:vite_3mm</footprint>
       <libsource lib="mmM" part="SCREW"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>522315DB</tstamp>
     </comp>
     <comp ref="SC9">
       <value>SCREW</value>
-      <footprint>uCm:vite_3mm</footprint>
+      <footprint>mmM:vite_3mm</footprint>
       <libsource lib="mmM" part="SCREW"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>522315E1</tstamp>
     </comp>
     <comp ref="SC7">
       <value>SCREW</value>
-      <footprint>uCm:vite_3mm</footprint>
+      <footprint>mmM:vite_3mm</footprint>
       <libsource lib="mmM" part="SCREW"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>522315F3</tstamp>
     </comp>
     <comp ref="SC10">
       <value>SCREW</value>
-      <footprint>uCm:vite_3mm</footprint>
+      <footprint>mmM:vite_3mm</footprint>
       <libsource lib="mmM" part="SCREW"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>522315F9</tstamp>
     </comp>
     <comp ref="B7">
       <value>PC1</value>
-      <footprint>uCm:I_O</footprint>
+      <footprint>mmM:I_O</footprint>
       <libsource lib="mmM" part="I_O"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>55A3A3EC</tstamp>
     </comp>
     <comp ref="C1">
-      <value>100n</value>
-      <footprint>uCm:c_0805</footprint>
+      <value>100nF</value>
+      <footprint>mmM:c_0805</footprint>
       <fields>
         <field name="manf#">CL21B104KCC5PNC</field>
       </fields>
@@ -303,8 +303,8 @@
       <tstamp>5664C0BB</tstamp>
     </comp>
     <comp ref="C4">
-      <value>100n</value>
-      <footprint>uCm:c_0805</footprint>
+      <value>100nF</value>
+      <footprint>mmM:c_0805</footprint>
       <fields>
         <field name="manf#">CL21B104KCC5PNC</field>
       </fields>
@@ -314,7 +314,7 @@
     </comp>
     <comp ref="C27">
       <value>100uF</value>
-      <footprint>uCm:C_ELCO_SMD_6x8</footprint>
+      <footprint>mmM:C_ELCO_SMD_6x8</footprint>
       <fields>
         <field name="manf#">UWT1V101MCL1GS</field>
       </fields>
@@ -324,7 +324,7 @@
     </comp>
     <comp ref="P9">
       <value>C3SB</value>
-      <footprint>uCm:pin_strip_4-90</footprint>
+      <footprint>mmM:pin_strip_4-90</footprint>
       <fields>
         <field name="manf#">PREC004SAAN-RC</field>
       </fields>
@@ -334,7 +334,7 @@
     </comp>
     <comp ref="U1">
       <value>TXB0104D</value>
-      <footprint>uCm:TXB0104D_null</footprint>
+      <footprint>mmM:TXB0104D_null</footprint>
       <fields>
         <field name="manf#">TXB0104DR</field>
       </fields>
@@ -344,7 +344,7 @@
     </comp>
     <comp ref="R4">
       <value>10k</value>
-      <footprint>uCm:r_0805</footprint>
+      <footprint>mmM:r_0805</footprint>
       <fields>
         <field name="manf#">RMCF0805JT10K0</field>
       </fields>
@@ -354,7 +354,7 @@
     </comp>
     <comp ref="Q1">
       <value>BCP5416TA</value>
-      <footprint>uCm:SOT223</footprint>
+      <footprint>mmM:SOT223</footprint>
       <fields>
         <field name="manf#">BCP5416TA</field>
       </fields>
@@ -364,7 +364,7 @@
     </comp>
     <comp ref="P14">
       <value>X_VALVE</value>
-      <footprint>uCm:X_Valve_2</footprint>
+      <footprint>mmM:X_Valve_2</footprint>
       <fields>
         <field name="manf#">X-1-05-S-F</field>
       </fields>
@@ -374,7 +374,7 @@
     </comp>
     <comp ref="P7">
       <value>GAGE_PR</value>
-      <footprint>uCm:HCEM500GUH9P3</footprint>
+      <footprint>mmM:HCEM500GUH9P3</footprint>
       <fields>
         <field name="manf#">HCEM500GUH9P3</field>
       </fields>
@@ -384,7 +384,7 @@
     </comp>
     <comp ref="D1">
       <value>ES1D-13-F</value>
-      <footprint>uCm:Diode-SMA</footprint>
+      <footprint>mmM:Diode-SMA</footprint>
       <fields>
         <field name="manf#">ES1D-13-F</field>
       </fields>
@@ -394,7 +394,7 @@
     </comp>
     <comp ref="C17">
       <value>100nF</value>
-      <footprint>uCm:c_0805</footprint>
+      <footprint>mmM:c_0805</footprint>
       <fields>
         <field name="manf#">CL21B104KCC5PNC</field>
       </fields>
@@ -404,7 +404,7 @@
     </comp>
     <comp ref="C13">
       <value>100nF</value>
-      <footprint>uCm:c_0805</footprint>
+      <footprint>mmM:c_0805</footprint>
       <fields>
         <field name="manf#">CL21B104KCC5PNC</field>
       </fields>
@@ -414,7 +414,7 @@
     </comp>
     <comp ref="C11">
       <value>100nF</value>
-      <footprint>uCm:c_0805</footprint>
+      <footprint>mmM:c_0805</footprint>
       <fields>
         <field name="manf#">CL21B104KCC5PNC</field>
       </fields>
@@ -424,7 +424,7 @@
     </comp>
     <comp ref="C10">
       <value>100nF</value>
-      <footprint>uCm:c_0805</footprint>
+      <footprint>mmM:c_0805</footprint>
       <fields>
         <field name="manf#">CL21B104KCC5PNC</field>
       </fields>
@@ -434,7 +434,7 @@
     </comp>
     <comp ref="C9">
       <value>100nF</value>
-      <footprint>uCm:c_0805</footprint>
+      <footprint>mmM:c_0805</footprint>
       <fields>
         <field name="manf#">CL21B104KCC5PNC</field>
       </fields>
@@ -444,7 +444,7 @@
     </comp>
     <comp ref="C8">
       <value>100nF</value>
-      <footprint>uCm:c_0805</footprint>
+      <footprint>mmM:c_0805</footprint>
       <fields>
         <field name="manf#">CL21B104KCC5PNC</field>
       </fields>
@@ -454,7 +454,7 @@
     </comp>
     <comp ref="C7">
       <value>100nF</value>
-      <footprint>uCm:c_0805</footprint>
+      <footprint>mmM:c_0805</footprint>
       <fields>
         <field name="manf#">CL21B104KCC5PNC</field>
       </fields>
@@ -464,7 +464,7 @@
     </comp>
     <comp ref="P10">
       <value>C3SB</value>
-      <footprint>uCm:pin_strip_4-90</footprint>
+      <footprint>mmM:pin_strip_4-90</footprint>
       <fields>
         <field name="manf#">PREC004SAAN-RC</field>
       </fields>
@@ -474,7 +474,7 @@
     </comp>
     <comp ref="P11">
       <value>VSel_Vlv</value>
-      <footprint>uCm:Header_3</footprint>
+      <footprint>mmM:Header_3</footprint>
       <fields>
         <field name="manf#">PREC003SAAN-RC</field>
       </fields>
@@ -484,7 +484,7 @@
     </comp>
     <comp ref="Q2">
       <value>BCP5416TA</value>
-      <footprint>uCm:SOT223</footprint>
+      <footprint>mmM:SOT223</footprint>
       <fields>
         <field name="manf#">BCP5416TA</field>
       </fields>
@@ -500,7 +500,7 @@
     </comp>
     <comp ref="R5">
       <value>4k7</value>
-      <footprint>uCm:r_0805</footprint>
+      <footprint>mmM:r_0805</footprint>
       <fields>
         <field name="manf#">RMCF0805JT4K70</field>
       </fields>
@@ -510,7 +510,7 @@
     </comp>
     <comp ref="C29">
       <value>100nF</value>
-      <footprint>uCm:c_0805</footprint>
+      <footprint>mmM:c_0805</footprint>
       <fields>
         <field name="manf#">CL21B104KCC5PNC</field>
       </fields>
@@ -520,7 +520,7 @@
     </comp>
     <comp ref="Q3">
       <value>BCP5416TA</value>
-      <footprint>uCm:SOT223</footprint>
+      <footprint>mmM:SOT223</footprint>
       <fields>
         <field name="manf#">BCP5416TA</field>
       </fields>
@@ -530,7 +530,7 @@
     </comp>
     <comp ref="P38">
       <value>X_VALVE2</value>
-      <footprint>uCm:X_Valve_2</footprint>
+      <footprint>mmM:X_Valve_2</footprint>
       <fields>
         <field name="manf#">X-1-05-S-F</field>
       </fields>
@@ -540,7 +540,7 @@
     </comp>
     <comp ref="D9">
       <value>ES1D-13-F</value>
-      <footprint>uCm:Diode-SMA</footprint>
+      <footprint>mmM:Diode-SMA</footprint>
       <fields>
         <field name="manf#">ES1D-13-F</field>
       </fields>
@@ -550,7 +550,7 @@
     </comp>
     <comp ref="C31">
       <value>100nF</value>
-      <footprint>uCm:c_0805</footprint>
+      <footprint>mmM:c_0805</footprint>
       <fields>
         <field name="manf#">CL21B104KCC5PNC</field>
       </fields>
@@ -560,7 +560,7 @@
     </comp>
     <comp ref="P34">
       <value>VSel_Vlv2</value>
-      <footprint>uCm:Header_3</footprint>
+      <footprint>mmM:Header_3</footprint>
       <fields>
         <field name="manf#">PREC003SAAN-RC</field>
       </fields>
@@ -570,7 +570,7 @@
     </comp>
     <comp ref="C14">
       <value>100nF</value>
-      <footprint>uCm:c_0805</footprint>
+      <footprint>mmM:c_0805</footprint>
       <fields>
         <field name="manf#">CL21B104KCC5PNC</field>
       </fields>
@@ -580,7 +580,7 @@
     </comp>
     <comp ref="Q4">
       <value>BCP5416TA</value>
-      <footprint>uCm:SOT223</footprint>
+      <footprint>mmM:SOT223</footprint>
       <fields>
         <field name="manf#">BCP5416TA</field>
       </fields>
@@ -590,7 +590,7 @@
     </comp>
     <comp ref="D3">
       <value>ES1D-13-F</value>
-      <footprint>uCm:Diode-SMA</footprint>
+      <footprint>mmM:Diode-SMA</footprint>
       <fields>
         <field name="manf#">ES1D-13-F</field>
       </fields>
@@ -600,7 +600,7 @@
     </comp>
     <comp ref="R6">
       <value>1k</value>
-      <footprint>uCm:r_0805</footprint>
+      <footprint>mmM:r_0805</footprint>
       <fields>
         <field name="manf#">RMCF0805JT1K00</field>
       </fields>
@@ -610,7 +610,7 @@
     </comp>
     <comp ref="SP1">
       <value>BUZZER</value>
-      <footprint>uCm:Speaker</footprint>
+      <footprint>mmM:Speaker</footprint>
       <fields>
         <field name="manf#">PS1240P02BT</field>
       </fields>
@@ -620,8 +620,7 @@
     </comp>
     <comp ref="P17">
       <value>PUMP</value>
-      <footprint>uCm:Pump_P54E01R_02</footprint>
-      <datasheet>http://www.xavitech.com/products</datasheet>
+      <footprint>mmM:Pump_P54E01R_02</footprint>
       <fields>
         <field name="manf#">P54E01R</field>
       </fields>
@@ -631,7 +630,7 @@
     </comp>
     <comp ref="R7">
       <value>Zero</value>
-      <footprint>uCm:r_0805</footprint>
+      <footprint>mmM:r_0805</footprint>
       <fields>
         <field name="manf#">RMCF0805ZT0R00</field>
       </fields>
@@ -641,7 +640,7 @@
     </comp>
     <comp ref="R10">
       <value>1k</value>
-      <footprint>uCm:r_0805</footprint>
+      <footprint>mmM:r_0805</footprint>
       <fields>
         <field name="manf#">RMCF0805JT1K00</field>
       </fields>
@@ -651,7 +650,7 @@
     </comp>
     <comp ref="R13">
       <value>1k</value>
-      <footprint>uCm:r_0805</footprint>
+      <footprint>mmM:r_0805</footprint>
       <fields>
         <field name="manf#">RMCF0805JT1K00</field>
       </fields>
@@ -661,7 +660,7 @@
     </comp>
     <comp ref="R9">
       <value>120E</value>
-      <footprint>uCm:r_0805</footprint>
+      <footprint>mmM:r_0805</footprint>
       <fields>
         <field name="manf#">RMCF0805JT120R</field>
       </fields>
@@ -671,7 +670,7 @@
     </comp>
     <comp ref="R8">
       <value>330E</value>
-      <footprint>uCm:r_0805</footprint>
+      <footprint>mmM:r_0805</footprint>
       <fields>
         <field name="manf#">RMCF0805JT330R</field>
       </fields>
@@ -681,7 +680,7 @@
     </comp>
     <comp ref="P24">
       <value>PWR_IN</value>
-      <footprint>uCm:JACK_ALIM</footprint>
+      <footprint>mmM:JACK_ALIM</footprint>
       <fields>
         <field name="manf#">PJ-002B</field>
       </fields>
@@ -691,7 +690,7 @@
     </comp>
     <comp ref="D7">
       <value>BLINK</value>
-      <footprint>uCm:led_0805</footprint>
+      <footprint>mmM:led_0805</footprint>
       <fields>
         <field name="manf#">LG M67K-H1J2-24-Z</field>
       </fields>
@@ -701,7 +700,7 @@
     </comp>
     <comp ref="D8">
       <value>12V</value>
-      <footprint>uCm:led_0805</footprint>
+      <footprint>mmM:led_0805</footprint>
       <fields>
         <field name="manf#">LG M67K-H1J2-24-Z</field>
       </fields>
@@ -711,7 +710,7 @@
     </comp>
     <comp ref="D6">
       <value>3V3</value>
-      <footprint>uCm:led_0805</footprint>
+      <footprint>mmM:led_0805</footprint>
       <fields>
         <field name="manf#">LG M67K-H1J2-24-Z</field>
       </fields>
@@ -721,7 +720,7 @@
     </comp>
     <comp ref="D5">
       <value>5V0</value>
-      <footprint>uCm:led_0805</footprint>
+      <footprint>mmM:led_0805</footprint>
       <fields>
         <field name="manf#">LG M67K-H1J2-24-Z</field>
       </fields>
@@ -731,7 +730,7 @@
     </comp>
     <comp ref="D4">
       <value>ES1D-13-F</value>
-      <footprint>uCm:Diode-SMA</footprint>
+      <footprint>mmM:Diode-SMA</footprint>
       <fields>
         <field name="manf#">ES1D-13-F</field>
       </fields>
@@ -741,35 +740,35 @@
     </comp>
     <comp ref="G4">
       <value>Logo_OH</value>
-      <footprint>uCm:OSHW_6mm</footprint>
+      <footprint>mmM:OSHW_6mm</footprint>
       <libsource lib="mmM" part="PCB"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
       <tstamp>4FC075DD</tstamp>
     </comp>
     <comp ref="G3">
       <value>Logo_OH</value>
-      <footprint>uCm:OSHW_6mm</footprint>
+      <footprint>mmM:OSHW_6mm</footprint>
       <libsource lib="mmM" part="PCB"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
       <tstamp>4FC075CE</tstamp>
     </comp>
     <comp ref="G2">
       <value>Logo_Wyolum</value>
-      <footprint>uCm:Logo-WL3</footprint>
+      <footprint>mmM:Logo-WL3</footprint>
       <libsource lib="mmM" part="PCB"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
       <tstamp>4FC075C2</tstamp>
     </comp>
     <comp ref="G1">
       <value>Logo_Wyolum</value>
-      <footprint>uCm:Logo-WL3</footprint>
+      <footprint>mmM:Logo-WL3</footprint>
       <libsource lib="mmM" part="PCB"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
       <tstamp>4FC075A6</tstamp>
     </comp>
     <comp ref="P13">
       <value>PWR_IN</value>
-      <footprint>uCm:Header_2</footprint>
+      <footprint>mmM:Header_2</footprint>
       <fields>
         <field name="manf#">PRPC002SFAN-RC</field>
       </fields>
@@ -779,7 +778,7 @@
     </comp>
     <comp ref="U2">
       <value>LM2675-5.0</value>
-      <footprint>uCm:SO8E</footprint>
+      <footprint>mmM:SO8E</footprint>
       <fields>
         <field name="manf#">LM2675MX-5.0/NOPB</field>
       </fields>
@@ -789,7 +788,7 @@
     </comp>
     <comp ref="C16">
       <value>100uF 10V</value>
-      <footprint>uCm:C_2917_HandSoldering</footprint>
+      <footprint>mmM:C_2917_HandSoldering</footprint>
       <fields>
         <field name="manf#">TPSD107M010R0050</field>
       </fields>
@@ -799,7 +798,7 @@
     </comp>
     <comp ref="C12">
       <value>10nF</value>
-      <footprint>uCm:c_0805</footprint>
+      <footprint>mmM:c_0805</footprint>
       <fields>
         <field name="manf#">CL21B103KBANNNC</field>
       </fields>
@@ -809,7 +808,7 @@
     </comp>
     <comp ref="D2">
       <value>SS35</value>
-      <footprint>uCm:DO-214AB</footprint>
+      <footprint>mmM:DO-214AB</footprint>
       <fields>
         <field name="manf#">SS35</field>
       </fields>
@@ -819,14 +818,14 @@
     </comp>
     <comp ref="W1">
       <value>EN</value>
-      <footprint>uCm:r_0805</footprint>
+      <footprint>mmM:r_0805</footprint>
       <libsource lib="mmM" part="TEST"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
       <tstamp>56642389</tstamp>
     </comp>
     <comp ref="U3">
       <value>LM2675-3.3</value>
-      <footprint>uCm:SO8E</footprint>
+      <footprint>mmM:SO8E</footprint>
       <fields>
         <field name="manf#">LM2675MX-3.3/NOPB</field>
       </fields>
@@ -836,7 +835,7 @@
     </comp>
     <comp ref="C6">
       <value>330uF 25V</value>
-      <footprint>uCm:C_ELCO_SMD_8x10</footprint>
+      <footprint>mmM:C_ELCO_SMD_8x10</footprint>
       <fields>
         <field name="manf#">UCL1E331MNL1GS</field>
       </fields>
@@ -846,7 +845,7 @@
     </comp>
     <comp ref="L2">
       <value>33uH</value>
-      <footprint>uCm:Choke_SMD_Wuerth-784775133</footprint>
+      <footprint>mmM:Choke_SMD_Wuerth-784775133</footprint>
       <fields>
         <field name="manf#">784775133</field>
       </fields>
@@ -856,7 +855,7 @@
     </comp>
     <comp ref="C15">
       <value>10nF</value>
-      <footprint>uCm:c_0805</footprint>
+      <footprint>mmM:c_0805</footprint>
       <fields>
         <field name="manf#">CL21B103KBANNNC</field>
       </fields>
@@ -866,7 +865,7 @@
     </comp>
     <comp ref="D10">
       <value>SS35</value>
-      <footprint>uCm:DO-214AB</footprint>
+      <footprint>mmM:DO-214AB</footprint>
       <fields>
         <field name="manf#">SS35</field>
       </fields>
@@ -876,14 +875,14 @@
     </comp>
     <comp ref="W2">
       <value>EN</value>
-      <footprint>uCm:r_0805</footprint>
+      <footprint>mmM:r_0805</footprint>
       <libsource lib="mmM" part="TEST"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
       <tstamp>5664E722</tstamp>
     </comp>
     <comp ref="C18">
       <value>100uF 10V</value>
-      <footprint>uCm:C_2917_HandSoldering</footprint>
+      <footprint>mmM:C_2917_HandSoldering</footprint>
       <fields>
         <field name="manf#">TPSD107M010R0050</field>
       </fields>
@@ -893,7 +892,7 @@
     </comp>
     <comp ref="L1">
       <value>33uH</value>
-      <footprint>uCm:Choke_SMD_Wuerth-784775133</footprint>
+      <footprint>mmM:Choke_SMD_Wuerth-784775133</footprint>
       <fields>
         <field name="manf#">784775133</field>
       </fields>
@@ -903,7 +902,7 @@
     </comp>
     <comp ref="C5">
       <value>330uF 25V</value>
-      <footprint>uCm:C_ELCO_SMD_8x10</footprint>
+      <footprint>mmM:C_ELCO_SMD_8x10</footprint>
       <fields>
         <field name="manf#">UCL1E331MNL1GS</field>
       </fields>
@@ -913,16 +912,9 @@
     </comp>
     <comp ref="J2">
       <value>3V3_EXT</value>
-      <footprint>uCm:Header_3</footprint>
+      <footprint>mmM:Header_3</footprint>
       <fields>
-        <field name="Field4">CONN HEADER 50POS .100" SGL GOLD</field>
-        <field name="Field5">Header, Unshrouded, Male pin,</field>
-        <field name="Field6">0.1" pitch x 50 nos</field>
-        <field name="Field7">Samtec Inc</field>
-        <field name="Field8">TSW-150-07-L-S</field>
-        <field name="Field9">Digikey</field>
-        <field name="Field10">SAM1031-50-ND</field>
-        <field name="Field11">http://www.digikey.com/scripts/DkSearch/dksus.dll?WT.z_header=search_go&amp;lang=en&amp;keywords=SAM1031-50-ND&amp;x=15&amp;y=16&amp;cur=USD</field>
+        <field name="manf#">PREC003SAAN-RC</field>
       </fields>
       <libsource lib="mmM" part="CONN_3"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
@@ -930,16 +922,9 @@
     </comp>
     <comp ref="J1">
       <value>5V_EXT</value>
-      <footprint>uCm:Header_3</footprint>
+      <footprint>mmM:Header_3</footprint>
       <fields>
-        <field name="Field4">CONN HEADER 50POS .100" SGL GOLD</field>
-        <field name="Field5">Header, Unshrouded, Male pin,</field>
-        <field name="Field6">0.1" pitch x 50 nos</field>
-        <field name="Field7">Samtec Inc</field>
-        <field name="Field8">TSW-150-07-L-S</field>
-        <field name="Field9">Digikey</field>
-        <field name="Field10">SAM1031-50-ND</field>
-        <field name="Field11">http://www.digikey.com/scripts/DkSearch/dksus.dll?WT.z_header=search_go&amp;lang=en&amp;keywords=SAM1031-50-ND&amp;x=15&amp;y=16&amp;cur=USD</field>
+        <field name="manf#">PREC003SAAN-RC</field>
       </fields>
       <libsource lib="mmM" part="CONN_3"/>
       <sheetpath names="/pwr/" tstamps="/4FC07407/"/>
@@ -947,7 +932,7 @@
     </comp>
     <comp ref="U5">
       <value>DS3231N</value>
-      <footprint>uCm:DS3231</footprint>
+      <footprint>mmM:DS3231</footprint>
       <fields>
         <field name="manf#">DS3231S#</field>
       </fields>
@@ -957,7 +942,7 @@
     </comp>
     <comp ref="R11">
       <value>10k</value>
-      <footprint>uCm:r_0805</footprint>
+      <footprint>mmM:r_0805</footprint>
       <fields>
         <field name="manf#">RMCF0805JT10K0</field>
       </fields>
@@ -967,7 +952,7 @@
     </comp>
     <comp ref="C23">
       <value>100nF</value>
-      <footprint>uCm:c_0805</footprint>
+      <footprint>mmM:c_0805</footprint>
       <fields>
         <field name="manf#">CL21B104KCC5PNC</field>
       </fields>
@@ -986,7 +971,7 @@
     </comp>
     <comp ref="BT1">
       <value>BATT_HOLDER</value>
-      <footprint>uCm:CR2032</footprint>
+      <footprint>mmM:CR2032</footprint>
       <fields>
         <field name="manf#">3003</field>
       </fields>
@@ -996,21 +981,21 @@
     </comp>
     <comp ref="B3">
       <value>I_O</value>
-      <footprint>uCm:I_O</footprint>
+      <footprint>mmM:I_O</footprint>
       <libsource lib="mmM" part="I_O"/>
       <sheetpath names="/rtc/" tstamps="/4E1FEA4E/"/>
       <tstamp>4E1FEBD4</tstamp>
     </comp>
     <comp ref="B2">
       <value>I_O</value>
-      <footprint>uCm:I_O</footprint>
+      <footprint>mmM:I_O</footprint>
       <libsource lib="mmM" part="I_O"/>
       <sheetpath names="/rtc/" tstamps="/4E1FEA4E/"/>
       <tstamp>4E1FEBCE</tstamp>
     </comp>
     <comp ref="B1">
       <value>I_O</value>
-      <footprint>uCm:I_O</footprint>
+      <footprint>mmM:I_O</footprint>
       <libsource lib="mmM" part="I_O"/>
       <sheetpath names="/rtc/" tstamps="/4E1FEA4E/"/>
       <tstamp>4E1FEBC6</tstamp>
@@ -1705,7 +1690,7 @@
   </libparts>
   <libraries>
     <library logical="mmM">
-      <uri>/home/samata/projects-git/uCm/KiCAD/mmM_Libs/mmM.lib</uri>
+      <uri>/home/samata/projects-git/mmM/KiCAD/mmM_Libs/mmM.lib</uri>
     </library>
   </libraries>
   <nets>

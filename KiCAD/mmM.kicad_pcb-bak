@@ -3,7 +3,7 @@
   (general
     (links 301)
     (no_connects 0)
-    (area 13.936499 13.936499 113.063501 94.063501)
+    (area 13.085 13.899999 126.418668 101.828801)
     (thickness 1.6)
     (drawings 136)
     (tracks 897)
@@ -20,8 +20,8 @@
   )
 
   (layers
-    (0 F.Cu signal)
-    (31 B.Cu signal)
+    (0 F.Cu signal hide)
+    (31 B.Cu signal hide)
     (32 B.Adhes user)
     (33 F.Adhes user)
     (34 B.Paste user)
@@ -47994,7 +47994,7 @@
     )
   )
 
-  (module uCm:c_0805 locked (layer F.Cu) (tedit 5665B75E) (tstamp 55D870CC)
+  (module uCm:c_0805 locked (layer F.Cu) (tedit 56671915) (tstamp 55D870CC)
     (at 79.7 62.5 180)
     (descr "SMT capacitor, 0805")
     (path /5664C0BB)
@@ -48002,7 +48002,7 @@
     (fp_text reference C1 (at 0 1.45 360) (layer F.SilkS)
       (effects (font (size 0.8 0.8) (thickness 0.12)))
     )
-    (fp_text value 100n (at 0 1.7145 180) (layer F.SilkS) hide
+    (fp_text value 100nF (at 0 1.7145 180) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
     )
     (fp_line (start 0.2 0.7) (end -0.2 0.7) (layer F.SilkS) (width 0.127))
@@ -48018,7 +48018,7 @@
     )
   )
 
-  (module uCm:c_0805 (layer F.Cu) (tedit 5665B7E8) (tstamp 55D870DB)
+  (module uCm:c_0805 (layer F.Cu) (tedit 56671922) (tstamp 55D870DB)
     (at 102.25 39.75 90)
     (descr "SMT capacitor, 0805")
     (path /5664C973)
@@ -48026,7 +48026,7 @@
     (fp_text reference C4 (at 2.15 0 180) (layer F.SilkS)
       (effects (font (size 0.8 0.8) (thickness 0.12)))
     )
-    (fp_text value 100n (at 0 1.7145 90) (layer F.SilkS) hide
+    (fp_text value 100nF (at 0 1.7145 90) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
     )
     (fp_line (start 0.2 0.7) (end -0.2 0.7) (layer F.SilkS) (width 0.127))

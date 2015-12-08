@@ -705,14 +705,7 @@ F 0 "J2" V 6425 4375 50  0000 C CNN
 F 1 "3V3_EXT" V 6525 4375 50  0000 C CNN
 F 2 "mmM:Header_3" H 6475 4375 60  0001 C CNN
 F 3 "" H 6475 4375 60  0000 C CNN
-F 4 "CONN HEADER 50POS .100\" SGL GOLD" H 6475 4475 60  0001 L CNN "Field4"
-F 5 "Header, Unshrouded, Male pin," H 6475 4575 60  0001 L CNN "Field5"
-F 6 "0.1\" pitch x 50 nos" H 6475 4675 60  0001 L CNN "Field6"
-F 7 "Samtec Inc" H 6475 4775 60  0001 L CNN "Field7"
-F 8 "TSW-150-07-L-S" H 6475 4875 60  0001 L CNN "Field8"
-F 9 "Digikey" H 6475 4975 60  0001 L CNN "Field9"
-F 10 "SAM1031-50-ND" H 6475 5075 60  0001 L CNN "Field10"
-F 11 "http://www.digikey.com/scripts/DkSearch/dksus.dll?WT.z_header=search_go&lang=en&keywords=SAM1031-50-ND&x=15&y=16&cur=USD" H 6475 5175 60  0001 L CNN "Field11"
+F 4 "PREC003SAAN-RC" V 6475 4375 60  0001 C CNN "manf#"
 	1    6475 4375
 	1    0    0    -1  
 $EndComp
@@ -733,14 +726,7 @@ F 0 "J1" V 6425 2075 50  0000 C CNN
 F 1 "5V_EXT" V 6525 2075 50  0000 C CNN
 F 2 "mmM:Header_3" H 6475 2075 60  0001 C CNN
 F 3 "" H 6475 2075 60  0000 C CNN
-F 4 "CONN HEADER 50POS .100\" SGL GOLD" H 6475 2175 60  0001 L CNN "Field4"
-F 5 "Header, Unshrouded, Male pin," H 6475 2275 60  0001 L CNN "Field5"
-F 6 "0.1\" pitch x 50 nos" H 6475 2375 60  0001 L CNN "Field6"
-F 7 "Samtec Inc" H 6475 2475 60  0001 L CNN "Field7"
-F 8 "TSW-150-07-L-S" H 6475 2575 60  0001 L CNN "Field8"
-F 9 "Digikey" H 6475 2675 60  0001 L CNN "Field9"
-F 10 "SAM1031-50-ND" H 6475 2775 60  0001 L CNN "Field10"
-F 11 "http://www.digikey.com/scripts/DkSearch/dksus.dll?WT.z_header=search_go&lang=en&keywords=SAM1031-50-ND&x=15&y=16&cur=USD" H 6475 2875 60  0001 L CNN "Field11"
+F 4 "PREC003SAAN-RC" V 6475 2075 60  0001 C CNN "manf#"
 	1    6475 2075
 	1    0    0    -1  
 $EndComp
