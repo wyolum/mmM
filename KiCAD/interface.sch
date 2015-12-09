@@ -969,7 +969,7 @@ Wire Wire Line
 	1550 775  1050 775 
 Connection ~ 2425 775 
 Text Notes 700  2975 0    47   ~ 0
-If using HCE...5, DNP\nU1, R4, R7\nand\nShort U1 pins\n1<>14, 2<>13, 3<>12, \n4<>11, 5<>10
+If using HCE...5, \nDNP U1, R4, R7\nand Short U1 pins\n1<>14, 2<>13, 3<>12, \n4<>11, 5<>10
 Text Notes 2950 1075 0    40   ~ 0
 MISO
 Text Notes 2950 1175 0    40   ~ 0

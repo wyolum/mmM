@@ -1,5 +1,5 @@
-### Module positions - created on Wed Dec  9 17:13:47 2015 ###
-### Printed by Pcbnew version kicad 4.0.0-2.201512072331+6194~38~ubuntu15.04.1-stable
+### Module positions - created on Wed Dec  9 20:46:29 2015 ###
+### Printed by Pcbnew version kicad 4.0.0-2.201511301921+6191~38~ubuntu15.10.1-stable
 ## Unit = inches, Angle = deg.
 ## Side : top
 # Ref    Val                  Package         PosX       PosY        Rot     Side
@@ -22,9 +22,9 @@ C5       330uF 25V        C_ELCO_SMD_8x10     2.7362     0.6201     270.0    top
 C6       330uF 25V        C_ELCO_SMD_8x10     1.7224     0.6201     270.0    top
 C7       100nF            c_0805              1.1516     2.7165     270.0    top
 C8       100nF            c_0805              0.9350     2.7165     270.0    top
-C9       100nF            c_0805              2.9921     2.1752     270.0    top
+C9       100nF            c_0805              2.9921     2.1063      90.0    top
 C10      100nF            c_0805              0.7874     2.7165     270.0    top
-C11      100nF            c_0805              2.7067     2.1752     270.0    top
+C11      100nF            c_0805              2.7067     2.1063      90.0    top
 C12      10nF             c_0805              2.4705     0.1969      90.0    top
 C13      100nF            c_0805              1.7618     1.8307     270.0    top
 C14      100nF            c_0805              0.9547     0.1280      90.0    top
