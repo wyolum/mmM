@@ -1,5 +1,5 @@
-### Module positions - created on Tue Dec  8 20:55:31 2015 ###
-### Printed by Pcbnew version kicad 4.0.0-2.201511301921+6191~38~ubuntu15.10.1-stable
+### Module positions - created on Wed Dec  9 17:13:47 2015 ###
+### Printed by Pcbnew version kicad 4.0.0-2.201512072331+6194~38~ubuntu15.04.1-stable
 ## Unit = inches, Angle = deg.
 ## Side : top
 # Ref    Val                  Package         PosX       PosY        Rot     Side
@@ -14,10 +14,10 @@ B10      PC6              I_O                 2.3484     1.2047       0.0    top
 B11      PC7              I_O                 2.3504     1.2992       0.0    top
 B12      PB0              I_O                 2.0866     0.9646       0.0    top
 BT1      BATT_HOLDER      CR2032              3.4154     1.5157     270.0    top
-C1       100n             c_0805              2.5866     1.2402     180.0    top
+C1       100nF            c_0805              2.5866     1.2402     180.0    top
 C2       22pF             c_0603              1.8110     1.0827      90.0    top
 C3       22pF             c_0603              1.5748     1.0827     270.0    top
-C4       100n             c_0805              3.4744     2.1358      90.0    top
+C4       100nF            c_0805              3.4744     2.1358      90.0    top
 C5       330uF 25V        C_ELCO_SMD_8x10     2.7362     0.6201     270.0    top
 C6       330uF 25V        C_ELCO_SMD_8x10     1.7224     0.6201     270.0    top
 C7       100nF            c_0805              1.1516     2.7165     270.0    top
@@ -47,7 +47,7 @@ D7       BLINK            led_0805            2.6772     1.0630     270.0    top
 D8       12V              led_0805            3.0020     1.0630     270.0    top
 D9       ES1D-13-F        diode-DO214AC       1.1122     1.3386      90.0    top
 D10      SS35             DO-214AB            1.2795     0.5807     180.0    top
-G2       Logo_Wyolum      Logo-WL3           -0.0212     1.1158       0.0    top
+G2       Logo_Wyolum      Logo-WL3           -0.0315     1.1161       0.0    top
 G3       Logo_OH          OSHW_6mm            0.6457     0.2165       0.0    top
 J1       5V_EXT           Header_3            2.2165     0.7717       0.0    top
 J2       3V3_EXT          Header_3            1.2008     0.7717       0.0    top
@@ -80,7 +80,11 @@ R8       330E             r_0805              2.8937     0.9154     270.0    top
 R9       120E             r_0805              2.7854     0.9154     270.0    top
 R10      1k               r_0805              2.6772     0.9154     270.0    top
 R11      10k              r_0805              2.7559     1.4370       0.0    top
+R12      10k              r_0805              1.7598     1.6811     270.0    top
 R13      1k               r_0805              3.0020     0.9154     270.0    top
+R14      10k              r_0805              1.4961     1.0827     270.0    top
+R15      10k              r_0805              0.9055     0.8543     180.0    top
+R16      10k              r_0805              2.1161     1.9764     180.0    top
 R21      10k              r_0805              3.3858     2.5984       0.0    top
 R22      10k              r_0805              2.9921     2.5984       0.0    top
 SC6      SCREW            vite_3mm            0.1575     2.9921       0.0    top
@@ -95,7 +99,7 @@ U1       TXB0104D         TXB0104D_null       1.0433     2.4409     270.0    top
 U2       LM2675-5.0       SO8E                2.6280     0.1969       0.0    top
 U3       LM2675-3.3       SO8E                1.6142     0.1969       0.0    top
 U5       DS3231N          DS3231              2.6772     1.7224      90.0    top
-U7       ATMEGA328-AU-ND  TQFP32              2.0965     1.2520       0.0    top
+U7       ATMEGA328P-AU-ND TQFP32              2.0965     1.2520       0.0    top
 W1       EN               r_0805              2.6969     0.4035       0.0    top
 W2       EN               r_0805              1.6831     0.4035       0.0    top
 X1       16MHz            Xtal_SMD3           1.6929     1.0827     180.0    top
