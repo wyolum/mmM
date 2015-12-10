@@ -1,18 +1,18 @@
-### Module positions - created on Wed Dec  9 20:46:29 2015 ###
-### Printed by Pcbnew version kicad 4.0.0-2.201511301921+6191~38~ubuntu15.10.1-stable
+### Module positions - created on Thu Dec 10 12:52:27 2015 ###
+### Printed by Pcbnew version kicad 4.0.0-2.201512072331+6194~38~ubuntu15.04.1-stable
 ## Unit = inches, Angle = deg.
 ## Side : top
 # Ref    Val                  Package         PosX       PosY        Rot     Side
 B1       I_O              I_O                 2.7835     1.6457      90.0    top
 B2       I_O              I_O                 2.7835     1.7205      90.0    top
 B3       I_O              I_O                 2.7835     1.5472      90.0    top
-B4       PB0              I_O                 2.0472     1.0039       0.0    top
-B7       PC1              I_O                 2.2441     1.5157       0.0    top
+B4       PB0              I_O                 2.0472     0.9843       0.0    top
+B7       PC1              I_O                 2.2441     1.5000       0.0    top
 B8       PC0              I_O                 2.3504     1.3661       0.0    top
 B9       PC1              I_O                 2.3504     1.4291       0.0    top
 B10      PC6              I_O                 2.3484     1.2047       0.0    top
 B11      PC7              I_O                 2.3504     1.2992       0.0    top
-B12      PB0              I_O                 2.0866     0.9646       0.0    top
+B12      PB0              I_O                 2.1004     0.9843       0.0    top
 BT1      BATT_HOLDER      CR2032              3.4154     1.5157     270.0    top
 C1       100nF            c_0805              2.5866     1.2402     180.0    top
 C2       22pF             c_0603              1.8110     1.0827      90.0    top
@@ -30,12 +30,12 @@ C13      100nF            c_0805              1.7618     1.8307     270.0    top
 C14      100nF            c_0805              0.9547     0.1280      90.0    top
 C15      10nF             c_0805              1.4567     0.1969      90.0    top
 C16      100uF 10V        C_2917_HandSolde    2.8543     0.1969      90.0    top
-C17      100nF            c_0805              1.8307     2.6969     180.0    top
+C17      100nF            c_0805              2.2028     2.7736       0.0    top
 C18      100uF 10V        C_2917_HandSolde    1.8406     0.1969      90.0    top
 C23      100nF            c_0805              2.5984     1.4370       0.0    top
-C27      100uF            C_ELCO_SMD          1.8307     2.5197     270.0    top
+C27      100uF            C_ELCO_SMD          2.2067     2.6083      90.0    top
 C28      100nF            c_0805              1.7717     1.2205       0.0    top
-C29      100nF            c_0805              1.8504     2.2835     270.0    top
+C29      100nF            c_0805              1.8957     2.1063     270.0    top
 C31      100nF            c_0805              1.7618     1.3780     270.0    top
 D1       ES1D-13-F        diode-DO214AC       1.1122     1.7913      90.0    top
 D2       SS35             DO-214AB            2.2933     0.5807     180.0    top
@@ -73,7 +73,7 @@ R1       10k              r_0805              2.5984     2.5984       0.0    top
 R2       10k              r_0805              3.2579     2.3425       0.0    top
 R3       10k              r_0805              3.2579     2.2343       0.0    top
 R4       10k              r_0805              1.0433     2.2047     180.0    top
-R5       4k7              r_0805              1.7520     2.2835      90.0    top
+R5       4k7              r_0805              1.8091     2.1083      90.0    top
 R6       1k               r_0805              0.9547     0.2756     270.0    top
 R7       Zero             r_0805              1.0433     2.1142     180.0    top
 R8       330E             r_0805              2.8937     0.9154     270.0    top
@@ -84,7 +84,7 @@ R12      10k              r_0805              1.7598     1.6811     270.0    top
 R13      1k               r_0805              3.0020     0.9154     270.0    top
 R14      10k              r_0805              1.4961     1.0827     270.0    top
 R15      10k              r_0805              0.9055     0.8543     180.0    top
-R16      10k              r_0805              2.1161     1.9764     180.0    top
+R16      10k              r_0805              1.9823     2.1063     270.0    top
 R21      10k              r_0805              3.3858     2.5984       0.0    top
 R22      10k              r_0805              2.9921     2.5984       0.0    top
 SC6      SCREW            vite_3mm            0.1575     2.9921       0.0    top
@@ -95,7 +95,7 @@ SP1      BUZZER           Speaker             0.4232     0.5413       0.0    top
 SW1      Reset            SW_PB_V_H           2.5984     2.9528     270.0    top
 SW2      INT0             SW_PB_V_H           3.3858     2.9528     270.0    top
 SW3      INT1             SW_PB_V_H           2.9921     2.9528     270.0    top
-U1       TXB0104D         TXB0104D_null       1.0433     2.4409     270.0    top
+U1       TXB0104D         TXB0104D            1.0433     2.4409     270.0    top
 U2       LM2675-5.0       SO8E                2.6280     0.1969       0.0    top
 U3       LM2675-3.3       SO8E                1.6142     0.1969       0.0    top
 U5       DS3231N          DS3231              2.6772     1.7224      90.0    top

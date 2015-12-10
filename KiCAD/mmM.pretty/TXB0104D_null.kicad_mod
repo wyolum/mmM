@@ -1,7 +1,7 @@
-(module TXB0104D_null (layer F.Cu) (tedit 5665C1FD)
+(module TXB0104D_null (layer F.Cu) (tedit 566811E9)
   (descr SOIC14)
   (attr smd)
-  (fp_text reference U1 (at -5 0 90) (layer F.SilkS)
+  (fp_text reference U1 (at -5.25 0 90) (layer F.SilkS)
     (effects (font (size 0.8 0.8) (thickness 0.12)))
   )
   (fp_text value TXB0104D (at 5.207 0 90) (layer F.SilkS) hide
