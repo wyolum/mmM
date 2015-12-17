@@ -1,8 +1,8 @@
-(kicad_pcb (version 4) (host pcbnew 4.0.0-2.201512072331+6194~38~ubuntu15.04.1-stable)
+(kicad_pcb (version 4) (host pcbnew 4.0.1-2.201512121406+6195~38~ubuntu15.10.1-stable)
 
   (general
     (links 308)
-    (no_connects 0)
+    (no_connects 4)
     (area 12.823 13.899999 126.418668 101.828801)
     (thickness 1.6)
     (drawings 137)
@@ -31,9 +31,9 @@
     (38 B.Mask user)
     (39 F.Mask user)
     (40 Dwgs.User user)
-    (41 Cmts.User user)
-    (42 Eco1.User user)
-    (43 Eco2.User user)
+    (41 Cmts.User user hide)
+    (42 Eco1.User user hide)
+    (43 Eco2.User user hide)
     (44 Edge.Cuts user)
   )
 
@@ -258,7 +258,7 @@
     (add_net GND)
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 5669263D) (tstamp 56699470)
+  (module mmM:via01 (layer F.Cu) (tedit 5669263D) (tstamp 56699470)
     (at 74.3 81.7)
     (fp_text reference REF62 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -270,7 +270,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 5669262E) (tstamp 5669946B)
+  (module mmM:via01 (layer F.Cu) (tedit 5669262E) (tstamp 5669946B)
     (at 75.75 81.7)
     (fp_text reference REF61 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -282,7 +282,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 56692623) (tstamp 56699466)
+  (module mmM:via01 (layer F.Cu) (tedit 56692623) (tstamp 56699466)
     (at 77.2 81.7)
     (fp_text reference REF60 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -294,7 +294,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via_th (layer F.Cu) (tedit 56680E62) (tstamp 56680E54)
+  (module mmM:via_th (layer F.Cu) (tedit 56680E62) (tstamp 56680E54)
     (at 64.35 43.8)
     (fp_text reference REF59 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -306,7 +306,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 56680686) (tstamp 56670530)
+  (module mmM:via01 (layer F.Cu) (tedit 56680686) (tstamp 56670530)
     (at 59.7 84.25)
     (fp_text reference REF1 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -318,7 +318,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 56680694) (tstamp 5667052B)
+  (module mmM:via01 (layer F.Cu) (tedit 56680694) (tstamp 5667052B)
     (at 61.1 84.25)
     (fp_text reference REF2 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -330,7 +330,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 56680666) (tstamp 56670526)
+  (module mmM:via01 (layer F.Cu) (tedit 56680666) (tstamp 56670526)
     (at 59.7 80.75)
     (fp_text reference REF3 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -342,7 +342,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 56680673) (tstamp 56670521)
+  (module mmM:via01 (layer F.Cu) (tedit 56680673) (tstamp 56670521)
     (at 61.1 80.75)
     (fp_text reference REF4 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -354,7 +354,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 5668076B) (tstamp 56670506)
+  (module mmM:via01 (layer F.Cu) (tedit 5668076B) (tstamp 56670506)
     (at 85.45 84)
     (fp_text reference REF5 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -366,7 +366,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 56680773) (tstamp 56670501)
+  (module mmM:via01 (layer F.Cu) (tedit 56680773) (tstamp 56670501)
     (at 86.85 84)
     (fp_text reference REF6 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -378,7 +378,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 56680751) (tstamp 566704FC)
+  (module mmM:via01 (layer F.Cu) (tedit 56680751) (tstamp 566704FC)
     (at 85.45 80.75)
     (fp_text reference REF7 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -390,7 +390,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 5668075A) (tstamp 566704F7)
+  (module mmM:via01 (layer F.Cu) (tedit 5668075A) (tstamp 566704F7)
     (at 86.85 80.75)
     (fp_text reference REF8 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -402,7 +402,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 56680724) (tstamp 566704E2)
+  (module mmM:via01 (layer F.Cu) (tedit 56680724) (tstamp 566704E2)
     (at 77.2 76.7)
     (fp_text reference REF9 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -414,7 +414,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 5668071C) (tstamp 566704DD)
+  (module mmM:via01 (layer F.Cu) (tedit 5668071C) (tstamp 566704DD)
     (at 75.75 76.7)
     (fp_text reference REF10 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -426,7 +426,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 5666CDDA) (tstamp 566704BF)
+  (module mmM:via01 (layer F.Cu) (tedit 5666CDDA) (tstamp 566704BF)
     (at 51.6 76.7)
     (fp_text reference REF11 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -438,7 +438,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 56680730) (tstamp 5667041C)
+  (module mmM:via01 (layer F.Cu) (tedit 56680730) (tstamp 5667041C)
     (at 81.6 80.8)
     (fp_text reference REF12 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -450,7 +450,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 5668073D) (tstamp 56670418)
+  (module mmM:via01 (layer F.Cu) (tedit 5668073D) (tstamp 56670418)
     (at 82.8 81.5)
     (fp_text reference REF13 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -462,7 +462,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 56680792) (tstamp 56670414)
+  (module mmM:via01 (layer F.Cu) (tedit 56680792) (tstamp 56670414)
     (at 81.4 89.7)
     (fp_text reference REF14 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -474,7 +474,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 56680789) (tstamp 56670410)
+  (module mmM:via01 (layer F.Cu) (tedit 56680789) (tstamp 56670410)
     (at 81.4 88.3)
     (fp_text reference REF15 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -486,7 +486,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 5668079B) (tstamp 5667040C)
+  (module mmM:via01 (layer F.Cu) (tedit 5668079B) (tstamp 5667040C)
     (at 80.1 89.7)
     (fp_text reference REF16 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -498,7 +498,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 5668064B) (tstamp 566703B0)
+  (module mmM:via01 (layer F.Cu) (tedit 5668064B) (tstamp 566703B0)
     (at 55.8 80.7)
     (fp_text reference REF17 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -510,7 +510,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 56680654) (tstamp 566703AC)
+  (module mmM:via01 (layer F.Cu) (tedit 56680654) (tstamp 566703AC)
     (at 55.8 82.2)
     (fp_text reference REF18 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -522,7 +522,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 56680747) (tstamp 566703A8)
+  (module mmM:via01 (layer F.Cu) (tedit 56680747) (tstamp 566703A8)
     (at 81.6 82.2)
     (fp_text reference REF19 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -534,7 +534,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 566806FF) (tstamp 5667038B)
+  (module mmM:via01 (layer F.Cu) (tedit 566806FF) (tstamp 5667038B)
     (at 55.6 88.3)
     (fp_text reference REF20 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -546,7 +546,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 5668065C) (tstamp 56670387)
+  (module mmM:via01 (layer F.Cu) (tedit 5668065C) (tstamp 56670387)
     (at 57.1 81.5)
     (fp_text reference REF21 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -558,7 +558,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 566806F5) (tstamp 56670383)
+  (module mmM:via01 (layer F.Cu) (tedit 566806F5) (tstamp 56670383)
     (at 55.6 89.7)
     (fp_text reference REF22 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -570,7 +570,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 566807E2) (tstamp 566B4960)
+  (module mmM:via01 (layer F.Cu) (tedit 566807E2) (tstamp 566B4960)
     (at 37 93)
     (fp_text reference REF23 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -582,7 +582,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 5668077F) (tstamp 566B495C)
+  (module mmM:via01 (layer F.Cu) (tedit 5668077F) (tstamp 566B495C)
     (at 88.25 84)
     (fp_text reference REF24 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -594,7 +594,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 56680763) (tstamp 566B4950)
+  (module mmM:via01 (layer F.Cu) (tedit 56680763) (tstamp 566B4950)
     (at 88.25 80.75)
     (fp_text reference REF25 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -606,7 +606,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 5668070B) (tstamp 566B494C)
+  (module mmM:via01 (layer F.Cu) (tedit 5668070B) (tstamp 566B494C)
     (at 74.3 76.7)
     (fp_text reference REF26 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -618,7 +618,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 5668067D) (tstamp 566B4944)
+  (module mmM:via01 (layer F.Cu) (tedit 5668067D) (tstamp 566B4944)
     (at 62.5 80.75)
     (fp_text reference REF27 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -630,7 +630,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via_th (layer F.Cu) (tedit 566807ED) (tstamp 55FBFE0A)
+  (module mmM:via_th (layer F.Cu) (tedit 566807ED) (tstamp 55FBFE0A)
     (at 31.5 74.9)
     (fp_text reference REF28 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -642,7 +642,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via_th (layer F.Cu) (tedit 56680819) (tstamp 55FBF8A1)
+  (module mmM:via_th (layer F.Cu) (tedit 56680819) (tstamp 55FBF8A1)
     (at 58.75 45.25)
     (fp_text reference REF29 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -654,7 +654,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via_th (layer F.Cu) (tedit 56680851) (tstamp 55FBF864)
+  (module mmM:via_th (layer F.Cu) (tedit 56680851) (tstamp 55FBF864)
     (at 77.5 57.5)
     (fp_text reference REF30 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -666,7 +666,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via_th (layer F.Cu) (tedit 566807BD) (tstamp 55FBF4A6)
+  (module mmM:via_th (layer F.Cu) (tedit 566807BD) (tstamp 55FBF4A6)
     (at 80.5 66.75)
     (fp_text reference REF31 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -678,7 +678,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via_th (layer F.Cu) (tedit 566807C8) (tstamp 55FBF49C)
+  (module mmM:via_th (layer F.Cu) (tedit 566807C8) (tstamp 55FBF49C)
     (at 91.75 66.75)
     (fp_text reference REF32 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -690,7 +690,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via_th (layer F.Cu) (tedit 56680870) (tstamp 55F5D96D)
+  (module mmM:via_th (layer F.Cu) (tedit 56680870) (tstamp 55F5D96D)
     (at 82 45.2)
     (fp_text reference REF33 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -702,7 +702,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via_th (layer F.Cu) (tedit 56680866) (tstamp 55F5D968)
+  (module mmM:via_th (layer F.Cu) (tedit 56680866) (tstamp 55F5D968)
     (at 83.9 45.8)
     (fp_text reference REF34 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -714,7 +714,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via_th (layer F.Cu) (tedit 56680878) (tstamp 55F5D95E)
+  (module mmM:via_th (layer F.Cu) (tedit 56680878) (tstamp 55F5D95E)
     (at 80.1 45.8)
     (fp_text reference REF35 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -726,7 +726,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via_th (layer F.Cu) (tedit 56680837) (tstamp 55F5D916)
+  (module mmM:via_th (layer F.Cu) (tedit 56680837) (tstamp 55F5D916)
     (at 60 69)
     (fp_text reference REF36 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -738,7 +738,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via_th (layer F.Cu) (tedit 566808B2) (tstamp 55EFBE28)
+  (module mmM:via_th (layer F.Cu) (tedit 566808B2) (tstamp 55EFBE28)
     (at 72.5 33.7)
     (fp_text reference REF37 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -750,7 +750,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via_th (layer F.Cu) (tedit 5668088E) (tstamp 55EFBE16)
+  (module mmM:via_th (layer F.Cu) (tedit 5668088E) (tstamp 55EFBE16)
     (at 88.4 41.4)
     (fp_text reference REF38 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -762,7 +762,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via_th (layer F.Cu) (tedit 56680884) (tstamp 55EFBE00)
+  (module mmM:via_th (layer F.Cu) (tedit 56680884) (tstamp 55EFBE00)
     (at 84.35 41.4)
     (fp_text reference REF39 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -774,7 +774,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via_th (layer F.Cu) (tedit 5668089B) (tstamp 55EFBDEB)
+  (module mmM:via_th (layer F.Cu) (tedit 5668089B) (tstamp 55EFBDEB)
     (at 97.4 28)
     (fp_text reference REF40 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -786,7 +786,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via_th (layer F.Cu) (tedit 566808A4) (tstamp 55EFBDDF)
+  (module mmM:via_th (layer F.Cu) (tedit 566808A4) (tstamp 55EFBDDF)
     (at 87.4 28)
     (fp_text reference REF41 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -798,7 +798,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via_th (layer F.Cu) (tedit 55E80C60) (tstamp 55EFBDCF)
+  (module mmM:via_th (layer F.Cu) (tedit 55E80C60) (tstamp 55EFBDCF)
     (at 83.7 24.4)
     (fp_text reference REF42 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -810,7 +810,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via_th (layer F.Cu) (tedit 5668080F) (tstamp 55EFBDBD)
+  (module mmM:via_th (layer F.Cu) (tedit 5668080F) (tstamp 55EFBDBD)
     (at 52.2 44.6)
     (fp_text reference REF43 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -822,7 +822,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via_th (layer F.Cu) (tedit 56680803) (tstamp 55EFBDB8)
+  (module mmM:via_th (layer F.Cu) (tedit 56680803) (tstamp 55EFBDB8)
     (at 52.2 56.1)
     (fp_text reference REF44 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -834,7 +834,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via_th (layer F.Cu) (tedit 56680848) (tstamp 55EFBD4F)
+  (module mmM:via_th (layer F.Cu) (tedit 56680848) (tstamp 55EFBD4F)
     (at 82 62.5)
     (fp_text reference REF45 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -846,7 +846,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via_th (layer F.Cu) (tedit 55E80C60) (tstamp 55EFBD4A)
+  (module mmM:via_th (layer F.Cu) (tedit 55E80C60) (tstamp 55EFBD4A)
     (at 69.3 61.8)
     (fp_text reference REF46 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -858,7 +858,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via_th (layer F.Cu) (tedit 5668082E) (tstamp 55EFBD3B)
+  (module mmM:via_th (layer F.Cu) (tedit 5668082E) (tstamp 55EFBD3B)
     (at 54 64)
     (fp_text reference REF47 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -870,7 +870,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via_th (layer F.Cu) (tedit 55E80C60) (tstamp 55EFBD35)
+  (module mmM:via_th (layer F.Cu) (tedit 55E80C60) (tstamp 55EFBD35)
     (at 65.8 61.8)
     (fp_text reference REF48 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -882,7 +882,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via_th (layer F.Cu) (tedit 566808BD) (tstamp 55EFBD30)
+  (module mmM:via_th (layer F.Cu) (tedit 566808BD) (tstamp 55EFBD30)
     (at 37.8 38)
     (fp_text reference REF49 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -894,7 +894,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via_th (layer F.Cu) (tedit 566808E6) (tstamp 55EFBD2B)
+  (module mmM:via_th (layer F.Cu) (tedit 566808E6) (tstamp 55EFBD2B)
     (at 44.8 24.1)
     (fp_text reference REF50 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -906,7 +906,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via_th (layer F.Cu) (tedit 566808D1) (tstamp 55EFBD26)
+  (module mmM:via_th (layer F.Cu) (tedit 566808D1) (tstamp 55EFBD26)
     (at 35.6 24.1)
     (fp_text reference REF51 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -918,7 +918,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via_th (layer F.Cu) (tedit 566808C7) (tstamp 55EFBD17)
+  (module mmM:via_th (layer F.Cu) (tedit 566808C7) (tstamp 55EFBD17)
     (at 27.3 26)
     (fp_text reference REF52 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -930,7 +930,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via_th (layer F.Cu) (tedit 566808DB) (tstamp 55EFBD12)
+  (module mmM:via_th (layer F.Cu) (tedit 566808DB) (tstamp 55EFBD12)
     (at 39.3 24.1)
     (fp_text reference REF53 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -942,7 +942,7 @@
       (net 32 GND))
   )
 
-  (module uCm:I_O (layer F.Cu) (tedit 4F420696) (tstamp 55D86E9F)
+  (module mmM:I_O (layer F.Cu) (tedit 4F420696) (tstamp 55D86E9F)
     (at 71 55.9)
     (path /55A3A3EC)
     (attr smd)
@@ -956,7 +956,7 @@
       (net 33 /PC2))
   )
 
-  (module uCm:I_O (layer F.Cu) (tedit 4F420696) (tstamp 55D870A2)
+  (module mmM:I_O (layer F.Cu) (tedit 4F420696) (tstamp 55D870A2)
     (at 84.7 52.2 90)
     (path /4E1FEA4E/4E1FEBC6)
     (attr smd)
@@ -970,7 +970,7 @@
       (net 29 /rtc/SQR))
   )
 
-  (module uCm:I_O (layer F.Cu) (tedit 4F420696) (tstamp 55D870A6)
+  (module mmM:I_O (layer F.Cu) (tedit 4F420696) (tstamp 55D870A6)
     (at 84.7 50.3 90)
     (path /4E1FEA4E/4E1FEBCE)
     (attr smd)
@@ -984,7 +984,7 @@
       (net 28 /rtc/RST))
   )
 
-  (module uCm:I_O (layer F.Cu) (tedit 4F420696) (tstamp 55D870AA)
+  (module mmM:I_O (layer F.Cu) (tedit 4F420696) (tstamp 55D870AA)
     (at 84.7 54.7 90)
     (path /4E1FEA4E/4E1FEBD4)
     (attr smd)
@@ -998,7 +998,7 @@
       (net 26 /rtc/32k))
   )
 
-  (module uCm:I_O (layer F.Cu) (tedit 4F420696) (tstamp 55D870AE)
+  (module mmM:I_O (layer F.Cu) (tedit 4F420696) (tstamp 55D870AE)
     (at 66 69)
     (path /52150F0F)
     (attr smd)
@@ -1012,7 +1012,7 @@
       (net 24 /PD7))
   )
 
-  (module uCm:I_O (layer F.Cu) (tedit 4F420696) (tstamp 55D870B2)
+  (module mmM:I_O (layer F.Cu) (tedit 4F420696) (tstamp 55D870B2)
     (at 73.7 59.3)
     (path /520E3AF6)
     (attr smd)
@@ -1026,7 +1026,7 @@
       (net 19 /PC0))
   )
 
-  (module uCm:I_O (layer F.Cu) (tedit 4F420696) (tstamp 55D870B6)
+  (module mmM:I_O (layer F.Cu) (tedit 4F420696) (tstamp 55D870B6)
     (at 73.7 57.7)
     (path /520E3DD3)
     (attr smd)
@@ -1040,7 +1040,7 @@
       (net 20 /PC1))
   )
 
-  (module uCm:I_O (layer F.Cu) (tedit 4F420696) (tstamp 55D870BA)
+  (module mmM:I_O (layer F.Cu) (tedit 4F420696) (tstamp 55D870BA)
     (at 73.65 63.4)
     (path /520E3DD9)
     (attr smd)
@@ -1054,7 +1054,7 @@
       (net 21 /PC6))
   )
 
-  (module uCm:I_O (layer F.Cu) (tedit 4F420696) (tstamp 55D870BE)
+  (module mmM:I_O (layer F.Cu) (tedit 4F420696) (tstamp 55D870BE)
     (at 73.7 61)
     (path /520E3ECF)
     (attr smd)
@@ -1068,7 +1068,7 @@
       (net 22 /PC7))
   )
 
-  (module uCm:I_O (layer F.Cu) (tedit 4F420696) (tstamp 55D870C2)
+  (module mmM:I_O (layer F.Cu) (tedit 4F420696) (tstamp 55D870C2)
     (at 67.35 69)
     (path /520E5284)
     (attr smd)
@@ -1082,7 +1082,7 @@
       (net 16 /PB0))
   )
 
-  (module uCm:CR2032 (layer F.Cu) (tedit 56683FE8) (tstamp 55D870C6)
+  (module mmM:CR2032 (layer F.Cu) (tedit 56683FE8) (tstamp 55D870C6)
     (at 100.75 55.5 270)
     (descr CR2032)
     (path /4E1FEA4E/50E29166)
@@ -1143,44 +1143,7 @@
     )
   )
 
-  (module uCm:C_ELCO_SMD (layer F.Cu) (tedit 56691902) (tstamp 55D8712B)
-    (at 70.05 27.75 90)
-    (path /50B2116F/51020D1A)
-    (attr smd)
-    (fp_text reference C27 (at 0 -5.15 180) (layer F.SilkS)
-      (effects (font (size 0.8 0.8) (thickness 0.12)))
-    )
-    (fp_text value 100uF (at 0 0 90) (layer F.SilkS) hide
-      (effects (font (size 0.8 0.8) (thickness 0.12)))
-    )
-    (fp_text user [+] (at 1.7 3.5 180) (layer F.SilkS)
-      (effects (font (size 0.635 0.635) (thickness 0.127)))
-    )
-    (fp_arc (start 0 0) (end -1.2065 2.3495) (angle 90) (layer F.SilkS) (width 0.1524))
-    (fp_arc (start 0 0) (end -2.3495 1.2065) (angle 90) (layer F.SilkS) (width 0.1524))
-    (fp_line (start -2.667 2.032) (end -2.667 -2.667) (layer F.SilkS) (width 0.1524))
-    (fp_arc (start 0 0) (end 2.3495 -1.143) (angle 90) (layer F.SilkS) (width 0.1524))
-    (fp_arc (start 0.0635 0) (end 1.0795 -2.3495) (angle 90) (layer F.SilkS) (width 0.1524))
-    (fp_line (start 2.667 -2.667) (end 1.016 -2.667) (layer F.SilkS) (width 0.1524))
-    (fp_line (start -2.667 -2.667) (end -1.143 -2.667) (layer F.SilkS) (width 0.1524))
-    (fp_line (start -2.032 2.667) (end -1.0795 2.667) (layer F.SilkS) (width 0.1524))
-    (fp_line (start 2.032 2.667) (end 1.0795 2.667) (layer F.SilkS) (width 0.1524))
-    (fp_line (start 2.032 2.667) (end 2.667 2.032) (layer F.SilkS) (width 0.1524))
-    (fp_line (start 2.667 2.032) (end 2.667 0) (layer F.SilkS) (width 0.1524))
-    (fp_line (start -2.032 2.667) (end -2.667 2.032) (layer F.SilkS) (width 0.1524))
-    (fp_line (start 2.667 -2.667) (end 2.667 0) (layer F.SilkS) (width 0.1524))
-    (pad 1 smd rect (at 0 2.286 90) (size 1.6256 3.048) (layers F.Cu F.Paste F.Mask)
-      (net 7 /Interface/12V))
-    (pad 2 smd rect (at -0.0635 -2.286 90) (size 1.6256 3.048) (layers F.Cu F.Paste F.Mask)
-      (net 32 GND))
-    (model c_elec_5x5_3.wrl
-      (at (xyz 0 0 0))
-      (scale (xyz 1 1 1))
-      (rotate (xyz 0 0 90))
-    )
-  )
-
-  (module uCm:diode-DO214AC (layer F.Cu) (tedit 56684552) (tstamp 55D87167)
+  (module mmM:diode-DO214AC (layer F.Cu) (tedit 56684552) (tstamp 55D87167)
     (at 42.25 48.5 90)
     (descr DIODE)
     (tags DIODE)
@@ -1222,7 +1185,7 @@
     )
   )
 
-  (module uCm:diode-DO214AC (layer F.Cu) (tedit 5665B4A8) (tstamp 55D8716C)
+  (module mmM:diode-DO214AC (layer F.Cu) (tedit 5665B4A8) (tstamp 55D8716C)
     (at 35.75 87 270)
     (descr DIODE)
     (tags DIODE)
@@ -1264,7 +1227,7 @@
     )
   )
 
-  (module uCm:diode-DO214AC (layer F.Cu) (tedit 55E98759) (tstamp 55D87171)
+  (module mmM:diode-DO214AC (layer F.Cu) (tedit 55E98759) (tstamp 55D87171)
     (at 99.5 84 180)
     (descr DIODE)
     (tags DIODE)
@@ -1306,7 +1269,7 @@
     )
   )
 
-  (module uCm:led_0805 (layer F.Cu) (tedit 55E987E4) (tstamp 55D87176)
+  (module mmM:led_0805 (layer F.Cu) (tedit 55E987E4) (tstamp 55D87176)
     (at 87.5 67 270)
     (descr "SMT LED, 0805")
     (path /4FC07407/50E2A42C)
@@ -1338,7 +1301,7 @@
     )
   )
 
-  (module uCm:led_0805 (layer F.Cu) (tedit 55E987EC) (tstamp 55D8717B)
+  (module mmM:led_0805 (layer F.Cu) (tedit 55E987EC) (tstamp 55D8717B)
     (at 84.75 67 270)
     (descr "SMT LED, 0805")
     (path /4FC07407/50E2A449)
@@ -1370,7 +1333,7 @@
     )
   )
 
-  (module uCm:led_0805 (layer F.Cu) (tedit 55E9880B) (tstamp 55D87180)
+  (module mmM:led_0805 (layer F.Cu) (tedit 55E9880B) (tstamp 55D87180)
     (at 82 67 270)
     (descr "SMT LED, 0805")
     (path /4FC07407/50E2A47A)
@@ -1402,7 +1365,7 @@
     )
   )
 
-  (module uCm:led_0805 (layer F.Cu) (tedit 55E987DE) (tstamp 55D87185)
+  (module mmM:led_0805 (layer F.Cu) (tedit 55E987DE) (tstamp 55D87185)
     (at 90.25 67 270)
     (descr "SMT LED, 0805")
     (path /4FC07407/50E2A45A)
@@ -1434,7 +1397,7 @@
     )
   )
 
-  (module uCm:diode-DO214AC (layer F.Cu) (tedit 55E98925) (tstamp 55D8718A)
+  (module mmM:diode-DO214AC (layer F.Cu) (tedit 55E98925) (tstamp 55D8718A)
     (at 42.25 60 90)
     (descr DIODE)
     (tags DIODE)
@@ -1476,7 +1439,7 @@
     )
   )
 
-  (module uCm:ShortLink2 (layer F.Cu) (tedit 55E9882E) (tstamp 55D871A9)
+  (module mmM:ShortLink2 (layer F.Cu) (tedit 55E9882E) (tstamp 55D871A9)
     (at 76.25 62.5 270)
     (descr "Connecteurs 2 pins")
     (tags "CONN DEV")
@@ -1502,7 +1465,7 @@
       (net 2 /AREF) (clearance 0.1))
   )
 
-  (module uCm:Header_ISP (layer F.Cu) (tedit 56692746) (tstamp 55D871AF)
+  (module mmM:Header_ISP (layer F.Cu) (tedit 56692746) (tstamp 55D871AF)
     (at 67.5 51.5)
     (descr "Connecteur 6 pins")
     (tags "CONN DEV")
@@ -1577,7 +1540,7 @@
     )
   )
 
-  (module uCm:Header_FTDI (layer F.Cu) (tedit 55EA9EC1) (tstamp 55D871B8)
+  (module mmM:Header_FTDI (layer F.Cu) (tedit 55EA9EC1) (tstamp 55D871B8)
     (at 105 35.5 270)
     (descr "Connecteur 6 pins")
     (tags "CONN DEV")
@@ -1673,7 +1636,7 @@
     )
   )
 
-  (module uCm:pin_strip_4-90 (layer F.Cu) (tedit 56684000) (tstamp 55D871CC)
+  (module mmM:pin_strip_4-90 (layer F.Cu) (tedit 56684000) (tstamp 55D871CC)
     (at 92.25 35.75 90)
     (descr "Pin strip 4pin 90")
     (tags "CONN DEV")
@@ -1718,7 +1681,7 @@
     )
   )
 
-  (module uCm:pin_strip_4-90 (layer F.Cu) (tedit 56683FFB) (tstamp 55D871D3)
+  (module mmM:pin_strip_4-90 (layer F.Cu) (tedit 56683FFB) (tstamp 55D871D3)
     (at 85 35.75 90)
     (descr "Pin strip 4pin 90")
     (tags "CONN DEV")
@@ -1763,7 +1726,7 @@
     )
   )
 
-  (module uCm:Header_3 (layer F.Cu) (tedit 55EA979E) (tstamp 55D871DA)
+  (module mmM:Header_3 (layer F.Cu) (tedit 55EA979E) (tstamp 55D871DA)
     (at 56 48.5 90)
     (descr "Connecteur 6 pins")
     (tags "CONN DEV")
@@ -1808,7 +1771,7 @@
     )
   )
 
-  (module uCm:Header_2 (layer F.Cu) (tedit 55E98763) (tstamp 55D871E0)
+  (module mmM:Header_2 (layer F.Cu) (tedit 55E98763) (tstamp 55D871E0)
     (at 99.5 89)
     (descr "Connecteur 2 pins")
     (tags "CONN DEV")
@@ -1845,7 +1808,7 @@
     )
   )
 
-  (module uCm:X_Valve_2 (layer F.Cu) (tedit 55EA9778) (tstamp 55D871E5)
+  (module mmM:X_Valve_2 (layer F.Cu) (tedit 55EA9778) (tstamp 55D871E5)
     (at 37 48.5 180)
     (path /50B2116F/50E2AFA0)
     (attr smd)
@@ -1899,7 +1862,7 @@
     )
   )
 
-  (module uCm:JACK_ALIM (layer F.Cu) (tedit 55E98785) (tstamp 55D87200)
+  (module mmM:JACK_ALIM (layer F.Cu) (tedit 55E98785) (tstamp 55D87200)
     (at 100.75 76.2 180)
     (descr "module 1 pin (ou trou mecanique de percage)")
     (tags "CONN JACK")
@@ -1931,7 +1894,7 @@
     )
   )
 
-  (module uCm:Header_3 (layer F.Cu) (tedit 55E98F20) (tstamp 55D87206)
+  (module mmM:Header_3 (layer F.Cu) (tedit 55E98F20) (tstamp 55D87206)
     (at 56 60 90)
     (descr "Connecteur 6 pins")
     (tags "CONN DEV")
@@ -1976,7 +1939,7 @@
     )
   )
 
-  (module uCm:X_Valve_2 (layer F.Cu) (tedit 55E9893C) (tstamp 55D8720C)
+  (module mmM:X_Valve_2 (layer F.Cu) (tedit 55E9893C) (tstamp 55D8720C)
     (at 37 60 180)
     (path /50B2116F/55D878E1)
     (attr smd)
@@ -2030,7 +1993,7 @@
     )
   )
 
-  (module uCm:SOT223 (layer F.Cu) (tedit 5668455C) (tstamp 55D87217)
+  (module mmM:SOT223 (layer F.Cu) (tedit 5668455C) (tstamp 55D87217)
     (at 49 48.5 90)
     (descr "module CMS SOT223 4 pins")
     (tags "CMS SOT")
@@ -2077,7 +2040,7 @@
     )
   )
 
-  (module uCm:SOT223 (layer F.Cu) (tedit 55E98A21) (tstamp 55D8721E)
+  (module mmM:SOT223 (layer F.Cu) (tedit 55E98A21) (tstamp 55D8721E)
     (at 67.5 36 90)
     (descr "module CMS SOT223 4 pins")
     (tags "CMS SOT")
@@ -2124,7 +2087,7 @@
     )
   )
 
-  (module uCm:SOT223 (layer F.Cu) (tedit 55E98919) (tstamp 55D87225)
+  (module mmM:SOT223 (layer F.Cu) (tedit 55E98919) (tstamp 55D87225)
     (at 49 60 90)
     (descr "module CMS SOT223 4 pins")
     (tags "CMS SOT")
@@ -2171,7 +2134,7 @@
     )
   )
 
-  (module uCm:SOT223 (layer F.Cu) (tedit 5665B64B) (tstamp 55D8722C)
+  (module mmM:SOT223 (layer F.Cu) (tedit 5665B64B) (tstamp 55D8722C)
     (at 35.75 78.5 180)
     (descr "module CMS SOT223 4 pins")
     (tags "CMS SOT")
@@ -2218,7 +2181,7 @@
     )
   )
 
-  (module uCm:vite_3mm (layer F.Cu) (tedit 50D9932E) (tstamp 55D87292)
+  (module mmM:vite_3mm (layer F.Cu) (tedit 50D9932E) (tstamp 55D87292)
     (at 18 18)
     (descr "vite 2,5mm")
     (path /522315DB)
@@ -2237,7 +2200,7 @@
     )
   )
 
-  (module uCm:vite_3mm (layer F.Cu) (tedit 50D9932E) (tstamp 55D87296)
+  (module mmM:vite_3mm (layer F.Cu) (tedit 50D9932E) (tstamp 55D87296)
     (at 109 18)
     (descr "vite 2,5mm")
     (path /522315F3)
@@ -2256,7 +2219,7 @@
     )
   )
 
-  (module uCm:vite_3mm (layer F.Cu) (tedit 50D9932E) (tstamp 55D8729E)
+  (module mmM:vite_3mm (layer F.Cu) (tedit 50D9932E) (tstamp 55D8729E)
     (at 18 90)
     (descr "vite 2,5mm")
     (path /522315E1)
@@ -2275,7 +2238,7 @@
     )
   )
 
-  (module uCm:vite_3mm (layer F.Cu) (tedit 50D9932E) (tstamp 55D872A2)
+  (module mmM:vite_3mm (layer F.Cu) (tedit 50D9932E) (tstamp 55D872A2)
     (at 109 90)
     (descr "vite 2,5mm")
     (path /522315F9)
@@ -2294,7 +2257,7 @@
     )
   )
 
-  (module uCm:Speaker (layer F.Cu) (tedit 566810D3) (tstamp 55D872A6)
+  (module mmM:Speaker (layer F.Cu) (tedit 566810D3) (tstamp 55D872A6)
     (at 24.75 80.25)
     (descr BUZZER)
     (tags BUZZER)
@@ -2355,7 +2318,7 @@
     )
   )
 
-  (module uCm:SW_PB_V_H (layer F.Cu) (tedit 55EA9F28) (tstamp 55D872AE)
+  (module mmM:SW_PB_V_H (layer F.Cu) (tedit 55EA9F28) (tstamp 55D872AE)
     (at 80 19 270)
     (path /50E2C59C)
     (attr smd)
@@ -2403,7 +2366,7 @@
     )
   )
 
-  (module uCm:SW_PB_V_H (layer F.Cu) (tedit 55EA9F31) (tstamp 55D872B9)
+  (module mmM:SW_PB_V_H (layer F.Cu) (tedit 55EA9F31) (tstamp 55D872B9)
     (at 100 19 270)
     (path /520E5B8D)
     (attr smd)
@@ -2451,7 +2414,7 @@
     )
   )
 
-  (module uCm:SW_PB_V_H (layer F.Cu) (tedit 55EA9F2D) (tstamp 55D872C4)
+  (module mmM:SW_PB_V_H (layer F.Cu) (tedit 55EA9F2D) (tstamp 55D872C4)
     (at 90 19 270)
     (path /520E5D15)
     (attr smd)
@@ -2499,7 +2462,7 @@
     )
   )
 
-  (module uCm:DS3231 (layer F.Cu) (tedit 55E988C8) (tstamp 55D87310)
+  (module mmM:DS3231 (layer F.Cu) (tedit 55E988C8) (tstamp 55D87310)
     (at 82 50.25 90)
     (descr "Module CMS SOJ 16 pins tres large")
     (tags "CMS SOJ")
@@ -2564,7 +2527,7 @@
     )
   )
 
-  (module uCm:TQFP32 (layer F.Cu) (tedit 5667225A) (tstamp 55D87323)
+  (module mmM:TQFP32 (layer F.Cu) (tedit 5667225A) (tstamp 55D87323)
     (at 67.25 62.2)
     (path /520A592B)
     (attr smd)
@@ -2662,7 +2625,7 @@
     )
   )
 
-  (module uCm:Xtal_SMD3 (layer F.Cu) (tedit 55E988DB) (tstamp 55D87346)
+  (module mmM:Xtal_SMD3 (layer F.Cu) (tedit 55E988DB) (tstamp 55D87346)
     (at 57 66.5 180)
     (path /50E2C481)
     (attr smd)
@@ -2691,7 +2654,7 @@
     )
   )
 
-  (module uCm:via_th (layer F.Cu) (tedit 56680821) (tstamp 55EFBD01)
+  (module mmM:via_th (layer F.Cu) (tedit 56680821) (tstamp 55EFBD01)
     (at 58.8 56.2)
     (fp_text reference REF54 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -2703,7 +2666,7 @@
       (net 32 GND))
   )
 
-  (module uCm:Logo-WL3 (layer B.Cu) (tedit 4FDE1789) (tstamp 55FBC88C)
+  (module mmM:Logo-WL3 (layer B.Cu) (tedit 4FDE1789) (tstamp 55FBC88C)
     (at 23.5 65.7 180)
     (path /4FC07407/4FC075A6)
     (attr smd)
@@ -24919,7 +24882,7 @@
       (xy 5.8674 -6.7056)) (layer B.SilkS) (width 0.00254))
   )
 
-  (module uCm:Logo-WL3 (layer F.Cu) (tedit 4FDE1789) (tstamp 55FBF3EE)
+  (module mmM:Logo-WL3 (layer F.Cu) (tedit 4FDE1789) (tstamp 55FBF3EE)
     (at 13.2 65.65)
     (path /4FC07407/4FC075C2)
     (attr smd)
@@ -47135,7 +47098,7 @@
       (xy 5.8674 6.7056)) (layer F.SilkS) (width 0.00254))
   )
 
-  (module uCm:OSHW_6mm (layer F.Cu) (tedit 4FDC1E18) (tstamp 55FBF3F4)
+  (module mmM:OSHW_6mm (layer F.Cu) (tedit 4FDC1E18) (tstamp 55FBF3F4)
     (at 30.4 88.5)
     (path /4FC07407/4FC075CE)
     (attr smd)
@@ -47220,7 +47183,7 @@
       (xy -2.02438 2.99974)) (layer F.SilkS) (width 0.00254))
   )
 
-  (module uCm:OSHW_6mm (layer B.Cu) (tedit 4FDC1E18) (tstamp 55FBF3FA)
+  (module mmM:OSHW_6mm (layer B.Cu) (tedit 4FDC1E18) (tstamp 55FBF3FA)
     (at 30.4 88.5 180)
     (path /4FC07407/4FC075DD)
     (attr smd)
@@ -47305,7 +47268,7 @@
       (xy -2.02438 -2.99974)) (layer B.SilkS) (width 0.00254))
   )
 
-  (module uCm:r_0805 locked (layer F.Cu) (tedit 55E98E2E) (tstamp 55D87279)
+  (module mmM:r_0805 locked (layer F.Cu) (tedit 55E98E2E) (tstamp 55D87279)
     (at 90 28)
     (descr "SMT capacitor, 0805")
     (path /520EF51D)
@@ -47329,7 +47292,7 @@
     )
   )
 
-  (module uCm:r_0805 locked (layer F.Cu) (tedit 55E98E2A) (tstamp 55D87274)
+  (module mmM:r_0805 locked (layer F.Cu) (tedit 55E98E2A) (tstamp 55D87274)
     (at 100 28)
     (descr "SMT capacitor, 0805")
     (path /520EF52B)
@@ -47353,7 +47316,7 @@
     )
   )
 
-  (module uCm:r_0805 locked (layer F.Cu) (tedit 55E98DA9) (tstamp 55D8726A)
+  (module mmM:r_0805 locked (layer F.Cu) (tedit 55E98DA9) (tstamp 55D8726A)
     (at 90.25 70.75 270)
     (descr "SMT capacitor, 0805")
     (path /4FC07407/50E2BB2F)
@@ -47377,7 +47340,7 @@
     )
   )
 
-  (module uCm:r_0805 locked (layer F.Cu) (tedit 55E98D80) (tstamp 55D87265)
+  (module mmM:r_0805 locked (layer F.Cu) (tedit 55E98D80) (tstamp 55D87265)
     (at 84 57.5)
     (descr "SMT capacitor, 0805")
     (path /4E1FEA4E/50E2B876)
@@ -47401,7 +47364,7 @@
     )
   )
 
-  (module uCm:r_0805 locked (layer F.Cu) (tedit 55E98D91) (tstamp 55D87260)
+  (module mmM:r_0805 locked (layer F.Cu) (tedit 55E98D91) (tstamp 55D87260)
     (at 82 70.75 270)
     (descr "SMT capacitor, 0805")
     (path /4FC07407/50E2BB63)
@@ -47425,7 +47388,7 @@
     )
   )
 
-  (module uCm:r_0805 locked (layer F.Cu) (tedit 55E98D9A) (tstamp 55D8725B)
+  (module mmM:r_0805 locked (layer F.Cu) (tedit 55E98D9A) (tstamp 55D8725B)
     (at 84.75 70.75 270)
     (descr "SMT capacitor, 0805")
     (path /4FC07407/50E2BB15)
@@ -47449,7 +47412,7 @@
     )
   )
 
-  (module uCm:r_0805 locked (layer F.Cu) (tedit 55E98DA1) (tstamp 55D87256)
+  (module mmM:r_0805 locked (layer F.Cu) (tedit 55E98DA1) (tstamp 55D87256)
     (at 87.5 70.75 270)
     (descr "SMT capacitor, 0805")
     (path /4FC07407/50E2BAF0)
@@ -47473,7 +47436,7 @@
     )
   )
 
-  (module uCm:r_0805 locked (layer F.Cu) (tedit 55E98C86) (tstamp 55D8724C)
+  (module mmM:r_0805 locked (layer F.Cu) (tedit 55E98C86) (tstamp 55D8724C)
     (at 38.25 87 270)
     (descr "SMT capacitor, 0805")
     (path /50B2116F/55D89683)
@@ -47497,7 +47460,7 @@
     )
   )
 
-  (module uCm:r_0805 (layer F.Cu) (tedit 566916B0) (tstamp 55D87247)
+  (module mmM:r_0805 (layer F.Cu) (tedit 566916B0) (tstamp 55D87247)
     (at 59.95 40.45 90)
     (descr "SMT capacitor, 0805")
     (path /50B2116F/5245AF3C)
@@ -47521,7 +47484,7 @@
     )
   )
 
-  (module uCm:r_0805 locked (layer F.Cu) (tedit 55E98CFF) (tstamp 55D87242)
+  (module mmM:r_0805 locked (layer F.Cu) (tedit 55E98CFF) (tstamp 55D87242)
     (at 40.5 38 180)
     (descr "SMT capacitor, 0805")
     (path /50B2116F/50E2B821)
@@ -47545,7 +47508,7 @@
     )
   )
 
-  (module uCm:r_0805 locked (layer F.Cu) (tedit 55E98D65) (tstamp 55D8723D)
+  (module mmM:r_0805 locked (layer F.Cu) (tedit 55E98D65) (tstamp 55D8723D)
     (at 96.75 37.25)
     (descr "SMT capacitor, 0805")
     (path /50E2B80B)
@@ -47569,7 +47532,7 @@
     )
   )
 
-  (module uCm:r_0805 locked (layer F.Cu) (tedit 55E98D72) (tstamp 55D87238)
+  (module mmM:r_0805 locked (layer F.Cu) (tedit 55E98D72) (tstamp 55D87238)
     (at 96.75 34.5)
     (descr "SMT capacitor, 0805")
     (path /50E2B7FE)
@@ -47593,7 +47556,7 @@
     )
   )
 
-  (module uCm:r_0805 locked (layer F.Cu) (tedit 55E98E33) (tstamp 55D87233)
+  (module mmM:r_0805 locked (layer F.Cu) (tedit 55E98E33) (tstamp 55D87233)
     (at 80 28)
     (descr "SMT capacitor, 0805")
     (path /50E2B7BA)
@@ -47617,7 +47580,7 @@
     )
   )
 
-  (module uCm:c_0603 (layer F.Cu) (tedit 56681118) (tstamp 55D870D6)
+  (module mmM:c_0603 (layer F.Cu) (tedit 56681118) (tstamp 55D870D6)
     (at 54 66.5 270)
     (descr "SMT capacitor, 0603")
     (path /50E29877)
@@ -47641,7 +47604,7 @@
     )
   )
 
-  (module uCm:c_0603 (layer F.Cu) (tedit 55E98CE4) (tstamp 55D870D1)
+  (module mmM:c_0603 (layer F.Cu) (tedit 55E98CE4) (tstamp 55D870D1)
     (at 60 66.5 90)
     (descr "SMT capacitor, 0603")
     (path /50E29842)
@@ -47665,7 +47628,7 @@
     )
   )
 
-  (module uCm:Pump_P54E01R_03 locked (layer F.Cu) (tedit 55EA9D9E) (tstamp 55D871F0)
+  (module mmM:Pump_P54E01R_03 locked (layer F.Cu) (tedit 55EA9D9E) (tstamp 55D871F0)
     (at 52 36)
     (path /50B2116F/55E98293)
     (fp_text reference P17 (at 21.9 4.8 180) (layer F.SilkS)
@@ -47745,7 +47708,7 @@
     )
   )
 
-  (module uCm:r_0805 (layer F.Cu) (tedit 5665B58C) (tstamp 566543F9)
+  (module mmM:r_0805 (layer F.Cu) (tedit 5665B58C) (tstamp 566543F9)
     (at 82.5 83.75)
     (descr "SMT capacitor, 0805")
     (path /4FC07407/56642389)
@@ -47769,7 +47732,7 @@
     )
   )
 
-  (module uCm:r_0805 (layer F.Cu) (tedit 5665B5E1) (tstamp 566543FF)
+  (module mmM:r_0805 (layer F.Cu) (tedit 5665B5E1) (tstamp 566543FF)
     (at 56.75 83.75)
     (descr "SMT capacitor, 0805")
     (path /4FC07407/5664E722)
@@ -47793,7 +47756,7 @@
     )
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 56680616) (tstamp 56657093)
+  (module mmM:via01 (layer F.Cu) (tedit 56680616) (tstamp 56657093)
     (at 48.7 76.7)
     (fp_text reference REF55 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -47805,7 +47768,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 566806A7) (tstamp 566570DE)
+  (module mmM:via01 (layer F.Cu) (tedit 566806A7) (tstamp 566570DE)
     (at 62.5 84.25)
     (fp_text reference REF56 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -47817,7 +47780,7 @@
       (net 32 GND))
   )
 
-  (module uCm:DO-214AB (layer F.Cu) (tedit 5666C2ED) (tstamp 566543C3)
+  (module mmM:DO-214AB (layer F.Cu) (tedit 5666C2ED) (tstamp 566543C3)
     (at 46.5 79.25 180)
     (descr "Jedec DO-214AB diode package. Designed according to Fairchild SS32 datasheet.")
     (tags "DO-214AB diode")
@@ -47846,7 +47809,7 @@
     )
   )
 
-  (module uCm:DO-214AB (layer F.Cu) (tedit 5666C2F6) (tstamp 566543BD)
+  (module mmM:DO-214AB (layer F.Cu) (tedit 5666C2F6) (tstamp 566543BD)
     (at 72.25 79.25 180)
     (descr "Jedec DO-214AB diode package. Designed according to Fairchild SS32 datasheet.")
     (tags "DO-214AB diode")
@@ -47875,7 +47838,7 @@
     )
   )
 
-  (module uCm:SO8E (layer F.Cu) (tedit 5665B690) (tstamp 566543F3)
+  (module mmM:SO8E (layer F.Cu) (tedit 5665B690) (tstamp 566543F3)
     (at 55 89)
     (descr "module CMS SOJ 8 pins etroit")
     (tags "CMS SOJ")
@@ -47922,7 +47885,7 @@
     )
   )
 
-  (module uCm:SO8E (layer F.Cu) (tedit 5665B6F2) (tstamp 566543E7)
+  (module mmM:SO8E (layer F.Cu) (tedit 5665B6F2) (tstamp 566543E7)
     (at 80.75 89)
     (descr "module CMS SOJ 8 pins etroit")
     (tags "CMS SOJ")
@@ -47969,7 +47932,7 @@
     )
   )
 
-  (module uCm:c_0805 (layer F.Cu) (tedit 5665B5E4) (tstamp 566543AB)
+  (module mmM:c_0805 (layer F.Cu) (tedit 5665B5E4) (tstamp 566543AB)
     (at 51 89 90)
     (descr "SMT capacitor, 0805")
     (path /4FC07407/5664E6ED)
@@ -47993,7 +47956,7 @@
     )
   )
 
-  (module uCm:c_0805 (layer F.Cu) (tedit 5665B57D) (tstamp 566543A5)
+  (module mmM:c_0805 (layer F.Cu) (tedit 5665B57D) (tstamp 566543A5)
     (at 76.75 89 90)
     (descr "SMT capacitor, 0805")
     (path /4FC07407/56642351)
@@ -48017,7 +47980,7 @@
     )
   )
 
-  (module uCm:c_0805 locked (layer F.Cu) (tedit 56671915) (tstamp 55D870CC)
+  (module mmM:c_0805 locked (layer F.Cu) (tedit 56671915) (tstamp 55D870CC)
     (at 79.7 62.5 180)
     (descr "SMT capacitor, 0805")
     (path /5664C0BB)
@@ -48041,7 +48004,7 @@
     )
   )
 
-  (module uCm:c_0805 (layer F.Cu) (tedit 56671922) (tstamp 55D870DB)
+  (module mmM:c_0805 (layer F.Cu) (tedit 56671922) (tstamp 55D870DB)
     (at 102.25 39.75 90)
     (descr "SMT capacitor, 0805")
     (path /5664C973)
@@ -48065,7 +48028,7 @@
     )
   )
 
-  (module uCm:c_0805 locked (layer F.Cu) (tedit 5665B829) (tstamp 55D870E0)
+  (module mmM:c_0805 locked (layer F.Cu) (tedit 5665B829) (tstamp 55D870E0)
     (at 43.25 25 270)
     (descr "SMT capacitor, 0805")
     (path /50B2116F/50E295F0)
@@ -48089,7 +48052,7 @@
     )
   )
 
-  (module uCm:c_0805 locked (layer F.Cu) (tedit 5665B830) (tstamp 55D870E5)
+  (module mmM:c_0805 locked (layer F.Cu) (tedit 5665B830) (tstamp 55D870E5)
     (at 37.75 25 270)
     (descr "SMT capacitor, 0805")
     (path /50B2116F/50E29607)
@@ -48113,7 +48076,7 @@
     )
   )
 
-  (module uCm:c_0805 (layer F.Cu) (tedit 5665B7F9) (tstamp 55D870EA)
+  (module mmM:c_0805 (layer F.Cu) (tedit 5665B7F9) (tstamp 55D870EA)
     (at 90 40.5 90)
     (descr "SMT capacitor, 0805")
     (path /50B2116F/50E29615)
@@ -48137,7 +48100,7 @@
     )
   )
 
-  (module uCm:c_0805 locked (layer F.Cu) (tedit 5665B836) (tstamp 55D870EF)
+  (module mmM:c_0805 locked (layer F.Cu) (tedit 5665B836) (tstamp 55D870EF)
     (at 34 25 270)
     (descr "SMT capacitor, 0805")
     (path /50B2116F/50E29621)
@@ -48161,7 +48124,7 @@
     )
   )
 
-  (module uCm:c_0805 (layer F.Cu) (tedit 5665B7F3) (tstamp 55D870F4)
+  (module mmM:c_0805 (layer F.Cu) (tedit 5665B7F3) (tstamp 55D870F4)
     (at 82.75 40.5 90)
     (descr "SMT capacitor, 0805")
     (path /50B2116F/50E2962F)
@@ -48185,7 +48148,7 @@
     )
   )
 
-  (module uCm:c_0805 locked (layer F.Cu) (tedit 56681128) (tstamp 55D870F9)
+  (module mmM:c_0805 locked (layer F.Cu) (tedit 56681128) (tstamp 55D870F9)
     (at 58.75 47.5 270)
     (descr "SMT capacitor, 0805")
     (path /50B2116F/50E2964D)
@@ -48209,7 +48172,7 @@
     )
   )
 
-  (module uCm:c_0805 locked (layer F.Cu) (tedit 5665B4B0) (tstamp 55D870FE)
+  (module mmM:c_0805 locked (layer F.Cu) (tedit 5665B4B0) (tstamp 55D870FE)
     (at 38.25 90.75 90)
     (descr "SMT capacitor, 0805")
     (path /50B2116F/55D89642)
@@ -48233,7 +48196,7 @@
     )
   )
 
-  (module uCm:c_0805 (layer F.Cu) (tedit 5669190A) (tstamp 55D87103)
+  (module mmM:c_0805 (layer F.Cu) (tedit 5669190A) (tstamp 55D87103)
     (at 69.95 23.55)
     (descr "SMT capacitor, 0805")
     (path /50B2116F/50E29685)
@@ -48257,7 +48220,7 @@
     )
   )
 
-  (module uCm:c_0805 locked (layer F.Cu) (tedit 5665B765) (tstamp 55D87121)
+  (module mmM:c_0805 locked (layer F.Cu) (tedit 5665B765) (tstamp 55D87121)
     (at 80 57.5)
     (descr "SMT capacitor, 0805")
     (path /4E1FEA4E/50E2955A)
@@ -48281,7 +48244,7 @@
     )
   )
 
-  (module uCm:c_0805 locked (layer F.Cu) (tedit 5665B7A0) (tstamp 55D87130)
+  (module mmM:c_0805 locked (layer F.Cu) (tedit 5665B7A0) (tstamp 55D87130)
     (at 59 63)
     (descr "SMT capacitor, 0805")
     (path /520F1F04)
@@ -48305,7 +48268,7 @@
     )
   )
 
-  (module uCm:c_0805 (layer F.Cu) (tedit 566916B4) (tstamp 55D87135)
+  (module mmM:c_0805 (layer F.Cu) (tedit 566916B4) (tstamp 55D87135)
     (at 62.15 40.5 270)
     (descr "SMT capacitor, 0805")
     (path /50B2116F/5245AF72)
@@ -48329,7 +48292,7 @@
     )
   )
 
-  (module uCm:c_0805 locked (layer F.Cu) (tedit 5665B794) (tstamp 55D8713F)
+  (module mmM:c_0805 locked (layer F.Cu) (tedit 5665B794) (tstamp 55D8713F)
     (at 58.75 59 270)
     (descr "SMT capacitor, 0805")
     (path /50B2116F/55D878FF)
@@ -48353,7 +48316,7 @@
     )
   )
 
-  (module uCm:C_2917_HandSoldering (layer F.Cu) (tedit 5668102B) (tstamp 566543B7)
+  (module mmM:C_2917_HandSoldering (layer F.Cu) (tedit 5668102B) (tstamp 566543B7)
     (at 60.75 89 90)
     (descr "Capacitor SMD 2225, hand soldering")
     (tags "capacitor 2225")
@@ -48382,7 +48345,7 @@
     )
   )
 
-  (module uCm:C_2917_HandSoldering (layer F.Cu) (tedit 5668101F) (tstamp 566543B1)
+  (module mmM:C_2917_HandSoldering (layer F.Cu) (tedit 5668101F) (tstamp 566543B1)
     (at 86.5 89 90)
     (descr "Capacitor SMD 2225, hand soldering")
     (tags "capacitor 2225")
@@ -48411,7 +48374,7 @@
     )
   )
 
-  (module uCm:Header_3 (layer F.Cu) (tedit 5665B5A5) (tstamp 566661D3)
+  (module mmM:Header_3 (layer F.Cu) (tedit 5665B5A5) (tstamp 566661D3)
     (at 70.3 74.4)
     (descr "Connecteur 6 pins")
     (tags "CONN DEV")
@@ -48456,7 +48419,7 @@
     )
   )
 
-  (module uCm:Header_3 (layer F.Cu) (tedit 5665B630) (tstamp 566661EE)
+  (module mmM:Header_3 (layer F.Cu) (tedit 5665B630) (tstamp 566661EE)
     (at 44.5 74.4)
     (descr "Connecteur 6 pins")
     (tags "CONN DEV")
@@ -48501,7 +48464,7 @@
     )
   )
 
-  (module uCm:C_ELCO_SMD_8x10 (layer F.Cu) (tedit 5665B5FC) (tstamp 5665439F)
+  (module mmM:C_ELCO_SMD_8x10 (layer F.Cu) (tedit 5665B5FC) (tstamp 5665439F)
     (at 57.75 78.25 270)
     (path /4FC07407/5664E6DB)
     (attr smd)
@@ -48534,7 +48497,7 @@
     )
   )
 
-  (module uCm:C_ELCO_SMD_8x10 (layer F.Cu) (tedit 5665B5D0) (tstamp 56654399)
+  (module mmM:C_ELCO_SMD_8x10 (layer F.Cu) (tedit 5665B5D0) (tstamp 56654399)
     (at 83.5 78.25 270)
     (path /4FC07407/56652F17)
     (attr smd)
@@ -48567,7 +48530,7 @@
     )
   )
 
-  (module uCm:Choke_SMD_Wuerth-784775133 (layer F.Cu) (tedit 5665B6FD) (tstamp 56656AD1)
+  (module mmM:Choke_SMD_Wuerth-784775133 (layer F.Cu) (tedit 5665B6FD) (tstamp 56656AD1)
     (at 45.5 88.25 270)
     (descr "Choke, Drossel, WE-PD2, Typ MS, Wuerth, SMD,")
     (tags "Choke, Drossel, WE-PD2, Typ MS, Wuerth, SMD,")
@@ -48594,7 +48557,7 @@
     )
   )
 
-  (module uCm:Choke_SMD_Wuerth-784775133 (layer F.Cu) (tedit 5665B6DC) (tstamp 56656AC7)
+  (module mmM:Choke_SMD_Wuerth-784775133 (layer F.Cu) (tedit 5665B6DC) (tstamp 56656AC7)
     (at 71.25 88.25 270)
     (descr "Choke, Drossel, WE-PD2, Typ MS, Wuerth, SMD,")
     (tags "Choke, Drossel, WE-PD2, Typ MS, Wuerth, SMD,")
@@ -48621,7 +48584,7 @@
     )
   )
 
-  (module uCm:HCEM500GUH9P3 (layer F.Cu) (tedit 566845A5) (tstamp 55D871C1)
+  (module mmM:HCEM500GUH9P3 (layer F.Cu) (tedit 566845A5) (tstamp 55D871C1)
     (at 26 31 180)
     (path /50B2116F/50E2ABAC)
     (attr smd)
@@ -48682,7 +48645,7 @@
     )
   )
 
-  (module uCm:r_0805 (layer F.Cu) (tedit 5665C58D) (tstamp 56675F58)
+  (module mmM:r_0805 (layer F.Cu) (tedit 5665C58D) (tstamp 56675F58)
     (at 40.5 40.3 180)
     (descr "SMT capacitor, 0805")
     (path /50B2116F/5665D2FA)
@@ -48699,14 +48662,14 @@
       (net 1 +3.3V))
     (pad 2 smd rect (at -0.95 0 180) (size 1 1.45) (layers F.Cu F.Paste F.Mask)
       (net 34 /Interface/5V0))
-    (model "/home/anool/projects-git/uCm/KiCAD/uCm_Libs/3D Modules/r_0805.wrl"
+    (model "/home/anool/projects-git/mmM/KiCAD/mmM_Libs/3D Modules/r_0805.wrl"
       (at (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 566806E9) (tstamp 56670379)
+  (module mmM:via01 (layer F.Cu) (tedit 566806E9) (tstamp 56670379)
     (at 54.3 89.7)
     (fp_text reference REF57 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -48718,7 +48681,7 @@
       (net 32 GND))
   )
 
-  (module uCm:via01 (layer F.Cu) (tedit 56680621) (tstamp 566704B3)
+  (module mmM:via01 (layer F.Cu) (tedit 56680621) (tstamp 566704B3)
     (at 50.1 76.7)
     (fp_text reference REF58 (at 0 1.25) (layer F.SilkS) hide
       (effects (font (size 0.8 0.8) (thickness 0.12)))
@@ -48747,7 +48710,7 @@
       (net 9 /Interface/PD4_Valve2))
     (pad 2 smd rect (at -0.95 0 270) (size 1 1.45) (layers F.Cu F.Paste F.Mask)
       (net 32 GND))
-    (model "/home/anool/projects-git/uCm/KiCAD/uCm_Libs/3D Modules/r_0805.wrl"
+    (model "/home/anool/projects-git/mmM/KiCAD/mmM_Libs/3D Modules/r_0805.wrl"
       (at (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -48771,7 +48734,7 @@
       (net 13 /Interface/~PD5_Valve))
     (pad 2 smd rect (at -0.95 0 270) (size 1 1.45) (layers F.Cu F.Paste F.Mask)
       (net 32 GND))
-    (model "/home/anool/projects-git/uCm/KiCAD/uCm_Libs/3D Modules/r_0805.wrl"
+    (model "/home/anool/projects-git/mmM/KiCAD/mmM_Libs/3D Modules/r_0805.wrl"
       (at (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -48795,7 +48758,7 @@
       (net 32 GND))
     (pad 2 smd rect (at -0.95 0 180) (size 1 1.45) (layers F.Cu F.Paste F.Mask)
       (net 14 /Interface/~PD6_Spk))
-    (model "/home/anool/projects-git/uCm/KiCAD/uCm_Libs/3D Modules/r_0805.wrl"
+    (model "/home/anool/projects-git/mmM/KiCAD/mmM_Libs/3D Modules/r_0805.wrl"
       (at (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -48819,7 +48782,7 @@
       (net 32 GND))
     (pad 2 smd rect (at -0.95 0 270) (size 1 1.45) (layers F.Cu F.Paste F.Mask)
       (net 12 /Interface/~PB1_Pump))
-    (model "/home/anool/projects-git/uCm/KiCAD/uCm_Libs/3D Modules/r_0805.wrl"
+    (model "/home/anool/projects-git/mmM/KiCAD/mmM_Libs/3D Modules/r_0805.wrl"
       (at (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -48883,6 +48846,43 @@
       (at (xyz 0 0 0))
       (scale (xyz 0.5 0.4 0.5))
       (rotate (xyz 0 0 0))
+    )
+  )
+
+  (module mmM:C_ELCO_SMD (layer F.Cu) (tedit 5672F00A) (tstamp 55D8712B)
+    (at 70.05 27.75 90)
+    (path /50B2116F/51020D1A)
+    (attr smd)
+    (fp_text reference C27 (at 0 -5.15 180) (layer F.SilkS)
+      (effects (font (size 0.8 0.8) (thickness 0.12)))
+    )
+    (fp_text value 100uF (at 0 0 90) (layer F.SilkS) hide
+      (effects (font (size 0.8 0.8) (thickness 0.12)))
+    )
+    (fp_text user [+] (at 1.7 3.5 180) (layer F.SilkS)
+      (effects (font (size 0.635 0.635) (thickness 0.127)))
+    )
+    (fp_arc (start 0 0) (end -1.2065 2.3495) (angle 90) (layer F.SilkS) (width 0.1524))
+    (fp_arc (start 0 0) (end -2.3495 1.2065) (angle 90) (layer F.SilkS) (width 0.1524))
+    (fp_line (start -2.667 2.032) (end -2.667 -2.667) (layer F.SilkS) (width 0.1524))
+    (fp_arc (start 0 0) (end 2.3495 -1.143) (angle 90) (layer F.SilkS) (width 0.1524))
+    (fp_arc (start 0.0635 0) (end 1.0795 -2.3495) (angle 90) (layer F.SilkS) (width 0.1524))
+    (fp_line (start 2.667 -2.667) (end 1.016 -2.667) (layer F.SilkS) (width 0.1524))
+    (fp_line (start -2.667 -2.667) (end -1.143 -2.667) (layer F.SilkS) (width 0.1524))
+    (fp_line (start -2.032 2.667) (end -1.0795 2.667) (layer F.SilkS) (width 0.1524))
+    (fp_line (start 2.032 2.667) (end 1.0795 2.667) (layer F.SilkS) (width 0.1524))
+    (fp_line (start 2.032 2.667) (end 2.667 2.032) (layer F.SilkS) (width 0.1524))
+    (fp_line (start 2.667 2.032) (end 2.667 0) (layer F.SilkS) (width 0.1524))
+    (fp_line (start -2.032 2.667) (end -2.667 2.032) (layer F.SilkS) (width 0.1524))
+    (fp_line (start 2.667 -2.667) (end 2.667 0) (layer F.SilkS) (width 0.1524))
+    (pad 1 smd rect (at 0 2.9 90) (size 1.4 3.8) (layers F.Cu F.Paste F.Mask)
+      (net 7 /Interface/12V))
+    (pad 2 smd rect (at 0 -2.85 90) (size 1.4 3.8) (layers F.Cu F.Paste F.Mask)
+      (net 32 GND))
+    (model c_elec_5x5_3.wrl
+      (at (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 90))
     )
   )
 
@@ -49190,14 +49190,14 @@
   (segment (start 37 62) (end 38.81 62) (width 0.762) (layer F.Cu) (net 6) (status 10))
   (segment (start 38.81 62) (end 39.54 61.27) (width 0.762) (layer F.Cu) (net 6) (tstamp 55EFBEBB) (status 20))
   (segment (start 52.175 60) (end 45.825 60) (width 0.762) (layer F.Cu) (net 6) (status 30))
+  (segment (start 76.2 27.75) (end 72.95 27.75) (width 0.762) (layer F.Cu) (net 7))
+  (segment (start 72.95 24.313) (end 72.95 27.75) (width 0.762) (layer F.Cu) (net 7))
+  (segment (start 70.85 23.55) (end 72.187 23.55) (width 0.762) (layer F.Cu) (net 7))
+  (segment (start 72.187 23.55) (end 72.95 24.313) (width 0.762) (layer F.Cu) (net 7))
   (segment (start 58.25 51.4) (end 58.25 47.4) (width 0.762) (layer B.Cu) (net 7))
   (segment (start 58.25 47.4) (end 56.81 45.96) (width 0.762) (layer B.Cu) (net 7) (tstamp 56699428))
-  (segment (start 72.336 27.75) (end 76.2 27.75) (width 0.762) (layer F.Cu) (net 7) (status 10))
   (segment (start 79.5 31.05) (end 79.5 33.5) (width 0.762) (layer F.Cu) (net 7) (tstamp 566990A4))
   (segment (start 76.2 27.75) (end 79.5 31.05) (width 0.762) (layer F.Cu) (net 7) (tstamp 566990A3))
-  (segment (start 70.85 23.55) (end 70.85 24.95) (width 0.762) (layer F.Cu) (net 7) (status 10))
-  (segment (start 72.336 26.436) (end 72.336 27.75) (width 0.762) (layer F.Cu) (net 7) (tstamp 566990A0) (status 20))
-  (segment (start 70.85 24.95) (end 72.336 26.436) (width 0.762) (layer F.Cu) (net 7) (tstamp 5669909F))
   (segment (start 77.9 43.7) (end 74.4 43.7) (width 0.762) (layer F.Cu) (net 7))
   (segment (start 56 44.8) (end 56 45.96) (width 0.762) (layer F.Cu) (net 7) (tstamp 55E976BB) (status 20))
   (segment (start 57.1 43.7) (end 56 44.8) (width 0.762) (layer F.Cu) (net 7) (tstamp 55E976B8))
@@ -49438,6 +49438,14 @@
   (segment (start 102.6 41.85) (end 102.25 41.5) (width 0.254) (layer F.Cu) (net 31) (tstamp 55FBF824))
   (segment (start 102.25 41.5) (end 102.25 40.65) (width 0.254) (layer F.Cu) (net 31) (tstamp 55FBF825) (status 20))
   (segment (start 102.25 40.65) (end 102.25 41) (width 0.254) (layer F.Cu) (net 31) (status 30))
+  (segment (start 72.5 33.7) (end 72.5 31.9) (width 0.762) (layer F.Cu) (net 32))
+  (segment (start 72.5 31.9) (end 71.25 30.65) (width 0.762) (layer F.Cu) (net 32))
+  (segment (start 68.45 30.65) (end 67.2 29.4) (width 0.762) (layer F.Cu) (net 32))
+  (segment (start 71.25 30.65) (end 68.45 30.65) (width 0.762) (layer F.Cu) (net 32))
+  (segment (start 67.2 29.4) (end 67.2 27.75) (width 0.762) (layer F.Cu) (net 32))
+  (segment (start 69.05 23.55) (end 67.713 23.55) (width 0.762) (layer F.Cu) (net 32))
+  (segment (start 67.713 23.55) (end 67.2 24.063) (width 0.762) (layer F.Cu) (net 32))
+  (segment (start 67.2 24.063) (end 67.2 27.75) (width 0.762) (layer F.Cu) (net 32))
   (segment (start 48.7 76.7) (end 46.8 76.7) (width 0.762) (layer F.Cu) (net 32))
   (segment (start 46.8 76.7) (end 44.5 74.4) (width 0.762) (layer F.Cu) (net 32) (tstamp 566994BB))
   (segment (start 74.3 76.7) (end 72.6 76.7) (width 0.762) (layer F.Cu) (net 32))
@@ -49460,14 +49468,6 @@
   (segment (start 55.6 88.3) (end 60.4 88.3) (width 0.762) (layer F.Cu) (net 32) (status 10))
   (segment (start 60.75 87.95) (end 60.75 86.46) (width 0.762) (layer F.Cu) (net 32) (tstamp 566991C2) (status 20))
   (segment (start 60.4 88.3) (end 60.75 87.95) (width 0.762) (layer F.Cu) (net 32) (tstamp 566991C1))
-  (segment (start 72.5 33.7) (end 72.5 31.9) (width 0.762) (layer F.Cu) (net 32) (status 10))
-  (segment (start 67.764 29.264) (end 67.764 27.8135) (width 0.762) (layer F.Cu) (net 32) (tstamp 566990C2) (status 20))
-  (segment (start 69.15 30.65) (end 67.764 29.264) (width 0.762) (layer F.Cu) (net 32) (tstamp 566990C1))
-  (segment (start 71.25 30.65) (end 69.15 30.65) (width 0.762) (layer F.Cu) (net 32) (tstamp 566990C0))
-  (segment (start 72.5 31.9) (end 71.25 30.65) (width 0.762) (layer F.Cu) (net 32) (tstamp 566990BF))
-  (segment (start 69.05 23.55) (end 69.05 25) (width 0.762) (layer F.Cu) (net 32) (status 10))
-  (segment (start 69.05 25) (end 67.764 26.286) (width 0.762) (layer F.Cu) (net 32) (tstamp 566990B4))
-  (segment (start 67.764 26.286) (end 67.764 27.8135) (width 0.762) (layer F.Cu) (net 32) (tstamp 566990B5) (status 20))
   (segment (start 64.35 41.45) (end 64.35 43.8) (width 0.762) (layer F.Cu) (net 32) (status 30))
   (segment (start 64.35 43.8) (end 59.2 43.8) (width 0.762) (layer B.Cu) (net 32) (status 10))
   (segment (start 58.75 44.25) (end 58.75 45.25) (width 0.762) (layer B.Cu) (net 32) (tstamp 566843A8) (status 20))
