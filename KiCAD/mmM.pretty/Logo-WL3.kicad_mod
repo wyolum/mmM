@@ -1,9 +1,10 @@
-(module Logo-WL3 (layer F.Cu) (tedit 4FDE1789)
+(module uCm:Logo-WL3 (layer F.Cu) (tedit 4FDE1789)
+  (attr smd)
   (fp_text reference G1 (at 4.699 3.048) (layer F.SilkS) hide
-    (effects (font (size 0.762 0.762) (thickness 0.127)))
+    (effects (font (size 0.8 0.8) (thickness 0.12)))
   )
-  (fp_text value Logo-WL3 (at 3.937 1.778) (layer F.SilkS) hide
-    (effects (font (size 0.762 0.762) (thickness 0.127)))
+  (fp_text value Logo_Wyolum (at 3.937 1.778) (layer F.SilkS) hide
+    (effects (font (size 0.8 0.8) (thickness 0.12)))
   )
   (fp_poly (pts (xy 7.3406 0.5588) (xy 7.366 0.5588) (xy 7.366 0.5842) (xy 7.3406 0.5842)
     (xy 7.3406 0.5588)) (layer F.SilkS) (width 0.00254))

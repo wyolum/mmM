@@ -1,12 +1,12 @@
-(module JACK_ALIM (layer F.Cu) (tedit 50D6D286)
+(module uCm:JACK_ALIM (layer F.Cu) (tedit 55E98785)
   (descr "module 1 pin (ou trou mecanique de percage)")
   (tags "CONN JACK")
   (attr smd)
-  (fp_text reference P24 (at 6.858 3.429) (layer F.SilkS)
-    (effects (font (size 0.762 0.762) (thickness 0.127)))
+  (fp_text reference P24 (at 7.15 -3.8) (layer F.SilkS)
+    (effects (font (size 0.8 0.8) (thickness 0.12)))
   )
-  (fp_text value 12V (at 4.191 -3.4925) (layer F.SilkS)
-    (effects (font (size 0.762 0.762) (thickness 0.127)))
+  (fp_text value PWR_IN (at 4.191 -3.4925) (layer F.SilkS) hide
+    (effects (font (size 0.8 0.8) (thickness 0.12)))
   )
   (fp_line (start -4.064 4.318) (end 0.4318 4.318) (layer F.SilkS) (width 0.254))
   (fp_line (start -7.874 4.318) (end -4.064 4.318) (layer F.SilkS) (width 0.254))
@@ -18,7 +18,7 @@
   (pad 2 thru_hole oval (at 0 0) (size 3.048 4.572) (drill oval 1.1684 3.556) (layers *.Cu *.Mask F.SilkS))
   (pad 1 thru_hole rect (at 6.096 0) (size 3.048 4.572) (drill oval 1.1684 4.064) (layers *.Cu *.Mask F.SilkS))
   (pad 3 thru_hole oval (at 3.175 5.08) (size 4.572 3.048) (drill oval 3.556 1.1684) (layers *.Cu *.Mask F.SilkS))
-  (model "uControl_Libs/3D Modules/POWER_21.wrl"
+  (model POWER_21.wrl
     (at (xyz 0 0 0))
     (scale (xyz 0.8 0.8 0.8))
     (rotate (xyz 0 0 0))

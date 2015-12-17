@@ -1,10 +1,10 @@
-(module Xtal_SMD3 (layer F.Cu) (tedit 52136E09)
+(module uCm:Xtal_SMD3 (layer F.Cu) (tedit 55E988DB)
   (attr smd)
-  (fp_text reference X1 (at -2.921 0 270) (layer F.SilkS)
-    (effects (font (size 1.016 1.016) (thickness 0.2032)))
+  (fp_text reference X1 (at 0 -2.25) (layer F.SilkS)
+    (effects (font (size 0.8 0.8) (thickness 0.12)))
   )
-  (fp_text value 16MHz (at -4.445 0 90) (layer F.SilkS)
-    (effects (font (size 1.016 1.016) (thickness 0.2032)))
+  (fp_text value 16MHz (at -4.445 0 90) (layer F.SilkS) hide
+    (effects (font (size 0.8 0.8) (thickness 0.12)))
   )
   (fp_line (start 1.6 -0.125) (end 1.6 0.125) (layer F.SilkS) (width 0.15))
   (fp_line (start -1.6 -0.125) (end -1.6 0.125) (layer F.SilkS) (width 0.15))
@@ -14,7 +14,7 @@
   (pad 2 smd rect (at 1.1 -0.8) (size 1.4 1.2) (layers F.Cu F.Paste F.Mask))
   (pad 3 smd rect (at -1.1 -0.8) (size 1.4 1.2) (layers F.Cu F.Paste F.Mask))
   (pad 3 smd rect (at 1.1 0.8) (size 1.4 1.2) (layers F.Cu F.Paste F.Mask))
-  (model "uControl_Libs/3D Modules/r_0805.wrl"
+  (model r_0805.wrl
     (at (xyz 0 0 0.005))
     (scale (xyz 1 1.2 1))
     (rotate (xyz 0 0 0))

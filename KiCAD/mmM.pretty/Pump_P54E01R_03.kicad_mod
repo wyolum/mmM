@@ -1,8 +1,8 @@
-(module Pump_P54E01R_03 locked (layer F.Cu) (tedit 55EA9A01)
-  (fp_text reference P17 (at 24.55 -6.9 180) (layer F.SilkS)
+(module uCm:Pump_P54E01R_03 locked (layer F.Cu) (tedit 55EA9D9E)
+  (fp_text reference P17 (at 21.9 4.8 180) (layer F.SilkS)
     (effects (font (size 0.8 0.8) (thickness 0.12)))
   )
-  (fp_text value PUMP (at 22.5 4.75 90) (layer F.SilkS)
+  (fp_text value PUMP (at 2.25 3 270) (layer F.SilkS)
     (effects (font (size 0.8 0.8) (thickness 0.12)))
   )
   (fp_line (start 20 -3) (end 20 3) (layer F.SilkS) (width 0.15))
@@ -66,7 +66,7 @@
     (clearance 1.5))
   (pad "" np_thru_hole circle (at 17 -18) (size 3 3) (drill 3) (layers *.Cu *.Mask F.SilkS)
     (clearance 1.5))
-  (model "/home/anool/projects-git/uCm/KiCAD/uCm_Libs/3D Modules/Pump.wrl"
+  (model Pump.wrl
     (at (xyz 0 0 1))
     (scale (xyz 4 4 4))
     (rotate (xyz 0 0 0))

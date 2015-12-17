@@ -1,9 +1,10 @@
-(module OSHW_6mm (layer F.Cu) (tedit 4FDC1E18)
-  (fp_text reference G*** (at 0 1.016) (layer F.SilkS) hide
-    (effects (font (size 0.3048 0.3048) (thickness 0.06096)))
+(module uCm:OSHW_6mm (layer F.Cu) (tedit 4FDC1E18)
+  (attr smd)
+  (fp_text reference G3 (at 0 1.016) (layer F.SilkS) hide
+    (effects (font (size 0.8 0.8) (thickness 0.12)))
   )
-  (fp_text value LOGO (at 0 -0.127) (layer F.SilkS) hide
-    (effects (font (size 0.3048 0.3048) (thickness 0.06096)))
+  (fp_text value Logo_OH (at 0 -0.127) (layer F.SilkS) hide
+    (effects (font (size 0.8 0.8) (thickness 0.12)))
   )
   (fp_text user OpenHardware (at 0 4.191) (layer F.SilkS)
     (effects (font (size 0.762 0.6096) (thickness 0.127)))
