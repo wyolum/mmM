@@ -1,8 +1,0 @@
-### Module positions - created on Thu Dec 10 12:52:27 2015 ###
-### Printed by Pcbnew version kicad 4.0.0-2.201512072331+6194~38~ubuntu15.04.1-stable
-## Unit = inches, Angle = deg.
-## Side : bottom
-# Ref    Val                  Package         PosX       PosY        Rot     Side
-G1       Logo_Wyolum      Logo-WL3            0.3740     1.1142     180.0    bottom
-G4       Logo_OH          OSHW_6mm            0.6457     0.2165     180.0    bottom
-## End
