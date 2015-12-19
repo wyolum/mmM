@@ -3,7 +3,7 @@
   (general
     (links 308)
     (no_connects 0)
-    (area 12.823 13.899999 126.418668 101.828801)
+    (area 13.936499 13.936499 113.063501 94.063501)
     (thickness 1.6)
     (drawings 135)
     (tracks 1038)
@@ -20,8 +20,8 @@
   )
 
   (layers
-    (0 F.Cu signal hide)
-    (31 B.Cu signal hide)
+    (0 F.Cu signal)
+    (31 B.Cu signal)
     (32 B.Adhes user)
     (33 F.Adhes user)
     (34 B.Paste user)
@@ -68,7 +68,7 @@
     (pad_drill 0.6)
     (pad_to_mask_clearance 0)
     (aux_axis_origin 14 94)
-    (visible_elements 7FFFFE7F)
+    (visible_elements 7FFFFF7F)
     (pcbplotparams
       (layerselection 0x00130_80000001)
       (usegerberextensions false)
@@ -1988,7 +1988,7 @@
       (net 4 /Interface/+Vlv2))
     (model X-VALVE.wrl
       (at (xyz 0 0 0))
-      (scale (xyz 0.9399999999999999 1 1))
+      (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
   )

@@ -3,7 +3,7 @@
   (general
     (links 308)
     (no_connects 0)
-    (area 12.823 13.899999 126.418668 101.828801)
+    (area 13.936499 13.936499 113.063501 94.063501)
     (thickness 1.6)
     (drawings 135)
     (tracks 1038)
@@ -68,7 +68,7 @@
     (pad_drill 0.6)
     (pad_to_mask_clearance 0)
     (aux_axis_origin 14 94)
-    (visible_elements 7FFFFE7F)
+    (visible_elements 7FFFFF7F)
     (pcbplotparams
       (layerselection 0x00130_80000001)
       (usegerberextensions false)
@@ -47628,7 +47628,7 @@
     )
   )
 
-  (module mmM:Pump_P54E01R_03 locked (layer F.Cu) (tedit 55EA9D9E) (tstamp 55D871F0)
+  (module mmM:Pump_P54E01R_03 (layer F.Cu) (tedit 55EA9D9E) (tstamp 55D871F0)
     (at 52 36)
     (path /50B2116F/55E98293)
     (fp_text reference P17 (at 21.9 4.8 180) (layer F.SilkS)
