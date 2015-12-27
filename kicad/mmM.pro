@@ -1,4 +1,4 @@
-update=Sat Dec 19 11:47:57 2015
+update=Sun Dec 27 20:04:16 2015
 last_client=kicad
 [cvpcb]
 version=1
@@ -24,12 +24,6 @@ SolderMaskMinWidth=0
 DrawSegmentWidth=0.2
 BoardOutlineThickness=0.127
 ModuleOutlineThickness=0.1524
-[eeschema]
-version=1
-LibDir=
-[eeschema/libraries]
-LibName1=mmM_Libs/mmM
-LibName2=mmM_Libs/power
 [schematic_editor]
 version=1
 PageLayoutDescrFile=
@@ -40,5 +34,11 @@ NetFmtName=Pcbnew
 SpiceForceRefPrefix=0
 SpiceUseNetNumbers=0
 LabSize=60
+[eeschema]
+version=1
+LibDir=
+[eeschema/libraries]
+LibName1=mmM_Libs/mmM
+LibName2=mmM_Libs/power
 [general]
 version=1

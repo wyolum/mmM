@@ -1,5 +1,5 @@
-### Module positions - created on Fri Dec 18 17:49:17 2015 ###
-### Printed by Pcbnew version kicad 4.0.1-3.201512161002+6197~38~ubuntu15.04.1-stable
+### Module positions - created on Sun Dec 27 19:34:55 2015 ###
+### Printed by Pcbnew version kicad 4.0.1-2.201512121406+6195~38~ubuntu15.10.1-stable
 ## Unit = inches, Angle = deg.
 ## Side : top
 # Ref    Val                  Package         PosX       PosY        Rot     Side
@@ -32,6 +32,7 @@ C15      10nF             c_0805              1.4567     0.1969      90.0    top
 C16      100uF 10V        C_2917_HandSolde    2.8543     0.1969      90.0    top
 C17      100nF            c_0805              2.2008     2.8031       0.0    top
 C18      100uF 10V        C_2917_HandSolde    1.8406     0.1969      90.0    top
+C19      100nF            c_0805              1.8898     1.6339      90.0    top
 C23      100nF            c_0805              2.5984     1.4370       0.0    top
 C27      100uF            C_ELCO_SMD          2.2087     2.5945      90.0    top
 C28      100nF            c_0805              1.7717     1.2205       0.0    top
@@ -48,6 +49,7 @@ D8       12V              led_0805            3.0020     1.0630     270.0    top
 D9       ES1D-13-F        diode-DO214AC       1.1122     1.3386      90.0    top
 D10      SS35             DO-214AB            1.2795     0.5827       0.0    top
 G2       Logo_Wyolum      Logo-WL3           -0.0315     1.1161       0.0    top
+G3       Logo_OH          OSHW_6mm            8.9961    -1.3976       0.0    top
 G3       Logo_OH          OSHW_6mm            0.6457     0.2165       0.0    top
 J1       5V_EXT           Header_3            2.2165     0.7717       0.0    top
 J2       3V3_EXT          Header_3            1.2008     0.7717       0.0    top
