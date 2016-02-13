@@ -25,9 +25,9 @@ module p_clamp(){
 	{
 	  translate([-1.25 * pump_h, pump_d/2 + wall_t, pump_d/2 + wall_t]) 
 	    rotate(a=90, v=[0, 1, 0])
-	    cylinder(d=pump_d + 2 * wall_t, h=1.75 * pump_h);
+	    cylinder(d=pump_d + 2 * wall_t, h=2 * screw_sep + screw_head_d);
 	}
-	pump();
+	translate([1, 0, 0])pump();
       }
     
     
