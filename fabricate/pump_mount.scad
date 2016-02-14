@@ -1,6 +1,6 @@
 
-pump_d = 24.2;
-pump_D = 27;
+pump_d = 24.7;
+pump_D = 27.5;
 wall_t = 3;
 pump_h = 20;
 screw_sep = 14;
