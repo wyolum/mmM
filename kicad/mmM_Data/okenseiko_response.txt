@@ -1,0 +1,221 @@
+--------- Forwarded message ----------
+From: 応研　海外 <oken@okenseiko.com>
+Date: Thu, Oct 17, 2013 at 9:36 PM
+Subject: Re: P54E01R Pinout
+To: Justin Shaw <wyojustin@gmail.com>
+
+
+Dear
+ 
+OK,it is good news.
+ 
+Let me know if you need any help.
+ 
+Tomoaki
+ 
+From: Justin Shaw
+Sent: Friday, October 18, 2013 9:38 AM
+To: 応研 海外
+Subject: Re: P54E01R Pinout
+ 
+Thank you for your offer to help.  It seems to work well when I leave PWM at 5V and toggle 12V supply line.  
+ 
+Justin
+
+
+On Thu, Oct 17, 2013 at 7:36 PM, 応研　海外 <oken@okenseiko.com> wrote:
+Dear Justin
+ 
+Hello,
+ 
+Could you tell the status after trying to do what I said?
+ 
+If it does not work as well, please let me  find another cause.
+ 
+Best  regards,
+ 
+Tomoaki
+ 
+From: Justin Shaw
+Sent: Monday, October 14, 2013 7:51 PM
+To: 応研 海外
+Cc: Michael D. Whitt ; Stephen Ritterbush ; Anool Mahidharia
+Subject: Re: P54E01R Pinout
+ 
+Tomoaki,
+ 
+Thank you for your rapid response. 
+ 
+I do not recall seeing a frequency requirement on this pump.  Can you please forward me the complete spec sheet?
+ 
+I will check the PWM frequency, but I am not having any problem controlling the rate.  Just turning the pump back on.
+ 
+Can leave PWM pin on and just use the 12V line to turn the pump on and off, or do I have to do both?
+ 
+We really would like to use the pump in our project, we'd like to know the full feature set and requirements please.
+ 
+Justin
+
+
+On Mon, Oct 14, 2013 at 3:07 AM, 応研　海外 <oken@okenseiko.com> wrote:
+Dear Justin
+ 
+Thank you fro your email.
+ 
+I would like you to check two points.
+ 
+1 Frequency. PLease check whether PWM Pulse at frequency is 15～25kHz or not.
+2 I guess you turn the pump off by cutting off PWM pulse.
+  If so, it makes the motor stopped in some situation.
+  I would like you to turn the pump off by cutting off PWM pulse and power supply.
+ 
+If you have any questions, let me know.
+ 
+Tomoaki
+ 
+ 
+ 
+From: Justin Shaw
+Sent: Monday, October 14, 2013 11:11 AM
+To: 応研 海外
+Cc: Michael D. Whitt ; Stephen Ritterbush ; Anool Mahidharia
+Subject: Re: P54E01R Pinout
+ 
+Tomoaki,
+ 
+I have finally gotten a cable for the pump and have tested two units.  Here is what I have discovered.  I can use PWM to control the rate of the pump, but if I turn the pump off for longer than about .5 seconds, it does not come back on.  Both pumps behave in this manor.
+ 
+Please advise.
+ 
+Normal operation includes being on for a short interval, then being off for a long period of time and then turning back on again,
+ 
+Thank you.
+Justin
+ 
+ 
+
+
+On Wed, Sep 25, 2013 at 3:46 AM, 応研　海外 <oken@okenseiko.com> wrote:
+Dear Jusitn
+ 
+ 
+Thank you for your reply.
+ 
+Please let me answer your question.
+FG means ‘Function Generator’.
+FG is a pin that outputs pulses based on number of rotations of a motor.
+ 
+I am sorry I can not provide  a reference circuit for this pin.
+ 
+Thank you for your understanding.
+ 
+Best regards.
+ 
+Tomoaki
+ 
+ 
+From: Justin Shaw
+Sent: Tuesday, September 24, 2013 8:16 PM
+To: 応研 海外
+Cc: Michael D. Whitt ; Anool Mahidharia ; Stephen Ritterbush
+Subject: Re: P54E01R Pinout
+ 
+Mr. Tomoaki,
+ 
+Thank you for sending the documents.  I've found the pinouts and the reference circuit (see below). Can you please describe what the purpose of FG is?  Can you provide a reference circuit for this pin?
+ 
+Jusitn
+ 
+PIN
+1　GND
+2　Vm　[10.8～13.2V]
+3　FG　[0-5.5V　pull-up　MAX5.5V,FG-LOW 0.6V less]
+4　PWM　[MAX 5.0V]
+5　NC
+Inline image 1
+Inline image 2
+
+
+On Tue, Sep 24, 2013 at 2:01 AM, 応研　海外 <oken@okenseiko.com> wrote:
+ 
+Dear Justin Shaw
+ 
+Hi, Thank you for your email.
+ 
+I will attach all documents I have related to P54E01R.(I guess you have already recived all from Michael Whitt)
+Also, Pin out is as below.
+ 
+PIN
+1　GND
+2　Vm　[10.8～13.2V]
+3　FG　[0-5.5V　pull-up　MAX5.5V,FG-LOW 0.6V less]
+4　PWM　[MAX 5.0V]
+5　NC
+ 
+Concerning sample cables and sample driving circuit,I am so sorry to say that we can not provide you .
+We ask to customer to procure that by themselves.
+ 
+If it did not answer all of your questions,let me know.
+I will check and answer as soon as possible.
+ 
+Tomoaki
+ 
+ 
+ 
+ 
+From: Justin Shaw
+Sent: Tuesday, September 24, 2013 11:19 AM
+To: oken@okenseiko.com
+Cc: Michael D. Whitt ; Stephen Ritterbush ; Anool Mahidharia
+Subject: P54E01R Pinout
+ 
+Mr. Tomoaki,
+ 
+I am Justin Shaw with Cordex.  Michael Whitt forwarded me the documents you sent to him regarding some aspects of your P54E01R 12V rolling pump.
+ 
+We were surprised to find a 5-pin connector when we received the 3 P54E01R pumps that Michael ordered.  We were unable to locate any documentation on the purpose of the extra pins.
+ 
+Can you please forward the complete data sheet on this pump including:
+ 
+1. pinout diagram
+2. sample driving circuit
+3. absolute voltage limits on each pin.
+ 
+Also, do you have any cables that we can use to test the pumps?  If so, please forward them to
+ 
+Justin Shaw
+12334 Coleraine CT
+Reston, VA 20191
+USA
+ 
+Thank you very much.
+Justin
+
+
+ 
+-- 
+Justin
+
+
+
+ 
+-- 
+Justin
+
+
+
+ 
+-- 
+Justin
+
+
+
+ 
+-- 
+Justin
+
+
+
+
+-- 
+Justin

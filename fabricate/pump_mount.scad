@@ -56,7 +56,7 @@ translate([0, -pump_d/2 - wall_t, -pump_d/2 - wall_t])
 color([1, 0 ,0])
 p_clamp();
 
-if(false){
+if(true){
   translate([1.5, 21.6, 25])
     rotate(a=180, v=[1, 0, 0])
     import("board.stl");
