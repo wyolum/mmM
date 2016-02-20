@@ -1,0 +1,945 @@
+EESchema Schematic File Version 2
+LIBS:mmM
+LIBS:power
+LIBS:mmM-cache
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 4
+Title "mmMercury : Blood Pressure Measurement Platform"
+Date "2015-12-27"
+Rev "1"
+Comp "WyoLum"
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L ISP P4
+U 1 1 50E3CDC2
+P 7475 6175
+F 0 "P4" V 7425 6175 40  0000 C CNN
+F 1 "ICSP" V 7525 6175 40  0000 C CNN
+F 2 "mmM:Header_ISP" V 7625 6175 40  0001 C CNN
+F 3 "" H 7475 6175 40  0001 C CNN
+F 4 "PREC003DAAN-RC" V 7475 6175 40  0001 C CNN "manf#"
+	1    7475 6175
+	0    1    1    0   
+$EndComp
+$Comp
+L CONN_3 P1
+U 1 1 50E3CCEE
+P 975 1325
+F 0 "P1" V 925 1325 40  0000 C CNN
+F 1 "AREF" V 1025 1325 40  0000 C CNN
+F 2 "mmM:ShortLink2" V 1125 1325 40  0001 C CNN
+F 3 "" H 975 1325 40  0001 C CNN
+	1    975  1325
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SW_PUSH SW1
+U 1 1 50E2C59C
+P 1575 4350
+F 0 "SW1" V 1475 4500 40  0000 C CNN
+F 1 "Reset" V 1400 4475 40  0000 C CNN
+F 2 "mmM:SW_PB_V_H" V 1675 4575 40  0001 C CNN
+F 3 "" H 1575 4350 40  0001 C CNN
+F 4 "FSMRA3JH" V 1575 4350 40  0001 C CNN "manf#"
+	1    1575 4350
+	0    -1   -1   0   
+$EndComp
+$Comp
+L CRYSTAL X1
+U 1 1 50E2C481
+P 1400 3050
+F 0 "X1" V 1350 2875 40  0000 C CNN
+F 1 "16MHz" V 1450 2850 40  0000 C CNN
+F 2 "mmM:Xtal_SMD3" H 1300 3100 40  0001 C CNN
+F 3 "" H 1400 3050 40  0001 C CNN
+F 4 "TSX-3225 16.0000MF09Z-AC3" V 1400 3050 40  0001 C CNN "manf#"
+	1    1400 3050
+	0    1    1    0   
+$EndComp
+$Comp
+L R_10k R3
+U 1 1 50E2B80B
+P 4800 1450
+F 0 "R3" H 4825 1625 40  0000 L CNN
+F 1 "10k" V 4805 1450 40  0000 C CNN
+F 2 "mmM:r_0805" V 4905 1450 40  0001 C CNN
+F 3 "" H 4800 1450 40  0001 C CNN
+F 4 "RMCF0805JT10K0" H 4800 1450 40  0001 C CNN "manf#"
+	1    4800 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L R_10k R2
+U 1 1 50E2B7FE
+P 4600 1450
+F 0 "R2" H 4625 1625 40  0000 L CNN
+F 1 "10k" V 4605 1450 40  0000 C CNN
+F 2 "mmM:r_0805" V 4705 1450 40  0001 C CNN
+F 3 "" H 4600 1450 40  0001 C CNN
+F 4 "RMCF0805JT10K0" H 4600 1450 40  0001 C CNN "manf#"
+	1    4600 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L R_10k R1
+U 1 1 50E2B7BA
+P 1575 1450
+F 0 "R1" H 1600 1625 40  0000 L CNN
+F 1 "10k" V 1580 1450 40  0000 C CNN
+F 2 "mmM:r_0805" V 1680 1450 40  0001 C CNN
+F 3 "" H 1575 1450 40  0001 C CNN
+F 4 "RMCF0805JT10K0" H 1575 1450 40  0001 C CNN "manf#"
+	1    1575 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L C1 C3
+U 1 1 50E29877
+P 1075 3300
+F 0 "C3" V 1025 3125 40  0000 L CNN
+F 1 "22pF" V 1125 3050 40  0000 L CNN
+F 2 "mmM:c_0603" V 1125 3350 40  0001 C CNN
+F 3 "" H 1075 3300 40  0001 C CNN
+F 4 "CL10C220JB8NNNC" V 1075 3300 40  0001 C CNN "manf#"
+	1    1075 3300
+	0    1    1    0   
+$EndComp
+$Comp
+L C1 C2
+U 1 1 50E29842
+P 1075 2800
+F 0 "C2" V 1025 2625 40  0000 L CNN
+F 1 "22pF" V 1125 2575 40  0000 L CNN
+F 2 "mmM:c_0603" V 1125 2850 40  0001 C CNN
+F 3 "" H 1075 2800 40  0001 C CNN
+F 4 "CL10C220JB8NNNC" V 1075 2800 40  0001 C CNN "manf#"
+	1    1075 2800
+	0    1    1    0   
+$EndComp
+Text Notes 4550 3450 0    40   ~ 0
+SW INT1
+Text Notes 10450 6375 0    40   ~ 0
+Mounting Holes
+Text Label 9775 825  0    40   ~ 0
+12V
+$Sheet
+S 10050 1625 1050 2225
+U 50B2116F
+F0 "Interface" 40
+F1 "interface.sch" 40
+F2 "SCK" I L 10050 2325 40 
+F3 "MISO" I L 10050 2425 40 
+F4 "12V" I L 10050 1725 40 
+F5 "GND" B L 10050 2025 40 
+F6 "5V0" B L 10050 1825 40 
+F7 "~PD5_Valve" I L 10050 2725 40 
+F8 "~MOSI" I L 10050 2125 40 
+F9 "~SS" I L 10050 2225 40 
+F10 "PC3_Pr1" I L 10050 3725 40 
+F11 "3V3" B L 10050 1925 40 
+F12 "~PB1_Pump" I L 10050 3125 40 
+F13 "PD4_Valve2" I L 10050 2625 40 
+F14 "~PD6_Spk" I L 10050 2825 40 
+F15 "SCL" I L 10050 3325 40 
+F16 "SDA" I L 10050 3425 40 
+$EndSheet
+NoConn ~ 8650 5825
+Text Label 9600 1925 0    40   ~ 0
+3V3
+Text Notes 4550 4550 0    40   ~ 0
+Pressure
+Text Notes 4550 4450 0    40   ~ 0
+Pressure
+Text Notes 4550 4350 0    40   ~ 0
+Pressure
+Text Notes 4550 4250 0    40   ~ 0
+CS #1 Pr Sensor
+Text Notes 4550 4150 0    40   ~ 0
+PUMP PWM
+Text Notes 4550 4050 0    40   ~ 0
+Blank
+Text Notes 4550 3850 0    40   ~ 0
+Blank
+Text Notes 4550 3750 0    40   ~ 0
+Speaker PWM
+Text Notes 4550 3650 0    40   ~ 0
+Valve #2 PWM
+Text Notes 4550 3550 0    40   ~ 0
+Valve #1
+Text Notes 4550 3350 0    40   ~ 0
+SW INT0
+Text Label 9600 3125 0    40   ~ 0
+~PB1_Pump
+Text Label 9600 1725 0    40   ~ 0
+12V
+Text Label 9600 1825 0    40   ~ 0
+5V0
+Text Label 9600 2125 0    40   ~ 0
+~MOSI
+Text Label 9600 2225 0    40   ~ 0
+~SS
+Text Label 9600 2325 0    40   ~ 0
+SCK
+Text Label 9600 2425 0    40   ~ 0
+MISO
+Text Label 9600 3725 0    40   ~ 0
+PC3_Pr1
+Text Label 9600 2725 0    40   ~ 0
+~PD5_Valve
+Text Label 9600 2025 0    40   ~ 0
+GND
+Text Notes 8775 4875 2    40   Italic 12
+FTDI Header
+Text Notes 7550 4875 2    40   Italic 12
+ISP Header
+Text Label 7225 5300 3    40   ~ 0
+GND
+Text Label 7725 5300 3    40   ~ 0
+MISO
+Text Label 7625 5300 3    40   ~ 0
+5V0
+Text Label 7525 5300 3    40   ~ 0
+SCK
+Text Label 7425 5300 3    40   ~ 0
+~MOSI
+Text Label 7325 5300 3    40   ~ 0
+RESET
+Text Label 8450 5000 3    40   ~ 0
+GND
+Text Label 8850 5000 3    40   ~ 0
+TXD
+Text Label 8750 5000 3    40   ~ 0
+RXD
+Text Label 8950 5000 3    40   ~ 0
+RESET
+$Comp
+L CONN_6 P5
+U 1 1 4FE58ED4
+P 8700 6175
+F 0 "P5" V 8650 6175 40  0000 C CNN
+F 1 "FTDI" V 8750 6175 40  0000 C CNN
+F 2 "mmM:Header_FTDI" H 8700 6175 40  0001 C CNN
+F 3 "" H 8700 6175 40  0001 C CNN
+F 4 "PREC006SAAN-RC" V 8700 6175 40  0001 C CNN "manf#"
+	1    8700 6175
+	0    -1   1    0   
+$EndComp
+Text Label 8950 5725 3    40   ~ 0
+~RTS
+Text Label 9775 1225 0    40   ~ 0
+SCK
+Text Label 9775 1125 0    40   ~ 0
+GND
+Text Label 9775 1025 0    40   ~ 0
+3V3
+Text Label 9775 925  0    40   ~ 0
+5V0
+$Sheet
+S 10050 625  1050 725 
+U 4FC07407
+F0 "pwr" 40
+F1 "pwr.sch" 40
+F2 "SCK" I L 10050 1225 40 
+F3 "GND" B L 10050 1125 40 
+F4 "3V3" B L 10050 1025 40 
+F5 "5V0" B L 10050 925 40 
+F6 "12V" B L 10050 825 40 
+$EndSheet
+$Sheet
+S 10050 4225 1050 900 
+U 4E1FEA4E
+F0 "rtc" 40
+F1 "rtc.sch" 40
+F2 "GND" I L 10050 4425 40 
+F3 "SDA" I L 10050 4625 40 
+F4 "SCL" I L 10050 4525 40 
+F5 "5V0" I L 10050 4325 40 
+F6 "RST" I L 10050 4725 40 
+F7 "32k" I L 10050 4925 40 
+F8 "BAT" I L 10050 5025 40 
+F9 "SQR" I L 10050 4825 40 
+$EndSheet
+Text Label 1025 2550 0    40   ~ 0
+AREF
+Text Label 1925 3300 0    40   ~ 0
+PB7
+Text Label 1925 2800 0    40   ~ 0
+PB6
+$Comp
+L GND #PWR01
+U 1 1 4F5AFC62
+P 2950 5100
+F 0 "#PWR01" H 2950 5100 30  0001 C CNN
+F 1 "GND" H 2950 5030 30  0001 C CNN
+F 2 "" H 2950 5100 40  0001 C CNN
+F 3 "" H 2950 5100 40  0001 C CNN
+	1    2950 5100
+	1    0    0    -1  
+$EndComp
+Text Label 9675 5025 0    40   ~ 0
+BAT
+Text Label 9675 4925 0    40   ~ 0
+32k
+Text Label 9675 4825 0    40   ~ 0
+SQR
+Text Label 9675 4725 0    40   ~ 0
+RST
+Text Label 9675 4425 0    40   ~ 0
+GND
+Text Label 9675 4625 0    40   ~ 0
+SDA
+Text Label 9675 4525 0    40   ~ 0
+SCL
+Text Label 9675 4325 0    40   ~ 0
+5V0
+Text Label 1575 2250 1    40   ~ 0
+RESET
+Text Label 4125 3650 0    40   ~ 0
+~PD5_Valve
+Text Label 4125 3750 0    40   ~ 0
+~PD6_Spk
+Text Label 4125 3450 0    40   ~ 0
+~PD3
+Text Label 4125 4050 0    40   ~ 0
+PB0
+Text Label 4125 4150 0    40   ~ 0
+~PB1_Pump
+Text Label 4125 2250 0    40   ~ 0
+PC0
+Text Label 4125 2350 0    40   ~ 0
+PC1
+Text Label 4125 2450 0    40   ~ 0
+PC2
+Text Label 4125 2550 0    40   ~ 0
+PC3_Pr1
+Text Label 4125 3150 0    40   ~ 0
+RXD
+Text Label 4125 3250 0    40   ~ 0
+TXD
+Text Label 4125 3350 0    40   ~ 0
+PD2
+Text Label 4125 3850 0    40   ~ 0
+PD7
+Text Label 4125 3550 0    40   ~ 0
+PD4_Valve
+Text Label 4800 650  0    40   ~ 0
+5V0
+Text Label 4125 2650 0    40   ~ 0
+SDA
+Text Label 4125 2750 0    40   ~ 0
+SCL
+Text Label 4125 4250 0    40   ~ 0
+~SS
+Text Label 4125 4350 0    40   ~ 0
+~MOSI
+Text Label 4125 4550 0    40   ~ 0
+SCK
+Text Label 4125 4450 0    40   ~ 0
+MISO
+$Comp
+L ATMEGA328-AU-ND U7
+U 1 1 520A592B
+P 2900 3250
+F 0 "U7" H 2300 2650 40  0000 L BNN
+F 1 "ATMEGA328P-AU-ND" H 2300 2500 40  0000 L BNN
+F 2 "mmM:TQFP32" H 3425 1675 40  0001 C CNN
+F 3 "" H 2900 3250 40  0000 C CNN
+F 4 "ATMEGA328-AU" H 2900 3250 40  0001 C CNN "manf#"
+	1    2900 3250
+	1    0    0    -1  
+$EndComp
+Text Notes 4550 2250 0    40   ~ 0
+Blank
+Text Notes 4550 2350 0    40   ~ 0
+Blank
+$Comp
+L PWR_FLAG #FLG02
+U 1 1 520CA632
+P 725 2475
+F 0 "#FLG02" H 725 2745 30  0001 C CNN
+F 1 "PWR_FLAG" H 725 2705 30  0000 C CNN
+F 2 "" H 725 2475 40  0000 C CNN
+F 3 "" H 725 2475 40  0000 C CNN
+	1    725  2475
+	1    0    0    -1  
+$EndComp
+Text Notes 4550 2450 0    40   ~ 0
+Blank
+Text Notes 4550 2550 0    40   ~ 0
+Analog, from Gage Pr Sensor
+Text Notes 4550 2850 0    40   ~ 0
+Blank
+Text Notes 4550 2950 0    40   ~ 0
+Blank
+$Comp
+L I_O B8
+U 1 1 520E3AF6
+P 4275 2250
+F 0 "B8" H 4355 2250 40  0000 L CNN
+F 1 "PC0" H 4275 2305 30  0001 C CNN
+F 2 "mmM:I_O" H 4275 2250 40  0001 C CNN
+F 3 "" H 4275 2250 40  0000 C CNN
+	1    4275 2250
+	1    0    0    -1  
+$EndComp
+$Comp
+L I_O B9
+U 1 1 520E3DD3
+P 4275 2350
+F 0 "B9" H 4355 2350 40  0000 L CNN
+F 1 "PC1" H 4275 2405 30  0001 C CNN
+F 2 "mmM:I_O" H 4275 2350 40  0001 C CNN
+F 3 "" H 4275 2350 40  0000 C CNN
+	1    4275 2350
+	1    0    0    -1  
+$EndComp
+$Comp
+L I_O B10
+U 1 1 520E3DD9
+P 4275 2850
+F 0 "B10" H 4355 2850 40  0000 L CNN
+F 1 "PC6" H 4275 2905 30  0001 C CNN
+F 2 "mmM:I_O" H 4275 2850 40  0001 C CNN
+F 3 "" H 4275 2850 40  0000 C CNN
+	1    4275 2850
+	1    0    0    -1  
+$EndComp
+$Comp
+L I_O B11
+U 1 1 520E3ECF
+P 4275 2950
+F 0 "B11" H 4355 2950 40  0000 L CNN
+F 1 "PC7" H 4275 3005 30  0001 C CNN
+F 2 "mmM:I_O" H 4275 2950 40  0001 C CNN
+F 3 "" H 4275 2950 40  0000 C CNN
+	1    4275 2950
+	1    0    0    -1  
+$EndComp
+Text Label 4125 2850 0    40   ~ 0
+PC6
+Text Label 4125 2950 0    40   ~ 0
+PC7
+$Comp
+L I_O B12
+U 1 1 520E5284
+P 4275 4050
+F 0 "B12" H 4355 4050 40  0000 L CNN
+F 1 "PB0" H 4275 4105 30  0001 C CNN
+F 2 "mmM:I_O" H 4275 4050 40  0001 C CNN
+F 3 "" H 4275 4050 40  0000 C CNN
+	1    4275 4050
+	1    0    0    -1  
+$EndComp
+$Comp
+L SW_PUSH SW2
+U 1 1 520E5B8D
+P 5800 2750
+F 0 "SW2" V 5650 2925 40  0000 R CNN
+F 1 "INT0" V 5575 2925 40  0000 R CNN
+F 2 "mmM:SW_PB_V_H" H 5800 2750 40  0001 C CNN
+F 3 "" H 5800 2750 40  0000 C CNN
+F 4 "FSMRA3JH" H 5800 2750 40  0001 C CNN "manf#"
+	1    5800 2750
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SW_PUSH SW3
+U 1 1 520E5D15
+P 6100 2750
+F 0 "SW3" V 5950 2925 40  0000 R CNN
+F 1 "INT1" V 5875 2925 40  0000 R CNN
+F 2 "mmM:SW_PB_V_H" H 6100 2750 40  0001 C CNN
+F 3 "" H 6100 2750 40  0000 C CNN
+F 4 "FSMRA3JH" H 6100 2750 40  0001 C CNN "manf#"
+	1    6100 2750
+	0    -1   -1   0   
+$EndComp
+$Comp
+L R_10k R22
+U 1 1 520EF51D
+P 6100 3900
+F 0 "R22" H 6125 4075 40  0000 L CNN
+F 1 "10k" V 6105 3900 40  0000 C CNN
+F 2 "mmM:r_0805" V 6205 3900 40  0001 C CNN
+F 3 "" H 6100 3900 40  0001 C CNN
+F 4 "RMCF0805JT10K0" H 6100 3900 10  0001 C CNN "manf#"
+	1    6100 3900
+	1    0    0    -1  
+$EndComp
+$Comp
+L R_10k R21
+U 1 1 520EF52B
+P 5800 3900
+F 0 "R21" H 5825 4075 40  0000 L CNN
+F 1 "10k" V 5805 3900 40  0000 C CNN
+F 2 "mmM:r_0805" V 5905 3900 40  0001 C CNN
+F 3 "" H 5800 3900 40  0001 C CNN
+F 4 "RMCF0805JT10K0" H 5800 3900 40  0001 C CNN "manf#"
+	1    5800 3900
+	1    0    0    -1  
+$EndComp
+$Comp
+L C C28
+U 1 1 520F1F04
+P 3250 1450
+F 0 "C28" H 3275 1525 40  0000 L CNN
+F 1 "100nF" H 3275 1350 40  0000 L CNN
+F 2 "mmM:c_0805" H 3250 1450 40  0001 C CNN
+F 3 "" H 3250 1450 40  0000 C CNN
+F 4 "CL21B104KCC5PNC" H 3250 1450 40  0001 C CNN "manf#"
+	1    3250 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR03
+U 1 1 520F2321
+P 3250 1725
+F 0 "#PWR03" H 3250 1725 30  0001 C CNN
+F 1 "GND" H 3250 1655 30  0001 C CNN
+F 2 "" H 3250 1725 40  0001 C CNN
+F 3 "" H 3250 1725 40  0001 C CNN
+	1    3250 1725
+	1    0    0    -1  
+$EndComp
+Text Label 1225 750  2    40   ~ 0
+5V0
+Text Label 725  750  2    40   ~ 0
+3V3
+$Comp
+L I_O B4
+U 1 1 52150F0F
+P 4275 3850
+F 0 "B4" H 4355 3850 40  0000 L CNN
+F 1 "PB0" H 4275 3905 30  0001 C CNN
+F 2 "mmM:I_O" H 4275 3850 40  0001 C CNN
+F 3 "" H 4275 3850 40  0000 C CNN
+	1    4275 3850
+	1    0    0    -1  
+$EndComp
+$Comp
+L SCREW SC6
+U 1 1 522315DB
+P 10550 5875
+F 0 "SC6" H 10550 5775 40  0000 C CNN
+F 1 "SCREW" H 10550 5975 40  0001 C CNN
+F 2 "mmM:vite_3mm" H 10550 6075 40  0001 C CNN
+F 3 "" H 10550 5875 40  0001 C CNN
+	1    10550 5875
+	1    0    0    -1  
+$EndComp
+$Comp
+L SCREW SC9
+U 1 1 522315E1
+P 10550 6075
+F 0 "SC9" H 10550 5975 40  0000 C CNN
+F 1 "SCREW" H 10550 6175 40  0001 C CNN
+F 2 "mmM:vite_3mm" H 10550 6275 40  0001 C CNN
+F 3 "" H 10550 6075 40  0001 C CNN
+	1    10550 6075
+	1    0    0    -1  
+$EndComp
+$Comp
+L SCREW SC7
+U 1 1 522315F3
+P 10750 5875
+F 0 "SC7" H 10750 5775 40  0000 C CNN
+F 1 "SCREW" H 10750 5975 40  0001 C CNN
+F 2 "mmM:vite_3mm" H 10750 6075 40  0001 C CNN
+F 3 "" H 10750 5875 40  0001 C CNN
+	1    10750 5875
+	1    0    0    -1  
+$EndComp
+$Comp
+L SCREW SC10
+U 1 1 522315F9
+P 10750 6075
+F 0 "SC10" H 10750 5975 40  0000 C CNN
+F 1 "SCREW" H 10750 6175 40  0001 C CNN
+F 2 "mmM:vite_3mm" H 10750 6275 40  0001 C CNN
+F 3 "" H 10750 6075 40  0001 C CNN
+	1    10750 6075
+	1    0    0    -1  
+$EndComp
+$Comp
+L I_O B7
+U 1 1 55A3A3EC
+P 4275 2450
+F 0 "B7" H 4355 2450 40  0000 L CNN
+F 1 "PC1" H 4275 2505 30  0001 C CNN
+F 2 "mmM:I_O" H 4275 2450 40  0001 C CNN
+F 3 "" H 4275 2450 40  0000 C CNN
+	1    4275 2450
+	1    0    0    -1  
+$EndComp
+Text Notes 8225 6525 0    40   ~ 0
+NOTE\nFTDI is un-powered.\nExternal 5V is required
+Text Label 9600 2625 0    40   ~ 0
+PD4_Valve
+Text Label 9600 2825 0    40   ~ 0
+~PD6_Spk
+Text Label 9600 3425 0    40   ~ 0
+SDA
+Text Label 9600 3325 0    40   ~ 0
+SCL
+$Comp
+L GND #PWR04
+U 1 1 55E8B5A9
+P 1200 2250
+F 0 "#PWR04" H 1200 2250 30  0001 C CNN
+F 1 "GND" H 1200 2180 30  0001 C CNN
+F 2 "" H 1200 2250 40  0001 C CNN
+F 3 "" H 1200 2250 40  0001 C CNN
+	1    1200 2250
+	1    0    0    -1  
+$EndComp
+$Comp
+L C C1
+U 1 1 5664C0BB
+P 1200 2050
+F 0 "C1" H 1225 2125 40  0000 L CNN
+F 1 "100nF" H 1225 1950 40  0000 L CNN
+F 2 "mmM:c_0805" H 1200 2050 40  0001 C CNN
+F 3 "" H 1200 2050 40  0000 C CNN
+F 4 "CL21B104KCC5PNC" H 1200 2250 40  0001 L CNN "manf#"
+	1    1200 2050
+	1    0    0    -1  
+$EndComp
+$Comp
+L C C4
+U 1 1 5664C973
+P 8950 5475
+F 0 "C4" H 8975 5550 40  0000 L CNN
+F 1 "100nF" H 8975 5375 40  0000 L CNN
+F 2 "mmM:c_0805" H 8950 5475 40  0001 C CNN
+F 3 "" H 8950 5475 40  0000 C CNN
+F 4 "CL21B104KCC5PNC" H 8950 5675 40  0001 L CNN "manf#"
+	1    8950 5475
+	1    0    0    -1  
+$EndComp
+$Comp
+L C C19
+U 1 1 567FE54D
+P 1025 4325
+F 0 "C19" H 1050 4400 40  0000 L CNN
+F 1 "100nF" H 1050 4225 40  0000 L CNN
+F 2 "mmM:c_0805" H 1025 4325 40  0001 C CNN
+F 3 "" H 1025 4325 40  0000 C CNN
+F 4 "CL21B104KCC5PNC" H 1025 4325 40  0001 C CNN "manf#"
+	1    1025 4325
+	1    0    0    -1  
+$EndComp
+$Comp
+L OSHW-LOGO M1
+U 1 1 5680B029
+P 10850 6825
+F 0 "M1" H 10850 6825 40  0001 C CNN
+F 1 "OSHW-LOGO" H 10850 6825 40  0001 C CNN
+F 2 "OSHW-LOGO" H 10880 6975 20  0001 C CNN
+F 3 "" H 10850 6825 40  0000 C CNN
+	1    10850 6825
+	1    0    0    -1  
+$EndComp
+Text Notes 8575 7100 0    40   ~ 0
+This documentation describes Open Hardware and is licensed \nunder the CERN OHL v. 1.2. You may redistribute and modify \nthis documentation under the terms of the CERN OHL v.1.2. \n(http://ohwr.org/cernohl). This documentation is distributed\nWITHOUT ANY EXPRESS OR IMPLIED WARRANTY, INCLUDING \nOF MERCHANTABILITY, SATISFACTORY QUALITY AND FITNESS\nFOR A PARTICULAR PURPOSE. Please see the CERN OHL v.1.2\nfor applicable conditions.
+Wire Wire Line
+	750  3050 1250 3050
+Wire Notes Line
+	7025 6300 8000 6300
+Wire Wire Line
+	9600 3125 10050 3125
+Wire Wire Line
+	9600 2725 10050 2725
+Wire Wire Line
+	9600 3725 10050 3725
+Wire Wire Line
+	9600 2325 10050 2325
+Wire Wire Line
+	9600 2125 10050 2125
+Wire Wire Line
+	9600 1725 10050 1725
+Wire Wire Line
+	725  750  725  1775
+Wire Wire Line
+	725  1775 875  1775
+Wire Wire Line
+	875  1775 875  1675
+Wire Wire Line
+	975  1675 975  2550
+Wire Wire Line
+	825  3300 875  3300
+Wire Wire Line
+	825  2800 825  3300
+Wire Wire Line
+	825  2800 875  2800
+Connection ~ 1400 2800
+Wire Wire Line
+	1275 2800 1925 2800
+Wire Wire Line
+	8950 5000 8950 5350
+Wire Wire Line
+	8750 5825 8750 5000
+Wire Wire Line
+	7625 5825 7625 5300
+Wire Wire Line
+	7425 5825 7425 5300
+Wire Wire Line
+	7225 5300 7225 5825
+Wire Wire Line
+	7325 5825 7325 5300
+Wire Wire Line
+	7525 5825 7525 5300
+Wire Wire Line
+	7725 5825 7725 5300
+Wire Wire Line
+	8450 5000 8450 5825
+Wire Wire Line
+	8850 5825 8850 5000
+Wire Wire Line
+	8950 5600 8950 5825
+Wire Wire Line
+	8550 5825 8550 5700
+Wire Wire Line
+	9775 1225 10050 1225
+Wire Wire Line
+	9775 1025 10050 1025
+Wire Wire Line
+	2950 4850 2950 5100
+Wire Wire Line
+	3900 2750 4800 2750
+Wire Wire Line
+	9675 5025 10050 5025
+Wire Wire Line
+	9675 4925 10050 4925
+Wire Wire Line
+	9675 4725 10050 4725
+Wire Wire Line
+	1400 3250 1400 3300
+Wire Wire Line
+	2000 2950 1925 2950
+Wire Wire Line
+	1925 2950 1925 2800
+Wire Wire Line
+	2000 2250 1575 2250
+Wire Wire Line
+	9675 4625 10050 4625
+Wire Wire Line
+	9675 4325 10050 4325
+Wire Wire Line
+	3900 3350 5800 3350
+Wire Wire Line
+	3900 3550 4125 3550
+Connection ~ 1575 800 
+Wire Wire Line
+	1575 1200 1575 800 
+Connection ~ 4800 800 
+Wire Wire Line
+	3900 2650 4600 2650
+Wire Wire Line
+	3900 4350 4125 4350
+Wire Wire Line
+	3900 4250 4125 4250
+Wire Wire Line
+	4125 4450 3900 4450
+Wire Wire Line
+	4125 4550 3900 4550
+Wire Wire Line
+	1575 4650 1575 4975
+Wire Wire Line
+	4600 2650 4600 1700
+Wire Wire Line
+	4800 2750 4800 1700
+Wire Wire Line
+	4600 800  4600 1200
+Connection ~ 4600 800 
+Wire Wire Line
+	3900 3450 6100 3450
+Wire Wire Line
+	3900 3250 4125 3250
+Wire Wire Line
+	3900 3150 4125 3150
+Wire Wire Line
+	3900 2450 4125 2450
+Wire Wire Line
+	3900 2350 4125 2350
+Wire Wire Line
+	3900 2250 4125 2250
+Wire Wire Line
+	3900 4150 4125 4150
+Wire Wire Line
+	3900 4050 4125 4050
+Wire Wire Line
+	3900 3850 4125 3850
+Wire Wire Line
+	3900 3750 4125 3750
+Wire Wire Line
+	3900 3650 4125 3650
+Wire Wire Line
+	4800 650  4800 1200
+Wire Wire Line
+	9675 4525 10050 4525
+Wire Wire Line
+	9675 4425 10050 4425
+Wire Wire Line
+	1575 1700 1575 4050
+Connection ~ 1575 2250
+Wire Wire Line
+	1925 3300 1925 3150
+Wire Wire Line
+	1925 3150 2000 3150
+Wire Wire Line
+	1400 2850 1400 2800
+Wire Wire Line
+	4125 2550 3900 2550
+Wire Wire Line
+	9675 4825 10050 4825
+Wire Wire Line
+	725  2550 2000 2550
+Wire Wire Line
+	2900 800  2900 1850
+Connection ~ 2900 800 
+Wire Wire Line
+	9775 925  10050 925 
+Wire Wire Line
+	9775 1125 10050 1125
+Wire Notes Line
+	9200 4775 8225 4775
+Wire Notes Line
+	9200 6300 8225 6300
+Wire Wire Line
+	8550 5700 8450 5700
+Connection ~ 8450 5700
+Wire Wire Line
+	1275 3300 1925 3300
+Connection ~ 1400 3300
+Connection ~ 825  3050
+Wire Wire Line
+	750  3050 750  4975
+Connection ~ 1575 4975
+Wire Wire Line
+	1075 1675 1075 1775
+Wire Wire Line
+	1075 1775 1225 1775
+Wire Wire Line
+	1225 1775 1225 750 
+Wire Wire Line
+	9600 1825 10050 1825
+Wire Wire Line
+	9600 2225 10050 2225
+Wire Wire Line
+	9600 2425 10050 2425
+Wire Wire Line
+	9600 2025 10050 2025
+Wire Wire Line
+	9600 1925 10050 1925
+Wire Wire Line
+	10050 825  9775 825 
+Wire Notes Line
+	8000 4775 7025 4775
+Connection ~ 2950 4975
+Wire Wire Line
+	2850 4975 2850 4850
+Connection ~ 2850 4975
+Wire Wire Line
+	2950 1850 2950 1950
+Wire Wire Line
+	2850 1850 2950 1850
+Wire Wire Line
+	2850 1950 2850 1850
+Connection ~ 2900 1850
+Wire Wire Line
+	1425 800  5950 800 
+Wire Wire Line
+	1425 800  1425 2650
+Wire Wire Line
+	1425 2650 2000 2650
+Wire Wire Line
+	725  2475 725  2550
+Connection ~ 975  2550
+Wire Wire Line
+	3900 2850 4125 2850
+Wire Wire Line
+	3900 2950 4125 2950
+Wire Notes Line
+	7025 4775 7025 6300
+Wire Notes Line
+	8000 6300 8000 4775
+Wire Notes Line
+	8225 6300 8225 4775
+Wire Notes Line
+	9200 6300 9200 4775
+Wire Wire Line
+	6100 3050 6100 3650
+Wire Wire Line
+	5800 3050 5800 3650
+Wire Wire Line
+	5800 4150 5800 4250
+Wire Wire Line
+	5800 4250 6100 4250
+Wire Wire Line
+	6100 4250 6100 4150
+Connection ~ 5800 3350
+Connection ~ 6100 3450
+Wire Wire Line
+	5800 2450 5800 2300
+Wire Wire Line
+	5800 2300 6100 2300
+Wire Wire Line
+	6100 2300 6100 2450
+Wire Wire Line
+	5950 4975 5950 4250
+Connection ~ 5950 4250
+Wire Wire Line
+	5950 800  5950 2300
+Connection ~ 5950 2300
+Wire Wire Line
+	3250 1325 3250 1225
+Wire Wire Line
+	3250 1225 2900 1225
+Connection ~ 2900 1225
+Wire Wire Line
+	3250 1575 3250 1725
+Wire Wire Line
+	10050 2625 9600 2625
+Wire Wire Line
+	10050 2825 9600 2825
+Wire Wire Line
+	10050 3325 9600 3325
+Wire Wire Line
+	10050 3425 9600 3425
+Wire Wire Line
+	1200 1925 1200 1875
+Wire Wire Line
+	1200 1875 975  1875
+Connection ~ 975  1875
+Wire Wire Line
+	1200 2175 1200 2250
+Wire Wire Line
+	1025 4000 1025 4200
+Wire Wire Line
+	1025 4000 1575 4000
+Connection ~ 1575 4000
+Wire Wire Line
+	1025 4450 1025 4725
+Wire Wire Line
+	1025 4725 1575 4725
+Connection ~ 1575 4725
+Wire Wire Line
+	1800 4975 1800 2450
+Wire Wire Line
+	1800 2450 2000 2450
+Wire Wire Line
+	750  4975 5950 4975
+Connection ~ 1800 4975
+Connection ~ -5600 975 
+Wire Bus Line
+	750  4975 5950 4975
+Wire Bus Line
+	1425 800  5950 800 
+$EndSCHEMATC
