@@ -82,7 +82,7 @@ void pwmPumpTest(){
 }
 void pumpUntil (uint16_t pressure){
   digitalWrite(PUMPPIN,HIGH);
-  while(ReadPressure() < pressure)
+  while(count_to_mmhg(ReadPressure()) < pressure)
     delay(10);
   digitalWrite(PUMPPIN,LOW);
 }
@@ -91,20 +91,21 @@ void GagePressureTest(){
   for (int i =0; i < 5000; i++){
     Serial.print(ReadPressure());
     Serial.print(",\n");
-    delay(10);
+    delay(5);
     }
     Serial.print("]\n");
 }
-
-// read pressure with 10 ms delay
+char buffer[50];
+// read pressure with 5 ms delay
 // and print in python array format until pressure
 void ReadPressureUntil(uint16_t pressure){
     uint16_t reading;
     Serial.print("[\n");
-    while ((reading = ReadPressure()) > pressure){
+    while ((reading =ReadPressure()) > pressure){
       Serial.print(reading);
+      Serial.print(buffer);
       Serial.print(",\n");
-      delay(10);
+      delay(5);
     }
     Serial.print("]\n");
     
@@ -123,6 +124,10 @@ uint16_t ReadPressure(){
   digitalWrite(SS, HIGH);
   return reading;
 }
+double count_to_mmhg(uint16_t val){
+   return (val - 2470) * 280. / 15030.;
+}
+
 void speakerTest(){
    //Test speaker
   for (int i = 500; i < 2000; i+=100)
@@ -138,7 +143,7 @@ void blink(){
 }
 void bp_sim(){
   digitalWrite(VALVE1,HIGH); //close valve
-  pumpUntil(12000);
+  pumpUntil(200);
   digitalWrite(VALVE1,LOW); //open valve
   ReadPressureUntil(2800);
   
