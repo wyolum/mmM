@@ -73,19 +73,19 @@ void control_valve(int  state){
   if(state == VALVE_OPEN){
     valve_is_closed = false;
     pressure_start = -1;
-    digitalWrite(VALVE_PIN, HIGH);
+    digitalWrite(VALVE_PIN, LOW);
   }
   else{
     valve_is_closed = true;
     pressure_start = millis();
-    digitalWrite(VALVE_PIN, LOW);
+    digitalWrite(VALVE_PIN, HIGH);
   }
 }
 void valve_close(){
-  control_valve(0);
+  control_valve(VALVE_CLOSE);
 }
 void valve_open(){
-  control_valve(1);
+  control_valve(VALVE_OPEN);
 }
 
 /*
