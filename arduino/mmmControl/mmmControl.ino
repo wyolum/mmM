@@ -85,11 +85,11 @@ void control_valve(int  state){
   }
   if(((state & 0x02)>>1) == VALVE_OPEN){
     pressure_start = -1;
-    digitalWrite(VALVE1_PIN, LOW);
+    digitalWrite(VALVE2_PIN, LOW);
   }
   else{
     pressure_start = millis();
-    digitalWrite(VALVE1_PIN, HIGH);
+    digitalWrite(VALVE2_PIN, HIGH);
   }
 }
 void valves_close(){
