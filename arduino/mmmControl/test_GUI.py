@@ -6,11 +6,11 @@ STS_GAIN = 175.72;
 data = dict(init=False,
             interval=0,
             pump_rate=0,
-            valve=0,
-            valve_state=True,
+            valve=0, ## for valve0 and valve1 control
             pump_state=True,
             amb_pressure=True,
-            amb_temp=True
+            amb_temp=True,
+            valve_state=True, ## for valve status request
             )
 
 
@@ -25,9 +25,20 @@ def pump_toggle():
     data['pump_rate'] = not int(data['pump_rate'])
     update()
 
-def valve_toggle():
-    valve_b.config(background="red", activebackground="red")
-    data['valve'] = not int(data['valve'])
+def valve0_toggle():
+    valve0_b.config(background="red", activebackground="red")
+    if bool(int(data['valve']) & 0b1) == False:
+        data['valve'] |= 0b10000001
+    else:
+        data['valve'] &= 0b11111110
+    print "data['valve']:", data['valve']
+    update()
+def valve1_toggle():
+    valve1_b.config(background="red", activebackground="red")
+    if bool(int(data['valve']) & 0b10 == False):
+        data['valve'] |= 0b10000010
+    else:
+        data['valve'] &= 0b11111101
     update()
 
 def set_sample_interval(val):
@@ -38,21 +49,24 @@ def set_pump_rate(val):
     data['pump_rate'] = int(val)
 
 def set_valve(val):
-    data['valve'] = val
+    data['valve'] = bool(val)
 
 r = Tk()
 
 pump_b = Button(r, text="Pump Toggle", command=pump_toggle)
 pump_b.grid(row=0, column=0)
 
-valve_b = Button(r, text="Valve Toggle", command=valve_toggle)
-valve_b.grid(row=0, column=1)
+valve0_b = Button(r, text="Valve 0 Toggle", command=valve0_toggle)
+valve0_b.grid(row=0, column=1)
+
+valve1_b = Button(r, text="Valve 1 Toggle", command=valve1_toggle)
+valve1_b.grid(row=0, column=2)
 
 reset_b = Button(r, text="Update", command=update)
-reset_b.grid(row=0, column=2)
+reset_b.grid(row=0, column=3)
 
 reset_b = Button(r, text="Reset", command=reset)
-reset_b.grid(row=0, column=3)
+reset_b.grid(row=0, column=4)
 
 Label(r, text='Sample interval ms').grid(row=1, column=0)
 sam_int = Scale(r, from_=0, to = 255, orient=HORIZONTAL, command=set_sample_interval)
@@ -83,8 +97,10 @@ def check_serial():
     r.after(1, check_serial)
 
 def new_data(packet):
-    GAGE_MIN_COUNT = 2470
-    GAGE_MAX_COUNT = 24575 # 0x5fff
+    # 0 - 2594
+    # 200 -- 14500
+    GAGE_MIN_COUNT = 2470 ## 
+    GAGE_MAX_COUNT = 24575 # 0x5fff ## 14XXX
     GAGE_COUNT_RANGE = GAGE_MAX_COUNT
     GAGE_MAX_PRESSURE_MB = 2000
     GAGE_SENSITIVITY = float(GAGE_COUNT_RANGE) / GAGE_MAX_PRESSURE_MB
@@ -93,6 +109,7 @@ def new_data(packet):
     bar = (bits - GAGE_MIN_COUNT) / GAGE_SENSITIVITY
     mmhg = (bits - 2470) * 280 / 15030.
     cuff.set(mmhg)
+    # cuff.set(cuff.get() * .9 + bits * .1)
     pulse.set(packet[3])
     if(packet[2] > 0):
         flow.set(packet[2])
@@ -110,10 +127,14 @@ def new_status(packet):
         else:
             pump_b.config(background="grey", activebackground="grey")
     elif packet.devid == 6:
-        if packet.value:
-            valve_b.config(background="green", activebackground="green")
+        if packet.value & 0b01:            
+            valve0_b.config(background="green", activebackground="green")
         else:
-            valve_b.config(background="grey", activebackground="grey")
+            valve0_b.config(background="grey", activebackground="grey")
+        if packet.value & 0b10:            
+            valve1_b.config(background="green", activebackground="green")
+        else:
+            valve1_b.config(background="grey", activebackground="grey")
 def new_short(packet):
     print packet, '%x %x' % (ord(packet[0]), ord(packet[1]))
     if packet[0] == 'F':

@@ -28,11 +28,15 @@ def limit_check(val, name):
     return val
 
 def mmhg_to_count(val):
-    count = val * 15030 / 280. + 2470
-    return count
+    # count = val * 15030 / 280. + 2470 ### was
+    # return count                      ### orig
+    b, m = [ 2599.61459873,    58.94583836] ## calibrated one unit
+    return m * val + b
 
 def count_to_mmhg(val):
-    return (val - 2470) * 280 / 15030.
+    # return (val - 2470) * 280 / 15030. ## orig
+    b, m = [ 2599.61459873,    58.94583836] ## calibrated one unit
+    return (val - b) / m
 
 def mmhg_to_mb(val):
     return  val * 1.33322368
@@ -64,13 +68,15 @@ def connect():
     s = Serial(port, baudrate, timeout=timeout)
 connect()
     
+def getValveByte(valve0=False, valve1=False):
+    return 1<<7 | bool(valve0) | bool(valve1) << 1
 
 # s.rtscts = True
 #         [init,  interval, pump_rate, valve, status]
 
 ### Message defaults!
 __cmd__ = [False,           0,         0,     0,      0]
-def send_cmd(init=None, interval=None, pump_rate=None, valve=None, 
+def send_cmd(init=None, interval=None, pump_rate=None, valve=None,
              cuff_pressure=False,
              flow_rate=False,
              pulse=False,
@@ -79,7 +85,6 @@ def send_cmd(init=None, interval=None, pump_rate=None, valve=None,
              pump_state=False,
              valve_state=False,
              ):
-
     ## grab defaults
     if init is None:
         init = __cmd__[0]
@@ -89,6 +94,8 @@ def send_cmd(init=None, interval=None, pump_rate=None, valve=None,
         pump_rate = __cmd__[2]
     if valve is None:
         valve = __cmd__[3]
+    # else:
+    #     valve = 1 << 7 | bool(valve0) | bool(valve1) << 1
 
     __send_cmd(init=init,
                interval=interval,
