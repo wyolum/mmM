@@ -85,7 +85,6 @@ def start(event):
         ucontrol = bpc.uControl(listener)
     try:
         name = "test%d.uct" % start.tid
-        name = "test0.uct"
         sys, dia = bpc.main(name, listener, ucontrol)
         image_fn = 'images/%s.png' % name
         figure(620)
