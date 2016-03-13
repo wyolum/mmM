@@ -42,7 +42,8 @@ const float STS_GAIN           = 175.72;
 
 // pin assignments
 const byte     PUMP_PIN = 9;
-const byte    VALVE_PIN = 4;
+const byte    VALVE1_PIN = 4;
+const byte    VALVE2_PIN = 5;
 const byte    PULSE_PIN = 1;
 const byte          LED = 13;
 const byte      FLOW_TX = 2;

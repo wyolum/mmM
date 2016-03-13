@@ -68,24 +68,35 @@ void pump_off(){
 /*
  * Open valve
  * full closed 0 <= dc <= 1(full open)
+ * State for two valves is set in bits 0,1
+ * enable is bit 7. If bit 7 is set, control both valves
  */
 void control_valve(int  state){
-  if(state == VALVE_OPEN){
+  if (!state &0x80) return;
+  if((state & 0x01) == VALVE_OPEN){
     valve_is_closed = false;
     pressure_start = -1;
-    digitalWrite(VALVE_PIN, LOW);
+    digitalWrite(VALVE1_PIN, LOW);
   }
   else{
     valve_is_closed = true;
     pressure_start = millis();
-    digitalWrite(VALVE_PIN, HIGH);
+    digitalWrite(VALVE1_PIN, HIGH);
+  }
+  if(((state & 0x02)>>1) == VALVE_OPEN){
+    pressure_start = -1;
+    digitalWrite(VALVE2_PIN, LOW);
+  }
+  else{
+    pressure_start = millis();
+    digitalWrite(VALVE2_PIN, HIGH);
   }
 }
-void valve_close(){
-  control_valve(VALVE_CLOSE);
+void valves_close(){
+  control_valve(0x80);
 }
-void valve_open(){
-  control_valve(VALVE_OPEN);
+void valves_open(){
+  control_valve(0x83);
 }
 
 /*
@@ -384,7 +395,7 @@ boolean serial_interact(){
 	    if((command[5] >> 6) & 1){
 	      // VALVE
 	      status_msg[3] = 6;
-	      status_msg[1] = *valve_state_p;
+	      status_msg[1] = (*valve_state_p)&0x7f;
 	      status_msg[2] = 0;
 	      send_msg(status_msg, 4);
 	    }
@@ -433,10 +444,10 @@ void bpc_setup(){
   Flow_last_end = 0;
   
   pinMode(PUMP_PIN, OUTPUT);
-  pinMode(VALVE_PIN, OUTPUT);
-  
+  pinMode(VALVE1_PIN, OUTPUT);
+  pinMode(VALVE2_PIN, OUTPUT);
   // open valve as audio feed back
-  valve_open();
+  valves_open();
   
   // turn off pump
   pump_off();
@@ -474,7 +485,7 @@ void bpc_setup(){
   // Serial.println("bpc_setup() flow ready");
   // start I2C
   Wire.begin();
-  valve_close();
+  valves_close();
  #ifdef TEMPSTS21 
   // start STS21 temperature sensor
   Wire.beginTransmission(STS_ADDR);
@@ -534,7 +545,7 @@ void loop(){
 }
 
 void abort(byte code){
-  valve_open();
+  valves_open();
   pump_off();
   
   command[1] = 0; // go to un initialized state
