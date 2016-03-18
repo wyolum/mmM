@@ -15,6 +15,77 @@ import scipy.integrate
 import pylab
 # import peakdetect
 
+def blood_pressure(raw):
+    '''
+    pressure is the raw pressure readings for the descent data only
+    '''
+    dt = defaults['dt']
+    lp = filter(raw, LP_TAPS)[1000:]
+    llp = filter(raw, LLP_TAPS)[1000:]
+    bpf = lp - llp
+    troughs, peaks, deltas = get_troughs_peaks_deltas(bpf)
+    
+    delta_vs = []
+    deltav_ps = []
+    deltav_ts = []
+    cuff_pressures = (llp[peaks] + llp[troughs])/2.
+    
+    ### anomoly check using MAD
+    ddeltas = numpy.diff(deltas)
+    mad_thresh = defaults['mad_thresh']
+    mad_n_bad_thresh = defaults['mad_n_bad_thresh']
+    mad_failed = mad_thresh_test(ddeltas, mad_thresh, mad_n_bad_thresh)
+    if mad_failed:
+        # raise ValueError("!!! Artifact detected !!!")
+        print "!!! Artifact detected !!!"
+        
+    m = mad(ddeltas)
+    candidate_deltas = [d for idx, d in zip(peaks, deltas) if llp[idx] > 60] ## MAP must be above 60mmhg.
+    n_peak = numpy.argmax(candidate_deltas) * 2 + 1
+    if n_peak >= len(peaks):
+        n_peak = len(peaks)
+    if n_peak < 15:
+        if len(peaks) < 15:
+            n_peak = len(peaks)
+        else:
+            n_peak = 15
+    assert n_peak <= len(peaks)
+    idx = numpy.arange(len(deltas))
+
+    fit_idx = numpy.arange(troughs[0], troughs[n_peak-1], 1)
+    fit_times = fit_idx * dt
+    p6 = poly_fit(troughs[:n_peak] * dt, deltas[:n_peak], 6) ### Actual
+    p5 = poly_der(p6)
+    t = numpy.arange(peaks[0] * dt, peaks[n_peak - 1] * dt, .05)
+    y = poly_eval(p6, t)
+    map_time = t[numpy.argmax(y)]
+    map_idx = int(map_time / dt)
+    MAP6 = llp[map_idx]
+
+    peak_fit = poly_eval(p6, map_time)
+    sbp_target = .55 * peak_fit
+    dbp_target = .85 * peak_fit
+
+    #### find SBP time
+    t = numpy.arange(map_time, 0, -.01) ### time going backwards from MAP
+    pt = poly_eval(p6, t) - sbp_target
+    sbp_time = t[numpy.where(pt < 0)[0][0]]
+
+    #### find DBP time
+    t = numpy.arange(map_time, 30 * map_time, .01)
+    pt = poly_eval(p6, t) - dbp_target
+    below_target_dbp = numpy.where(pt < 0)[0]
+    if len(below_target_dbp) == 0:
+        raise ValueError('target diastolic polynomial ratio not reached in polynomial evaluation')
+    dbp_time = t[numpy.where(pt < 0)[0][0]]
+
+    sbp_idx = int(sbp_time / dt)
+    dbp_idx = int(dbp_time / dt)
+
+    sbp = llp[sbp_idx]
+    dbp = llp[dbp_idx]
+    return sbp, dbp, mad_failed
+    
 def get_troughs_peaks_deltas(bpf):
     peaks, troughs = find_pulse_peaks_and_troughs(bpf, defaults['dt'])
     if peaks[0] < troughs[0]: # peak follows trough

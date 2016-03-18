@@ -231,8 +231,7 @@ def main(name, listener, ucontrol):
    
 USAGE = 'python record_data.py basename'
 if __name__ == '__main__':
+    import sys
     listener = Listener()
     ucontrol = uControl(listener)
-
-    import sys
     main(sys.argv[1], listener, ucontrol)
