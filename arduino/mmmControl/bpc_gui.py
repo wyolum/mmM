@@ -11,6 +11,24 @@ fontsize=18
 
 WIDTH = 800
 HEIGHT = 480
+
+class HgColumn:
+    def __init__(self, can):
+        can.create_rectangle(WIDTH/2 - 5, 5, WIDTH/2 + 5, HEIGHT - 5)
+    def set(self, val):
+        h = val * (HEIGHT - 10) / 300.
+        can.create_rectangle(WIDTH/2 - 5, HEIGHT - 5 - h, 
+                             WIDTH/2 + 5, HEIGHT - 5, 
+                             fill='red')
+        
+class MyListener(bpc.Listener):
+    '''
+    Handle messages from uControl
+    '''
+    def mpid_cb(self, ucontrol, pkt):
+        bpc.Listener(self, ucontrol, pkt)
+        mmhg.set(pkt.cuff)
+
 class CanvasButton:
     buttons = []
     def top(self):
@@ -27,7 +45,7 @@ class CanvasButton:
                         font=("Helvetica", fontsize),
                         anchor=anchor, 
                         tag='button')
-        can.create_rectangle(bbox[0], bbox[1], 
+        can.create_rectangle(bbox[0],  bbox[1], 
                              bbox[2] + bbox[0], 
                              bbox[3] + bbox[1])
         self.buttons.append(self)
@@ -60,7 +78,7 @@ def display_image(im):
     x = int(x / scale)
     y = int(y / scale)
 
-    im = im.resize((x,y));
+    im = im.resize((x,y))
     image_tk = ImageTk.PhotoImage(im)
 
     ## delete all canvas elements with "image" in the tag
@@ -80,7 +98,7 @@ def start(event):
         del image_tk
     clear_can()
     if listener is None:
-        listener = bpc.Listener()
+        listener = MyListener()
     if ucontrol is None:
         ucontrol = bpc.uControl(listener)
     try:
@@ -104,6 +122,7 @@ start.tid = len(glob.glob('images/*.uct'))
 
 can = Canvas(root, width=WIDTH, height=HEIGHT)
 start_b = CanvasButton(can, 'Start', (0, 0, 80, 20), command=start)
+HgColumn(can)
 can.pack()
 root.mainloop()
 import sys

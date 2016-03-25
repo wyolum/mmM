@@ -65,7 +65,7 @@ const int VALVE_CLOSE = 0;
 const byte FLOW_BUFFER_LEN = 8; // enough bytes for two valid samples
 const byte FLOW_MAX_TRY = 20; // max # tries to read flow meter
 const unsigned short FLOW_MAX_COUNT = 30000;
-const byte SAMPLE_INTERVAL_STEP_MS = 4;
+const byte SAMPLE_INTERVAL_STEP_MS = 5;
 
 // I2C Addresses
 const byte    DS3231_ADDR = 104;

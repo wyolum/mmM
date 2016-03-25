@@ -97,7 +97,7 @@ def check_serial():
     r.after(1, check_serial)
 
 def new_data(packet):
-    # 0 - 2594
+    # 0    - 2594
     # 200 -- 14500
     GAGE_MIN_COUNT = 2470 ## 
     GAGE_MAX_COUNT = 24575 # 0x5fff ## 14XXX

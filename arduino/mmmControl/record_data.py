@@ -1,3 +1,5 @@
+import util
+import e_sphyg_bpc
 import time
 from drive import *
 import pickle
@@ -24,61 +26,25 @@ class Listener:
     def short_cb(self, ucontrol, pkt):
         self.last_short = pkt
 
-def collect(max_p, hold_p, hold_t):
-    ucontrol.maintain(0, max_p, 0)
-    ucontrol.hirate = []
-    ucontrol.record(True)
-    ucontrol.deflate(hold_p)
-    ucontrol.delay(hold_t)
-    data = ucontrol.hirate[:]
-    return data
-
 listener = Listener()
 ucontrol = uControl(listener)
 
 def main(base):
-# if __name__ == '__main__':
-    # base = 'justin_1'
-    #base = 'michael_2'
-
-    duration = 30
-    # do no release baseline
-    c1 = collect(50, 30, duration)
-    pfn = '%s_no_release_base.uct' % base
-    pickle.dump(c1, open(pfn, 'w'))
-    print 'wrote', pfn
-
-    # do fast release baseline
-    ucontrol.maintain(0, 190, 0) ### pump it up
-    print 'manual release down to 0'
-    ucontrol.deflate(10)
-    while ucontrol.cuff_pressure > 10:
-        ucontrol.delay(.5)
-    c2 = collect(50, 30, duration)
-    pfn = '%s_fast_release_base.uct' % base
-    pickle.dump(c2, open(pfn, 'w'))
-    
-    # do slow release baseline
-    c3 = collect(190, 30, duration)
-    pfn = '%s_slow_release_base.uct' % base
-    pickle.dump(c3, open(pfn, 'w'))
-    
-    # do fast release hyper
-    ucontrol.maintain(180, 190, 300) ### pump it up and hold
-    print 'manual release down to 0'
-    ucontrol.deflate(10)
-    while ucontrol.cuff_pressure > 10:
-        ucontrol.delay(.5)
-    c4 = collect(50, 30, duration)
-    pfn = '%s_fast_release_hyper.uct' % base
-    pickle.dump(c4, open(pfn, 'w'))
-
-    # do slow release hyper
-    c5 = collect(190, 30, duration)
-    pfn = '%s_slow_release_hyper.uct' % base
-    pickle.dump(c5, open(pfn, 'w'))
-    print 'wrote', pfn
-    ucontrol.abort()
+    try:
+        ucontrol.hirate = []
+        ucontrol.record(True)
+        while True:
+            ucontrol.delay(1)
+    except KeyboardInterrupt:
+        data = ucontrol.hirate[:]
+        raw = [l[1] for l in data]
+        raw = e_sphyg_bpc.crop(raw)
+        print util.blood_pressure(raw)
+        show()
+    finally:
+        ext = raw_input('sys_dia:')
+        pickle.dump(data, open('%s_%s.uct' % (base, ext), 'w'))
+        ucontrol.abort()
 
 USAGE = 'python record_data.py basename'
 if __name__ == '__main__':
