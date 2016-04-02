@@ -27,7 +27,7 @@ class MyListener(bpc.Listener):
     '''
     def mpid_cb(self, ucontrol, pkt):
         bpc.Listener.mpid_cb(self, ucontrol, pkt)
-        mmhg.set(pkt.cuff)
+        # mmhg.set(pkt.cuff)
 
 class CanvasButton:
     buttons = []
