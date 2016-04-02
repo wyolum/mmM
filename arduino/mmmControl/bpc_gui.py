@@ -26,7 +26,7 @@ class MyListener(bpc.Listener):
     Handle messages from uControl
     '''
     def mpid_cb(self, ucontrol, pkt):
-        bpc.Listener(self, ucontrol, pkt)
+        bpc.Listener.mpid_cb(self, ucontrol, pkt)
         mmhg.set(pkt.cuff)
 
 class CanvasButton:
