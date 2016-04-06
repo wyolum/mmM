@@ -81,7 +81,7 @@ sam_int.grid(row=1, column=1)
 
 cuff = Scale(r, from_=0, to = 24000, orient=VERTICAL, label='Cuff')
 pulse = Scale(r, from_=0, to = 1024, orient=VERTICAL, label='Pulse')
-flow = Scale(r, from_=0, to = 3000, orient=VERTICAL, label='Flow')
+flow = Scale(r, from_=-200, to = 200, orient=VERTICAL, label='Flow')
 cuff.grid(row=4, column=0);
 pulse.grid(row=4, column=1);
 flow.grid(row=4, column=2);
@@ -112,7 +112,7 @@ def new_data(packet):
     # cuff.set(cuff.get() * .9 + bits * .1)
     pulse.set(packet[3])
     if(packet[2] > 0):
-        flow.set(packet[2])
+        flow.set(count_to_smlpm(packet[2]))
         
     # print packet
 def new_status(packet):

@@ -37,12 +37,12 @@ class Listener:
     def short_cb(self, ucontrol, pkt):
         self.last_short = pkt
 
-def bpc_collect(name, listener, ucontrol):
+def bpc_collect(name, listener, ucontrol, abort=None):
 # if __name__ == '__main__':
     if True:
         max_p = 200
         min_p = 30
-        ucontrol.maintain(0, max_p, 0)
+        ucontrol.maintain(0, max_p, 0, abort=abort)
         ucontrol.hirate = []
         ucontrol.record(True)
         ucontrol.deflate(min_p)
@@ -223,8 +223,8 @@ def bpc_process(data, listener, ucontrol):
         pass
     return __SBP, __DBP
 
-def main(name, listener, ucontrol):
-    data = bpc_collect(name, listener, ucontrol)
+def main(name, listener, ucontrol, abort=None):
+    data = bpc_collect(name, listener, ucontrol, abort=abort)
     sys, dia = bpc_process(data, listener, ucontrol)
     print sys, dia
     return sys, dia

@@ -14,7 +14,7 @@ from constants import *
 
 #         name   lo    hi   unit
 LIMITS = {'GAGE':(0,  400, 'MMHG'),
-          'FLOW':(0, 1000, 'SCCM'),
+          'FLOW':(-1000, 1000, 'SCCM'),
           'ABS_PRESSURE':(5, 1500, 'MBAR'),
           'TEMP':(0, 30, 'C')
           }
@@ -37,6 +37,12 @@ def count_to_mmhg(val):
     # return (val - 2470) * 280 / 15030. ## orig
     b, m = [ 2599.61459873,    58.94583836] ## calibrated one unit
     return (val - b) / m
+
+SENSIRION_SCALE_FACTOR_F = 140
+SENSIRION_OFFSET_F  = 32000
+def count_to_smlpm(count):
+    smlpm = float(count - SENSIRION_OFFSET_F) / float(SENSIRION_SCALE_FACTOR_F);
+    return smlpm
 
 def mmhg_to_mb(val):
     return  val * 1.33322368
@@ -213,7 +219,7 @@ class MeasurementsPID(PID):
         PID.__init__(self, packet)
         self.millis = self[0]
         self.cuff = limit_check(count_to_mmhg(self[1]), 'GAGE') ## in mmhg
-        self.flow = limit_check(self[2], 'FLOW')
+        self.flow = limit_check(count_to_smlpm(self[2]), 'FLOW')
         self.pulse = self[3]
 
 class ShortPID(PID):

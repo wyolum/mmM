@@ -4,6 +4,11 @@
 #include <SPI.h>
 
 
+#define SENSIRION_ADDR 64
+#define FLOW_METER_ADDR SENSIRION_ADDR
+#define SENSIRION_SCALE_FACTOR_F 140
+#define SENSIRION_OFFSET_F 32000
+
 /*
  * Flush and discard all serial input
  */
@@ -140,25 +145,6 @@ void start_sampling(unsigned long __interval_ms){
     // Serial << "Start sampling" << __interval_ms << "\n";
     interval_ms = __interval_ms;
     if(__interval_ms > 0){
-#ifdef FLOW_METER
-      if(!Flow_serial.available()){
-	if(!Flow_run_command("go\n", FLOW_MAX_TRY)){
-	  short_msg[1] = 'F';
-	  short_msg[2] = 'g';
-	}
-	else{
-	  short_msg[1] = 'f';
-	  short_msg[2] = Flow_serial.available();
-	}
-	send_msg(short_msg, 3);
-      }
-#else
-// pretend there's flow data available
- short_msg[1] = 'f';
- short_msg[2] = 1;
- send_msg(short_msg, 3);
-#endif
- 
 
       sampling = true;
       set_next_sample(now_ms);
@@ -207,23 +193,15 @@ void read_amb_pressure(byte *where){
 void read_flow(byte *where){
   byte n_flow;
   short flow;
-
-  where[0] = Flow_rate[1];
-  where[1] = Flow_rate[0];
-#ifdef NOTDEFINED // DBG Message
-  short_msg[1] = 'O';
-  short_msg[2] = where[0];
-  send_msg(short_msg, 3);
-  short_msg[1] = 'T';
-  short_msg[2] = where[1];
-  send_msg(short_msg, 3);
-#endif
-  /*-- MOCK UP ------------------------------------------------------------------------------*/
   
-  // read from serial
-  // *(unsigned short*)(where) = flow_rate;
-  /*-- MOCK UP ------------------------------------------------------------------------------*/
-  
+  Wire.requestFrom(FLOW_METER_ADDR, 2);
+  if(Wire.available() == 2){
+    /* count = Wire.read()<<8; */ // this works
+    /* count |= Wire.read(); */
+    /* return (count - SENSIRION_OFFSET_F) / float(SENSIRION_SCALE_FACTOR_F); */
+    where[1] = Wire.read(); // works!
+    where[0] = Wire.read(); // works!
+  }
 }
 
 void read_pulse(byte *where){
@@ -452,7 +430,7 @@ void bpc_setup(){
   // turn off pump
   pump_off();
 
-#ifdef FLOW_SENSOR
+#ifdef SERIAL_FLOW_SENSOR
 // start flow sensor serial
   Flow_serial.begin(19200);
 
@@ -481,10 +459,14 @@ void bpc_setup(){
     short_msg[2] = 'g';
     send_msg(short_msg, 3);    
   } 
- #endif   
+#endif
   // Serial.println("bpc_setup() flow ready");
   // start I2C
   Wire.begin();
+  Wire.beginTransmission(SENSIRION_ADDR);
+  Wire.write(0x10);
+  Wire.write(0x00);
+  Wire.endTransmission();
   valves_close();
  #ifdef TEMPSTS21 
   // start STS21 temperature sensor

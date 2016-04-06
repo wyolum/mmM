@@ -27,7 +27,7 @@ class MyListener(bpc.Listener):
     '''
     def mpid_cb(self, ucontrol, pkt):
         bpc.Listener.mpid_cb(self, ucontrol, pkt)
-        # mmhg.set(pkt.cuff)
+        mmhg.set(pkt.cuff)
 
 class CanvasButton:
     buttons = []
@@ -88,12 +88,17 @@ def display_image(im):
                      image=image_tk, 
                      tag="image")
 root = Tk()
-root.attributes("-fullscreen",False)
+root.attributes("-fullscreen", False)
 ucontrol = None
 listener = None
+def abort():
+    return testing
+
 def start(event):
     global ucontrol, listener
     global image_tk
+    global testing
+    testing = False
     if image_tk is not None:
         del image_tk
     clear_can()
@@ -103,7 +108,7 @@ def start(event):
         ucontrol = bpc.uControl(listener)
     try:
         name = "test%d.uct" % start.tid
-        sys, dia = bpc.main(name, listener, ucontrol)
+        sys, dia = bpc.main(name, listener, ucontrol, abort=abort)
         image_fn = 'images/%s.png' % name
         figure(620)
         title('%.0f/%.0f' % (sys, dia))
@@ -117,12 +122,18 @@ def start(event):
         start_b.top()
     finally:
         ucontrol.deflate(10, fast=True)
+testing = False
+def stop(event):
+    global abort_test
+    testing = False
+        
 start.tid = len(glob.glob('images/*.uct'))
 
 
 can = Canvas(root, width=WIDTH, height=HEIGHT)
 start_b = CanvasButton(can, 'Start', (0, 0, 80, 20), command=start)
-HgColumn(can)
+# stop_b = CanvasButton(can, 'Stop', (90, 0, 80, 20), command=stop)
+mmhg = HgColumn(can)
 can.pack()
 root.mainloop()
 import sys
