@@ -8,7 +8,8 @@
 #define cbi(sfr, bit) (_SFR_BYTE(sfr) &= ~_BV(bit))
 #endif
 
-#define SENSIRION_ADDR 64
+#define SENSIRION_ADDR 64 // 200 SLM
+// #define SENSIRION_ADDR 1  // 20 SLM
 #define SENSIRION_READ_FLOW 0x1000
 #define SENSIRION_READ_TEMP 0x1001
 #define SENSIRION_SCALE_FACTOR_F 140
@@ -21,7 +22,7 @@ void setup()
 {
   Wire.begin();        // join i2c bus (address optional for master)
   Serial.begin(115200);  // start serial for output
-  // probe_I2C();
+probe_I2C();// while(1) delay(100);
   Wire.beginTransmission(SENSIRION_ADDR);
   Wire.write(0x10);
   Wire.write(0x00);
@@ -31,11 +32,17 @@ float getFlow(){
   float flow;
   int count;
 
+  // hi resolution module
+  // Wire.beginTransmission(SENSIRION_ADDR);
+  // Wire.write(0xF1);
+  // Wire.endTransmission();
+  // end hi res module
   Wire.requestFrom(SENSIRION_ADDR, 2);    // request 6 bytes from slave device #2
+delay(10);
+Serial.println(Wire.available());
   count = Wire.read()<<8;
   count |= Wire.read();
   return (count - SENSIRION_OFFSET_F) / float(SENSIRION_SCALE_FACTOR_F);
-
 }
 float getTemp(){
   Wire.beginTransmission(SENSIRION_ADDR);

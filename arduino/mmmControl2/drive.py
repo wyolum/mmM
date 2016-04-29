@@ -38,10 +38,16 @@ def count_to_mmhg(val):
     b, m = [ 2599.61459873,    58.94583836] ## calibrated one unit
     return (val - b) / m
 
+## 200 mlps
 SENSIRION_SCALE_FACTOR_F = 140
 SENSIRION_OFFSET_F  = 32000
+# /* (count - SENSIRION_OFFSET_F) / float(SENSIRION_SCALE_FACTOR_F); */
+
+## 20 mlps
+# SENSIRION_SCALE_FACTOR_F = 1
+# SENSIRION_OFFSET_F  = 0
 def count_to_smlpm(count):
-    smlpm = float(count - SENSIRION_OFFSET_F) / float(SENSIRION_SCALE_FACTOR_F);
+    smlpm = float(count - SENSIRION_OFFSET_F) / float(SENSIRION_SCALE_FACTOR_F) * 1000;
     return smlpm
 
 def mmhg_to_mb(val):
@@ -202,6 +208,7 @@ class PID(object):
     def __repr__(self):
         return '%s-%s' % (self.__class__.__name__, self.payload)
 
+PID_file = open("Flow3.txt", 'wb')
 class MeasurementsPID(PID):
     '''
     High rate data format:
@@ -212,8 +219,8 @@ class MeasurementsPID(PID):
     89       unsigned short   -- pulse                    [3]
     '''
     PID = chr(1)
-    PAYLOAD_FMT = 'IHhh' ## pack tightly ## reformat for new flow meter in pulse slot
-    ## PAYLOAD_FMT = 'IHhH' ## pack tightly
+    # PAYLOAD_FMT = 'IHhH' ## pack tightly ## orig pulse sensor
+    PAYLOAD_FMT = 'IHhh' ## pack tightly   ## using pulse slot for second flow meter
     N_BYTE = struct.calcsize(PAYLOAD_FMT) + 2
 
     def __init__(self, packet):
@@ -222,7 +229,8 @@ class MeasurementsPID(PID):
         self.cuff = limit_check(count_to_mmhg(self[1]), 'GAGE') ## in mmhg
         self.flow = limit_check(count_to_smlpm(self[2]), 'FLOW')
         self.pulse = self[3]
-
+        print >> PID_file, self.flow, self.pulse
+        
 class ShortPID(PID):
     '''
     Short 2-char message from device.

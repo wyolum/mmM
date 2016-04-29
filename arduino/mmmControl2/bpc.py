@@ -26,7 +26,7 @@ class Listener:
     def mpid_cb(self, ucontrol, pkt):
         self.last_mpid = pkt
         if self.count % 200 == 0:
-            print self.count / 200., pkt.cuff, pkt.flow, pkt.pulse
+            print self.count / 200., pkt.cuff, pkt.flow
         # ucontrol.cuff = pkt.cuff
         self.count += 1
         # ucontrol.abort()

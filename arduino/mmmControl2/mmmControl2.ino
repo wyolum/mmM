@@ -4,11 +4,8 @@
 #include <SPI.h>
 
 
-#define SENSIRION_ADDR 64 // 200 mlpm
-//#define SENSIRION_ADDR 1 // 20 mlpm
-#define FLOW_METER_ADDR SENSIRION_ADDR
-#define SENSIRION_SCALE_FACTOR_F 140
-#define SENSIRION_OFFSET_F 32000
+#define SENSIRION_ADDR_1 64 // 200 mlpm
+#define SENSIRION_ADDR_2 1 // 20 mlpm
 
 /*
  * Flush and discard all serial input
@@ -192,15 +189,27 @@ void read_amb_pressure(byte *where){
 }
 
 void read_flow(byte *where){
-  byte n_flow;
   short flow;
   
-  Wire.requestFrom(FLOW_METER_ADDR, 2);
+// Hi Res Sensirion start initiate read command
+// end hi res start initaate read command
+  Wire.requestFrom(SENSIRION_ADDR_1, 2);
   if(Wire.available() == 2){
-    /* count = Wire.read()<<8; */ // this works
-    /* count |= Wire.read(); */
-    /* return (count - SENSIRION_OFFSET_F) / float(SENSIRION_SCALE_FACTOR_F); */
+    where[1] = Wire.read(); // works!
+    where[0] = Wire.read(); // works!
+  }
+}
 
+void read_flow2(byte *where){
+  short flow;
+  
+// Hi Res Sensirion start initiate read command
+Wire.beginTransmission(SENSIRION_ADDR_2);
+Wire.write(0xF1);
+Wire.endTransmission();
+// end hi res start initaate read command
+  Wire.requestFrom(SENSIRION_ADDR_2, 2);
+  if(Wire.available() == 2){
     where[1] = Wire.read(); // works!
     where[0] = Wire.read(); // works!
   }
@@ -244,8 +253,9 @@ void take_sample(){
     read_flow(hirate_data + 7);
 
     // read pulse sensor
-    read_pulse(hirate_data + 9);
-    
+    // read_pulse(hirate_data + 9);
+    read_flow2(hirate_data + 9); // higher resolution flow meter
+
     // send of hirate data
     send_msg(hirate_data, MEASUREMENTS_LEN);
   }
@@ -465,7 +475,7 @@ void bpc_setup(){
   // Serial.println("bpc_setup() flow ready");
   // start I2C
   Wire.begin();
-  Wire.beginTransmission(SENSIRION_ADDR);
+  Wire.beginTransmission(SENSIRION_ADDR_1);
   Wire.write(0x10);
   Wire.write(0x00);
   Wire.endTransmission();
