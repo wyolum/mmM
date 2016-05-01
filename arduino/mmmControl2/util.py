@@ -632,7 +632,10 @@ def find_pulse_peaks_and_troughs(data, dt, max_pulse_period=defaults['max_pulse_
     start = max_i - max_pulse_period_samples / 2
     start = max([0, start])
     end = max_i + max_pulse_period_samples / 2
-    min_left = start + numpy.argmin(data[start:max_i])
+    if max_i > 0:
+        min_left = start + numpy.argmin(data[start:max_i])
+    else:
+        min_left = start
     min_right = max_i + numpy.argmin(data[max_i:end])
     pulse_period = (min_right - min_left) * dt
 

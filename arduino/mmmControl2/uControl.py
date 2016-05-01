@@ -26,9 +26,10 @@ class uControl:
         self.amb_pressure = None
         self.amb_temp = None
         self.pump_state = None
-        self.valve_state = None
+        self.valve_state = getValveByte(False, False)
         self.short_msg = None
         self.last_update = None
+        self.bleeding = False
         
         ## used to control inflation and deflation
         self.max_pressure = 1e6
@@ -54,6 +55,7 @@ class uControl:
                 tries += 1
                 if tries % 10 == 9:
                     print 'tries', tries
+        # self.send_cmd(valve=self.valve_state)
                     
     def send_cmd(self, **kw):
         '''
@@ -89,10 +91,28 @@ class uControl:
             print 'max pressure exceeded, pump off', self.cuff_pressure, self.min_pressure, self.max_pressure
             self.pump_state = False
             send_cmd(pump_rate=self.pump_state)
-        elif self.lpf.last < self.min_pressure and not self.pump_state:
+        if self.lpf.last < self.min_pressure and not self.pump_state:
             print 'min pressure exceeded, pump on', self.cuff_pressure, self.min_pressure, self.max_pressure
             self.pump_state = True
+            send_cmd(valve=getValveByte(valve0=False, valve1=False))
             send_cmd(pump_rate=self.pump_state)
+        if False:
+            any_open    = bool(0b00000011 & self.valve_state)
+            both_closed = not any_open
+            if self.lpf.last <= (self.max_pressure + self.min_pressure) / 2. and self.bleeding:
+                print 'stop the bleeding'
+                self.valve_state = getValveByte(valve0=False, valve1=False)
+                send_cmd(valve=self.valve_state)
+                self.bleeding = False
+
+            if self.lpf.last > self.max_pressure and both_closed and not self.bleeding:
+                print 'start the bleeding'
+                ### if valves are both closed, start bleeding
+                self.valve_state = getValveByte(valve0=True, valve1=False)
+                send_cmd(valve=self.valve_state)
+                self.bleeding = True
+            
+            
     def lpid_cb(self, pkt):
         '''
         Called when a new lorate measurement packet is recieved (lorate)
@@ -181,12 +201,10 @@ class uControl:
         '''
         Open valve until mmhg is reached
         '''
-        self.min_pressure = -1
+        self.min_pressure = -1              ## make sure pump does not come on
         self.max_pressure = mmhg
-        print self.max_pressure, self.cuff_pressure
         if self.cuff_pressure > self.max_pressure:
-            send_cmd(valve=getValveByte(valve0=True, valve1=fast), 
-                     valve_state=True)
+            send_cmd(valve=getValveByte(valve0=True, valve1=fast))
         
         while self.cuff_pressure > self.max_pressure:
             serial_interact()

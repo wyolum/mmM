@@ -37,83 +37,38 @@ class Listener:
     def short_cb(self, ucontrol, pkt):
         self.last_short = pkt
 
-def collect(name, listener, ucontrol, hold=0, fast_deflate=False, abort=None, min_p=30, max_p=200):
-# if __name__ == '__main__':
-    
-    ucontrol.maintain(0, max_p, hold, abort=abort)
-    ucontrol.hirate = []
-    ucontrol.record(True)
-    ucontrol.deflate(min_p, fast=fast_deflate)
-    ucontrol.maintain(0, min_p, 30, abort=abort)
-     
-    data = ucontrol.hirate[:]
-    if name is not None:
-        pickle.dump(data, open(name, 'w'))
-    return data
 
-def main(name, listener, ucontrol, abort=None):
+def main(name, listener, ucontrol):
     min_p = 30
     max_p = 200
            # pressure, hold, fast, hold
            #  0            1     2    3
-    runs = [(min_p + 30,   0,  True, 30),
-            (max_p     ,   0,  True, 30),
-            (max_p     ,   0, False, 30),
-            (max_p     , 300,  True, 30),
-            (max_p     ,   0, False, 30)]
+    runs = [
+        (min_p + 30,   0,  True, 30),
+        (max_p     ,   0, False, 30),   # Slow
+        (max_p     ,   0, True, 30),    # Fast
+        (max_p     , 300, False, 30),   ## slow release
+        (max_p     ,   0,  True, 30)     ## fast
+    ]
     
+    def bleed_abort():
+        if ucontrol.lpf.last > min_p + 5:
+            ucontrol.deflate(min_p + 4, fast = False)
+        return False
+
     for i, run in enumerate(runs):
-        ucontrol.maintain(0, run[0], run[1], abort=abort) ## inflate
-        ucontrol.hirate = []                              ## start recording
+        print 'PROTO:: inflate'
+        ucontrol.maintain(0, run[0], run[1], abort=None) ## inflate
+        print 'PROTO:: record'
+        ucontrol.hirate = []                                       ## start recording
         ucontrol.record(True)
-        ucontrol.deflate(min_p, run[2])                   ## deflate 
-        ucontrol.maintain(0, min_p, run[3])               ## hold
+        print 'PROTO:: deflate, fast=', run[2]
+        ucontrol.deflate(min_p + 5, run[2])                        ## deflate 
+        print 'PROTO:: hold'
+        ucontrol.maintain(0, min_p + 5, run[3], abort=bleed_abort)                ## hold
         fn = '%s_%02d.dat' %(name, i)                     
-        pickle.dump(ucontrol.hirate, open(fn, 'w'))       ## save
+        pickle.dump(ucontrol.hirate, open(fn, 'w'))                ## save
         print 'wrote', fn
-        
-    ## inflate to min_p + 30
-    ## hold 0
-    ## fast deflate to min_p
-    ## start measurements
-    ## hold 30
-    ## save measurements
-
-    ## inflate to max_p
-    ## hold 0
-    ## start measurements
-    ## slow deflate to min_p
-    ## hold 30
-    ## stop measurements
-
-    ## inflate to max_p
-    ## hold 0
-    ## start measurements
-    ## fast deflate to min_p
-    ## hold 30
-    ## stop measurements
-
-    ## inflate to max_p
-    ## hold 600
-    ## start measurements
-    ## fast deflate to min_p
-    ## hold 30
-    ## stop measurements
-
-    ## inflate to max_p
-    ## hold 0
-    ## start measurements
-    ## slow deflate to min_p
-    ## hold 30
-    ## stop measurements
-
-    
-    data = collect(name, listener, ucontrol, hold=3, abort=abort, fast_deflate=True)
-    data = collect(name, listener, ucontrol, hold=3, abort=abort, fast_deflate=False)
-    ucontrol.maintain(0, max_p, 0, abort=abort)
-    ucontrol.deflate(min_p)
-    
-    
 USAGE = 'python record_data.py basename'
 if __name__ == '__main__':
     import sys
