@@ -75,8 +75,6 @@ def main(base, regression_file = None):
     savefig(fn)
     print 'wrote', fn
     
-    show()
-
 class Usage(Exception):
     def __repr__(self):
         return 'python compare_data.py base_name'

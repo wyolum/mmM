@@ -10,12 +10,13 @@ slant = 30;
 base_y = screen_y * cos(slant);
 base_x = screen_x;
 h1 = 50;
-h2 = h1 + screen_y * cos(slant);
+h2 = h1 + screen_y * sin(slant);
 
 rim_t = 1.2;
 interior_x = 166.2 + .5;
 interior_y = 101 + .5;
 interior_z = rim_t + 2;
+interior_z = rim_t + 1;
 interior_off_x = 14 + 1 - .25;
 interior_off_y = 3.5 - .25;
 
@@ -31,46 +32,99 @@ module slotted_cylinder(h){
 module display(){
   difference(){
     translate([screen_r, screen_r, 0]) minkowski(){
-      cube([screen_x - screen_d, screen_y - screen_d, rim_t]);
-      cylinder(r=screen_r, h=rim_t);
+      cube([screen_x - screen_d, screen_y - screen_d, rim_t/2]);
+      cylinder(r=screen_r, h=rim_t/2);
     }
     translate([interior_off_x, interior_off_y, -.1])
       cube([interior_x, interior_y, interior_z]);
   }
 }
 
-union(){
-  translate([0, sin(slant) * rim_t, h1])
-    rotate(v=[1, 0, 0],a = slant) 
-    display();
-  
-  
-  difference(){
-    union(){
-      translate([screen_r, screen_r, 0])slotted_cylinder(h = h1 + 15);
-      translate([base_x - screen_r, screen_r, 0])
-	rotate(v=[0,0, 1], a=90)
-	slotted_cylinder(h = h1 + 15);
-      translate([screen_r, base_y - screen_r * cos(slant), 0])
-	rotate(v=[0,0, 1], a=-90)
-	slotted_cylinder(h = h2 + 15);
-      translate([base_x - screen_r, base_y - screen_r * cos(slant), 0])
-	rotate(v=[0,0, 1], a=180)
-	slotted_cylinder(h = h2 + 15);
+module main(){
+  union(){
+    translate([0, sin(slant) * rim_t, h1])
+      rotate(v=[1, 0, 0],a = slant) 
+      display();
+    
+    
+    difference(){
+      union(){
+	translate([screen_r, screen_r, 0])slotted_cylinder(h = h1 + 15);
+	translate([base_x - screen_r, screen_r, 0])
+	  rotate(v=[0,0, 1], a=90)
+	  slotted_cylinder(h = h1 + 15);
+	translate([screen_r, base_y - screen_r * cos(slant), 0])
+	  rotate(v=[0,0, 1], a=-90)
+	  slotted_cylinder(h = h2 + 15);
+	translate([base_x - screen_r, base_y - screen_r * cos(slant), 0])
+	  rotate(v=[0,0, 1], a=180)
+	  slotted_cylinder(h = h2 + 15);
+      }
+      translate([0, 0, h1])rotate(a=slant, v=[1, 0, 0])cube([1000, 1000, 1000]);
+      color([1, 0, 0])translate([1, 0, h1])
+	rotate(a=slant, v=[1, 0, 0])
+	translate([interior_off_x, interior_off_y+1, -3 * interior_z])
+	cube([interior_x, interior_y, 5 * interior_z]);
+      color([1, 0, 0])translate([0, 0, h1])
+	rotate(a=slant, v=[1, 0, 0])
+	translate([interior_off_x, interior_off_y+1, -3 * interior_z])
+	cube([interior_x, interior_y, 5 * interior_z]);
     }
-    translate([0, 0, h1])rotate(a=slant, v=[1, 0, 0])cube([1000, 1000, 1000]);
-    color([1, 0, 0])translate([1, 0, h1])
-      rotate(a=slant, v=[1, 0, 0])
-      translate([interior_off_x, interior_off_y+1, -3 * interior_z])
-      cube([interior_x, interior_y, 5 * interior_z]);
-    color([1, 0, 0])translate([0, 0, h1])
-      rotate(a=slant, v=[1, 0, 0])
-      translate([interior_off_x, interior_off_y+1, -3 * interior_z])
-      cube([interior_x, interior_y, 5 * interior_z]);
+  }
+  color([0, 1, 0])
+    intersection(){
+    scale([1, cos(slant), 100])
+      translate([screen_r, screen_r, 0]) 
+      difference(){
+      minkowski(){
+	cube([screen_x - screen_d, screen_y - screen_d, .0001]);
+	cylinder(r=screen_r, h=rim_t);
+      }
+      minkowski(){
+	cube([screen_x - screen_d, screen_y - screen_d, 1]);
+	cylinder(r=screen_r - 1, h=rim_t);
+      }
+    }
+    translate([0, 0, h1 - 3])rotate(a=slant, v=[1, 0, 0])cube([1000, 1000, 3]);
+  }
+
+}
+
+module bottom(){
+  color([1, 0, 0])
+  translate([screen_r, screen_r, - acr_t])minkowski(){
+    cube([base_x - 2 * screen_r, base_y - 2 * screen_r, acr_t]);
+    cylinder(r=screen_r, h=.0001);
   }
 }
 
+module side(){
+  color([1, 0, 0])
+    rotate(a=90, v=[0, -1, 0])
+    intersection(){
+    linear_extrude(height=acr_t)
+      polygon(points=[[0, 0], [0, base_y], [h2, base_y], [h1, 0]]);
+    translate([-100, screen_r + .5, -100])cube([200, base_y - 2 * screen_r, 200]);
+  }
+}
 
+module front(){
+  translate([screen_r, screen_r - acr_t, 0])cube([base_x - 2 * screen_r, acr_t, h1]);
+}
 
+module back(){
+  translate([screen_r, base_y - screen_r + acr_t, 0])cube([base_x - 2 * screen_r, acr_t, h2]);
+}
 
+//main();
+//translate([screen_r - acr_t, 0, 0])side();
+//translate([base_x - screen_r + acr_t, 0, 0])side();
+// front();
+// back();
+
+projection()bottom();
+projection()translate([-10, 0, 0])rotate(a=-90, v=[0, 1, 0])side();
+projection()translate([base_x + 20, 0, 0])rotate(a=90, v=[0, 1, 0])side();
+projection()translate([0, -10, -2 * acr_t])rotate(a=90, v=[1, 0, 0])front();
+projection()translate([0, base_y + 10, base_y - acr_t])rotate(a=-90, v=[1, 0, 0])back();
 
