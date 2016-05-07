@@ -5,7 +5,7 @@ screen_x = 192.96;
 screen_y = 110.76;
 screen_r = 7.5;
 screen_d = 2 * screen_r;
-screw_d = 4 * mm;
+screw_d = 2.5 * mm;
 
 slant = 30;
 base_y = screen_y * cos(slant);
@@ -50,7 +50,8 @@ module main(){
     
     difference(){
       union(){
-	translate([screen_r, screen_r, 0])slotted_cylinder(h = h1 + 15);
+	translate([screen_r, screen_r, 0])
+	  slotted_cylinder(h = h1 + 15);
 	translate([base_x - screen_r, screen_r, 0])
 	  rotate(v=[0,0, 1], a=90)
 	  slotted_cylinder(h = h1 + 15);
@@ -71,6 +72,11 @@ module main(){
 	translate([interior_off_x, interior_off_y+1, -3 * interior_z])
 	cube([interior_x, interior_y, 5 * interior_z]);
     }
+
+    foot();
+    translate([base_x - 2 * screen_r, 0, 0])foot();
+    translate([base_x - 2 * screen_r, base_y - 2 * screen_r * cos(slant), 0])foot();
+    translate([0, base_y - 2 * screen_r * cos(slant), 0])foot();
   }
   color([0, 1, 0])
     intersection(){
@@ -98,9 +104,14 @@ module bottom1(){
     cylinder(r=screen_r, h=.0001);
   }
 }
-module foot_screw(){
-  translate([screen_r, screen_r, - acr_t - 1])
-    cylinder(d=screw_d, h=acr_t + 2);
+module foot(){
+  translate([screen_r, screen_r, - 3 * acr_t])
+    difference(){
+    cylinder(r2=screen_r, r1 = screen_r * .75, h=2 * acr_t);
+    cylinder(d=screw_d, h=1000, $fn=20);
+    translate([0, 0, -1])
+    cylinder(d=6, h=acr_t + 1, $fn=20);
+  }
 }
 module bottom(){
   difference(){
@@ -166,10 +177,10 @@ if(laser_cut){
  }
  else{
    main();
-   //translate([screen_r - acr_t, 0, 0])side();
-   //translate([base_x - screen_r + acr_t, 0, 0])side();
-   //front();
-   //back();
+   translate([screen_r - acr_t, 0, 0])side();
+   translate([base_x - screen_r + acr_t, 0, 0])side();
+   front();
+   back();
    bottom();
  }
 
