@@ -5,6 +5,7 @@ screen_x = 192.96;
 screen_y = 110.76;
 screen_r = 7.5;
 screen_d = 2 * screen_r;
+screw_d = 4 * mm;
 
 slant = 30;
 base_y = screen_y * cos(slant);
@@ -90,11 +91,44 @@ module main(){
 
 }
 
-module bottom(){
+module bottom1(){
   color([1, 0, 0])
   translate([screen_r, screen_r, - acr_t])minkowski(){
     cube([base_x - 2 * screen_r, base_y - 2 * screen_r, acr_t]);
     cylinder(r=screen_r, h=.0001);
+  }
+}
+module foot_screw(){
+  translate([screen_r, screen_r, - acr_t - 1])
+    cylinder(d=screw_d, h=acr_t + 2);
+}
+module bottom(){
+  difference(){
+    union(){
+      translate([screen_r - 1 * acr_t, screen_r - 1 * acr_t, - acr_t])
+	minkowski(){
+	cube([base_x - 2 * screen_r + 2 * acr_t, 
+	      base_y - 2 * screen_r + 2 * acr_t, 
+	      acr_t/2]);
+	cylinder(r=acr_t, h=acr_t/2);
+      }
+      translate([screen_r, screen_r, - acr_t])
+	cylinder(r=screen_r, h=acr_t);
+      translate([base_x - screen_r, screen_r, - acr_t])
+	cylinder(r=screen_r, h=acr_t);
+      translate([base_x - screen_r, base_y - screen_r * cos(slant), - acr_t])
+	cylinder(r=screen_r, h=acr_t);
+      translate([screen_r, base_y - screen_r * cos(slant), - acr_t])
+	cylinder(r=screen_r, h=acr_t);
+    }
+    translate([screen_r, screen_r, - acr_t - 1])
+      cylinder(d=screw_d, h=acr_t + 2);
+    translate([base_x - screen_r, screen_r, - acr_t - 1])
+      cylinder(d=screw_d, h=acr_t + 2);
+    translate([base_x - screen_r, base_y - screen_r * cos(slant), - acr_t - 1])
+      cylinder(d=screw_d, h=acr_t + 2);
+    translate([screen_r, base_y - screen_r * cos(slant), - acr_t - 1])
+      cylinder(d=screw_d, h=acr_t + 2);
   }
 }
 
@@ -122,9 +156,20 @@ module back(){
 // front();
 // back();
 
-projection()bottom();
-projection()translate([-10, 0, 0])rotate(a=-90, v=[0, 1, 0])side();
-projection()translate([base_x + 20, 0, 0])rotate(a=90, v=[0, 1, 0])side();
-projection()translate([0, -10, -2 * acr_t])rotate(a=90, v=[1, 0, 0])front();
-projection()translate([0, base_y + 10, base_y - acr_t])rotate(a=-90, v=[1, 0, 0])back();
+laser_cut = true;
+if(laser_cut){
+  projection()bottom();
+  projection()translate([-10, 0, 0])rotate(a=-90, v=[0, 1, 0])side();
+  projection()translate([base_x + 20, 0, 0])rotate(a=90, v=[0, 1, 0])side();
+  projection()translate([0, -10, -2 * acr_t])rotate(a=90, v=[1, 0, 0])front();
+  projection()translate([0, base_y + 10, base_y - acr_t])rotate(a=-90, v=[1, 0, 0])back();
+ }
+ else{
+   main();
+   //translate([screen_r - acr_t, 0, 0])side();
+   //translate([base_x - screen_r + acr_t, 0, 0])side();
+   //front();
+   //back();
+   bottom();
+ }
 
