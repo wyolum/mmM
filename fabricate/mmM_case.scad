@@ -5,7 +5,7 @@ screen_x = 192.96;
 screen_y = 110.76;
 screen_r = 7.5;
 screen_d = 2 * screen_r;
-screw_d = 2.5 * mm;
+screw_d = 2.5;
 
 slant = 30;
 base_y = screen_y * cos(slant);
@@ -167,7 +167,7 @@ module back(){
 // front();
 // back();
 
-laser_cut = true;
+laser_cut = false;
 if(laser_cut){
   projection()bottom();
   projection()translate([-10, 0, 0])rotate(a=-90, v=[0, 1, 0])side();
@@ -183,4 +183,4 @@ if(laser_cut){
    back();
    bottom();
  }
-
+color([1, 0, 1])translate([19, 9, 30])scale(.282)linear_extrude(height=1.5)import("mmM_board_outline.dxf");
