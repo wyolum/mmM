@@ -27,7 +27,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="2"
      inkscape:cx="311.52139"
-     inkscape:cy="771.07602"
+     inkscape:cy="511.07602"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -140,35 +140,35 @@
          x="571"
          y="487.36215">DC Power plug</tspan></text>
     <g
-       id="g4413"
-       style="stroke:#000000;stroke-width:0.35433071;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
+       id="g4524"
+       transform="translate(86,-18)">
       <ellipse
          ry="6.0007958"
          rx="6.0007954"
          cy="691.97235"
-         cx="131.38583"
+         cx="25.205526"
          id="path4391"
-         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.35433071;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.35433072;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <ellipse
-         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.35433071;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.35433072;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          id="ellipse4393"
-         cx="281.01968"
+         cx="164.20946"
          cy="691.97235"
          rx="6.0007954"
          ry="6.0007958" />
       <g
          id="g4405"
-         transform="translate(0,-84.43304)"
-         style="stroke:#000000;stroke-width:0.35433071;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
+         transform="translate(-106.18031,-84.43304)"
+         style="stroke:#000000;stroke-width:0.35433072;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
         <ellipse
            ry="6.0007958"
            rx="6.0007954"
            cy="690.48022"
            cx="112.35827"
            id="ellipse4407"
-           style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.35433071;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+           style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.35433072;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
         <ellipse
-           style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.35433071;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.35433072;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
            id="ellipse4409"
            cx="290.23227"
            cy="690.48022"
