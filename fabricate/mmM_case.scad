@@ -18,7 +18,7 @@ interior_x = 166.2 + .5;
 interior_y = 101 + .5;
 interior_z = rim_t + 2;
 interior_z = rim_t + 1;
-interior_off_x = 14 + 1 - .25;
+interior_off_x = 14 + .5 - .25;
 interior_off_y = 3.5 - .25;
 
 module slotted_cylinder(h){
@@ -176,7 +176,7 @@ if(laser_cut){
   projection()translate([0, base_y + 10, base_y - acr_t])rotate(a=-90, v=[1, 0, 0])back();
  }
  else{
-   main();
+   !main();
    translate([screen_r - acr_t, 0, 0])side();
    translate([base_x - screen_r + acr_t, 0, 0])side();
    front();
