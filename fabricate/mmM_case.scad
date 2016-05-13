@@ -1,6 +1,6 @@
 inch = 25.4;
 
-acr_t = 3;
+acr_t = 3.1;
 screen_x = 192.96;
 screen_y = 110.76;
 screen_r = 7.5;
@@ -158,7 +158,7 @@ module front(){
 }
 
 module back(){
-  translate([screen_r, base_y - screen_r + acr_t, 0])cube([base_x - 2 * screen_r, acr_t, h2]);
+  translate([screen_r, base_y - screen_r + acr_t, 0])cube([base_x - 2 * screen_r, acr_t, h2 - sin(slant) * acr_t]);
 }
 
 //main();
@@ -176,7 +176,7 @@ if(laser_cut){
   projection()translate([0, base_y + 10, base_y - acr_t])rotate(a=-90, v=[1, 0, 0])back();
  }
  else{
-   !main();
+   main();
    translate([screen_r - acr_t, 0, 0])side();
    translate([base_x - screen_r + acr_t, 0, 0])side();
    front();
