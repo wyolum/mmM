@@ -78,7 +78,7 @@ class uControl:
         Called when a new measurement packet is recieved (hirate)
         '''
         if self.listener:
-            self.listener.mpid_cb(self, pkt)
+            self.listener.mpid_cb(pkt)
         self.lpf(pkt.cuff)
         self.mpid_count += 1
         # print pkt
@@ -131,7 +131,7 @@ class uControl:
         Called when a new short packet is recieved (two chars)
         '''
         if self.listener:
-            self.listener.short_cb(self, pkt)
+            self.listener.short_cb(pkt)
         self.short_dat = pkt[0] + pkt[1]
         
     def status_cb(self, pkt):
@@ -159,8 +159,8 @@ class uControl:
         '''
         inflate cuff to mmhg pressure.
         abort -- callback function
-                 return True if inflation should continue
-                 return False if inflation should be aborted
+                 return False if inflation should continue
+                 return True if inflation should be aborted
         '''
         self.min_pressure = mmhg
         self.max_pressure = self.min_pressure + 10 # mmhg

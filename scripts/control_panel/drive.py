@@ -65,19 +65,7 @@ timeout = .01
 
 def connect():
     global s
-    try:
-        import RPi.GPIO as GPIO
-        PI = True
-        # port = '/dev/ttyS0' ### gpio serial port
-        port = '/dev/ttyUSB0'
-        GPIO.setwarnings(False)
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(18, GPIO.OUT)
-        GPIO.output(18, GPIO.HIGH)
-    except ImportError:
-        PI = False
-        port = glob("/dev/ttyU*")[-1]
-
+    port = '/dev/ttyUSB0'
     s = Serial(port, baudrate, timeout=timeout)
 connect()
     
@@ -426,10 +414,7 @@ def reset():
     '''
     global last_ser_data
     print 'Resetting uControl'
-    if PI:
-        toggle = toggle_GPIO18
-    else:
-        toggle = toggle_rts
+    toggle = toggle_rts
     toggle()
     time.sleep(2.1)
     ack = None
@@ -462,8 +447,9 @@ def ping__test__():
             pass
         print time.time() - start
 # ping__test__() ## .01 seconds on toshiba laptop
+# ping__test__() ## .0003 seconds on raspberry pi 3
 # here
-    
+
 def stream__test__():
     # s.flush()
     # s.setRtsCts(False); s.setRtsCts(True)
