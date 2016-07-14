@@ -179,7 +179,7 @@ class LED(Widget):
 
         self.color = color
         self.radius = radius
-        self.status = not status ## ensure change and update
+        self.status = not status ## insure update
         if status:
             self.on()
         else:
@@ -525,7 +525,9 @@ class Tester(cevent.CEvent):
         screen_touched = True
     
     def initialize(self):
-        pygame.init()
+        # pygame.init()
+        pygame.display.init()
+        pygame.font.init()
         pygame.mouse.set_cursor(*cursor)
         end = 100
         min_hr = 30
