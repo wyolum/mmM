@@ -63,11 +63,6 @@ done = False
 baudrate = 115200
 timeout = .01
 
-def connect():
-    global s
-    port = '/dev/ttyUSB0'
-    s = Serial(port, baudrate, timeout=timeout)
-connect()
     
 def getValveByte(valve0=False, valve1=False):
     return 1<<7 | bool(valve0) | bool(valve1) << 1
@@ -161,6 +156,14 @@ def __send_cmd(init,
     # time.sleep(.5)
     last_cmd = cmd
 
+def connect():
+    global s
+    patt = '/dev/ttyUSB*'
+    for port in glob(patt):
+        s = Serial(port, baudrate, timeout=timeout)
+        break
+connect()
+    
 class PIDError(Exception):
     pass
 class LengthError(Exception):

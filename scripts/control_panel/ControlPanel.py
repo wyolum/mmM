@@ -2,6 +2,7 @@
 based on przemoli-pygametutorial-540433c50ffc
 '''
 import serial
+import os
 import time
 import math
 import pygame
@@ -65,6 +66,8 @@ class Buff:
 DEG = math.pi / 180.
 WIDTH = 800
 HEIGHT = 480
+WIDTH = 480
+HEIGHT = 272
 
 UNITS = {'MIN': 60,
          'HOUR': 3600,
@@ -528,31 +531,38 @@ class Tester(cevent.CEvent):
         # pygame.init()
         pygame.display.init()
         pygame.font.init()
+        # print pygame.display.Info()
         pygame.mouse.set_cursor(*cursor)
         end = 100
         min_hr = 30
         max_hr = 200
         
         ## create widgets.
-        self.speed = Gauge(self, (WIDTH / 2, HEIGHT / 2), 125, [120, 420],
+        self.text = Widget(self, (WIDTH - 60, HEIGHT - 40, 60, 30),
+                           background_color=(0, 0, 0))
+        # self.speed = Gauge(self, (WIDTH / 2, HEIGHT / 2), 100, [120, 420],
+        #                    [0, 300],
+        #                    dial_color=(255, 0, 0),
+        #                    inner_radius=20)
+        self.speed = Gauge(self, (130, 133), 100, [117.5, 422.5],
                            [0, 300],
                            dial_color=(255, 0, 0),
                            inner_radius=20)
-        self.text = Widget(self, (WIDTH / 2 - 40, HEIGHT-125, 80, 40),
-                           background_color=(0, 0, 0))
         self.pump_led   = LED(self, (0, 0, 255), (10, 10), 6, False)
         self.valve0_led = LED(self, (0, 0, 255), (10, 30), 6, False)
         self.valve1_led = LED(self, (0, 0, 255), (10, 50), 6, False)
         def start_bp():
             pass
         
-        self.instruction = Widget(self, rect=(525, 400, 300, 70),
+        self.instruction = Widget(self, rect=(WIDTH - 200, 0, 200, 50),
                                   background_color=(0, 0, 0))
         self._display_surf = pygame.display.set_mode((WIDTH,HEIGHT),
                                                      pygame.HWSURFACE)
         self._running = True
         # self._image_surf = pygame.image.load("WyoLum_racing.png").convert()
-        self._image_surf = pygame.image.load("images/background.png").convert()
+        # self._image_surf = pygame.image.load("images/background.png").convert()
+        background = os.path.join(os.path.split(__file__)[0], 'images/background_480_272.png')
+        self._image_surf = pygame.image.load(background).convert()
 
         ### put all static widgets on image surf
         for wid in self.widgets:
@@ -587,7 +597,7 @@ class Tester(cevent.CEvent):
         drive.serial_interact(1)
         cuff_pressure = last_cuff_pressure
         self.speed.update(int(cuff_pressure))
-        self.text.add_text('%3d' % cuff_pressure, 40)
+        self.text.add_text('%3d' % cuff_pressure, 30)
 
         self.last_loop_time = time.time()
 
