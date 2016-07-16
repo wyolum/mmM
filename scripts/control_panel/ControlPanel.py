@@ -429,6 +429,7 @@ class Abort(Mode):
                 time.time() - self.start_time > 5)
 class Start(Mode):
     instruction = 'Starting...'
+
 class Ready(Mode):
     instruction = 'Touch to begin'
     def start(self):
@@ -441,6 +442,7 @@ class Ready(Mode):
         out = screen_touched
         screen_touched = False
         return out
+
 class Inflate(Mode):
     instruction = 'Touch to abort'
     max_inflate_start_time = 5 
@@ -449,6 +451,7 @@ class Inflate(Mode):
         self.tester.inflate(MAX_PRESSURE)
         stop_recording()
         self.start_cuff_pressure = last_cuff_pressure
+        self.tester.results.add_text("SYS/DIA", 30, BLUE)
 
     def is_complete(self):
         global abort_test
@@ -478,13 +481,34 @@ class Deflate(Mode):
             self.tester.open_valves()
             stop_recording()
         return complete
+
 class Compute(Mode):
     instruction = 'Computing BP'
     def start(self):
+        self.tester.on_render()
+
+    def is_complete(self):
+        Mode.start(self)
         data = array(hirate)
         raw = data[:,1]
-        print util.blood_pressure(raw)
-    def is_complete(self):
+        try:
+            sys, dia, mad_failed = util.blood_pressure(raw)
+            error = False
+        except IndexError, e:
+            print 'Error', e
+            error = True
+        except ValueError, e:
+            print 'Error:', e
+            error = True
+        if mad_failed:
+            results = 'Test Failed!'
+            color = RED
+        elif error:
+            results = 'ERROR' 
+        else:
+            results = '%3d/%3d' % (sys, dia)
+            color = BLUE
+        self.tester.results.add_text(results, 30, color)
         return True
 
 class Tester(cevent.CEvent):
@@ -493,8 +517,6 @@ class Tester(cevent.CEvent):
         self._display_surf = None
         self._image_surf = None
         self.widgets = []
-        self.beats = 0
-        self.target_beats = 1000. ## avoid / by zero
         self.last_loop_time = None
         self.mode = 0
         self.modes = [Start(self),
@@ -558,11 +580,6 @@ class Tester(cevent.CEvent):
         if last_cuff_pressure > mmhg:
             self.open_valve1()
 
-    def deflate_fast(self, mmhg):
-        self.turn_pump_off()
-        if last_cuff_pressure > mmhg:
-            self.open_valves()
-
     def on_mbutton_up(self, event):
         global screen_touched
         screen_touched = True
@@ -573,9 +590,6 @@ class Tester(cevent.CEvent):
         pygame.font.init()
         # print pygame.display.Info()
         pygame.mouse.set_cursor(*cursor)
-        end = 100
-        min_hr = 30
-        max_hr = 200
         
         ## create widgets.
         self.text = Widget(self, (WIDTH - 60, HEIGHT - 40, 60, 30),
@@ -596,6 +610,9 @@ class Tester(cevent.CEvent):
         
         self.instruction = Widget(self, rect=(WIDTH - 200, 0, 200, 50),
                                   background_color=(0, 0, 0))
+        self.results = Widget(self, rect=(WIDTH - 150, 50, 200, 50),
+                              background_color=(0, 0, 0))
+        self.results.add_text("SYS/DIA", 30, BLUE)
         self._display_surf = pygame.display.set_mode((WIDTH,HEIGHT),
                                                      pygame.HWSURFACE)
         self._running = True
@@ -621,15 +638,9 @@ class Tester(cevent.CEvent):
                 self.mode = self.abort_transition[self.mode]
             else:
                 self.mode = self.normal_transition[self.mode]
-            print self.mode, screen_touched, abort_test
             self.modes[self.mode].start()
         ## update values
         rect = self._display_surf.get_rect()
-        heartrate = getHR()
-        if self.last_loop_time:
-            dt = time.time() - self.last_loop_time
-            self.beats += dt * heartrate / 60.
-            fuel_remaining = 1 - self.beats / 100
         now = time.time() - self.start
         duration = 300
 
@@ -667,17 +678,13 @@ class Tester(cevent.CEvent):
     
         while(self._running):
             self.on_render() 
-            for i in range(3): ## watch for events and updates
-                self.on_loop()
-                drive.serial_interact()
-                # clock.tick(100)
+            self.on_loop()
+            drive.serial_interact()
+            # clock.tick(100)
 
-                for event in pygame.event.get():
-                    self.on_event(event)
+            for event in pygame.event.get():
+                self.on_event(event)
  
 if __name__ == "__main__" :
-    workout_string = '50 on 50 off::Z2 1*MIN, ' + ','.join(3 * ['Z4b 50, Z2 50,Z4b 50, Z2 50,Z4b 50, Z2 50,Z4b 50, Z2 50,Z4b 50, Z2 50,Z4b 50, Z2 50,Z4b 50, Z2 4*MIN'])
-    workout_string = 'UNDER_OVER::Z2 15*MIN, Z3 5*MIN, ' + ','.join(7 * ['Z4a 1*MIN, Z3 1*MIN, Z4b 1*MIN, Z3 1*MIN, Z2 4*MIN'])    
-    workout_string = 'UNDER_OVER::Z2 15*SEC, Z3 5*SEC, ' + ','.join(7 * ['Z4a 1*SEC, Z3 1*SEC, Z4b 1*SEC, Z3 1*SEC, Z2 4*SEC'])    
     theApp = Tester()
     theApp.mainloop()
