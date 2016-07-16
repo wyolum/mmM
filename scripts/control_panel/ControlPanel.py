@@ -1,6 +1,7 @@
 '''
 based on przemoli-pygametutorial-540433c50ffc
 '''
+import util
 import serial
 import os
 import time
@@ -481,8 +482,8 @@ class Compute(Mode):
     instruction = 'Computing BP'
     def start(self):
         data = array(hirate)
-        print data.shape
-
+        raw = data[:,1]
+        print util.blood_pressure(raw)
     def is_complete(self):
         return True
 
