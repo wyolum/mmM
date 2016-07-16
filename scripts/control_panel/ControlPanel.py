@@ -2,6 +2,7 @@
 based on przemoli-pygametutorial-540433c50ffc
 '''
 import serial
+import os
 import time
 import math
 import pygame
@@ -65,6 +66,8 @@ class Buff:
 DEG = math.pi / 180.
 WIDTH = 800
 HEIGHT = 480
+WIDTH = 480
+HEIGHT = 272
 
 UNITS = {'MIN': 60,
          'HOUR': 3600,
@@ -309,10 +312,25 @@ class FreshFish:
 import drive
 
 last_cuff_pressure = 123
+hirate = []
+recording = False
+MAX_HIRATE_N = 200 * 60 * 2
+def start_recording():
+    global recording
+    del hirate[:]
+    recording = True
+
+def stop_recording():
+    global recording
+    recording = False
 def mpid_cb(pkt):
     global last_cuff_pressure
     last_cuff_pressure = last_cuff_pressure * .95 + pkt.cuff * .05
     # print last_cuff_pressure
+    if recording:
+        hirate.append([pkt.millis, pkt.cuff, pkt.flow, pkt.pulse])
+        if len(hirate) > MAX_HIRATE_N:
+            del MAX_HIRATE[-MAX_HIRATE_N:]
 drive.subscribe(drive.MPID.PID, mpid_cb)
 drive.subscribe(drive.StatusPID.PID, mmm_new_status)
 
@@ -387,11 +405,14 @@ class Mode:
     color = BLUE
     def __init__(self, tester):
         self.tester = tester
+
     def start(self):
         global screen_touched, abort_test
         screen_touched = False
         abort_test = False
         self.tester.instruction.add_text(self.instruction, 30, self.color)
+        self.start_time = time.time()
+
     def is_complete(self):
         return True
 class Abort(Mode):
@@ -400,8 +421,11 @@ class Abort(Mode):
     def start(self):
         Mode.start(self)
         self.tester.open_valves()
+        stop_recording()
+
     def is_complete(self):
-        return last_cuff_pressure < 5
+        return (last_cuff_pressure < 5 and
+                time.time() - self.start_time > 5)
 class Start(Mode):
     instruction = 'Starting...'
 class Ready(Mode):
@@ -409,6 +433,8 @@ class Ready(Mode):
     def start(self):
         Mode.start(self)
         self.tester.open_valves()
+        stop_recording()
+
     def is_complete(self):
         global screen_touched
         out = screen_touched
@@ -416,31 +442,47 @@ class Ready(Mode):
         return out
 class Inflate(Mode):
     instruction = 'Touch to abort'
+    max_inflate_start_time = 5 
     def start(self):
         Mode.start(self)
         self.tester.inflate(MAX_PRESSURE)
+        stop_recording()
+        self.start_cuff_pressure = last_cuff_pressure
+
     def is_complete(self):
         global abort_test
+        complete = last_cuff_pressure > MAX_PRESSURE or abort_test
         if screen_touched:
             abort_test = True
-        complete = last_cuff_pressure > MAX_PRESSURE or abort_test
-        if complete:
             self.tester.turn_pump_off()
+
+        elif (time.time() - self.start_time > self.max_inflate_start_time and
+              last_cuff_pressure - self.start_cuff_pressure < 10):
+            abort_test = True
+            self.tester.turn_pump_off()
+        else:
+            if complete:
+                self.tester.turn_pump_off()
         return complete
 class Deflate(Mode):
     instruction = 'Remain still'
     def start(self):
         Mode.start(self)
         self.tester.deflate_slow(10)
+        start_recording()
+
     def is_complete(self):
         complete = last_cuff_pressure < MIN_PRESSURE
         if complete:
             self.tester.open_valves()
+            stop_recording()
         return complete
 class Compute(Mode):
     instruction = 'Computing BP'
     def start(self):
-        pass
+        data = array(hirate)
+        print data.shape
+
     def is_complete(self):
         return True
 
@@ -528,31 +570,38 @@ class Tester(cevent.CEvent):
         # pygame.init()
         pygame.display.init()
         pygame.font.init()
+        # print pygame.display.Info()
         pygame.mouse.set_cursor(*cursor)
         end = 100
         min_hr = 30
         max_hr = 200
         
         ## create widgets.
-        self.speed = Gauge(self, (WIDTH / 2, HEIGHT / 2), 125, [120, 420],
+        self.text = Widget(self, (WIDTH - 60, HEIGHT - 40, 60, 30),
+                           background_color=(0, 0, 0))
+        # self.speed = Gauge(self, (WIDTH / 2, HEIGHT / 2), 100, [120, 420],
+        #                    [0, 300],
+        #                    dial_color=(255, 0, 0),
+        #                    inner_radius=20)
+        self.speed = Gauge(self, (130, 133), 100, [117.5, 422.5],
                            [0, 300],
                            dial_color=(255, 0, 0),
                            inner_radius=20)
-        self.text = Widget(self, (WIDTH / 2 - 40, HEIGHT-125, 80, 40),
-                           background_color=(0, 0, 0))
         self.pump_led   = LED(self, (0, 0, 255), (10, 10), 6, False)
         self.valve0_led = LED(self, (0, 0, 255), (10, 30), 6, False)
         self.valve1_led = LED(self, (0, 0, 255), (10, 50), 6, False)
         def start_bp():
             pass
         
-        self.instruction = Widget(self, rect=(525, 400, 300, 70),
+        self.instruction = Widget(self, rect=(WIDTH - 200, 0, 200, 50),
                                   background_color=(0, 0, 0))
         self._display_surf = pygame.display.set_mode((WIDTH,HEIGHT),
                                                      pygame.HWSURFACE)
         self._running = True
         # self._image_surf = pygame.image.load("WyoLum_racing.png").convert()
-        self._image_surf = pygame.image.load("images/background.png").convert()
+        # self._image_surf = pygame.image.load("images/background.png").convert()
+        background = os.path.join(os.path.split(__file__)[0], 'images/background_480_272.png')
+        self._image_surf = pygame.image.load(background).convert()
 
         ### put all static widgets on image surf
         for wid in self.widgets:
@@ -587,7 +636,7 @@ class Tester(cevent.CEvent):
         drive.serial_interact(1)
         cuff_pressure = last_cuff_pressure
         self.speed.update(int(cuff_pressure))
-        self.text.add_text('%3d' % cuff_pressure, 40)
+        self.text.add_text('%3d' % cuff_pressure, 30)
 
         self.last_loop_time = time.time()
 
