@@ -398,12 +398,20 @@ class Gauge(Widget):
 
             self.surf.fill(self.colorkey)
             pygame.draw.polygon(self.surf, self.dial_color, points , 0)
+            self.value = value
+            self.changed = True
+
             if self.inner_radius > 0:
                 pygame.draw.circle(self.surf, (0, 0, 0),
                                    [self.radius, self.radius],
                                    self.inner_radius)
-            self.value = value
-            self.changed = True
+
+                font = pygame.font.Font(None, 30)
+                hi = font.render(str(self.value), True, self.dial_color)
+                hi_x = self.radius - hi.get_width() / 2
+                hi_y = self.radius - hi.get_height() / 2
+            self.surf.blit(hi, (hi_x, hi_y))
+            
         else:
             self.changed = False
 
@@ -501,6 +509,7 @@ class Deflate(Mode):
 class Compute(Mode):
     instruction = 'Computing BP'
     def start(self):
+        Mode.start(self)
         self.tester.on_render()
 
     def is_complete(self):
@@ -587,6 +596,7 @@ class Tester(cevent.CEvent):
         self.turn_pump_off()
         if last_cuff_pressure > mmhg:
             self.open_valve1()
+            
     def on_mbutton_up(self, event):
         global screen_touched
         screen_touched = True
@@ -599,8 +609,9 @@ class Tester(cevent.CEvent):
         pygame.mouse.set_cursor(*cursor)
         
         ## create widgets.
-        self.text = Widget(self, (WIDTH - 60, HEIGHT - 40, 60, 30),
-                           background_color=(0, 0, 0))
+        self.text = Widget(self, (60, HEIGHT - 40, 60, 30),
+                           background_color=(0, 0, 0),
+                           alpha=50)
         # self.speed = Gauge(self, (WIDTH / 2, HEIGHT / 2), 100, [120, 420],
         #                    [0, 300],
         #                    dial_color=(255, 0, 0),
@@ -682,7 +693,7 @@ class Tester(cevent.CEvent):
     def mainloop(self):
         if self.initialize() == False:
             self._running = False
-    
+        count = 0
         while(self._running):
             self.on_render() 
             self.on_loop()
@@ -691,7 +702,7 @@ class Tester(cevent.CEvent):
 
             for event in pygame.event.get():
                 self.on_event(event)
- 
+            count += 1
 if __name__ == "__main__" :
     theApp = Tester()
     theApp.open_valves()
