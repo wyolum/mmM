@@ -1,6 +1,7 @@
 '''
 based on przemoli-pygametutorial-540433c50ffc
 '''
+import drive
 import util
 import serial
 import os
@@ -50,7 +51,22 @@ def mmm_update():
     drive.send_cmd(**mmm_data)
 
 def mmm_new_status(packet):
-    pass
+    ### update leds
+    if packet.name == 'Pump':
+        if packet.value:
+            theApp.pump_led.on()
+        else:
+            theApp.pump_led.off()
+    if packet.name == 'Valve':
+        if packet.value & 0b01:
+            theApp.valve0_led.on()
+        else:
+            theApp.valve0_led.off()
+        if packet.value & 0b10:
+            theApp.valve1_led.on()
+        else:
+            theApp.valve1_led.off()
+            
 class Buff:
     def __init__(self, max_size=10):
         self.data = []
@@ -189,9 +205,11 @@ class LED(Widget):
         else:
             self.off()
         
-    def on(self):
+    def on(self, color=None):
+        if color is None:
+            color = self.color
         if not self.status:
-            pygame.draw.circle(self.surf, self.color,
+            pygame.draw.circle(self.surf, color,
                                (self.radius, self.radius), self.radius)
             self.status = True
             self.changed = True
@@ -310,7 +328,6 @@ class FreshFish:
         return out
 
 ######################### mmM interaction
-import drive
 
 last_cuff_pressure = 123
 hirate = []
@@ -334,7 +351,6 @@ def mpid_cb(pkt):
             del MAX_HIRATE[-MAX_HIRATE_N:]
 drive.subscribe(drive.MPID.PID, mpid_cb)
 drive.subscribe(drive.StatusPID.PID, mmm_new_status)
-
 ######################### END mmM interaction
 
 
@@ -531,44 +547,36 @@ class Tester(cevent.CEvent):
     def turn_pump_on(self):
         mmm_data['pump_rate'] = 1
         mmm_update()
-        self.pump_led.on()
         
     def turn_pump_off(self):
         mmm_data['pump_rate'] = 0
         mmm_update()
-        self.pump_led.off()
 
     def close_valve0(self):
-        mmm_data['valve'] |= 01
+        mmm_data['valve'] &= 01
         mmm_update()
-        self.valve0_led.off()
         
     def open_valve0(self):
-        mmm_data['valve'] &= 10
+        mmm_data['valve'] |= 10
         mmm_update()
-        self.valve0_led.on()
 
     def close_valve1(self):
-        mmm_data['valve'] |= 0b10
+        mmm_data['valve'] &= 0b10
         mmm_update()
-        self.valve1_led.off()
 
     def open_valve1(self):
-        mmm_data['valve'] &= 0b01
+        mmm_data['valve'] |= 0b01
+        print mmm_data['valve']
         mmm_update()
-        self.valve1_led.on()
 
     def open_valves(self):
         mmm_data['valve'] = 0b11
         mmm_update()
-        self.valve0_led.on()
-        self.valve1_led.on()
 
     def close_valves(self):
+        print 'open_valves'
         mmm_data['valve'] = 0b00
         mmm_update()
-        self.valve0_led.off()
-        self.valve1_led.off()
 
     def inflate(self, mmhg):
         self.close_valves()
@@ -579,7 +587,6 @@ class Tester(cevent.CEvent):
         self.turn_pump_off()
         if last_cuff_pressure > mmhg:
             self.open_valve1()
-
     def on_mbutton_up(self, event):
         global screen_touched
         screen_touched = True
@@ -687,4 +694,5 @@ class Tester(cevent.CEvent):
  
 if __name__ == "__main__" :
     theApp = Tester()
+    theApp.open_valves()
     theApp.mainloop()

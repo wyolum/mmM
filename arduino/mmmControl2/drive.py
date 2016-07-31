@@ -99,6 +99,7 @@ def send_cmd(init=None, interval=None, pump_rate=None, valve=None,
              valve_state=False,
              ):
     ## grab defaults
+    print 'here'
     if init is None:
         init = __cmd__[0]
     if interval is None:
