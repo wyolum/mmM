@@ -16,7 +16,7 @@ def create_tables():
             'INSERT INTO Sex VALUES ("other")',
             'CREATE TABLE Patient(sexid INT, user TEXT, birth DATE)',
             'CREATE UNIQUE INDEX unq_patient ON Patient(user)',
-            'CREATE TABLE BP(user TEXT, sys INT, dia INT, day DATE)'
+            'CREATE TABLE BP(user TEXT, sys INT, dia INT, day DATETIME)'
     ]
             
     for sql in sqls:
@@ -48,7 +48,7 @@ def str2ymd(s):
     return year, month, day
 
 def add_result(user, sys, dia, day):
-    day = str(day).split()[0]
+    day = str(day)
     sql = 'INSERT INTO BP VALUES("%s", %d, %d, "%s")' % (user, sys, dia, day)
     cur.execute(sql)
     con.commit()
@@ -75,8 +75,8 @@ def getBPs(user):
     cur.execute(sql)
     out = cur.fetchall()[0]
     day = out[2]
-    year, month, day = str2ymd(day)
-    day = datetime.date(year, month, day)
+    # year, month, day = str2ymd(day)
+    # day = datetime.date(year, month, day)
     return {'sys': out[0],
             'dia': out[1],
             'day': day}
@@ -87,4 +87,4 @@ def test():
     add_result('justin', 110, 70, datetime.datetime.now())
     print getAge('justin')
     print getBPs('justin')
-# test()
+test()
