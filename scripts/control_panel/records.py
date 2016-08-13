@@ -87,4 +87,4 @@ def test():
     add_result('justin', 110, 70, datetime.datetime.now())
     print getAge('justin')
     print getBPs('justin')
-test()
+# test()
