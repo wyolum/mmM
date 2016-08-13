@@ -14,7 +14,7 @@ from numpy import random
 import time
 
 MAX_PRESSURE = 200 ### shutoff above this pressure
-MIN_PRESSURE =  20
+MIN_PRESSURE =  35
 
 clock = pygame.time.Clock()
 COLORKEY = (1, 128, 1)
@@ -343,7 +343,7 @@ def stop_recording():
     recording = False
 def mpid_cb(pkt):
     global last_cuff_pressure
-    last_cuff_pressure = last_cuff_pressure * .95 + pkt.cuff * .05
+    last_cuff_pressure = last_cuff_pressure * .90 + pkt.cuff * .10
     # print last_cuff_pressure
     if recording:
         hirate.append([pkt.millis, pkt.cuff, pkt.flow, pkt.pulse])
@@ -516,23 +516,28 @@ class Compute(Mode):
         Mode.start(self)
         data = array(hirate)
         raw = data[:,1]
-        try:
-            sys, dia, mad_failed = util.blood_pressure(raw)
-            error = False
-        except IndexError, e:
-            print 'Error', e
+        if len(raw) < 5 * 200: # 5 seconds of data
             error = True
-        except ValueError, e:
-            print 'Error:', e
-            error = True
-        if mad_failed:
-            results = 'Test Failed!'
             color = RED
-        elif error:
-            results = 'ERROR' 
+            results = 'Data Error'
         else:
-            results = '%3d/%3d' % (sys, dia)
-            color = BLUE
+            try:
+                sys, dia, mad_failed = util.blood_pressure(raw)
+                error = False
+            except IndexError, e:
+                print 'Error', e
+                error = True
+            except ValueError, e:
+                print 'Error:', e
+                error = True
+            if mad_failed:
+                results = 'Mad Failed!'
+                color = RED
+            elif error:
+                results = 'ERROR' 
+            else:
+                results = '%d/%d' % (sys, dia)
+                color = BLUE
         self.tester.results.add_text(results, 30, color)
         return True
 
@@ -609,14 +614,13 @@ class Tester(cevent.CEvent):
         pygame.mouse.set_cursor(*cursor)
         
         ## create widgets.
-        self.text = Widget(self, (60, HEIGHT - 40, 60, 30),
-                           background_color=(0, 0, 0),
-                           alpha=50)
-        # self.speed = Gauge(self, (WIDTH / 2, HEIGHT / 2), 100, [120, 420],
+        # self.text = Widget(self, (60, HEIGHT - 40, 60, 30),
+        #                    background_color=(0, 0, 0))
+        # self.cuff_pressure = Gauge(self, (WIDTH / 2, HEIGHT / 2), 100, [120, 420],
         #                    [0, 300],
         #                    dial_color=(255, 0, 0),
         #                    inner_radius=20)
-        self.speed = Gauge(self, (130, 133), 100, [117.5, 422.5],
+        self.cuff_pressure = Gauge(self, (130, 133), 100, [117.5, 422.5],
                            [0, 300],
                            dial_color=(255, 0, 0),
                            inner_radius=20)
@@ -665,8 +669,8 @@ class Tester(cevent.CEvent):
         ## update widgets
         drive.serial_interact(1)
         cuff_pressure = last_cuff_pressure
-        self.speed.update(int(cuff_pressure))
-        self.text.add_text('%3d' % cuff_pressure, 30)
+        self.cuff_pressure.update(int(cuff_pressure))
+        # self.text.add_text('%3d' % cuff_pressure, 30)
 
         self.last_loop_time = time.time()
 
