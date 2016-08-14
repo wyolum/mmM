@@ -4,7 +4,7 @@ import datetime
 con = lite.connect('blood_pressure.db')
 cur = con.cursor()
 
-N_TABLE = 4
+N_TABLE = 3
 
 def create_tables():
     sqls = ['DROP TABLE IF EXISTS Sex',
