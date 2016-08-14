@@ -84,7 +84,7 @@ def getBPs(name):
 def getNames():
     sql = 'SELECT name FROM User'
     cur.execute(sql)
-    return [l[0] for l in cur.fetcall()]
+    return [l[0] for l in cur.fetchall()]
 def test():
     create_tables()
     add_patient('male', 'username', datetime.datetime(1970, 3, 10))
