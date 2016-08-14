@@ -48,6 +48,18 @@ def get_users():
     cur.execute(sql)
     return cur.fetchall()
 
+def get_lastuser():
+    out = 'anon'
+    sql = 'SELECT name FROM BP ORDER BY DAY DESC LIMIT 1'
+    cur.execute(sql)
+    rows = cur.fetchall()
+    if len(rows) == 1:
+        out = rows[0][0]
+    else:
+        out = 'anon'
+    return out
+    
+    
 def str2ymd(s):
     year, month, day = s.split('-')
     year = int(year)
@@ -104,6 +116,7 @@ def test():
         print get_BPs('anon')
         print get_users()
         print get_BPs('justin')
+        print get_lastuser()
     else:
         print 'Test aborted.'
 # test()

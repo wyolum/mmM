@@ -14,6 +14,7 @@ from numpy import random
 import time
 import records
 import datetime
+import eztext
 
 MAX_PRESSURE = 200 ### shutoff above this pressure
 MIN_PRESSURE =  35
@@ -27,10 +28,10 @@ cursor = ((16, 16),
           (192, 0, 224, 0, 240, 0, 248, 0, 252, 0, 254, 0, 255, 0,
            255, 128, 255, 192, 255, 224, 254, 0, 239, 0, 207, 0, 135,
            128, 7, 128, 3, 0))
-cursor = ((8, 8),
-          (0, 0),
-          (255, 255, 255, 255, 255, 255, 255, 255),
-          (0, 0, 0, 0, 0, 0, 0, 0))
+#cursor = ((8, 8),
+#          (0, 0),
+#          (255, 255, 255, 255, 255, 255, 255, 255),
+#          (0, 0, 0, 0, 0, 0, 0, 0))
 import time
 from numpy import diff, median, nan, array
 
@@ -38,6 +39,7 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
 
 mmm_data = dict(init=False,
                 interval=1,
@@ -354,6 +356,7 @@ def mpid_cb(pkt):
             del MAX_HIRATE[-MAX_HIRATE_N:]
 drive.subscribe(drive.MPID.PID, mpid_cb)
 drive.subscribe(drive.StatusPID.PID, mmm_new_status)
+
 ######################### END mmM interaction
 
 
@@ -552,7 +555,43 @@ def collidepoint(rect, point):
     iny = rect[1] <= point[1] <= rect[1] + rect[3]
     return inx and iny
 
-def userscreen():
+def new_user(surf):
+    nu_surf = pygame.Surface((WIDTH, 100))
+    nu_surf.fill(WHITE)
+    txtbx = eztext.Input(maxlength=45, color=BLACK, prompt='username:')
+    done = False
+    while not done:
+        events = pygame.event.get()
+        for event in events:
+            if event.type == QUIT:
+                done = True
+        nu_surf.fill(WHITE)
+        txtbx.update(events)
+        txtbx.draw(nu_surf)
+        surf.blit(nu_surf, (0, 0))
+        pygame.display.flip()
+    # raw_input('...')
+    print 'TODO: Make this a pygame GUI'
+    try:
+        name = raw_input('username:')
+        sex = raw_input('sex: (M/F/O)')
+        if sex not in 'MFO':
+            raise ValueError("Sex not understood: %s" % sex)
+        else:
+            sex = {'M':'male','F':'female','O':'other'}[sex]
+        year = int(raw_input("birth year (YYYY):"))
+        month = int(raw_input("birth month (MM):"))
+        day = int(raw_input("birth day (DD):"))
+        birth = datetime.datetime(year, month, day)
+        records.add_user(sex, name, birth)
+        out = name.lower()
+
+    except Exception, e:
+        print 'ERROR:', e
+        out = None
+        done = False
+    return out
+def prompt_user():
     surf = pygame.display.get_surface()
     surf.fill(BLACK)
     users = records.get_users()
@@ -564,8 +603,8 @@ def userscreen():
         surf.blit(text, textpos)
     i = len(users)
     textpos = (10, i * 20 + 10)
-    text = font.render("add", 1, RED)
-    surf.blit(text, textpos)
+    # text = font.render("add", 1, RED)
+    # surf.blit(text, textpos)
     
     pygame.display.flip()
     done = False
@@ -578,33 +617,7 @@ def userscreen():
                 idx = (event.pos[1] - 10) / 20
                 if idx < len(users):
                     out = users[idx][1]
-                    done = True
-                elif idx == len(users):
-                    def new_user():
-                        print 'TODO: Make this a pygame GUI'
-
-                        try:
-                            name = raw_input('username:')
-                            sex = raw_input('sex: (M/F/O)')
-                            if sex not in 'MFO':
-                                raise ValueError("Sex not understood: %s" % sex)
-                            else:
-                                sex = {'M':'male','F':'female','O':'other'}[sex]
-                            year = int(raw_input("birth year (YYYY):"))
-                            month = int(raw_input("birth month (MM):"))
-                            day = int(raw_input("birth day (DD):"))
-                            birth = datetime.datetime(year, month, day)
-                            records.add_user(sex, name, birth)
-                            out = name.lower()
-
-                        except Exception, e:
-                            print e
-                            out = None
-                        return out
-                    out = new_user()
-                    if out is not None:
-                        done = True
-                        
+                    done = True                        
     return out
 class Tester(cevent.CEvent):
     def __init__(self):
@@ -620,7 +633,7 @@ class Tester(cevent.CEvent):
                       Deflate(self),
                       Compute(self),
                       Abort(self)]
-        self.user = 'anon'
+        self.user = records.get_lastuser()
         self.normal_transition = [1, 2, 3, 4, 1, 1]
         self.abort_transition  = [5, 5, 5, 5, 5, 5]
         
@@ -646,7 +659,6 @@ class Tester(cevent.CEvent):
 
     def open_valve1(self):
         mmm_data['valve'] |= 0b01
-        print mmm_data['valve']
         mmm_update()
 
     def open_valves(self):
@@ -671,8 +683,10 @@ class Tester(cevent.CEvent):
     def on_mbutton_up(self, event):
         global screen_touched
         if collidepoint(self.user_wid.rect, event.pos):
-            self.user = userscreen()
-            self.user_wid.add_text(self.user, 30, BLUE)
+            self.user = prompt_user()
+            if self.user is not None:
+                self.user_wid.add_text(self.user, 30, BLUE)
+                
             self.initialize()
             self.cuff_pressure.update(-1) # insure pressure gets updated.
         else:
@@ -680,6 +694,7 @@ class Tester(cevent.CEvent):
     
     def initialize(self):
         # pygame.init()
+        
         pygame.display.init()
         pygame.font.init()
         # print pygame.display.Info()
@@ -727,6 +742,14 @@ class Tester(cevent.CEvent):
         self.start = time.time()
         self.interval_start = 0
         self.interval_num = 0
+
+        self.turn_pump_off()
+        self.open_valve0()
+        self.open_valve1()
+
+        self.valve0_led.on() ## this should not be necessary
+        self.valve1_led.on() ## this should not be necessary
+
         self._display_surf.blit(self._image_surf,(0,0))
 
     def on_loop(self):
