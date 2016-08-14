@@ -1,7 +1,9 @@
 import sqlite3 as lite
 import datetime
 
-con = lite.connect('blood_pressure.db')
+filename = 'blood_pressure.db'
+
+con = lite.connect(filename)
 cur = con.cursor()
 
 N_TABLE = 3
@@ -16,6 +18,7 @@ def create_tables():
             'INSERT INTO Sex VALUES ("other")',
             'CREATE TABLE User(sexid INT, name TEXT, birth DATE)',
             'CREATE UNIQUE INDEX unq_username ON User(name)',
+            'INSERT INTO User VALUES(2, "anon", "2000-01-01")',
             'CREATE TABLE BP(name TEXT, sys INT, dia INT, day DATETIME)'
     ]
             
@@ -33,12 +36,17 @@ sexes = {}
 for id, sex in cur.fetchall():
     sexes[sex] = id
 
-def add_patient(sex, name, birthday):
+def add_user(sex, name, birthday):
     sid = sexes[sex]
     birth = str(birthday).split()[0]
-    sql = 'INSERT INTO User VALUES(%d, "%s", "%s")' % (sid, name, birth)
+    sql = 'INSERT INTO User VALUES(%d, "%s", "%s")' % (sid, name.lower(), birth)
     cur.execute(sql)
     con.commit()
+
+def get_users():
+    sql = 'SELECT * FROM User'
+    cur.execute(sql)
+    return cur.fetchall()
 
 def str2ymd(s):
     year, month, day = s.split('-')
@@ -47,13 +55,13 @@ def str2ymd(s):
     day = int(month)
     return year, month, day
 
-def add_result(name, sys, dia, day):
+def add_result(user, sys, dia, day):
     day = str(day)
-    sql = 'INSERT INTO BP VALUES("%s", %d, %d, "%s")' % (name, sys, dia, day)
+    sql = 'INSERT INTO BP VALUES("%s", %d, %d, "%s")' % (user, sys, dia, day)
     cur.execute(sql)
     con.commit()
 
-def getAge(name):
+def get_age(name):
     sql = 'SELECT birth FROM User WHERE name="%s"' % name
     cur.execute('SELECT * FROM User')
     cur.execute(sql)
@@ -70,7 +78,7 @@ def getAge(name):
     now = datetime.datetime.now()
     return (now - birth).days / 365.25
 
-def getBPs(name):
+def get_BPs(name):
     sql = 'SELECT sys, dia, day FROM BP WHERE name="%s"' % name
     cur.execute(sql)
     out = cur.fetchall()[0]
@@ -81,15 +89,21 @@ def getBPs(name):
             'dia': out[1],
             'day': day}
 
-def getNames():
+def get_names():
     sql = 'SELECT name FROM User'
     cur.execute(sql)
     return [l[0] for l in cur.fetchall()]
 def test():
-    create_tables()
-    add_patient('male', 'username', datetime.datetime(1970, 3, 10))
-    add_result('username', 110, 70, datetime.datetime.now())
-    print getAge('username')
-    print getBPs('username')
-
+    if raw_input('This test destroys all data. Continue[n]?') == 'y':
+        create_tables()
+        add_user('male', 'anon', datetime.datetime(1970, 3, 10))
+        add_result('anon', 110, 70, datetime.datetime.now())
+        add_user('male', 'justin', datetime.datetime(1970, 3, 10))
+        add_result('justin', 110, 70, datetime.datetime.now())
+        print get_age('anon')
+        print get_BPs('anon')
+        print get_users()
+        print get_BPs('justin')
+    else:
+        print 'Test aborted.'
 # test()

@@ -12,6 +12,8 @@ from pygame.locals import *
 import cevent
 from numpy import random
 import time
+import records
+import datetime
 
 MAX_PRESSURE = 200 ### shutoff above this pressure
 MIN_PRESSURE =  35
@@ -35,6 +37,7 @@ from numpy import diff, median, nan, array
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
+BLACK = (0, 0, 0)
 
 mmm_data = dict(init=False,
                 interval=1,
@@ -386,6 +389,7 @@ class Gauge(Widget):
             frac = -.05
         angle = (self.angles[0] + frac * (self.angles[1] - self.angles[0])) * math.pi / 180
         return angle
+    
     def update(self, value):
         if value != self.value:
             angle = self.val2angle(value)
@@ -536,11 +540,72 @@ class Compute(Mode):
             elif error:
                 results = 'ERROR' 
             else:
+                records.add_result(self.tester.user,
+                                   sys, dia, datetime.datetime.now())
                 results = '%d/%d' % (sys, dia)
                 color = BLUE
         self.tester.results.add_text(results, 30, color)
         return True
 
+def collidepoint(rect, point):
+    inx = rect[0] <= point[0] <= rect[0] + rect[2]
+    iny = rect[1] <= point[1] <= rect[1] + rect[3]
+    return inx and iny
+
+def userscreen():
+    surf = pygame.display.get_surface()
+    surf.fill(BLACK)
+    users = records.get_users()
+
+    font = pygame.font.Font(None, 30)
+    for i, user in enumerate(users):
+        text = font.render(user[1], 1, BLUE)
+        textpos = (10, i * 20 + 10)
+        surf.blit(text, textpos)
+    i = len(users)
+    textpos = (10, i * 20 + 10)
+    text = font.render("add", 1, RED)
+    surf.blit(text, textpos)
+    
+    pygame.display.flip()
+    done = False
+    out = None
+    while not done:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                done = True
+            if event.type == pygame.MOUSEBUTTONUP:
+                idx = (event.pos[1] - 10) / 20
+                if idx < len(users):
+                    out = users[idx][1]
+                    done = True
+                elif idx == len(users):
+                    def new_user():
+                        print 'TODO: Make this a pygame GUI'
+
+                        try:
+                            name = raw_input('username:')
+                            sex = raw_input('sex: (M/F/O)')
+                            if sex not in 'MFO':
+                                raise ValueError("Sex not understood: %s" % sex)
+                            else:
+                                sex = {'M':'male','F':'female','O':'other'}[sex]
+                            year = int(raw_input("birth year (YYYY):"))
+                            month = int(raw_input("birth month (MM):"))
+                            day = int(raw_input("birth day (DD):"))
+                            birth = datetime.datetime(year, month, day)
+                            records.add_user(sex, name, birth)
+                            out = name.lower()
+
+                        except Exception, e:
+                            print e
+                            out = None
+                        return out
+                    out = new_user()
+                    if out is not None:
+                        done = True
+                        
+    return out
 class Tester(cevent.CEvent):
     def __init__(self):
         self._running = True
@@ -555,6 +620,7 @@ class Tester(cevent.CEvent):
                       Deflate(self),
                       Compute(self),
                       Abort(self)]
+        self.user = 'anon'
         self.normal_transition = [1, 2, 3, 4, 1, 1]
         self.abort_transition  = [5, 5, 5, 5, 5, 5]
         
@@ -604,7 +670,13 @@ class Tester(cevent.CEvent):
             
     def on_mbutton_up(self, event):
         global screen_touched
-        screen_touched = True
+        if collidepoint(self.user_wid.rect, event.pos):
+            self.user = userscreen()
+            self.user_wid.add_text(self.user, 30, BLUE)
+            self.initialize()
+            self.cuff_pressure.update(-1) # insure pressure gets updated.
+        else:
+            screen_touched = True
     
     def initialize(self):
         # pygame.init()
@@ -635,6 +707,9 @@ class Tester(cevent.CEvent):
         self.results = Widget(self, rect=(WIDTH - 150, 50, 200, 50),
                               background_color=(0, 0, 0))
         self.results.add_text("SYS/DIA", 30, BLUE)
+        self.user_wid = Widget(self, rect=(WIDTH - 150, HEIGHT-50, 200, 50),
+                              background_color=(0, 0, 0))
+        self.user_wid.add_text(self.user, 30, BLUE)
         self._display_surf = pygame.display.set_mode((WIDTH,HEIGHT),
                                                      pygame.HWSURFACE)
         self._running = True

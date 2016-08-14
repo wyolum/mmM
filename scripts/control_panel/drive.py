@@ -162,6 +162,8 @@ def connect():
     for port in glob(patt):
         s = Serial(port, baudrate, timeout=timeout)
         break
+    else:
+        raise ValueError("mmM board not found: no serial port")
 connect()
     
 class PIDError(Exception):
