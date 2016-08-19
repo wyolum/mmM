@@ -1,27 +1,25 @@
 '''
 based on przemoli-pygametutorial-540433c50ffc
 '''
-import drive
-import util
-import serial
 import os
 import time
 import math
-import pygame
-from pygame.locals import *
-import cevent
-from numpy import random
-import time
-import records
 import datetime
+from numpy import array
+
+import pygame
+import util
+import records
 import eztext
+import cevent
+import drive
+
 
 MAX_PRESSURE = 200 ### shutoff above this pressure
-MIN_PRESSURE =  35
+MIN_PRESSURE = 35
 
-clock = pygame.time.Clock()
 COLORKEY = (1, 128, 1)
-cursor = ((16, 16),
+CURSOR = ((16, 16),
           (0, 0),
           (0, 0, 64, 0, 96, 0, 112, 0, 120, 0, 124, 0, 126, 0, 127, 0,
            127, 128, 124, 0, 108, 0, 70, 0, 6, 0, 3, 0, 3, 0, 0, 0),
@@ -32,8 +30,6 @@ cursor = ((16, 16),
 #          (0, 0),
 #          (255, 255, 255, 255, 255, 255, 255, 255),
 #          (0, 0, 0, 0, 0, 0, 0, 0))
-import time
-from numpy import diff, median, nan, array
 
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
@@ -41,7 +37,7 @@ BLUE = (0, 0, 255)
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 
-mmm_data = dict(init=False,
+MMM_DATA = dict(init=False,
                 interval=1,
                 pump_rate=0,
                 valve=0, ## for valve0 and valve1 control
@@ -49,14 +45,19 @@ mmm_data = dict(init=False,
                 amb_pressure=True,
                 amb_temp=True,
                 valve_state=True, ## for valve status request
-)
+               )
 def mmm_update():
-    for k in mmm_data:
-        mmm_data[k] = int(mmm_data[k])
-    drive.send_cmd(**mmm_data)
+    '''
+    Send commands to mmm board
+    '''
+    for k in MMM_DATA:
+        MMM_DATA[k] = int(MMM_DATA[k])
+    drive.send_cmd(**MMM_DATA)
 
 def mmm_new_status(packet):
-    ### update leds
+    '''
+    Update leds when new status arrives.
+    '''
     if packet.name == 'Pump':
         if packet.value:
             theApp.pump_led.on()
@@ -71,19 +72,6 @@ def mmm_new_status(packet):
             theApp.valve1_led.on()
         else:
             theApp.valve1_led.off()
-            
-class Buff:
-    def __init__(self, max_size=10):
-        self.data = []
-        self.max_size = max_size
-
-    def append(self, item):
-        self.data.append(item)
-	self.data = self.data[-self.max_size:]
-
-    def get(self):
-        out = self.data[:]
-        return out
 
 DEG = math.pi / 180.
 WIDTH = 800
@@ -98,13 +86,10 @@ MIN = UNITS['MIN']
 SEC = UNITS['SEC']
 HOUR = UNITS['HOUR']
 
-def html2rgb(s):
-    rr = int(s[1:3], 16)
-    gg = int(s[3:5], 16)
-    bb = int(s[5:7], 16)
-    return [rr, gg, bb, 255]
-    
 class Widget:
+    '''
+    Pygame GUI Widget baseclass
+    '''
     def __init__(self, parent, rect, colorkey=None, background_color=(0, 0, 0),
                  alpha=255, static=False):
         '''
@@ -114,7 +99,7 @@ class Widget:
         rect[2] -- width
         rect[3] -- height
         '''
-        self.background_color=background_color
+        self.background_color = background_color
         self.surf = pygame.Surface((rect[2], rect[3]))
         self.text_surf = None
 
@@ -125,10 +110,9 @@ class Widget:
         if self.surf.fill is not None:
             self.surf.fill(background_color)
         self.rect = rect
-        self.Rect = Rect(rect)
         self.parent = parent
         self.parent.widgets.append(self)
-        self.static=static
+        self.static = static
         self.changed = True
 
         self.text = None
@@ -136,11 +120,17 @@ class Widget:
         self.color = None
 
     def render(self, surf):
+        '''
+        Update GUI image of self.
+        '''
         rect = surf.blit(self.surf, (self.rect[0], self.rect[1]))
         self.changed = False
         return rect
 
     def set_text(self, text, fontsize, color=(0, 0, 255), align="l"):
+        '''
+        Set text
+        '''
         self.changed = True
         if self.text_surf is None:
             self.text_surf = pygame.Surface((self.rect[2], self.rect[3]))
@@ -166,28 +156,37 @@ class Widget:
         self.color = color
 
     def on_lbutton_down(self, event):
+        'abstract'
         pass
     def on_lbutton_up(self, event):
+        'abstract'
         pass
     def on_mbutton_down(self, event):
+        'abstract'
         pass
     def on_mbutton_up(self, event):
+        'abstract'
         pass
     def on_rbutton_down(self, event):
+        'abstract'
         pass
     def on_rbutton_up(self, event):
+        'abstract'
         pass
-    
+
 class Button(Widget):
     def __init__(self, parent, text, color, fontsize, command, *args, **kw):
         Widget.__init__(self, parent, *args, **kw)
         self.command = command
         self.set_text(text, fontsize, color)
-        
+
     def on_mbutton_up(self, event):
         self.command()
-        
+
     def config(self, **kw):
+        '''
+        Update widget with keywords
+        '''
         text = self.text
         color = self.color
         fontsize = self.fontsize
@@ -199,11 +198,10 @@ class Button(Widget):
                 text = kw[k]
                 del kw['text']
             elif k == 'fontsize':
-                fontsize=kw[k]
+                fontsize = kw[k]
                 del kw['fontsize']
         self.set_text(text, fontsize, color, **kw)
 
-    
 class LED(Widget):
     def __init__(self, parent, color, position, radius, status,
                  *args, **kw):
@@ -219,7 +217,7 @@ class LED(Widget):
             self.on()
         else:
             self.off()
-        
+
     def on(self, color=None):
         if color is None:
             color = self.color
@@ -231,14 +229,12 @@ class LED(Widget):
     def off(self):
         if self.status:
             pygame.draw.circle(self.surf, (0, 0, 0),
-                               (self.radius, self.radius), self.radius-1,
-            )
+                               (self.radius, self.radius), self.radius-1)
             pygame.draw.circle(self.surf, self.color,
-                               (self.radius, self.radius), self.radius,
-                               1)
+                               (self.radius, self.radius), self.radius, 1)
             self.status = False
             self.changed = True
-        
+
 class Chart(Widget):
     def __init__(self, parent, rect, xmin, xmax, ymin, ymax, *args, **kw):
         Widget.__init__(self, parent, rect, *args, **kw)
@@ -275,8 +271,6 @@ class Chart(Widget):
         x, y, w, h = xywh
         my = -self.rect[3] / float(self.ymax - self.ymin)
         top = my * (y - self.ymax)
-        bottom = my * (y + h - self.ymax)
-        bottom = float(h) / (self.ymax - self.ymin)
 
         # (x, y) = upper left
         # (x + w, y + h) = lower right
@@ -290,25 +284,13 @@ class Chart(Widget):
             out[-2] = 1
         def intround(v):
             return int(round(v))
-        out = map(intround, out)
+        out = [intround(x) for x in out]
         # print xywh, out, self.rect
         return out
-
-def readline():
-    return ser.read(100)
-
-def fast_readline():
-    out = []
-    c = 0
-    while c and c != '\r':
-        c = ser.read(1)
-        out.append(c)
-    return ''.join(out)
 
 class ExpFilterDeco:
     '''
     An exponential filter decorator for the getSpeed and getCadence functions.
-    
     return alpha * f + (1 - alpha) * last_f
     '''
     def __init__(self, alpha):
@@ -382,7 +364,8 @@ class Gauge(Widget):
                  dial_width=10, dial_color=(0, 0, 255),
                  inner_radius=30, colorkey=COLORKEY, *args, **kw):
         rect = (center[0] - radius, center[1] - radius, 2 * radius, 2 * radius)
-        Widget.__init__(self, parent, rect, colorkey=colorkey, background_color=colorkey, *args, **kw)
+        Widget.__init__(self, parent, rect, colorkey=colorkey, background_color=colorkey,
+                        *args, **kw)
         self.center = center
         self.radius = radius
         self.angles = angles
@@ -393,7 +376,7 @@ class Gauge(Widget):
             self.update(value)
         self.dial_color = dial_color
         self.value = self.values[0]
-        
+
     def val2angle(self, value):
         frac = float(value - self.values[0]) / (self.values[1] - self.values[0])
         if frac > 1.05:
@@ -402,7 +385,7 @@ class Gauge(Widget):
             frac = -.05
         angle = (self.angles[0] + frac * (self.angles[1] - self.angles[0])) * math.pi / 180
         return angle
-    
+
     def update(self, value):
         if value != self.value:
             angle = self.val2angle(value)
@@ -414,7 +397,7 @@ class Gauge(Widget):
                        self.radius - self.dial_width/2 * math.cos(angle))]
 
             self.surf.fill(self.colorkey)
-            pygame.draw.polygon(self.surf, self.dial_color, points , 0)
+            pygame.draw.polygon(self.surf, self.dial_color, points, 0)
             self.value = value
             self.changed = True
 
@@ -428,7 +411,6 @@ class Gauge(Widget):
                 hi_x = self.radius - hi.get_width() / 2
                 hi_y = self.radius - hi.get_height() / 2
             self.surf.blit(hi, (hi_x, hi_y))
-            
         else:
             self.changed = False
 
@@ -436,8 +418,10 @@ class Gauge(Widget):
         '''
         draw a wedge behind the gauge
         '''
-        pygame.draw.arc(self.surf, color, (self.radius - radius, self.radius-radius, 2 * radius, 2 * radius),
-                        -self.val2angle(maxval) - 1 * DEG, -self.val2angle(minval) + 1 * DEG, thickness)
+        pygame.draw.arc(self.surf, color,
+                        (self.radius - radius, self.radius-radius, 2 * radius, 2 * radius),
+                        -self.val2angle(maxval) - 1 * DEG,
+                        -self.val2angle(minval) + 1 * DEG, thickness)
 
 
 screen_touched = False
@@ -447,6 +431,8 @@ class Mode:
     color = BLUE
     def __init__(self, tester):
         self.tester = tester
+        self.start_time = None
+        self.start_cuff_pressure = None
 
     def start(self):
         global screen_touched, abort_test
@@ -455,7 +441,8 @@ class Mode:
         self.tester.instruction.set_text(self.instruction, 30, self.color)
         self.start_time = time.time()
 
-    def is_complete(self):
+    @staticmethod
+    def is_complete():
         return True
 class Abort(Mode):
     instruction = 'Test Aborted!'
@@ -486,13 +473,14 @@ class Ready(Mode):
 
 class Inflate(Mode):
     instruction = 'Touch to abort'
-    max_inflate_start_time = 5 
+    max_inflate_start_time = 5
     def start(self):
         Mode.start(self)
         self.tester.inflate(MAX_PRESSURE)
         stop_recording()
         self.start_cuff_pressure = last_cuff_pressure
         self.tester.bp_result.set_text("BP:", 30, BLUE)
+        self.tester.map_result.set_text("MP:", 30, BLUE)
         self.tester.hr_result.set_text("HR:", 30, BLUE)
 
     def is_complete(self):
@@ -533,30 +521,37 @@ class Compute(Mode):
     def is_complete(self):
         Mode.start(self)
         data = array(hirate)
-        raw = data[:,1]
+        raw = data[:, 1]
+
+        bp_result = 'BP:'
+        map_result = 'MAP:'
+        hr_result = 'HR:'
+        error = True
+
         if len(raw) < 5 * 200: # 5 seconds of data
-            error = True
-            color = RED
-            bp_result = 'Data Error'
-            hr_result = 'HR'
+            bp_result = 'Data QTY Error'
         else:
             try:
                 sys, dia, map, hr = util.blood_pressure(raw)
+                error = False
             except IndexError, e:
-                bp_result = 'Error: %d' % e
+                bp_result = str(e)
                 error = True
-                color = RED
             except ValueError, e:
-                bp_result = 'Error: %d' % e
+                bp_result = str(e)
                 error = True
-                color = RED
             else:
                 records.add_result(self.tester.user,
                                    sys, dia, map, hr, datetime.datetime.now())
                 bp_result = 'BP: %d/%d' % (sys, dia)
+                map_result = 'MP: %3d' % map
                 hr_result = 'HR: %3d' % hr
-                color = BLUE
+        if error:
+            color = RED
+        else:
+            color = BLUE
         self.tester.bp_result.set_text(bp_result, 30, color)
+        self.tester.map_result.set_text(map_result, 30, color)
         self.tester.hr_result.set_text(hr_result, 30, color)
         return True
 
@@ -588,7 +583,7 @@ def new_user(surf):
         if sex not in 'MFO':
             raise ValueError("Sex not understood: %s" % sex)
         else:
-            sex = {'M':'male','F':'female','O':'other'}[sex]
+            sex = {'M':'male', 'F':'female', 'O':'other'}[sex]
         year = int(raw_input("birth year (YYYY):"))
         month = int(raw_input("birth month (MM):"))
         day = int(raw_input("birth day (DD):"))
@@ -615,7 +610,7 @@ def prompt_user():
     textpos = (10, i * 20 + 10)
     # text = font.render("add", 1, RED)
     # surf.blit(text, textpos)
-    
+
     pygame.display.flip()
     done = False
     out = None
@@ -627,7 +622,7 @@ def prompt_user():
                 idx = (event.pos[1] - 10) / 20
                 if idx < len(users):
                     out = users[idx][1]
-                    done = True                        
+                    done = True
     return out
 class Tester(cevent.CEvent):
     def __init__(self):
@@ -646,38 +641,62 @@ class Tester(cevent.CEvent):
         self.user = records.get_lastuser()
         self.normal_transition = [1, 2, 3, 4, 1, 1]
         self.abort_transition  = [5, 5, 5, 5, 5, 5]
-        
-    def turn_pump_on(self):
-        mmm_data['pump_rate'] = 1
-        mmm_update()
-        
-    def turn_pump_off(self):
-        mmm_data['pump_rate'] = 0
+        self.interval_start = None
+        self.interval_num = None
+
+        self.cuff_pressure = None
+        self.pump_led   = None
+        self.valve0_led = None
+        self.valve1_led = None
+
+        self.instruction = None
+        self.bp_result = None
+        self.map_result = None
+        self.hr_result = None
+        self.user_wid = None
+        self._display_surf = None
+        self._running = False
+        self.start = None
+
+    @staticmethod
+    def turn_pump_on():
+        MMM_DATA['pump_rate'] = 1
         mmm_update()
 
-    def close_valve0(self):
-        mmm_data['valve'] &= 01
-        mmm_update()
-        
-    def open_valve0(self):
-        mmm_data['valve'] |= 10
+    @staticmethod
+    def turn_pump_off():
+        MMM_DATA['pump_rate'] = 0
         mmm_update()
 
-    def close_valve1(self):
-        mmm_data['valve'] &= 0b10
+    @staticmethod
+    def close_valve0():
+        MMM_DATA['valve'] &= 01
         mmm_update()
 
-    def open_valve1(self):
-        mmm_data['valve'] |= 0b01
+    @staticmethod
+    def open_valve0():
+        MMM_DATA['valve'] |= 10
         mmm_update()
 
-    def open_valves(self):
-        mmm_data['valve'] = 0b11
+    @staticmethod
+    def close_valve1():
+        MMM_DATA['valve'] &= 0b10
         mmm_update()
 
-    def close_valves(self):
+    @staticmethod
+    def open_valve1():
+        MMM_DATA['valve'] |= 0b01
+        mmm_update()
+
+    @staticmethod
+    def open_valves():
+        MMM_DATA['valve'] = 0b11
+        mmm_update()
+
+    @staticmethod
+    def close_valves():
         print 'open_valves'
-        mmm_data['valve'] = 0b00
+        MMM_DATA['valve'] = 0b00
         mmm_update()
 
     def inflate(self, mmhg):
@@ -689,27 +708,27 @@ class Tester(cevent.CEvent):
         self.turn_pump_off()
         if last_cuff_pressure > mmhg:
             self.open_valve1()
-            
+
     def on_mbutton_up(self, event):
         global screen_touched
         if collidepoint(self.user_wid.rect, event.pos):
             self.user = prompt_user()
             if self.user is not None:
                 self.user_wid.set_text(self.user, 30, BLUE)
-                
+
             self.initialize()
             self.cuff_pressure.update(-1) # insure pressure gets updated.
         else:
             screen_touched = True
-    
+
     def initialize(self):
         # pygame.init()
-        
+
         pygame.display.init()
         pygame.font.init()
         # print pygame.display.Info()
-        pygame.mouse.set_cursor(*cursor)
-        
+        pygame.mouse.set_cursor(*CURSOR)
+
         ## create widgets.
         # self.text = Widget(self, (60, HEIGHT - 40, 60, 30),
         #                    background_color=(0, 0, 0))
@@ -718,27 +737,28 @@ class Tester(cevent.CEvent):
         #                    dial_color=(255, 0, 0),
         #                    inner_radius=20)
         self.cuff_pressure = Gauge(self, (130, 133), 100, [117.5, 422.5],
-                           [0, 300],
-                           dial_color=(255, 0, 0),
-                           inner_radius=20)
+                                   [0, 300],
+                                   dial_color=(255, 0, 0),
+                                   inner_radius=20)
         self.pump_led   = LED(self, (0, 0, 255), (10, 10), 6, False)
         self.valve0_led = LED(self, (0, 0, 255), (10, 30), 6, False)
         self.valve1_led = LED(self, (0, 0, 255), (10, 50), 6, False)
-        def start_bp():
-            pass
-        
+
         self.instruction = Widget(self, rect=(WIDTH - 200, 0, 200, 50),
                                   background_color=(0, 0, 0))
-        self.bp_result = Widget(self, rect=(WIDTH - 150, 75, 200, 30),
+        self.bp_result = Widget(self, rect=(WIDTH - 200, 75, 200, 30),
+                                background_color=(0, 0, 0))
+        self.map_result = Widget(self, rect=(WIDTH - 200, 100, 200, 30),
                                  background_color=(0, 0, 0))
-        self.hr_result = Widget(self, rect=(WIDTH - 150, 100, 200, 30),
-                                 background_color=(0, 0, 0))
+        self.hr_result = Widget(self, rect=(WIDTH - 200, 125, 200, 30),
+                                background_color=(0, 0, 0))
         self.bp_result.set_text("BP:", 30, BLUE)
+        self.map_result.set_text("MP:", 30, BLUE)
         self.hr_result.set_text("HR:", 30, BLUE)
         self.user_wid = Widget(self, rect=(WIDTH - 150, HEIGHT-50, 200, 50),
-                              background_color=(0, 0, 0))
+                               background_color=(0, 0, 0))
         self.user_wid.set_text(self.user, 30, BLUE)
-        self._display_surf = pygame.display.set_mode((WIDTH,HEIGHT),
+        self._display_surf = pygame.display.set_mode((WIDTH, HEIGHT),
                                                      pygame.HWSURFACE)
         self._running = True
         # self._image_surf = pygame.image.load("WyoLum_racing.png").convert()
@@ -751,7 +771,7 @@ class Tester(cevent.CEvent):
             if wid.static:
                 pass
             #   wid.render(self._image_surf)
-        
+
         self.start = time.time()
         self.interval_start = 0
         self.interval_num = 0
@@ -763,7 +783,7 @@ class Tester(cevent.CEvent):
         self.valve0_led.on() ## this should not be necessary
         self.valve1_led.on() ## this should not be necessary
 
-        self._display_surf.blit(self._image_surf,(0,0))
+        self._display_surf.blit(self._image_surf, (0, 0))
 
     def on_loop(self):
         if self.modes[self.mode].is_complete():
@@ -772,10 +792,6 @@ class Tester(cevent.CEvent):
             else:
                 self.mode = self.normal_transition[self.mode]
             self.modes[self.mode].start()
-        ## update values
-        rect = self._display_surf.get_rect()
-        now = time.time() - self.start
-        duration = 300
 
         ## update widgets
         drive.serial_interact(1)
@@ -798,27 +814,27 @@ class Tester(cevent.CEvent):
     def on_exit(self):
         self._running = False
 
-    def on_cleanup(self):
+    @staticmethod
+    def on_cleanup():
         pygame.quit()
 
     def on_key_down(self, event):
-        if event.key == K_ESCAPE or event.key == K_LEFT:
+        if event.key == pygame.locals.K_ESCAPE or event.key == pygame.locals.K_LEFT:
             self._running = False
-        
+
     def mainloop(self):
         if self.initialize() == False:
             self._running = False
         count = 0
-        while(self._running):
-            self.on_render() 
+        while self._running:
+            self.on_render()
             self.on_loop()
             drive.serial_interact()
-            # clock.tick(100)
 
             for event in pygame.event.get():
                 self.on_event(event)
             count += 1
-if __name__ == "__main__" :
+if __name__ == "__main__":
     theApp = Tester()
     theApp.open_valves()
     theApp.mainloop()

@@ -24,8 +24,8 @@ def blood_pressure(raw):
     lp = filter(raw, LP_TAPS)[1000:]
     llp = filter(raw, LLP_TAPS)[1000:]
     bpf = lp - llp
+    # pylab.plot(bpf); pylab.show()
     troughs, peaks, deltas, pulse_period = get_troughs_peaks_deltas(bpf)
-    # pulse_period = find_pulse_period(bpf)
     
     delta_vs = []
     deltav_ps = []
@@ -38,7 +38,7 @@ def blood_pressure(raw):
     mad_n_bad_thresh = defaults['mad_n_bad_thresh']
     mad_failed = mad_thresh_test(ddeltas, mad_thresh, mad_n_bad_thresh)
     if mad_failed:
-        raise ValueError("!!! Artifact detected !!!")
+        raise ValueError("Motion Detected")
         print "!!! Artifact detected !!!"
         
     candidate_deltas = [d for idx, d in zip(peaks, deltas) if llp[idx] > 60] ## MAP must be above 60mmhg.
