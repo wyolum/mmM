@@ -140,7 +140,7 @@ class Widget:
         self.changed = False
         return rect
 
-    def add_text(self, text, fontsize, color=(0, 0, 255)):
+    def set_text(self, text, fontsize, color=(0, 0, 255), align="l"):
         self.changed = True
         if self.text_surf is None:
             self.text_surf = pygame.Surface((self.rect[2], self.rect[3]))
@@ -148,11 +148,18 @@ class Widget:
         font = pygame.font.Font(None, fontsize)
         text = font.render(text, 1, color)
         textpos = text.get_rect()
-        location = self.surf.get_rect().center
-        textpos.center = location
+        location = self.surf.get_rect()
+        if align == 'c':
+            textoffset = ((location.width - textpos.width) / 2,
+                          (location.height - textpos.height) / 2)
+        elif align == 'l':
+            textoffset = (0,
+                          (location.height - textpos.height) / 2)
+        elif align == 'r':
+            textoffset = (location.width - textpos.width,
+                          (location.height - textpos.height) / 2)
         self.surf.fill(self.background_color)
-        self.surf.blit(text, textpos)
-        # self.text_surf.blit(text, (0, 0))
+        self.surf.blit(text, textoffset)
 
         self.text = text
         self.fontsize = fontsize
@@ -175,7 +182,7 @@ class Button(Widget):
     def __init__(self, parent, text, color, fontsize, command, *args, **kw):
         Widget.__init__(self, parent, *args, **kw)
         self.command = command
-        self.add_text(text, fontsize, color)
+        self.set_text(text, fontsize, color)
         
     def on_mbutton_up(self, event):
         self.command()
@@ -187,11 +194,14 @@ class Button(Widget):
         for k in kw:
             if k == 'color':
                 color = kw[k]
+                del kw['color']
             elif k == 'text':
                 text = kw[k]
+                del kw['text']
             elif k == 'fontsize':
                 fontsize=kw[k]
-        self.add_text(text, fontsize, color)
+                del kw['fontsize']
+        self.set_text(text, fontsize, color, **kw)
 
     
 class LED(Widget):
@@ -442,7 +452,7 @@ class Mode:
         global screen_touched, abort_test
         screen_touched = False
         abort_test = False
-        self.tester.instruction.add_text(self.instruction, 30, self.color)
+        self.tester.instruction.set_text(self.instruction, 30, self.color)
         self.start_time = time.time()
 
     def is_complete(self):
@@ -482,7 +492,8 @@ class Inflate(Mode):
         self.tester.inflate(MAX_PRESSURE)
         stop_recording()
         self.start_cuff_pressure = last_cuff_pressure
-        self.tester.results.add_text("SYS/DIA", 30, BLUE)
+        self.tester.bp_result.set_text("BP:", 30, BLUE)
+        self.tester.hr_result.set_text("HR:", 30, BLUE)
 
     def is_complete(self):
         global abort_test
@@ -526,28 +537,27 @@ class Compute(Mode):
         if len(raw) < 5 * 200: # 5 seconds of data
             error = True
             color = RED
-            results = 'Data Error'
+            bp_result = 'Data Error'
+            hr_result = 'HR'
         else:
             try:
-                sys, dia, mad_failed = util.blood_pressure(raw)
-                error = False
+                sys, dia, map, hr = util.blood_pressure(raw)
             except IndexError, e:
-                print 'Error', e
+                bp_result = 'Error: %d' % e
                 error = True
-            except ValueError, e:
-                print 'Error:', e
-                error = True
-            if mad_failed:
-                results = 'Mad Failed!'
                 color = RED
-            elif error:
-                results = 'ERROR' 
+            except ValueError, e:
+                bp_result = 'Error: %d' % e
+                error = True
+                color = RED
             else:
                 records.add_result(self.tester.user,
-                                   sys, dia, datetime.datetime.now())
-                results = '%d/%d' % (sys, dia)
+                                   sys, dia, map, hr, datetime.datetime.now())
+                bp_result = 'BP: %d/%d' % (sys, dia)
+                hr_result = 'HR: %3d' % hr
                 color = BLUE
-        self.tester.results.add_text(results, 30, color)
+        self.tester.bp_result.set_text(bp_result, 30, color)
+        self.tester.hr_result.set_text(hr_result, 30, color)
         return True
 
 def collidepoint(rect, point):
@@ -685,7 +695,7 @@ class Tester(cevent.CEvent):
         if collidepoint(self.user_wid.rect, event.pos):
             self.user = prompt_user()
             if self.user is not None:
-                self.user_wid.add_text(self.user, 30, BLUE)
+                self.user_wid.set_text(self.user, 30, BLUE)
                 
             self.initialize()
             self.cuff_pressure.update(-1) # insure pressure gets updated.
@@ -719,12 +729,15 @@ class Tester(cevent.CEvent):
         
         self.instruction = Widget(self, rect=(WIDTH - 200, 0, 200, 50),
                                   background_color=(0, 0, 0))
-        self.results = Widget(self, rect=(WIDTH - 150, 50, 200, 50),
-                              background_color=(0, 0, 0))
-        self.results.add_text("SYS/DIA", 30, BLUE)
+        self.bp_result = Widget(self, rect=(WIDTH - 150, 75, 200, 30),
+                                 background_color=(0, 0, 0))
+        self.hr_result = Widget(self, rect=(WIDTH - 150, 100, 200, 30),
+                                 background_color=(0, 0, 0))
+        self.bp_result.set_text("BP:", 30, BLUE)
+        self.hr_result.set_text("HR:", 30, BLUE)
         self.user_wid = Widget(self, rect=(WIDTH - 150, HEIGHT-50, 200, 50),
                               background_color=(0, 0, 0))
-        self.user_wid.add_text(self.user, 30, BLUE)
+        self.user_wid.set_text(self.user, 30, BLUE)
         self._display_surf = pygame.display.set_mode((WIDTH,HEIGHT),
                                                      pygame.HWSURFACE)
         self._running = True
@@ -768,7 +781,7 @@ class Tester(cevent.CEvent):
         drive.serial_interact(1)
         cuff_pressure = last_cuff_pressure
         self.cuff_pressure.update(int(cuff_pressure))
-        # self.text.add_text('%3d' % cuff_pressure, 30)
+        # self.text.set_text('%3d' % cuff_pressure, 30)
 
         self.last_loop_time = time.time()
 

@@ -18,12 +18,14 @@ import pylab
 def blood_pressure(raw):
     '''
     pressure is the raw pressure readings for the descent data only
+    returns sys, dia, map, hr
     '''
     dt = defaults['dt']
     lp = filter(raw, LP_TAPS)[1000:]
     llp = filter(raw, LLP_TAPS)[1000:]
     bpf = lp - llp
-    troughs, peaks, deltas = get_troughs_peaks_deltas(bpf)
+    troughs, peaks, deltas, pulse_period = get_troughs_peaks_deltas(bpf)
+    # pulse_period = find_pulse_period(bpf)
     
     delta_vs = []
     deltav_ps = []
@@ -36,10 +38,9 @@ def blood_pressure(raw):
     mad_n_bad_thresh = defaults['mad_n_bad_thresh']
     mad_failed = mad_thresh_test(ddeltas, mad_thresh, mad_n_bad_thresh)
     if mad_failed:
-        # raise ValueError("!!! Artifact detected !!!")
+        raise ValueError("!!! Artifact detected !!!")
         print "!!! Artifact detected !!!"
         
-    m = mad(ddeltas)
     candidate_deltas = [d for idx, d in zip(peaks, deltas) if llp[idx] > 60] ## MAP must be above 60mmhg.
     n_peak = numpy.argmax(candidate_deltas) * 2 + 1
     if n_peak >= len(peaks):
@@ -84,10 +85,14 @@ def blood_pressure(raw):
 
     sbp = llp[sbp_idx]
     dbp = llp[dbp_idx]
-    return sbp, dbp, mad_failed
+    hr = 60./pulse_period
+    return sbp, dbp, MAP6, hr
     
 def get_troughs_peaks_deltas(bpf):
-    peaks, troughs = find_pulse_peaks_and_troughs(bpf, defaults['dt'])
+    peaks, troughs, pulse_period = find_pulse_peaks_and_troughs(
+        bpf,
+        defaults['dt'],
+        return_pulse_period=True)
     if peaks[0] < troughs[0]: # peak follows trough
         peaks = peaks[1:]
     if troughs[-1] > peaks[-1]: # peak follows trough
@@ -101,7 +106,7 @@ def get_troughs_peaks_deltas(bpf):
     troughs = hills[:,0]
     peaks = hills[:,1]
     deltas = bpf[peaks] - bpf[troughs]
-    return troughs, peaks, deltas
+    return troughs, peaks, deltas, pulse_period
 
 def sample_std(nums):
     n = len(nums)
@@ -616,7 +621,8 @@ def get_edited_deltas(raw_data, filtered, eps, do_plot=False, dt=defaults['dt'])
     # return deltas, MAP6, SBP, DBP, HR
     return deltas, MAP, SBP, DBP, HR
 
-def find_pulse_peaks_and_troughs(data, dt, max_pulse_period=defaults['max_pulse_period'], 
+def find_pulse_peaks_and_troughs(data, dt,
+                                 max_pulse_period=defaults['max_pulse_period'], 
                                  return_pulse_period=False):
     ''' return peaks, troughs
     both trimmed to same length with 
@@ -680,14 +686,15 @@ def peak_follows_trough(peaks, troughs):
             troughs = troughs[keep]
     return peaks, troughs
 
-def find_pulse_period(data, dt, fmin, fmax, fast=False):
+def find_pulse_period(bp_data, dt, fmin, fmax, fast=False):
     '''
-    compute the partial descrete power spectral density for the time series data from fmin to fmax on dfreq steps up to but not including fmax
+    compute the partial descrete power spectral density for the time series 
+    band pass data from fmin to fmax on dfreq steps up to but not including fmax
     return freqs, psd
     '''
-    N = len(data)
+    N = len(bp_data)
     if fast:
-        F = abs(numpy.fft.rfft(data)) ** 2
+        F = abs(numpy.fft.rfft(bp_data)) ** 2
         f = numpy.fft.rfftfreq(N, dt)[numpy.argmax(F)]
         out = 1/f
     else:
@@ -705,8 +712,8 @@ def find_pulse_period(data, dt, fmin, fmax, fast=False):
             imag = 0
             for j in range(N):
                 # exp(2.j * pi * freq * j * dt)
-                real += cos(2 * pi * freq * j * dt) * data[j]
-                imag += sin(2 * pi * freq * j * dt) * data[j]
+                real += cos(2 * pi * freq * j * dt) * bp_data[j]
+                imag += sin(2 * pi * freq * j * dt) * bp_data[j]
             psd = (real ** 2 + imag ** 2) / N
             psds.append(psd)
             pps.append(pp)

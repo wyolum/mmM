@@ -16,10 +16,12 @@ def create_tables():
             'INSERT INTO Sex VALUES ("male")',
             'INSERT INTO Sex VALUES ("female")',
             'INSERT INTO Sex VALUES ("other")',
-            'CREATE TABLE User(sexid INT, name TEXT, birth DATE)',
+            'CREATE TABLE User(sexid INT, name TEXT, birth DATE, email TEXT)',
             'CREATE UNIQUE INDEX unq_username ON User(name)',
-            'INSERT INTO User VALUES(2, "anon", "2000-01-01")',
-            'CREATE TABLE BP(name TEXT, sys INT, dia INT, day DATETIME)'
+            'INSERT INTO User VALUES(2, "anon", "2000-01-01", '
+            '                        "anon@gmail.com")',
+            'CREATE TABLE BP(name TEXT, sys INT, dia INT, map INT, '
+            '                hr INT, day DATETIME)'
     ]
             
     for sql in sqls:
@@ -36,10 +38,15 @@ sexes = {}
 for id, sex in cur.fetchall():
     sexes[sex] = id
 
-def add_user(sex, name, birthday):
+def add_user(sex, name, birthday, email=None):
     sid = sexes[sex]
     birth = str(birthday).split()[0]
-    sql = 'INSERT INTO User VALUES(%d, "%s", "%s")' % (sid, name.lower(), birth)
+    if email is None:
+        email = 'None'
+    sql = 'INSERT INTO User VALUES(%d, "%s", "%s", "%s")' % (sid,
+                                                             name.lower(),
+                                                             birth,
+                                                             email)
     cur.execute(sql)
     con.commit()
 
@@ -67,9 +74,11 @@ def str2ymd(s):
     day = int(month)
     return year, month, day
 
-def add_result(user, sys, dia, day):
+def add_result(user, sys, dia, map, hr, day):
     day = str(day)
-    sql = 'INSERT INTO BP VALUES("%s", %d, %d, "%s")' % (user, sys, dia, day)
+    sql = 'INSERT INTO BP VALUES("%s", %d, %d, %d, %d, "%s")' % (user,
+                                                                 sys, dia, map,
+                                                                 hr, day)
     cur.execute(sql)
     con.commit()
 
@@ -91,27 +100,29 @@ def get_age(name):
     return (now - birth).days / 365.25
 
 def get_BPs(name):
-    sql = 'SELECT sys, dia, day FROM BP WHERE name="%s"' % name
+    sql = 'SELECT sys, dia, map, hr, day FROM BP WHERE name="%s"' % name
     cur.execute(sql)
     out = cur.fetchall()[0]
-    day = out[2]
+    day = out[4]
     # year, month, day = str2ymd(day)
     # day = datetime.date(year, month, day)
     return {'sys': out[0],
             'dia': out[1],
+            'map': out[2],
+            'hr': out[3],
             'day': day}
 
 def get_names():
     sql = 'SELECT name FROM User'
     cur.execute(sql)
     return [l[0] for l in cur.fetchall()]
+
 def test():
     if raw_input('This test destroys all data. Continue[n]?') == 'y':
         create_tables()
-        add_user('male', 'anon', datetime.datetime(1970, 3, 10))
-        add_result('anon', 110, 70, datetime.datetime.now())
+        add_result('anon', 110, 70, 90, 60, datetime.datetime.now())
         add_user('male', 'justin', datetime.datetime(1970, 3, 10))
-        add_result('justin', 110, 70, datetime.datetime.now())
+        add_result('justin', 110, 70, 90, 60, datetime.datetime.now())
         print get_age('anon')
         print get_BPs('anon')
         print get_users()
