@@ -7,6 +7,7 @@ import time
 import math
 import datetime
 from numpy import array
+import pickle
 
 import pygame
 import util
@@ -478,7 +479,7 @@ class Compute(Mode):
     def is_complete(self):
         Mode.start(self)
         data = array(hirate)
-        path = os.path.join('../../data/', data.user)
+        path = os.path.join('../../data/', self.tester.user)
         if not os.path.exists(path):
             os.mkdir(path)
         n = len(glob.glob(os.path.join(path, '*.dat')))
