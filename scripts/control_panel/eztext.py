@@ -29,7 +29,8 @@ class Input:
         self.maxlength = self.options.maxlength
         self.prompt = self.options.prompt; self.value = ''
         self.shifted = False
-
+        self.done = False
+        
     def set_pos(self, x, y):
         """ Set the position to x, y """
         self.x = x
@@ -50,7 +51,9 @@ class Input:
             if event.type == KEYUP:
                 if event.key == K_LSHIFT or event.key == K_RSHIFT: self.shifted = False
             if event.type == KEYDOWN:
-                if event.key == K_BACKSPACE: self.value = self.value[:-1]
+                if event.key == K_RETURN:
+                    self.done = True
+                elif event.key == K_BACKSPACE: self.value = self.value[:-1]
                 elif event.key == K_LSHIFT or event.key == K_RSHIFT: self.shifted = True
                 elif event.key == K_SPACE: self.value += ' '
                 if not self.shifted:

@@ -1,6 +1,7 @@
 '''
 based on przemoli-pygametutorial-540433c50ffc
 '''
+import re
 import os
 import time
 import math
@@ -15,7 +16,7 @@ import cevent
 import drive
 
 
-MAX_PRESSURE = 200 ### shutoff above this pressure
+MAX_PRESSURE = 300 ### shutoff above this pressure
 MIN_PRESSURE = 35
 
 COLORKEY = (1, 128, 1)
@@ -288,42 +289,6 @@ class Chart(Widget):
         # print xywh, out, self.rect
         return out
 
-class ExpFilterDeco:
-    '''
-    An exponential filter decorator for the getSpeed and getCadence functions.
-    return alpha * f + (1 - alpha) * last_f
-    '''
-    def __init__(self, alpha):
-        self.alpha = alpha
-        self.last = [None]
-    def __call__(self, f):
-        def out():
-            out = f()
-            if self.last[0] is not None:
-                out = out * self.alpha + self.last[0] * (1 - self.alpha)
-            self.last[0] = out
-            return out
-        return out
-class FreshFish:
-    '''
-    Keep result around for specified time.  Refresh when fish goes bad
-    '''
-    def __init__(self, shelf_life=1):
-        self.shelf = shelf_life
-        self.last_time = 0
-        self.last_result = None
-
-    def __call__(self, f):
-        def out():
-            if time.time() - self.last_time < self.shelf:
-                res = self.last_result
-            else:
-                res = f()
-                self.last_time = time.time()
-                self.last_result = res
-            return res
-        return out
-
 ######################### mmM interaction
 
 last_cuff_pressure = 123
@@ -340,7 +305,7 @@ def stop_recording():
     recording = False
 def mpid_cb(pkt):
     global last_cuff_pressure
-    last_cuff_pressure = last_cuff_pressure * .90 + pkt.cuff * .10
+    last_cuff_pressure = last_cuff_pressure * .50 + pkt.cuff * .50
     # print last_cuff_pressure
     if recording:
         hirate.append([pkt.millis, pkt.cuff, pkt.flow, pkt.pulse])
@@ -350,14 +315,6 @@ drive.subscribe(drive.MPID.PID, mpid_cb)
 drive.subscribe(drive.StatusPID.PID, mmm_new_status)
 
 ######################### END mmM interaction
-
-
-@ExpFilterDeco(.01)
-@FreshFish(2)
-def getHR():
-    out = 100
-
-    return out
 
 class Gauge(Widget):
     def __init__(self, parent, center, radius, angles, min_max_values, value=None,
@@ -521,6 +478,7 @@ class Compute(Mode):
     def is_complete(self):
         Mode.start(self)
         data = array(hirate)
+        
         raw = data[:, 1]
 
         bp_result = 'BP:'
@@ -535,11 +493,9 @@ class Compute(Mode):
                 sys, dia, map, hr = util.blood_pressure(raw)
                 error = False
             except IndexError, e:
-                bp_result = str(e)
-                error = True
+                bp_result = 'Insuficient Data'
             except ValueError, e:
                 bp_result = str(e)
-                error = True
             else:
                 records.add_result(self.tester.user,
                                    sys, dia, map, hr, datetime.datetime.now())
@@ -560,42 +516,84 @@ def collidepoint(rect, point):
     iny = rect[1] <= point[1] <= rect[1] + rect[3]
     return inx and iny
 
-def new_user(surf):
+def ask_radio(surf, prompt, options, txt_color=BLACK, default=None):
     nu_surf = pygame.Surface((WIDTH, 100))
     nu_surf.fill(WHITE)
-    txtbx = eztext.Input(maxlength=45, color=BLACK, prompt='username:')
+    font = pygame.font.Font(None, 30)
+    m_width = font.render('M', 1, txt_color).get_width()
+    text = font.render(prompt, 1, txt_color)
+    textpos = (10, 10)
+    nu_surf.blit(text, textpos)
+    x = 10 + text.get_width() + m_width
+
+    rects = []
+    for i, option in enumerate(options):
+        text = font.render(option, 1, txt_color)
+        textpos = (x, 10)
+        nu_surf.blit(text, textpos)
+        rect = text.get_rect()
+        rect[0] = x
+        rects.append(rect)
+        x += text.get_width() + m_width
+
     done = False
+    value = ''
     while not done:
         events = pygame.event.get()
         for event in events:
-            if event.type == QUIT:
+            if event.type == pygame.locals.QUIT:
                 done = True
+            if event.type == pygame.MOUSEBUTTONUP:
+                for i, rect in enumerate(rects):
+                    if collidepoint(rect, event.pos):
+                        value = options[i]
+                        done = True
+        surf.blit(nu_surf, (0, 0))
+        pygame.display.flip()
+    return value
+def ask_string(surf, prompt, txt_color=BLACK):
+    nu_surf = pygame.Surface((WIDTH, 100))
+    nu_surf.fill(WHITE)
+    txtbx = eztext.Input(maxlength=45, color=txt_color, prompt=prompt)
+    done = False
+    while not txtbx.done:
+        events = pygame.event.get()
+        for event in events:
+            if event.type == pygame.locals.QUIT:
+                txtbx.value = ''
+                txtbx.done = True
         nu_surf.fill(WHITE)
         txtbx.update(events)
         txtbx.draw(nu_surf)
         surf.blit(nu_surf, (0, 0))
         pygame.display.flip()
-    # raw_input('...')
-    print 'TODO: Make this a pygame GUI'
-    try:
-        name = raw_input('username:')
-        sex = raw_input('sex: (M/F/O)')
-        if sex not in 'MFO':
-            raise ValueError("Sex not understood: %s" % sex)
-        else:
-            sex = {'M':'male', 'F':'female', 'O':'other'}[sex]
-        year = int(raw_input("birth year (YYYY):"))
-        month = int(raw_input("birth month (MM):"))
-        day = int(raw_input("birth day (DD):"))
-        birth = datetime.datetime(year, month, day)
-        records.add_user(sex, name, birth)
-        out = name.lower()
+    return txtbx.value
 
+def new_user(surf):
+    name = ask_string(surf, 'username:').lower()
+    email = None
+    while email is None:
+        email = ask_string(surf, 'email:')
+        if '@' not in email:
+            email = None
+    sex = ask_radio(surf, 'select gender:', ['female', 'male', 'other'])
+    birth = None
+    regexp = re.compile('[12][0-9]{3}-[0-9]{1,2}-[0-9]{1,2}')
+    assert regexp.match('1970-03-10')
+    while birth is None:
+        birth = ask_string(surf, 'DOB(YYYY-MM-DD):')
+        if not regexp.match(birth):
+            birth = None
+    
+    try:
+        records.add_user(sex, name, birth, email)
+        out = name.lower()
     except Exception, e:
         print 'ERROR:', e
         out = None
         done = False
     return out
+
 def prompt_user():
     surf = pygame.display.get_surface()
     surf.fill(BLACK)
@@ -608,8 +606,8 @@ def prompt_user():
         surf.blit(text, textpos)
     i = len(users)
     textpos = (10, i * 20 + 10)
-    # text = font.render("add", 1, RED)
-    # surf.blit(text, textpos)
+    text = font.render("add", 1, RED)
+    surf.blit(text, textpos)
 
     pygame.display.flip()
     done = False
@@ -622,6 +620,9 @@ def prompt_user():
                 idx = (event.pos[1] - 10) / 20
                 if idx < len(users):
                     out = users[idx][1]
+                    done = True
+                if idx == len(users):
+                    out = new_user(surf)
                     done = True
     return out
 class Tester(cevent.CEvent):
