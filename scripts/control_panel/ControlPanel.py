@@ -478,7 +478,7 @@ class Compute(Mode):
     def is_complete(self):
         Mode.start(self)
         data = array(hirate)
-        path = os.path.join('/home/chip/code/mmM/data/', data.user)
+        path = os.path.join('../../data/', data.user)
         if not os.path.exists(path):
             os.mkdir(path)
         n = len(glob.glob(os.path.join(path, '*.dat')))
