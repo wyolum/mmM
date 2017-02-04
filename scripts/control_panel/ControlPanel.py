@@ -478,7 +478,13 @@ class Compute(Mode):
     def is_complete(self):
         Mode.start(self)
         data = array(hirate)
-        
+        path = os.path.join('/home/chip/code/mmM/data/', data.user)
+        if not os.path.exists(path):
+            os.mkdir(path)
+        n = len(glob.glob(os.path.join(path, '*.dat')))
+        fn = os.path.join(path, str(n) + '.dat')
+        pickle.dump(data, open(fn, 'wb'))
+        print 'wrote', fn
         raw = data[:, 1]
 
         bp_result = 'BP:'
