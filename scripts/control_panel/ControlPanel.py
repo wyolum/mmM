@@ -1,6 +1,8 @@
 '''
 based on przemoli-pygametutorial-540433c50ffc
 '''
+import sys
+sys.path.append("../../python")
 import re
 import os
 import time
