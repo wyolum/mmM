@@ -1,3 +1,5 @@
+import sys
+sys.path.append("../../python/")
 import pickle
 import scipy.signal as signal
 import numpy
@@ -133,6 +135,8 @@ class uControl:
         if self.listener:
             self.listener.short_cb(pkt)
         self.short_dat = pkt[0] + pkt[1]
+        
+        print "short msg: 0X%02x%02x" % (ord(pkt[0]), ord(pkt[1]))
         
     def status_cb(self, pkt):
         '''

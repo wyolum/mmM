@@ -1,0 +1,6 @@
+//compiled python files
+**/*.pyc
+//emace backup files
+**/*~
+**/\#*
+

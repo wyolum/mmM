@@ -188,8 +188,11 @@ void read_amb_pressure(byte *where){
 #endif
 }
 
-void read_flow(byte *where){
+void read_flow(uint8_t *where){
   short flow;
+  uint8_t last[2];
+  last[0] = where[0];
+  last[1] = where[1];
   
 // Hi Res Sensirion start initiate read command
 // end hi res start initaate read command
@@ -198,6 +201,12 @@ void read_flow(byte *where){
   if(Wire.available() == 2){
     where[1] = Wire.read(); // works!
     where[0] = Wire.read(); // works!
+  }
+  if ((where[1] & 0xC0) || (where[0] == 0 && where[1] == 0))
+  {
+    // resend last value
+    where[0] = last[0];
+    where[1] = last[1];
   }
 }
 

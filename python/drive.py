@@ -62,7 +62,7 @@ def count_to_smlpm(count):
     gain = 0.02179666666666667
     out = (count - offset) * gain
 
-    if abs(out) > 1500:
+    if abs(out) > 100 or out < -10:
         bytes = struct.pack('h', count)
         print 'Flow status ignored 0x%02x%02x' % (ord(bytes[0]), ord(bytes[1]))
         if last_flow is None:
