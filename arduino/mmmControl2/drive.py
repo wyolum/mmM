@@ -39,16 +39,37 @@ def count_to_mmhg(val):
     return (val - b) / m
 
 ## 200 mlps
-SENSIRION_SCALE_FACTOR_F = 140
-SENSIRION_OFFSET_F  = 32000
-# /* (count - SENSIRION_OFFSET_F) / float(SENSIRION_SCALE_FACTOR_F); */
+# FLOW_SCALE_FACTOR = 140
+# FLOW_OFFSET  = 32000
+# /* (count - FLOW_OFFSET_F) / float(FLOW_SCALE_FACTOR_F); */
 
 ## 20 mlps
-# SENSIRION_SCALE_FACTOR_F = 1
-# SENSIRION_OFFSET_F  = 0
+# FLOW_SCALE_FACTOR = 1
+# FLOW_OFFSET  = 0
+
+## honeywell zephyr
+FLOW_SCALE_FACTOR = 1.
+FLOW_OFFSET = 6.
+Full_Scale_Flow  = 15000
+
+
+last_flow = None
 def count_to_smlpm(count):
-    smlpm = float(count - SENSIRION_OFFSET_F) / float(SENSIRION_SCALE_FACTOR_F) * 1000;
-    return smlpm
+    global last_flow
+    ## smlpm = float(count - FLOW_OFFSET) / float(FLOW_SCALE_FACTOR) * 1000;
+    # return smlpm
+    offset = 1636.12
+    gain = 0.02179666666666667
+    out = (count - offset) * gain
+
+    if abs(out) > 1500:
+        bytes = struct.pack('h', count)
+        print 'Flow status ignored 0x%02x%02x' % (ord(bytes[0]), ord(bytes[1]))
+        if last_flow is None:
+            last_flow = 0.
+        out = last_flow
+    last_flow = out
+    return out
 
 def mmhg_to_mb(val):
     return  val * 1.33322368
@@ -99,7 +120,6 @@ def send_cmd(init=None, interval=None, pump_rate=None, valve=None,
              valve_state=False,
              ):
     ## grab defaults
-    print 'here'
     if init is None:
         init = __cmd__[0]
     if interval is None:
@@ -261,8 +281,15 @@ class StatusPID(PID):
              'Pump',
              'Valve',
              'Interval']
-    convert = {3: lambda bits: (bits - AMB_PRESSURE_MIN_COUNT) / AMB_PRESSURE_SENSITIVITY,
-               4: lambda bits: STS_T0 + (STS_GAIN * bits) / float(1l << 16)}
+    FLOW_ML_PER_BIT = 1.307873
+    FLOW_MIN_COUNT = 1638
+    Full_Scale_Flow  = 15000
+    # Full_Scale_Flow * [(bits/16384.) - 0.1]/0.8,
+    gain = 1.
+    convert = {
+        1: lambda bits: (bits - 6.) * GAIN,
+        3: lambda bits: (bits - AMB_PRESSURE_MIN_COUNT) / AMB_PRESSURE_SENSITIVITY,
+        4: lambda bits: STS_T0 + (STS_GAIN * bits) / float(1l << 16)}
                    
     def __init__(self, packet):
         PID.__init__(self, packet)

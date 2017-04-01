@@ -6,7 +6,7 @@
 
 #define SENSIRION_ADDR_1 64 // 200 mlpm
 #define SENSIRION_ADDR_2 1 // 20 mlpm
-
+#define HONEYWELL_ADDR 0x49
 /*
  * Flush and discard all serial input
  */
@@ -193,22 +193,8 @@ void read_flow(byte *where){
   
 // Hi Res Sensirion start initiate read command
 // end hi res start initaate read command
-  Wire.requestFrom(SENSIRION_ADDR_1, 2);
-  if(Wire.available() == 2){
-    where[1] = Wire.read(); // works!
-    where[0] = Wire.read(); // works!
-  }
-}
-
-void read_flow2(byte *where){
-  short flow;
-  
-// Hi Res Sensirion start initiate read command
-Wire.beginTransmission(SENSIRION_ADDR_2);
-Wire.write(0xF1);
-Wire.endTransmission();
-// end hi res start initaate read command
-  Wire.requestFrom(SENSIRION_ADDR_2, 2);
+//  Wire.requestFrom(SENSIRION_ADDR_1, 2);
+  Wire.requestFrom(HONEYWELL_ADDR, 2);
   if(Wire.available() == 2){
     where[1] = Wire.read(); // works!
     where[0] = Wire.read(); // works!
@@ -254,7 +240,7 @@ void take_sample(){
 
     // read pulse sensor
     // read_pulse(hirate_data + 9);
-    read_flow2(hirate_data + 9); // higher resolution flow meter
+    read_flow(hirate_data + 9); // higher resolution flow meter
 
     // send of hirate data
     send_msg(hirate_data, MEASUREMENTS_LEN);
@@ -475,10 +461,12 @@ void bpc_setup(){
   // Serial.println("bpc_setup() flow ready");
   // start I2C
   Wire.begin();
+#ifdef SENSIRION
   Wire.beginTransmission(SENSIRION_ADDR_1);
   Wire.write(0x10);
   Wire.write(0x00);
   Wire.endTransmission();
+#endif
   valves_close();
  #ifdef TEMPSTS21 
   // start STS21 temperature sensor
