@@ -139,7 +139,7 @@ class uControl:
         Called when a new status packet is recieved
         '''
         if self.listener:
-            self.listener.status_cb(self, pkt)
+            self.listener.status_cb(pkt)
         if pkt.name == 'Cuff Pressure':
             self.cuff_pressure = pkt.value
         elif pkt.name == 'Flow Rate':
@@ -231,6 +231,11 @@ class uControl:
         self.max_pressure = 0
         self.min_pressure = -1
 
+    def save_hirate(self, fn):
+        if len(self.hirate) == 0:
+            raise ValueError("No data to save.  (Try ucontrol.record(True))")
+        pickle.dump(self.hirate, open(fn, 'wb'))
+        
 def test():
     print 'here we go'
     # while s.read(100000):
