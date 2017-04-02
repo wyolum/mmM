@@ -1,6 +1,9 @@
 #include "Arduino.h"
 #include <SoftwareSerial.h>
 
+// for invitro experiments. Note has the same i2C address as the sometimes
+// used ambient pressure sensor
+#define LIQUID_PRESSURE_SENSOR
 
 const unsigned long BAUDRATE = 115200;
 
@@ -70,7 +73,7 @@ const byte SAMPLE_INTERVAL_STEP_MS = 5;
 // I2C Addresses
 const byte    DS3231_ADDR = 104;
 const byte AMB_PRESS_ADDR = 120; // 0b1111000;
-
+const byte LIQ_PRESS_ADDR = 120;
 
 // pointers
 byte command[COMMAND_BUFF_SIZE];   // commands

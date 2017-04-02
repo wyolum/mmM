@@ -188,6 +188,15 @@ void read_amb_pressure(byte *where){
 #endif
 }
 
+void read_liquid_pressure(byte *where){
+  Wire.requestFrom(LIQ_PRESS_ADDR,(byte)2);
+  if (Wire.available() == 2){
+    where[1] = Wire.read();
+    where[0] = Wire.read();
+  }
+}
+
+
 void read_flow(uint8_t *where){
   short flow;
   uint8_t last[2];
@@ -249,7 +258,10 @@ void take_sample(){
 
     // read pulse sensor
     // read_pulse(hirate_data + 9);
-    read_flow(hirate_data + 9); // higher resolution flow meter
+#ifdef LIQUID_PRESSURE_SENSOR    
+    read_liquid_pressure(hirate_data +7);
+#endif
+    //read_flow(hirate_data + 9); // higher resolution flow meter
 
     // send of hirate data
     send_msg(hirate_data, MEASUREMENTS_LEN);
