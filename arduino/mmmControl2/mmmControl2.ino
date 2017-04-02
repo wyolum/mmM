@@ -259,7 +259,7 @@ void take_sample(){
     // read pulse sensor
     // read_pulse(hirate_data + 9);
 #ifdef LIQUID_PRESSURE_SENSOR    
-    read_liquid_pressure(hirate_data +7);
+    read_liquid_pressure(hirate_data + 9);
 #endif
     //read_flow(hirate_data + 9); // higher resolution flow meter
 

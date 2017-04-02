@@ -82,43 +82,47 @@ def bpc_run(pkl_fn):
     # junk = s.read(1000)
     print 'here'
     try:
-        print 'uc.cuff_pressure', uc.cuff_pressure
-        print 'maintain()'
-        uc.maintain(200, 230, 3)
-        uc.record(True)
-        print 'len(uc.hirate)', len(uc.hirate)
-        while uc.pump_state:
+        if not os.path.exists(pkl_fn):
             print 'uc.cuff_pressure', uc.cuff_pressure
-            serial_interact()
-        print 'deflate'
-        uc.deflate(40, fast=False)
-        uc.deflate(5, fast=True)
-        uc.record(False)
-        print 'len(uc.hirate)', len(uc.hirate)
-        hirate = array(uc.hirate)
-        if len(uc.hirate) > 0:
-            dt = 0.004
-            n_tap = 100
-            lp_taps = util.get_lowpass_taps(5, dt, n_tap)
-            llp_taps = util.get_lowpass_taps(.25, dt, n_tap)
-            lpd = util.filter(hirate[:,1] - hirate[0, 1], lp_taps)[::10] + hirate[0, 1]
-            llpd = util.filter(hirate[:,1] - hirate[0, 1], llp_taps)[::10] + hirate[0, 1]
-            print len(lpd)
-            times = hirate[::10,0]
-            ax = pylab.subplot(211)
-            pylab.plot(times, lpd)
-            pylab.plot(times, llpd)
-            pylab.subplot(212, sharex=ax)
-            pylab.plot(times, lpd - llpd)
-            pylab.figure()
-            pylab.plot(hirate[:,2])
-            pylab.show()
+            print 'maintain()'
+            uc.maintain(250, 280, 3)
+            uc.record(True)
+            print 'len(uc.hirate)', len(uc.hirate)
+            while uc.pump_state:
+                print 'uc.cuff_pressure', uc.cuff_pressure
+                serial_interact()
+            print 'deflate'
+            uc.deflate(5, fast=False)
+            ## uc.deflate(5, fast=True)
+            uc.record(False)
+            if len(uc.hirate) > 0:
+                pickle.dump(uc.hirate, open(pkl_fn, 'wb'))
+                print 'write', pkl_fn
+        hirate = pickle.load(open(pkl_fn, 'rb'))
+        print hirate[0]
+        print 'len(uc.hirate)', len(hirate)
+        hirate = array(hirate)
             
-            pickle.dump(hirate, open(pkl_fn, 'w'))
-            print 'write', pfn
-            # pylab.figure(2); pylab.plot(uc.lpf.out)
-            # pylab.figure(3); pylab.plot(hirate[:,1])
-
+        dt = 0.004
+        n_tap = 100
+        lp_taps = util.get_lowpass_taps(.6, dt, n_tap)
+        llp_taps = util.get_lowpass_taps(.4, dt, n_tap)
+        lpd = util.filter(hirate[:,1] - hirate[0, 1], lp_taps)[::10] + hirate[0, 1]
+        llpd = util.filter(hirate[:,1] - hirate[0, 1], llp_taps)[::10] + hirate[0, 1]
+        print len(lpd)
+        times = hirate[::10,0]
+        ax = pylab.subplot(211)
+        pylab.plot(times, lpd)
+        pylab.plot(times, llpd)
+        pylab.subplot(212, sharex=ax)
+        pylab.plot(times, lpd - llpd)
+        pylab.figure()
+        pylab.plot(hirate[:,2])
+        pylab.show()
+        
+        # pylab.figure(2); pylab.plot(uc.lpf.out)
+        # pylab.figure(3); pylab.plot(hirate[:,1])
+        
         print 'done'
     finally:
         uc.deflate(50)
