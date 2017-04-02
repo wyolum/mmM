@@ -8,7 +8,7 @@ import os
 import time
 import math
 import datetime
-from numpy import array
+from numpy import array, log, exp, linalg, ones, zeros, dot
 import pickle
 import glob
 import pylab
@@ -16,9 +16,6 @@ import pylab
 import util
 import drive
 import uControl
-
-MAX_PRESSURE = 300 ### shutoff above this pressure
-MIN_PRESSURE = 35
 
 MMM_DATA = dict(init=False,
                 interval=1,
@@ -74,6 +71,15 @@ def mpid_cb(pkt):
 drive.subscribe(drive.MPID.PID, mpid_cb)
 drive.subscribe(drive.StatusPID.PID, mmm_new_status)
 
+def gage_fit(time, gage):
+    log_gage = log(gage)
+    g_coeff = util.poly_fit(time, log_gage, 1) ## new way test
+    gage_fit = exp(util.poly_eval(g_coeff, time))
+    err = linalg.norm(gage - gage_fit)
+    return gage_fit, g_coeff
+
+HONEYWELL_OFFSET = -75.840574
+HONEYWELL_SLOPE = 0.025600
 def bpc_run(pkl_fn):
     print 'here we go'
     # while s.read(100000):
@@ -85,7 +91,8 @@ def bpc_run(pkl_fn):
         if not os.path.exists(pkl_fn):
             print 'uc.cuff_pressure', uc.cuff_pressure
             print 'maintain()'
-            uc.maintain(250, 280, 3)
+            uc.inflate(360, lambda *args: False)
+            uc.maintain(350, 360, 3)
             uc.record(True)
             print 'len(uc.hirate)', len(uc.hirate)
             while uc.pump_state:
@@ -102,22 +109,39 @@ def bpc_run(pkl_fn):
         print hirate[0]
         print 'len(uc.hirate)', len(hirate)
         hirate = array(hirate)
+        # hirate = hirate[hirate[:,1] < 200] ## filter out really high pressure
             
-        dt = 0.004
-        n_tap = 100
-        lp_taps = util.get_lowpass_taps(.6, dt, n_tap)
-        llp_taps = util.get_lowpass_taps(.4, dt, n_tap)
-        lpd = util.filter(hirate[:,1] - hirate[0, 1], lp_taps)[::10] + hirate[0, 1]
-        llpd = util.filter(hirate[:,1] - hirate[0, 1], llp_taps)[::10] + hirate[0, 1]
-        print len(lpd)
-        times = hirate[::10,0]
-        ax = pylab.subplot(211)
+        dt = 1/200.
+        n_tap = 1000
+        dec = 1
+        lp_taps = util.get_lowpass_taps(5, dt, n_tap)
+        llp_taps = util.get_lowpass_taps(.1, dt, n_tap)
+        lpd = util.filter(hirate[:,1] - hirate[0, 1], lp_taps)[::dec] + hirate[0, 1]
+        llpd = util.filter(hirate[:,1] - hirate[0, 1], llp_taps)[::dec] + hirate[0, 1]
+        # llpd, coeff = gage_fit(hirate[:,0], hirate[:,1])
+        # llpd = llpd[::dec]
+        times = hirate[::dec,0]
+        print len(lpd), len(llpd), len(times)
+        ax = pylab.subplot(411)
+        pylab.ylabel('Gage')
+        pylab.plot(times + n_tap * dt/2. * 1000, hirate[::dec,1])
         pylab.plot(times, lpd)
         pylab.plot(times, llpd)
-        pylab.subplot(212, sharex=ax)
+        # N = len(hirate)
+        # A = ones((N, 2))
+        # A[:,1] = hirate[:,3]
+        # a0, a1 = dot(linalg.inv(dot(A.T, A)), dot(A.T, hirate[:,1]))
+        print 'mmHG (count) = %f + %f * count' % (HONEYWELL_OFFSET, HONEYWELL_SLOPE)
+        pylab.subplot(412, sharex=ax)
+        pylab.ylabel('Band Pass')
         pylab.plot(times, lpd - llpd)
-        pylab.figure()
-        pylab.plot(hirate[:,2])
+        pylab.subplot(413, sharex=ax)
+        pylab.ylabel('Liquid Pressure')
+        pylab.plot(times, hirate[::dec,3] * HONEYWELL_SLOPE + HONEYWELL_OFFSET) ## calibrated
+        # pylab.plot(times, (hirate[::dec,3] - 3000) / 24000. * 750.) ## factory setting
+        pylab.subplot(414, sharex=ax)
+        pylab.ylabel('Flow')
+        pylab.plot(times, hirate[::dec,2])
         pylab.show()
         
         # pylab.figure(2); pylab.plot(uc.lpf.out)
