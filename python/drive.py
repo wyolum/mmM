@@ -2,6 +2,7 @@
 uControl driver library.
 '''
 
+import warnings
 from numpy import *
 import time
 import sys
@@ -64,7 +65,7 @@ def count_to_smlpm(count):
 
     if abs(out) > 100 or out < -10:
         bytes = struct.pack('h', count)
-        print 'Flow status ignored 0x%02x%02x' % (ord(bytes[0]), ord(bytes[1]))
+        warnings.warn('Flow status ignored 0x%02x%02x' % (ord(bytes[0]), ord(bytes[1])))
         if last_flow is None:
             last_flow = 0.
         out = last_flow
@@ -84,6 +85,7 @@ done = False
 baudrate = 115200
 timeout = .01
 
+PI = False
 def connect():
     global s
     try:
@@ -97,9 +99,18 @@ def connect():
         GPIO.output(18, GPIO.HIGH)
     except ImportError:
         PI = False
-        port = glob("/dev/ttyU*")[-1]
-
-    s = Serial(port, baudrate, timeout=timeout)
+        ports = glob("/dev/ttyU*")
+        ports.extend(glob("/dev/ttyA*"))
+        if len(ports) >= 1:
+            port = ports[0]
+        else:
+            port = None
+    print ports, len(ports), port
+    if port:
+        s = Serial(port, baudrate, timeout=timeout)
+        print s
+    else:
+        warnings.warn('mmM not found')
 connect()
     
 def getValveByte(valve0=False, valve1=False):
@@ -218,6 +229,8 @@ class PID(object):
         if chr(s) != packet[-1]: 
             print map(ord, packet)
             raise CheckSumError('CheckSumError: %s != %s' % (s, ord(packet[-1])))
+        else:
+            print map(ord, packet)
 
         ### Valid packet beyond here
         payload = packet[1:-1]
@@ -320,7 +333,6 @@ def read_packet():
     new_data = s.read(MeasurementsPID.N_BYTE - len(last_ser_data))
     if new_data:
         pass
-        # print new_data
     # if new_data:
     #     print 'new_data', new_data
     ser_data = last_ser_data + new_data
@@ -331,7 +343,8 @@ def read_packet():
             packet = PIDS[ser_data[0]](ser_data)
             last_ser_data = ser_data[packet.N_BYTE:]
         except LengthError, e:
-            print e ## DBG LOG
+            # warnings.warn(str(e)) ## DBG LOG
+            print e
             packet = None ## not long enough, get more data on next call
         except CheckSumError, e:
             print e ## DBG LOG
