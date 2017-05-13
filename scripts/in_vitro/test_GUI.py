@@ -1,3 +1,5 @@
+import sys
+sys.path.append('../../python')
 from drive import *
 from Tkinter import *
 STS_T0 = -46.85;

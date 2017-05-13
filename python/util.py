@@ -443,6 +443,8 @@ ged_color = 0
 def poly_fit(x, y, deg):
     V = numpy.array([[i**j for j in range(deg + 1)] for i in x])
     poly_out = numpy.dot(numpy.linalg.inv(numpy.dot(V.T, V)), numpy.dot(V.T, y))
+    # W = weights
+    #     poly_out = numpy.dot(numpy.linalg.inv(numpy.dot(V.T, numpy.dot(W, V))), numpy.dot(V.T, numpy.dot(W, y)))
     return poly_out
 
 def rsquared(y, fit):

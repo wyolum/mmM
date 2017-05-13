@@ -1,14 +1,14 @@
 '''
 based on przemoli-pygametutorial-540433c50ffc
 '''
-
 import sys; sys.path.append('../../python')
+import cuff_compliance
 import re
 import os
 import time
 import math
 import datetime
-from numpy import array, log, exp, linalg, ones, zeros, dot
+from numpy import array, log, exp, linalg, ones, zeros, dot, diff, arange
 import pickle
 import glob
 import pylab
@@ -84,20 +84,21 @@ def bpc_run(pkl_fn):
     print 'here we go'
     # while s.read(100000):
     #     print 'flush serial'
-    uc = uControl.uControl()
     # junk = s.read(1000)
     print 'here'
     try:
         if not os.path.exists(pkl_fn):
+            uc = uControl.uControl()
+    
             print 'uc.cuff_pressure', uc.cuff_pressure
             print 'maintain()'
-            uc.inflate(360, lambda *args: False)
-            uc.maintain(350, 360, 3)
+            uc.inflate(250, lambda *args: False)
+            uc.maintain(250, 260, 2)
             uc.record(True)
             print 'len(uc.hirate)', len(uc.hirate)
             while uc.pump_state:
                 print 'uc.cuff_pressure', uc.cuff_pressure
-                serial_interact()
+                drive.serial_interact()
             print 'deflate'
             uc.deflate(5, fast=False)
             ## uc.deflate(5, fast=True)
@@ -112,21 +113,34 @@ def bpc_run(pkl_fn):
         # hirate = hirate[hirate[:,1] < 200] ## filter out really high pressure
             
         dt = 1/200.
-        n_tap = 1000
+        n_tap = 2000
         dec = 1
-        lp_taps = util.get_lowpass_taps(5, dt, n_tap)
-        llp_taps = util.get_lowpass_taps(.1, dt, n_tap)
-        lpd = util.filter(hirate[:,1] - hirate[0, 1], lp_taps)[::dec] + hirate[0, 1]
-        llpd = util.filter(hirate[:,1] - hirate[0, 1], llp_taps)[::dec] + hirate[0, 1]
+        lp_taps = util.get_lowpass_taps(1, dt, n_tap)
+        llp_taps = util.get_lowpass_taps(.05, dt, n_tap)
+        gage = hirate[:,1]
+        lpd = util.filter(gage - gage[0], lp_taps)[::dec] + gage[0]
+        llpd = util.filter(gage - gage[0], llp_taps)[::dec] + gage[0]
+        bandpass = lpd - llpd
+        ## deltas are peaks(on the left) - troughs(on the right)
+        troughs, peaks, deltas = util.get_troughs_peaks_deltas(bandpass)
+
+        ## adj deltas are trought(on the left) - peaks (on the right)
+        adj_deltas = deltas + (llpd[troughs] - llpd[peaks])
+        flow = hirate[::dec,2]
+        flow_lp = util.filter(flow - max(flow), lp_taps)[::dec] + max(flow)
+        flow_llp = util.filter(flow - max(flow), llp_taps)[::dec] + max(flow)
+        
         # llpd, coeff = gage_fit(hirate[:,0], hirate[:,1])
         # llpd = llpd[::dec]
-        times = hirate[::dec,0]
-        print len(lpd), len(llpd), len(times)
+        times = hirate[::dec,0] / 1000. ### 1000 ms per second
+        times = arange(len(hirate)) * .005 
+        pylab.figure(1)
         ax = pylab.subplot(411)
         pylab.ylabel('Gage')
-        pylab.plot(times + n_tap * dt/2. * 1000, hirate[::dec,1])
+        pylab.plot(times + n_tap * dt/2., hirate[::dec,1])
         pylab.plot(times, lpd)
         pylab.plot(times, llpd)
+
         # N = len(hirate)
         # A = ones((N, 2))
         # A[:,1] = hirate[:,3]
@@ -134,26 +148,42 @@ def bpc_run(pkl_fn):
         print 'mmHG (count) = %f + %f * count' % (HONEYWELL_OFFSET, HONEYWELL_SLOPE)
         pylab.subplot(412, sharex=ax)
         pylab.ylabel('Band Pass')
-        pylab.plot(times, lpd - llpd)
+        pylab.plot(times, bandpass)
+        pylab.plot(times[peaks], bandpass[peaks], 'ro')
+        pylab.plot(times[troughs], bandpass[troughs], 'bo')
         pylab.subplot(413, sharex=ax)
         pylab.ylabel('Liquid Pressure')
         pylab.plot(times, hirate[::dec,3] * HONEYWELL_SLOPE + HONEYWELL_OFFSET) ## calibrated
         # pylab.plot(times, (hirate[::dec,3] - 3000) / 24000. * 750.) ## factory setting
         pylab.subplot(414, sharex=ax)
         pylab.ylabel('Flow')
-        pylab.plot(times, hirate[::dec,2])
-        pylab.show()
+        pylab.plot(times, flow)
+        skip = 1000
+        # gage_fit, gage_coeff, flow_fit, compl = cuff_compliance.cuff_compliance(times[skip:], llpd[skip:], flow[skip:], plot_it=True)
+        gage_fit, gage_coeff, flow_fit, compl = cuff_compliance.cuff_compliance(times[skip:], llpd[skip:], flow[skip:], plot_it=True,
+                                                                                gage_upper_limit=1000,
+                                                                                gage_lower_limit=20)
+        pylab.figure(2)
+        VOL = 10.
+        pylab.plot(llpd[troughs], VOL/deltas, 'b-')
+        pylab.plot(llpd[troughs], VOL/adj_deltas, 'g-')
+        pylab.plot(llpd[troughs], .5 * VOL/deltas + .5*VOL/adj_deltas, 'm--')
+        pylab.plot(llpd[skip:], compl, 'r-')
+        pylab.xlabel('Bandpass Gage mmHg')
+        pylab.ylabel('Cuff Compliance mL/mmHg')
         
         # pylab.figure(2); pylab.plot(uc.lpf.out)
         # pylab.figure(3); pylab.plot(hirate[:,1])
         
         print 'done'
     finally:
-        uc.deflate(50)
-        uControl.send_cmd(pump_rate=False, valve=drive.getValveByte(valve0=True))
-        time.sleep(2)
-        uControl.send_cmd(pump_rate=False, valve=drive.getValveByte(valve0=False), interval=0)
-    pylab.show()
+        try:
+            uc.deflate(50)
+            uControl.send_cmd(pump_rate=False, valve=drive.getValveByte(valve0=True))
+            time.sleep(2)
+            uControl.send_cmd(pump_rate=False, valve=drive.getValveByte(valve0=False), interval=0)
+        except:
+            pass
 
 USAGE = '''\npython InVitro.py out_filename.pkl\n'''
 
@@ -161,4 +191,6 @@ if __name__ == '__main__':
     if len(sys.argv) < 2:
         print USAGE
     else:
-        bpc_run(sys.argv[1])
+        for fn in sys.argv[1:]:
+            bpc_run(fn)
+        pylab.show()
