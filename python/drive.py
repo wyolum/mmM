@@ -227,10 +227,11 @@ class PID(object):
 
         s = sum([ord(c) for c in packet[:-1]]) % 256
         if chr(s) != packet[-1]: 
-            print map(ord, packet)
+            # print map(ord, packet)
             raise CheckSumError('CheckSumError: %s != %s' % (s, ord(packet[-1])))
         else:
-            print map(ord, packet)
+            pass
+            # print map(ord, packet)
 
         ### Valid packet beyond here
         payload = packet[1:-1]

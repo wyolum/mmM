@@ -158,7 +158,8 @@ def bpc_run(pkl_fn):
         pylab.subplot(414, sharex=ax)
         pylab.ylabel('Flow')
         pylab.plot(times, flow)
-        skip = 1000
+        skip_factor = 1.
+        skip = int(n_tap * skip_factor)
         # gage_fit, gage_coeff, flow_fit, compl = cuff_compliance.cuff_compliance(times[skip:], llpd[skip:], flow[skip:], plot_it=True)
         gage_fit, gage_coeff, flow_fit, compl = cuff_compliance.cuff_compliance(times[skip:], llpd[skip:], flow[skip:], plot_it=True,
                                                                                 gage_upper_limit=1000,

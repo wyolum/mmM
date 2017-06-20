@@ -88,6 +88,8 @@ def blood_pressure(raw):
     
 def get_troughs_peaks_deltas(bpf):
     peaks, troughs = find_pulse_peaks_and_troughs(bpf, defaults['dt'])
+    if len(peaks) < 2:
+        raise ValueError('No pulses in data')
     if peaks[0] < troughs[0]: # peak follows trough
         peaks = peaks[1:]
     if troughs[-1] > peaks[-1]: # peak follows trough
@@ -640,7 +642,7 @@ def find_pulse_peaks_and_troughs(data, dt, max_pulse_period=defaults['max_pulse_
         min_left = start
     min_right = max_i + numpy.argmin(data[max_i:end])
     pulse_period = (min_right - min_left) * dt
-
+    
     fmin = defaults['min_pulse_freq']
     fmax = defaults['max_pulse_freq']
     dfreq = 1. / (len(data) * defaults['dt'])
@@ -690,7 +692,9 @@ def find_pulse_period(data, dt, fmin, fmax, fast=False):
     N = len(data)
     if fast:
         F = abs(numpy.fft.rfft(data)) ** 2
-        f = numpy.fft.rfftfreq(N, dt)[numpy.argmax(F)]
+        freqs = numpy.fft.rfftfreq(N, dt)
+        keep = numpy.logical_and(fmin < freqs, freqs < fmax)
+        f = freqs[keep][numpy.argmax(F[keep])]
         out = 1/f
     else:
         dfreq = 1. / (N * dt)
