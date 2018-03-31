@@ -12,18 +12,18 @@ class Listener:
     Handle messages from uControl
     '''
     count = 0
-    def mpid_cb(self, ucontrol, pkt):
+    def mpid_cb(self, pkt):
         self.last_mpid = pkt
         if self.count % 200 == 0:
             print self.count / 200., pkt.cuff, pkt.flow
         # ucontrol.cuff = pkt.cuff
         self.count += 1
         # ucontrol.abort()
-    def lpid_cb(self, ucontro, pkt):
+    def lpid_cb(self, pkt):
         self.last_lpid = pkt
     def status_cb(self, ucontrol, pkt):
         self.last_status = pkt
-    def short_cb(self, ucontrol, pkt):
+    def short_cb(self, pkt):
         self.last_short = pkt
 
 listener = Listener()

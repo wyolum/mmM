@@ -252,8 +252,8 @@ def test():
             print 'uc.cuff_pressure', uc.cuff_pressure
             serial_interact()
         print 'deflate'
-        uc.deflate(40, fast=False)
-        uc.deflate(5, fast=True)
+        uc.deflate(2, fast=False)
+        # uc.deflate(5, fast=True)
         uc.record(False)
         print 'len(uc.hirate)', len(uc.hirate)
         hirate = array(uc.hirate)
@@ -267,17 +267,19 @@ def test():
             print len(lpd)
             times = hirate[::10,0]
             ax = pylab.subplot(211)
+            pylab.title('low pass')
             pylab.plot(times, lpd)
             pylab.plot(times, llpd)
             pylab.subplot(212, sharex=ax)
-            pylab.plot(times, lpd - llpd)
-            pylab.figure()
-            pylab.plot(hirate[:,2])
+            # pylab.plot(times, lpd - llpd)
+            # pylab.figure()
+            pylab.plot(hirate[:,0], hirate[:,2])
+            pylab.title('flow')
             pylab.show()
             
             pfn = 'hirate.pkl'
             pickle.dump(hirate, open(pfn, 'w'))
-            print 'write', pfn
+            print 'wrote', pfn
             # pylab.figure(2); pylab.plot(uc.lpf.out)
             # pylab.figure(3); pylab.plot(hirate[:,1])
 

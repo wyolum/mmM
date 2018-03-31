@@ -1,6 +1,6 @@
 import argparse
 import sys; sys.path.append('../../python')
-import cuff_compliance
+#import cuff_compliance
 import re
 import os
 import time
@@ -93,7 +93,7 @@ def endys_run(pkl_fn, hold_sec):
                 print 'uc.cuff_pressure', uc.cuff_pressure
                 drive.serial_interact()
             print 'deflate'
-            uc.deflate(5, fast=False)
+            uc.deflate(20, fast=False)
             ## uc.deflate(5, fast=True)
             uc.record(False)
             if len(uc.hirate) > 0:
@@ -172,9 +172,9 @@ def my_plot(pkl_fn, peak_marker, trough_marker):
     map_idx = argmax(deltas)
     pylab.plot(times[peaks] - times[peaks][map_idx], deltas)
     # gage_fit, gage_coeff, flow_fit, compl = cuff_compliance.cuff_compliance(times[skip:], llpd[skip:], flow[skip:], plot_it=True)
-    gage_fit, gage_coeff, flow_fit, compl = cuff_compliance.cuff_compliance(times[skip:], llpd[skip:], flow[skip:], plot_it=True,
-                                                                            gage_upper_limit=1000,
-                                                                            gage_lower_limit=20)
+    #gage_fit, gage_coeff, flow_fit, compl = cuff_compliance.cuff_compliance(times[skip:], llpd[skip:], flow[skip:], plot_it=True,
+    #                                                                        gage_upper_limit=1000,
+    #                                                                        gage_lower_limit=20)
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Run EnDys collection with arbitrary hold')
     parser.add_argument('filename', help="Output filename")
