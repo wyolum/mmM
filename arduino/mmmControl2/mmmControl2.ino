@@ -512,12 +512,7 @@ void setup(){
   bpc_setup();
   // toggle valve
   // Serial.println("ready");
-  while(0){
-    char i= 0;
-    short_msg[1] = 'R'; // code for ready
-    short_msg[2] = (i++ % 256);
-    send_msg(short_msg, 3);
-  }
+
   short_msg[1] = 'R'; // code for ready
   short_msg[2] = '!';
   send_msg(short_msg, 3);
