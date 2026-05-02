@@ -105,10 +105,10 @@ def connect():
             port = ports[0]
         else:
             port = None
-    print ports, len(ports), port
+    print(ports, len(ports), port)
     if port:
         s = Serial(port, baudrate, timeout=timeout)
-        print s
+        print(s)
     else:
         warnings.warn('mmM not found')
 connect()
@@ -265,7 +265,7 @@ class MeasurementsPID(PID):
         self.cuff = limit_check(count_to_mmhg(self[1]), 'GAGE') ## in mmhg
         self.flow = limit_check(count_to_smlpm(self[2]), 'FLOW')
         self.pulse = self[3]
-        print >> PID_file, self.flow, self.pulse
+        print(self.flow, self.pulse, file= PID_file)
         
 class ShortPID(PID):
     '''
@@ -303,7 +303,7 @@ class StatusPID(PID):
     convert = {
         1: lambda bits: (bits - 6.) * GAIN,
         3: lambda bits: (bits - AMB_PRESSURE_MIN_COUNT) / AMB_PRESSURE_SENSITIVITY,
-        4: lambda bits: STS_T0 + (STS_GAIN * bits) / float(1l << 16)}
+        4: lambda bits: STS_T0 + (STS_GAIN * bits) / float(1 << 16)}
                    
     def __init__(self, packet):
         PID.__init__(self, packet)
@@ -313,7 +313,7 @@ class StatusPID(PID):
             self.value = self.convert[self.devid](self[0])
         else:
             self.value = self[0]
-        print self
+        print(self)
     def __repr__(self):
         return 'Status:%s=%s' % (self.name, self.value)
         
@@ -343,12 +343,12 @@ def read_packet():
         try:
             packet = PIDS[ser_data[0]](ser_data)
             last_ser_data = ser_data[packet.N_BYTE:]
-        except LengthError, e:
+        except LengthError as e:
             # warnings.warn(str(e)) ## DBG LOG
-            print e
+            print(e)
             packet = None ## not long enough, get more data on next call
-        except CheckSumError, e:
-            print e ## DBG LOG
+        except CheckSumError as e:
+            print(e) ## DBG LOG
             last_ser_data = ser_data[1:]
             packet = None ## malformed, try again at one byte offset next call
     else:
@@ -378,7 +378,7 @@ def repeat_last_cmd():
     global __n_repeat
     if last_cmd:
         __n_repeat += 1
-        print 'repeating last command, %s repeats so far' % __n_repeat
+        print('repeating last command, %s repeats so far' % __n_repeat)
         s.write(last_cmd)
 def garbeled_cmd_catcher(pkt):
     if pkt[0] == 'C':
@@ -389,7 +389,7 @@ def serial_ready_catcher(pkt):
         if pkt[1] == 'R': # ready
             while __command_buffer:
                 cmd = __command_buffer.pop(0)
-                print 'writing', cmd
+                print('writing', cmd)
                 s.write(cmd)
                 
     
@@ -452,12 +452,12 @@ def status__test__():
         pkt = read_packet()
         assert pkt[0] == 0
 def toggle_rts():
-    print 'Resetting from FTDI...'
+    print('Resetting from FTDI...')
     s.flushInput()
     s.setRTS(True); time.sleep(.1); s.setRTS(False) ## reset uControl
 
 def toggle_GPIO18():
-    print 'Resetting from GPIO...'
+    print('Resetting from GPIO...')
     GPIO.output(18, GPIO.LOW)
     time.sleep(.1); 
     GPIO.output(18, GPIO.HIGH)
@@ -467,7 +467,7 @@ def reset():
     initialize the serial connection with the device by requesting pump state.
     '''
     global last_ser_data
-    print 'Resetting uControl'
+    print('Resetting uControl')
     if PI:
         toggle = toggle_GPIO18
     else:
@@ -479,7 +479,7 @@ def reset():
     while ack is None:
         # 20 tries
         for i in range(20):
-            print 'try', i
+            print('try', i)
             ack = read_packet()
             if isinstance(ack, ShortPID):
                 if ack[0] == 'R' and ack[1] == '!':
@@ -488,11 +488,11 @@ def reset():
         else:
             # resend request
             s.flushInput()
-            print 'try again'
+            print('try again')
             toggle()
             time.sleep(3.1)
             send_cmd(pump_state=True)
-    print 'uControl is reset'
+    print('uControl is reset')
 def ping__test__():
     s.flush()
     ## reset()
@@ -502,7 +502,7 @@ def ping__test__():
         start = time.time()
         while not read_packet():
             pass
-        print time.time() - start
+        print(time.time() - start)
 # ping__test__() ## .01 seconds on toshiba laptop
 # here
     
@@ -510,7 +510,7 @@ def stream__test__():
     # s.flush()
     # s.setRtsCts(False); s.setRtsCts(True)
     # time.sleep(1)
-    print 'start'
+    print('start')
     try:
         # reset()
         sample_num = 0
@@ -533,11 +533,11 @@ def stream__test__():
                         heart.append(pkt.pulse)
                         dt = float(time.time() - start) 
                         rate = (pkt.millis - initial_millis) / dt
-                        print 'Valid PKT:', pkt, (pkt.millis - last_millis), (pkt.millis - initial_millis) / float(N), 'ms/sample'
+                        print('Valid PKT:', pkt, (pkt.millis - last_millis), (pkt.millis - initial_millis) / float(N), 'ms/sample')
                         last_millis = pkt.millis
             ha = array(heart)
             uptime = pkt.millis / 3.6e6
-            print 'UP TIME:', int(uptime), 'Hr', int(uptime * 60) % 60, 'Min', int(uptime * 3600) % 60, 'Sec'
+            print('UP TIME:', int(uptime), 'Hr', int(uptime * 60) % 60, 'Min', int(uptime * 3600) % 60, 'Sec')
             # send_cmd(interval=0)
             done = True
 
@@ -545,7 +545,7 @@ def stream__test__():
         RATE = 1
         # send_cmd(interval=RATE, pump_state=True)
         while not done:
-            print done, len(last_ser_data)
+            print(done, len(last_ser_data))
             for i in range(10):
                 serial_interact()
             if not done:
@@ -553,7 +553,7 @@ def stream__test__():
 
 
     finally:
-        print 'finally'
+        print('finally')
         unsubscribe(StatusPID.PID, go)
         # send_cmd(interval=0)
         # s.flush()
@@ -573,11 +573,11 @@ def abort__test__():
         packet = read_packet()
         assert packet[0] == 1
         send_cmd(valve=True, valve_state=True)
-        print 'b4', read_packet()
-        print 'b4', read_packet()
-        print 'after', read_packet()
+        print('b4', read_packet())
+        print('b4', read_packet())
+        print('after', read_packet())
         for i in range(5):
-            print i, read_packet()
+            print(i, read_packet())
             time.sleep(1)
     finally:
         send_cmd(valve=0, pump_rate=0, interval=0) ## turn off sampling
@@ -585,5 +585,5 @@ def abort__test__():
         pass
         
 if __name__ == '__main__':
-    print 'stream__test__'
+    print('stream__test__')
     stream__test__()

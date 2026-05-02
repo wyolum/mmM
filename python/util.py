@@ -37,7 +37,7 @@ def blood_pressure(raw):
     mad_failed = mad_thresh_test(ddeltas, mad_thresh, mad_n_bad_thresh)
     if mad_failed:
         # raise ValueError("!!! Artifact detected !!!")
-        print "!!! Artifact detected !!!"
+        print("!!! Artifact detected !!!")
         
     m = mad(ddeltas)
     candidate_deltas = [d for idx, d in zip(peaks, deltas) if llp[idx] > 60] ## MAP must be above 60mmhg.
@@ -237,7 +237,7 @@ def flow_of_gage(flow, gage, cba=None):
         cba = numpy.dot(numpy.linalg.inv(numpy.dot(A.T, A)), numpy.dot(A.T, __gage))
     flow_fit = get_flow(gage, cba)
 
-    print 'cba', cba
+    print('cba', cba)
     return flow_fit, cba, A
 
 def gage_of_flow(flow, cba):

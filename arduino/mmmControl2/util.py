@@ -20,8 +20,8 @@ def blood_pressure(raw):
     pressure is the raw pressure readings for the descent data only
     '''
     dt = defaults['dt']
-    lp = filter(raw, LP_TAPS)[1000:]
-    llp = filter(raw, LLP_TAPS)[1000:]
+    lp = list(filter(raw, LP_TAPS))[1000:]
+    llp = list(filter(raw, LLP_TAPS))[1000:]
     bpf = lp - llp
     troughs, peaks, deltas = get_troughs_peaks_deltas(bpf)
     
@@ -37,7 +37,7 @@ def blood_pressure(raw):
     mad_failed = mad_thresh_test(ddeltas, mad_thresh, mad_n_bad_thresh)
     if mad_failed:
         # raise ValueError("!!! Artifact detected !!!")
-        print "!!! Artifact detected !!!"
+        print("!!! Artifact detected !!!")
         
     m = mad(ddeltas)
     candidate_deltas = [d for idx, d in zip(peaks, deltas) if llp[idx] > 60] ## MAP must be above 60mmhg.
@@ -230,12 +230,12 @@ def flow_of_gage(flow, gage, cba=None):
     __gage = numpy.array(gage)[keep]
 
     N = len(__flow)
-    A = numpy.array(zip(numpy.ones(len(keep)), __flow, __flow ** 2))
+    A = numpy.array(list(zip(numpy.ones(len(keep)), __flow, __flow ** 2)))
     if cba is None:
         cba = numpy.dot(numpy.linalg.inv(numpy.dot(A.T, A)), numpy.dot(A.T, __gage))
     flow_fit = get_flow(gage, cba)
 
-    print 'cba', cba
+    print('cba', cba)
     return flow_fit, cba, A
 
 def gage_of_flow(flow, cba):
@@ -309,7 +309,7 @@ def filter_deltas(idx, deltas, thresh=.5, plotit=False):
     '''
     return induces of deltas to keep
     '''
-    smoothed = filter(deltas[idx], [.5, 0, .5])
+    smoothed = list(filter(deltas[idx], [.5, 0, .5]))
     # keep first delta??
     test_data = abs(deltas[idx[:-1]] - smoothed[idx[1:]]) / smoothed[idx[1:]]
     if plotit:
@@ -322,7 +322,7 @@ def filter_deltas(idx, deltas, thresh=.5, plotit=False):
     while max(test_data[1:]) > thresh:
         toss = idx[numpy.argmax(test_data[1:]) + 1]
         idx = idx[idx!=toss]
-        smoothed = filter(deltas[idx], [.5, 0, .5])
+        smoothed = list(filter(deltas[idx], [.5, 0, .5]))
         test_data = abs(deltas[idx[:-1]] - smoothed[1:]) / smoothed[1:]
         if plotit:
             pylab.plot(idx[:-1], test_data)
@@ -788,7 +788,7 @@ def find_peaks(data, eps, n_max=30, do_plot=False):
             i += 1
         hi = i
         if 'peaks' in do_plot:
-            do_plot['peaks'].plot(range(lo, hi), data[lo:hi], 'r-')
+            do_plot['peaks'].plot(list(range(lo, hi)), data[lo:hi], 'r-')
             do_plot['peaks'].plot([lo, hi], [data[lo], data[hi]], 'ro')
 
         data = numpy.array(data, copy=True)
@@ -884,7 +884,7 @@ Data processing techniques will be used to automatically determine the "steps" o
     if do_plot == False:
         do_plot = {}
     ## low pass filter
-    ifiltered = (filter(inflation_data - MIN_PRESSURE, get_lowpass_taps(1e-8))
+    ifiltered = (list(filter(inflation_data - MIN_PRESSURE, get_lowpass_taps(1e-8)))
                  + MIN_PRESSURE)
 
     # numeric derivative
@@ -1119,16 +1119,16 @@ def grabCol(filename, skiprows=1, col=0):
         file = open(filename)
         for i in range(skiprows):
             file.readline()
-        dat = [l.split('\t')[col] for l in file.xreadlines()]
+        dat = [l.split('\t')[col] for l in file]
         if 'normal' in filename:
             hyper = filename.replace('normal', 'hyper')
             if os.path.exists(hyper):
                 file = open(hyper)
                 for i in range(skiprows):
                     file.readline()
-                hdat = [l.split('\t')[col] for l in file.xreadlines()]
+                hdat = [l.split('\t')[col] for l in file]
                 dat.extend(hdat)
-        dat = numpy.array(map(float, dat[:-2]))
+        dat = numpy.array(list(map(float, dat[:-2])))
     elif filename.lower().endswith('.acq'):
         dat = bioread.read_file(filename).channels[0].data
     else:
@@ -1143,7 +1143,7 @@ def __grabCol__test__():
 def decimate(data, fs_ratio=200/20, n_tap=defaults['n_tap']):
     fs_ratio = int(fs_ratio)
     taps = get_lowpass_taps(1./fs_ratio, dt=1., n=n_tap)
-    return filter(data, taps)[::fs_ratio]
+    return list(filter(data, taps))[::fs_ratio]
 
 def __decimate__test__():
     data = numpy.random.normal(0, 1, 10000)

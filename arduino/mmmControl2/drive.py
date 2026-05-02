@@ -53,8 +53,8 @@ def mmhg_to_mb(val):
 def mb_to_mmhg(val):
     return val /  1.33322368
 
-COMMAND_START = chr(0x7f) + chr(0x7f)
-COMMAND_END = '\n'
+COMMAND_START = b'\x7f\x7f'
+COMMAND_END = b'\n'
 last_cmd = None
 done = False
 baudrate = 115200
@@ -65,7 +65,7 @@ def connect():
     try:
         import RPi.GPIO as GPIO
         PI = True
-        port = '/dev/ttyS0'
+        port = '/dev/ttyUSB1'
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(18, GPIO.OUT)
@@ -73,7 +73,7 @@ def connect():
     except ImportError:
         PI = False
         port = glob("/dev/ttyU*")[-1]
-
+    port = '/dev/ttyUSB1'
     s = Serial(port, baudrate, timeout=timeout)
 connect()
     
@@ -161,8 +161,8 @@ def __send_cmd(init,
         __cmd__[i] = cmd[i]
     # cksum = chr(211)
     # print 'cmd"%s"' % cmd
-    cksum = (sum([c for c in cmd]) + 0xA) % 256
-    cmd = COMMAND_START + chr(cksum) + ''.join([chr(v) for v in cmd]) + COMMAND_END
+    cksum = (sum(cmd) + 0xA) % 256
+    cmd = COMMAND_START + bytes([cksum]) + bytes(cmd) + COMMAND_END
     s.write(cmd)
     # __command_buffer.append(cmd)
     # s.flush()
@@ -189,10 +189,10 @@ class PID(object):
             raise LengthError('LengthError: %s < %s' % (len(packet), self.N_BYTE))
         packet = packet[:self.N_BYTE]
 
-        s = sum([ord(c) for c in packet[:-1]]) % 256
-        if chr(s) != packet[-1]: 
-            print map(ord, packet)
-            raise CheckSumError('CheckSumError: %s != %s' % (s, ord(packet[-1])))
+        s = sum([c for c in packet[:-1]]) % 256
+        if s != packet[-1]: 
+            print(list(packet))
+            raise CheckSumError('CheckSumError: %s != %s' % (s, packet[-1]))
 
         ### Valid packet beyond here
         payload = packet[1:-1]
@@ -214,7 +214,7 @@ class MeasurementsPID(PID):
     67       unsigned short   -- flow                     [2]
     89       unsigned short   -- pulse                    [3]
     '''
-    PID = chr(1)
+    PID = 1
     PAYLOAD_FMT = 'IHhh' ## pack tightly ## reformat for new flow meter in pulse slot
     ## PAYLOAD_FMT = 'IHhH' ## pack tightly
     N_BYTE = struct.calcsize(PAYLOAD_FMT) + 2
@@ -230,7 +230,7 @@ class ShortPID(PID):
     '''
     Short 2-char message from device.
     '''
-    PID = 'R'
+    PID = ord('R')
     PAYLOAD_FMT = 'cc'
     N_BYTE = struct.calcsize(PAYLOAD_FMT) + 2
 
@@ -243,7 +243,7 @@ class StatusPID(PID):
     1 -- device ID
     
     '''
-    PID = chr(2)
+    PID = 2
     PAYLOAD_FMT = 'HB'
     N_BYTE = struct.calcsize(PAYLOAD_FMT) + 2
     NAMES = ['Cuff Pressure',
@@ -255,7 +255,7 @@ class StatusPID(PID):
              'Valve',
              'Interval']
     convert = {3: lambda bits: (bits - AMB_PRESSURE_MIN_COUNT) / AMB_PRESSURE_SENSITIVITY,
-               4: lambda bits: STS_T0 + (STS_GAIN * bits) / float(1l << 16)}
+               4: lambda bits: STS_T0 + (STS_GAIN * bits) / float(1 << 16)}
                    
     def __init__(self, packet):
         PID.__init__(self, packet)
@@ -265,7 +265,7 @@ class StatusPID(PID):
             self.value = self.convert[self.devid](self[0])
         else:
             self.value = self[0]
-        print self
+        print(self)
     def __repr__(self):
         return 'Status:%s=%s' % (self.name, self.value)
         
@@ -275,10 +275,10 @@ MPID = MeasurementsPID
 PIDS = {MPID.PID: MPID,
         ShortPID.PID:ShortPID,
         StatusPID.PID:StatusPID}
-assert chr(1) in PIDS
+assert 1 in PIDS
 
 messages = []
-last_ser_data = ''
+last_ser_data = b''
 def read_packet():
     global last_ser_data
     
@@ -287,17 +287,18 @@ def read_packet():
     # if new_data:
     #     print 'new_data', new_data
     ser_data = last_ser_data + new_data
-    if ser_data == '':
+    if ser_data == b'':
         packet = None
     elif ser_data[0] in PIDS: ## packet ID in first byte
         try:
             packet = PIDS[ser_data[0]](ser_data)
             last_ser_data = ser_data[packet.N_BYTE:]
-        except LengthError, e:
-            print e ## DBG LOG
+        except LengthError as e:
+            # print(e) ## DBG LOG
+            last_ser_data = ser_data
             packet = None ## not long enough, get more data on next call
-        except CheckSumError, e:
-            print e ## DBG LOG
+        except CheckSumError as e:
+            print(e) ## DBG LOG
             last_ser_data = ser_data[1:]
             packet = None ## malformed, try again at one byte offset next call
     else:
@@ -319,7 +320,7 @@ def subscribe(pid, callback):
     subscriptions[pid].append(callback)
 
 def unsubscribe(pid, callback):
-    if subscriptions.has_key(pid):
+    if pid in subscriptions:
         if callback in subscriptions[pid]:
             subscriptions[pid].remove(callback)
 __n_repeat = 0
@@ -327,18 +328,18 @@ def repeat_last_cmd():
     global __n_repeat
     if last_cmd:
         __n_repeat += 1
-        print 'repeating last command, %s repeats so far' % __n_repeat
+        print('repeating last command, %s repeats so far' % __n_repeat)
         s.write(last_cmd)
 def garbeled_cmd_catcher(pkt):
-    if pkt[0] == 'C':
-        if pkt[1] in 'SCL':
+    if pkt[0] == ord('C'):
+        if chr(pkt[1]) in 'SCL':
             repeat_last_cmd()
 def serial_ready_catcher(pkt):
-    if pkt[0] == 'S':     # serial
-        if pkt[1] == 'R': # ready
+    if pkt[0] == ord('S'):     # serial
+        if pkt[1] == ord('R'): # ready
             while __command_buffer:
                 cmd = __command_buffer.pop(0)
-                print 'writing', cmd
+                print('writing', cmd)
                 s.write(cmd)
                 
     
@@ -401,12 +402,12 @@ def status__test__():
         pkt = read_packet()
         assert pkt[0] == 0
 def toggle_rts():
-    print 'Resetting from FTDI...'
+    print('Resetting from FTDI...')
     s.flushInput()
     s.setRTS(True); time.sleep(.1); s.setRTS(False) ## reset uControl
 
 def toggle_GPIO18():
-    print 'Resetting from GPIO...'
+    print('Resetting from GPIO...')
     GPIO.output(18, GPIO.LOW)
     time.sleep(.1); 
     GPIO.output(18, GPIO.HIGH)
@@ -416,7 +417,7 @@ def reset():
     initialize the serial connection with the device by requesting pump state.
     '''
     global last_ser_data
-    print 'Resetting uControl'
+    print('Resetting uControl')
     if PI:
         toggle = toggle_GPIO18
     else:
@@ -428,20 +429,20 @@ def reset():
     while ack is None:
         # 20 tries
         for i in range(20):
-            print 'try', i
+            print('try', i)
             ack = read_packet()
             if isinstance(ack, ShortPID):
-                if ack[0] == 'R' and ack[1] == '!':
+                if ack[0] == ord('R') and ack[1] == ord('!'):
                     break
             time.sleep(.1)
         else:
             # resend request
             s.flushInput()
-            print 'try again'
+            print('try again')
             toggle()
             time.sleep(3.1)
             send_cmd(pump_state=True)
-    print 'uControl is reset'
+    print('uControl is reset')
 def ping__test__():
     s.flush()
     ## reset()
@@ -451,7 +452,7 @@ def ping__test__():
         start = time.time()
         while not read_packet():
             pass
-        print time.time() - start
+        print(time.time() - start)
 # ping__test__() ## .01 seconds on toshiba laptop
 # here
     
@@ -459,7 +460,7 @@ def stream__test__():
     # s.flush()
     # s.setRtsCts(False); s.setRtsCts(True)
     # time.sleep(1)
-    print 'start'
+    print('start')
     try:
         # reset()
         sample_num = 0
@@ -482,11 +483,11 @@ def stream__test__():
                         heart.append(pkt.pulse)
                         dt = float(time.time() - start) 
                         rate = (pkt.millis - initial_millis) / dt
-                        print 'Valid PKT:', pkt, (pkt.millis - last_millis), (pkt.millis - initial_millis) / float(N), 'ms/sample'
+                        print('Valid PKT:', pkt, (pkt.millis - last_millis), (pkt.millis - initial_millis) / float(N), 'ms/sample')
                         last_millis = pkt.millis
             ha = array(heart)
             uptime = pkt.millis / 3.6e6
-            print 'UP TIME:', int(uptime), 'Hr', int(uptime * 60) % 60, 'Min', int(uptime * 3600) % 60, 'Sec'
+            print('UP TIME:', int(uptime), 'Hr', int(uptime * 60) % 60, 'Min', int(uptime * 3600) % 60, 'Sec')
             # send_cmd(interval=0)
             done = True
 
@@ -502,7 +503,7 @@ def stream__test__():
 
 
     finally:
-        print 'finally'
+        print('finally')
         unsubscribe(StatusPID.PID, go)
         # send_cmd(interval=0)
         # s.flush()
@@ -512,21 +513,21 @@ def abort__test__():
     try:
         send_cmd(pump_rate=True, valve=1, interval=0)
         packet = read_packet()
-        assert packet[0] == 'S'
-        assert ord(packet[1]) == 0
+        assert packet[0] == ord('S')
+        assert packet[1] == 0
         
         send_cmd(valve_state=True, )
         packet = read_packet()
-        assert packet[0] == 'S'
-        assert ord(packet[1]) == 0
+        assert packet[0] == ord('S')
+        assert packet[1] == 0
         packet = read_packet()
         assert packet[0] == 1
         send_cmd(valve=True, valve_state=True)
-        print 'b4', read_packet()
-        print 'b4', read_packet()
-        print 'after', read_packet()
+        print('b4', read_packet())
+        print('b4', read_packet())
+        print('after', read_packet())
         for i in range(5):
-            print i, read_packet()
+            print(i, read_packet())
             time.sleep(1)
     finally:
         send_cmd(valve=0, pump_rate=0, interval=0) ## turn off sampling
@@ -534,5 +535,5 @@ def abort__test__():
         pass
         
 if __name__ == '__main__':
-    print 'stream__test__'
+    print('stream__test__')
     stream__test__()

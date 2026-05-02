@@ -54,7 +54,7 @@ class uControl:
                 serial_interact()
                 tries += 1
                 if tries % 10 == 9:
-                    print 'tries', tries
+                    print('tries', tries)
         # self.send_cmd(valve=self.valve_state)
                     
     def send_cmd(self, **kw):
@@ -88,11 +88,11 @@ class uControl:
         self.flow_rate = pkt.flow
         self.pulse_rate = pkt.pulse
         if self.lpf.last > self.max_pressure and self.pump_state:
-            print 'max pressure exceeded, pump off', self.cuff_pressure, self.min_pressure, self.max_pressure
+            print('max pressure exceeded, pump off', self.cuff_pressure, self.min_pressure, self.max_pressure)
             self.pump_state = False
             send_cmd(pump_rate=self.pump_state)
         if self.lpf.last < self.min_pressure and not self.pump_state:
-            print 'min pressure exceeded, pump on', self.cuff_pressure, self.min_pressure, self.max_pressure
+            print('min pressure exceeded, pump on', self.cuff_pressure, self.min_pressure, self.max_pressure)
             self.pump_state = True
             send_cmd(valve=getValveByte(valve0=False, valve1=False))
             send_cmd(pump_rate=self.pump_state)
@@ -100,13 +100,13 @@ class uControl:
             any_open    = bool(0b00000011 & self.valve_state)
             both_closed = not any_open
             if self.lpf.last <= (self.max_pressure + self.min_pressure) / 2. and self.bleeding:
-                print 'stop the bleeding'
+                print('stop the bleeding')
                 self.valve_state = getValveByte(valve0=False, valve1=False)
                 send_cmd(valve=self.valve_state)
                 self.bleeding = False
 
             if self.lpf.last > self.max_pressure and both_closed and not self.bleeding:
-                print 'start the bleeding'
+                print('start the bleeding')
                 ### if valves are both closed, start bleeding
                 self.valve_state = getValveByte(valve0=True, valve1=False)
                 send_cmd(valve=self.valve_state)
@@ -184,13 +184,13 @@ class uControl:
         self.max_pressure = max_p
         start = time.time()
         i = 0
-        print 'hold'
+        print('hold')
         last_togo = -1
         while time.time() < start + duration and not abort():
             serial_interact(max_iter=10, abort=abort)
             togo = int(start + duration  - time.time())
             if int(togo) != last_togo:
-                print togo, 'sec togo'
+                print(togo, 'sec togo')
                 last_togo = togo
         if abort():
             self.pump_state = False
@@ -237,26 +237,26 @@ class uControl:
         pickle.dump(self.hirate, open(fn, 'wb'))
         
 def test():
-    print 'here we go'
+    print('here we go')
     # while s.read(100000):
-    #     print 'flush serial'
+    #     print('flush serial')
     uc = uControl()
     # junk = s.read(1000)
-    print 'here'
+    print('here')
     try:
-        print 'uc.cuff_pressure', uc.cuff_pressure
-        print 'maintain()'
+        print('uc.cuff_pressure', uc.cuff_pressure)
+        print('maintain()')
         uc.maintain(200, 230, 3)
         uc.record(True)
-        print 'len(uc.hirate)', len(uc.hirate)
+        print('len(uc.hirate)', len(uc.hirate))
         while uc.pump_state:
-            print 'uc.cuff_pressure', uc.cuff_pressure
+            print('uc.cuff_pressure', uc.cuff_pressure)
             serial_interact()
-        print 'deflate'
+        print('deflate')
         uc.deflate(40, fast=False)
         uc.deflate(5, fast=True)
         uc.record(False)
-        print 'len(uc.hirate)', len(uc.hirate)
+        print('len(uc.hirate)', len(uc.hirate))
         hirate = array(uc.hirate)
         if len(uc.hirate) > 0:
             dt = 0.004
@@ -265,7 +265,7 @@ def test():
             llp_taps = util.get_lowpass_taps(.25, dt, n_tap)
             lpd = util.filter(hirate[:,1] - hirate[0, 1], lp_taps)[::10] + hirate[0, 1]
             llpd = util.filter(hirate[:,1] - hirate[0, 1], llp_taps)[::10] + hirate[0, 1]
-            print len(lpd)
+            print(len(lpd))
             times = hirate[::10,0]
             ax = pylab.subplot(211)
             pylab.plot(times, lpd)
@@ -278,11 +278,11 @@ def test():
             
             pfn = 'hirate.pkl'
             pickle.dump(hirate, open(pfn, 'w'))
-            print 'write', pfn
+            print('write', pfn)
             # pylab.figure(2); pylab.plot(uc.lpf.out)
             # pylab.figure(3); pylab.plot(hirate[:,1])
 
-        print 'done'
+        print('done')
     finally:
         uc.deflate(50)
         send_cmd(pump_rate=False, valve=getValveByte(valve0=True))
