@@ -234,7 +234,7 @@ class uControl:
     def save_hirate(self, fn):
         if len(self.hirate) == 0:
             raise ValueError("No data to save.  (Try ucontrol.record(True))")
-        pickle.dump(self.hirate, open(fn, 'wb'))
+        pickle.dump(self.hirate, open(fn, 'w'))
         
 def test():
     print('here we go')
@@ -272,12 +272,10 @@ def test():
             pylab.plot(times, llpd)
             pylab.subplot(212, sharex=ax)
             pylab.plot(times, lpd - llpd)
-            pylab.figure()
-            pylab.plot(hirate[:,2])
             pylab.show()
             
             pfn = 'hirate.pkl'
-            pickle.dump(hirate, open(pfn, 'w'))
+            pickle.dump(hirate, open(pfn, 'wb'))
             print('write', pfn)
             # pylab.figure(2); pylab.plot(uc.lpf.out)
             # pylab.figure(3); pylab.plot(hirate[:,1])

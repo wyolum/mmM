@@ -2,7 +2,6 @@
 uControl driver library.
 '''
 
-import warnings
 from numpy import *
 import time
 import sys
@@ -39,38 +38,14 @@ def count_to_mmhg(val):
     b, m = [ 2599.61459873,    58.94583836] ## calibrated one unit
     return (val - b) / m
 
-## 200 mlps
-# FLOW_SCALE_FACTOR = 140
-# FLOW_OFFSET  = 32000
-# /* (count - FLOW_OFFSET_F) / float(FLOW_SCALE_FACTOR_F); */
-
-## 20 mlps
-# FLOW_SCALE_FACTOR = 1
-# FLOW_OFFSET  = 0
-
-## honeywell zephyr
-FLOW_SCALE_FACTOR = 1.
-FLOW_OFFSET = 6.
-Full_Scale_Flow  = 15000
-
-
-last_flow = None
+SENSIRION_SCALE_FACTOR_F = 140
+SENSIRION_OFFSET_F  = 32000
+HONEYWELL_SCALE_FACTOR_F = 1.307873
+HONEYWELL_OFFSET_F = 1638
 def count_to_smlpm(count):
-    global last_flow
-    ## smlpm = float(count - FLOW_OFFSET) / float(FLOW_SCALE_FACTOR) * 1000;
-    # return smlpm
-    offset = 1636.12
-    gain = 0.02179666666666667
-    out = (count - offset) * gain
-
-    if abs(out) > 100 or out < -10:
-        bytes = struct.pack('h', count)
-        warnings.warn('Flow status ignored 0x%02x%02x' % (ord(bytes[0]), ord(bytes[1])))
-        if last_flow is None:
-            last_flow = 0.
-        out = last_flow
-    last_flow = out
-    return out
+    # smlpm = float(count - SENSIRION_OFFSET_F) / float(SENSIRION_SCALE_FACTOR_F);
+    smlpm = float(count - HONEYWELL_OFFSET_F) * float(HONEYWELL_SCALE_FACTOR_F);
+    return smlpm
 
 def mmhg_to_mb(val):
     return  val * 1.33322368
@@ -78,39 +53,17 @@ def mmhg_to_mb(val):
 def mb_to_mmhg(val):
     return val /  1.33322368
 
-COMMAND_START = chr(0x7f) + chr(0x7f)
-COMMAND_END = '\n'
+COMMAND_START = b'\x7f\x7f'
+COMMAND_END = b'\n'
 last_cmd = None
 done = False
 baudrate = 115200
 timeout = .01
 
-PI = False
 def connect():
     global s
-    try:
-        import RPi.GPIO as GPIO
-        PI = True
-        # port = '/dev/ttyS0' ### gpio serial port
-        port = '/dev/ttyUSB0'
-        GPIO.setwarnings(False)
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(18, GPIO.OUT)
-        GPIO.output(18, GPIO.HIGH)
-    except ImportError:
-        PI = False
-        ports = glob("/dev/ttyU*")
-        ports.extend(glob("/dev/ttyA*"))
-        if len(ports) >= 1:
-            port = ports[0]
-        else:
-            port = None
-    print(ports, len(ports), port)
-    if port:
-        s = Serial(port, baudrate, timeout=timeout)
-        print(s)
-    else:
-        warnings.warn('mmM not found')
+    port = glob("/dev/cu.usbserial*")[-1]
+    s = Serial(port, baudrate, timeout=timeout)
 connect()
     
 def getValveByte(valve0=False, valve1=False):
@@ -197,8 +150,8 @@ def __send_cmd(init,
         __cmd__[i] = cmd[i]
     # cksum = chr(211)
     # print 'cmd"%s"' % cmd
-    cksum = (sum([c for c in cmd]) + 0xA) % 256
-    cmd = COMMAND_START + chr(cksum) + ''.join([chr(v) for v in cmd]) + COMMAND_END
+    cksum = (sum(cmd) + 0xA) % 256
+    cmd = COMMAND_START + bytes([cksum]) + bytes(cmd) + COMMAND_END
     s.write(cmd)
     # __command_buffer.append(cmd)
     # s.flush()
@@ -225,13 +178,10 @@ class PID(object):
             raise LengthError('LengthError: %s < %s' % (len(packet), self.N_BYTE))
         packet = packet[:self.N_BYTE]
 
-        s = sum([ord(c) for c in packet[:-1]]) % 256
-        if chr(s) != packet[-1]: 
-            # print map(ord, packet)
-            raise CheckSumError('CheckSumError: %s != %s' % (s, ord(packet[-1])))
-        else:
-            pass
-            # print map(ord, packet)
+        s = sum([c for c in packet[:-1]]) % 256
+        if s != packet[-1]: 
+            print(list(packet))
+            raise CheckSumError('CheckSumError: %s != %s' % (s, packet[-1]))
 
         ### Valid packet beyond here
         payload = packet[1:-1]
@@ -244,7 +194,6 @@ class PID(object):
     def __repr__(self):
         return '%s-%s' % (self.__class__.__name__, self.payload)
 
-PID_file = open("Flow3.txt", 'wb')
 class MeasurementsPID(PID):
     '''
     High rate data format:
@@ -254,9 +203,9 @@ class MeasurementsPID(PID):
     67       unsigned short   -- flow                     [2]
     89       unsigned short   -- pulse                    [3]
     '''
-    PID = chr(1)
-    # PAYLOAD_FMT = 'IHhH' ## pack tightly ## orig pulse sensor
-    PAYLOAD_FMT = 'IHhh' ## pack tightly   ## using pulse slot for second flow meter
+    PID = 1
+    PAYLOAD_FMT = 'IHhh' ## pack tightly ## reformat for new flow meter in pulse slot
+    ## PAYLOAD_FMT = 'IHhH' ## pack tightly
     N_BYTE = struct.calcsize(PAYLOAD_FMT) + 2
 
     def __init__(self, packet):
@@ -265,13 +214,12 @@ class MeasurementsPID(PID):
         self.cuff = limit_check(count_to_mmhg(self[1]), 'GAGE') ## in mmhg
         self.flow = limit_check(count_to_smlpm(self[2]), 'FLOW')
         self.pulse = self[3]
-        print(self.flow, self.pulse, file= PID_file)
-        
+
 class ShortPID(PID):
     '''
     Short 2-char message from device.
     '''
-    PID = 'R'
+    PID = ord('R')
     PAYLOAD_FMT = 'cc'
     N_BYTE = struct.calcsize(PAYLOAD_FMT) + 2
 
@@ -284,7 +232,7 @@ class StatusPID(PID):
     1 -- device ID
     
     '''
-    PID = chr(2)
+    PID = 2
     PAYLOAD_FMT = 'HB'
     N_BYTE = struct.calcsize(PAYLOAD_FMT) + 2
     NAMES = ['Cuff Pressure',
@@ -295,15 +243,8 @@ class StatusPID(PID):
              'Pump',
              'Valve',
              'Interval']
-    FLOW_ML_PER_BIT = 1.307873
-    FLOW_MIN_COUNT = 1638
-    Full_Scale_Flow  = 15000
-    # Full_Scale_Flow * [(bits/16384.) - 0.1]/0.8,
-    gain = 1.
-    convert = {
-        1: lambda bits: (bits - 6.) * GAIN,
-        3: lambda bits: (bits - AMB_PRESSURE_MIN_COUNT) / AMB_PRESSURE_SENSITIVITY,
-        4: lambda bits: STS_T0 + (STS_GAIN * bits) / float(1 << 16)}
+    convert = {3: lambda bits: (bits - AMB_PRESSURE_MIN_COUNT) / AMB_PRESSURE_SENSITIVITY,
+               4: lambda bits: STS_T0 + (STS_GAIN * bits) / float(1 << 16)}
                    
     def __init__(self, packet):
         PID.__init__(self, packet)
@@ -323,29 +264,27 @@ MPID = MeasurementsPID
 PIDS = {MPID.PID: MPID,
         ShortPID.PID:ShortPID,
         StatusPID.PID:StatusPID}
-assert chr(1) in PIDS
+assert 1 in PIDS
 
 messages = []
-last_ser_data = ''
+last_ser_data = b''
 def read_packet():
     global last_ser_data
     
     ## read in remainder of packet
     new_data = s.read(MeasurementsPID.N_BYTE - len(last_ser_data))
-    if new_data:
-        pass
     # if new_data:
     #     print 'new_data', new_data
     ser_data = last_ser_data + new_data
-    if ser_data == '':
+    if ser_data == b'':
         packet = None
     elif ser_data[0] in PIDS: ## packet ID in first byte
         try:
             packet = PIDS[ser_data[0]](ser_data)
             last_ser_data = ser_data[packet.N_BYTE:]
         except LengthError as e:
-            # warnings.warn(str(e)) ## DBG LOG
-            print(e)
+            # print(e) ## DBG LOG
+            last_ser_data = ser_data
             packet = None ## not long enough, get more data on next call
         except CheckSumError as e:
             print(e) ## DBG LOG
@@ -370,7 +309,7 @@ def subscribe(pid, callback):
     subscriptions[pid].append(callback)
 
 def unsubscribe(pid, callback):
-    if subscriptions.has_key(pid):
+    if pid in subscriptions:
         if callback in subscriptions[pid]:
             subscriptions[pid].remove(callback)
 __n_repeat = 0
@@ -381,12 +320,12 @@ def repeat_last_cmd():
         print('repeating last command, %s repeats so far' % __n_repeat)
         s.write(last_cmd)
 def garbeled_cmd_catcher(pkt):
-    if pkt[0] == 'C':
-        if pkt[1] in 'SCL':
+    if pkt[0] == ord('C'):
+        if chr(pkt[1]) in 'SCL':
             repeat_last_cmd()
 def serial_ready_catcher(pkt):
-    if pkt[0] == 'S':     # serial
-        if pkt[1] == 'R': # ready
+    if pkt[0] == ord('S'):     # serial
+        if pkt[1] == ord('R'): # ready
             while __command_buffer:
                 cmd = __command_buffer.pop(0)
                 print('writing', cmd)
@@ -482,7 +421,7 @@ def reset():
             print('try', i)
             ack = read_packet()
             if isinstance(ack, ShortPID):
-                if ack[0] == 'R' and ack[1] == '!':
+                if ack[0] == ord('R') and ack[1] == ord('!'):
                     break
             time.sleep(.1)
         else:
@@ -545,7 +484,7 @@ def stream__test__():
         RATE = 1
         # send_cmd(interval=RATE, pump_state=True)
         while not done:
-            print(done, len(last_ser_data))
+            # print 'done?', done, len(last_ser_data)
             for i in range(10):
                 serial_interact()
             if not done:
@@ -563,13 +502,13 @@ def abort__test__():
     try:
         send_cmd(pump_rate=True, valve=1, interval=0)
         packet = read_packet()
-        assert packet[0] == 'S'
-        assert ord(packet[1]) == 0
+        assert packet[0] == ord('S')
+        assert packet[1] == 0
         
         send_cmd(valve_state=True, )
         packet = read_packet()
-        assert packet[0] == 'S'
-        assert ord(packet[1]) == 0
+        assert packet[0] == ord('S')
+        assert packet[1] == 0
         packet = read_packet()
         assert packet[0] == 1
         send_cmd(valve=True, valve_state=True)

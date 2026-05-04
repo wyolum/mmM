@@ -62,18 +62,7 @@ timeout = .01
 
 def connect():
     global s
-    try:
-        import RPi.GPIO as GPIO
-        PI = True
-        port = '/dev/ttyUSB1'
-        GPIO.setwarnings(False)
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(18, GPIO.OUT)
-        GPIO.output(18, GPIO.HIGH)
-    except ImportError:
-        PI = False
-        port = glob("/dev/ttyU*")[-1]
-    port = '/dev/ttyUSB1'
+    port = glob("/dev/cu.usbserial*")[-1]
     s = Serial(port, baudrate, timeout=timeout)
 connect()
     

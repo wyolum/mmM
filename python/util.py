@@ -69,6 +69,8 @@ def blood_pressure(raw):
     #### find SBP time
     t = numpy.arange(map_time, 0, -.01) ### time going backwards from MAP
     pt = poly_eval(p6, t) - sbp_target
+    print(pt)
+    print(numpy.where(pt < 0))
     sbp_time = t[numpy.where(pt < 0)[0][0]]
 
     #### find DBP time
@@ -422,8 +424,8 @@ def poly_solve(poly, y, guess, max_iter=100, eps=1e-5):
     return find_zero(coeff, guess, max_iter, eps)
     
 def poly_eval(poly, x):
-    pows = [x ** i for i in range(len(poly))]
-    return numpy.dot(poly, pows)
+    x = numpy.asarray(x, dtype=float)
+    return sum(poly[i] * x**i for i in range(len(poly)))
 
 def optimize(poly, guess, max_iter=100, eps=1e-5):
     dydx = poly_der(poly)
@@ -626,6 +628,9 @@ def find_pulse_peaks_and_troughs(data, dt, max_pulse_period=defaults['max_pulse_
     both trimmed to same length with 
     peak following trough
     '''
+
+    data = numpy.asarray(data)
+
     ### find max of all the data
     max_i = numpy.argmax(data)
     ### look backward for next trough to the left
@@ -633,9 +638,9 @@ def find_pulse_peaks_and_troughs(data, dt, max_pulse_period=defaults['max_pulse_
 
     ### find min to the left
     max_pulse_period_samples = int(max_pulse_period / dt)
-    start = max_i - max_pulse_period_samples / 2
+    start = max_i - max_pulse_period_samples // 2
     start = max([0, start])
-    end = max_i + max_pulse_period_samples / 2
+    end = max_i + max_pulse_period_samples // 2
     if max_i > 0:
         min_left = start + numpy.argmin(data[start:max_i])
     else:
