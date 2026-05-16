@@ -107,14 +107,25 @@ def find_release_idx(raw, dt, slope_thresh=-5.0, sustain_sec=0.2):
 # ---------------------------------------------------------------------------
 def analyse(raw, dt, release_idx):
     # --- descent-only, baseline corrected ---
+    # Baseline-correct the descent so the FIR sees a signal starting near zero
+    n_tap    = defaults['n_tap']
     baseline = raw[release_idx]
-    descent  = raw[release_idx:] - baseline   # starts near 0
+    descent  = raw[release_idx:] - baseline
 
-    lp_full  = util.filter(descent, util.LP_TAPS)  + baseline
-    llp_full = util.filter(descent, util.LLP_TAPS) + baseline
+    # Estimate initial deflation slope from a 50-sample linear fit (~200ms at 250Hz)
+    # — robust to sample noise, short enough to stay within one deflation rate regime
+    n_slope = 50
+    slope   = numpy.polyfit(numpy.arange(n_slope), descent[:n_slope], 1)[0]  # mmHg/sample
+
+    # Prime the filter with a ramp matching the slope so the FIR state is
+    # pre-loaded before it hits the data we care about
+    ramp     = slope * numpy.arange(-n_tap, 0)
+    primed   = numpy.concatenate([ramp, descent])
+    lp_full  = util.filter(primed, util.LP_TAPS)[n_tap:]  + baseline
+    llp_full = util.filter(primed, util.LLP_TAPS)[n_tap:] + baseline
 
     # Skip n_tap samples so FIR filters have settled before peak detection
-    n_tap = defaults["n_tap"]
+
     skip = n_tap # * 3 // 2
     lp  = lp_full[skip:]
     llp = llp_full[skip:]
@@ -135,6 +146,7 @@ def analyse(raw, dt, release_idx):
     deltas  = deltas[keep]
 
     # n_peak logic (mirrors util.blood_pressure)
+    #print('util.blood_pressure', util.blood_pressure(raw))
     candidate_deltas = [d for idx, d in zip(peaks, deltas) if llp[idx] > 60]
     n_peak = numpy.argmax(candidate_deltas) * 2 + 1
     if n_peak >= len(peaks):
@@ -393,51 +405,62 @@ class DebugBPApp(tk.Tk):
         n_peak      = r['n_peak']
         t_dense     = r['t_dense']
         y_poly      = r['y_poly']
+        n_full      = len(raw)
+        lp_full     = r['lp_full']
+        llp_full    = r['llp_full']
+        n_tap       = r['n_tap']
 
-        n_full    = len(raw)
-        lp_full   = r['lp_full']
-        llp_full  = r['llp_full']
-        n_tap     = r['n_tap']
-        t_full    = numpy.arange(n_full) * dt
-        release_t = release_idx * dt
+        # --- Canonical time axis: t=0 at release ---
+        skip_t    = n_tap * dt          # seconds from release to analysis start
+        t_full    = numpy.arange(n_full) * dt - release_idx * dt   # panel 0 raw
+        t_desc    = numpy.arange(len(lp_full)) * dt                # panel 0 filters (already start at release)
+        t_bpf     = numpy.arange(len(bpf)) * dt + skip_t          # panels 1/2/3: shift by skip
+        t_llp     = numpy.arange(len(llp)) * dt + skip_t          # panel 3 llp
 
-        # descent time axes — relative to release
-        t_desc = numpy.arange(len(lp)) * dt
-        t_llp  = numpy.arange(len(llp)) * dt
-        t_sig  = numpy.arange(len(bpf)) * dt
+        # Shift poly/marker times (from analyse, t=0 = analysis start) -> t=0 = release
+        map_time_r = r['map_time'] + skip_t
+        sbp_time_r = r['sbp_time'] + skip_t if r['sbp_time'] is not None else None
+        dbp_time_r = r['dbp_time'] + skip_t if r['dbp_time'] is not None else None
+        t_dense_r  = t_dense + skip_t
 
-        # --- Panel 0: full raw + descent filters, showing release and n_tap skip ---
-        t_desc_full = numpy.arange(len(lp_full)) * dt
-        skip_t      = n_tap * dt   # time into descent where analysis starts
+################################################################################
+        print("release_idx:", release_idx)
+        print("raw[release_idx]:", raw[release_idx])
+        print("baseline:", baseline)
+        print("len(raw):", len(raw))
+################################################################################
 
+        # --- Panel 0: full raw + descent filters ---        
         self.ax0.cla()
         self.ax0.plot(t_full, raw, color='lightgray', lw=0.7, label='raw')
-        self.ax0.plot(release_t + t_desc_full, lp_full,  color='steelblue',  lw=1.2, label='LP (descent only)')
-        self.ax0.plot(release_t + t_desc_full, llp_full, color='darkorange', lw=1.5, label='LLP (descent only)')
-        self.ax0.axvline(release_t, color='red', lw=1.5, ls='--',
-                         label='release @ %.2fs  (%.0f mmHg)' % (release_t, baseline))
-        self.ax0.axvline(release_t + skip_t, color='green', lw=1.5, ls='--',
-                         label='n_tap skip ends @ %.2fs' % (release_t + skip_t))
+        self.ax0.plot(t_desc, lp_full,  color='steelblue',  lw=1.2, label='LP (descent only)')
+        self.ax0.plot(t_desc, llp_full, color='darkorange', lw=1.5, label='LLP (descent only)')
+        self.ax0.axvline(0,      color='red',   lw=1.5, ls='--',
+                         label='release @ %.0f mmHg' % baseline)
+        self.ax0.axvline(skip_t, color='green', lw=1.5, ls='--',
+                         label='analysis start (n_tap=%.2fs)' % skip_t)
         self.ax0.set_ylabel('Pressure (mmHg)')
-        self.ax0.set_title('Full raw + descent filters — red=release, green=analysis start (n_tap settled)', fontsize=9)
+        self.ax0.set_title('Full raw + descent filters  [t=0 = release]', fontsize=9)
         self.ax0.legend(fontsize=7, loc='upper right')
 
-        # --- Panel 1: bandpass (descent) + peaks/troughs ---
+        # --- Panel 1: bandpass + peaks/troughs ---
         self.ax1.cla()
-        self.ax1.plot(t_sig, bpf, color='seagreen', lw=0.8, label='Bandpass')
-        self.ax1.plot(peaks * dt,   bpf[peaks],   'r^', ms=4, label='peaks')
-        self.ax1.plot(troughs * dt, bpf[troughs], 'bv', ms=4, label='troughs')
-        self.ax1.axvspan(troughs[0] * dt, troughs[n_peak - 1] * dt,
+        self.ax1.plot(t_bpf, bpf, color='seagreen', lw=0.8, label='Bandpass')
+        self.ax1.plot(peaks   * dt + skip_t, bpf[peaks],   'r^', ms=4, label='peaks')
+        self.ax1.plot(troughs * dt + skip_t, bpf[troughs], 'bv', ms=4, label='troughs')
+        self.ax1.axvspan(troughs[0] * dt + skip_t, troughs[n_peak - 1] * dt + skip_t,
                          alpha=0.10, color='gold', label='fit window (n=%d)' % n_peak)
+        self.ax1.axvline(0,      color='red',   lw=1.0, ls='--', alpha=0.4)
+        self.ax1.axvline(skip_t, color='green', lw=1.0, ls='--', alpha=0.4)
         self.ax1.axhline(0, color='gray', lw=0.5, ls='--')
         self.ax1.set_ylabel('Bandpass (mmHg)')
-        self.ax1.set_title('Bandpass — peaks & troughs (t=0 is release)', fontsize=9)
+        self.ax1.set_title('Bandpass — peaks & troughs  [t=0 = release]', fontsize=9)
         self.ax1.legend(fontsize=7, loc='upper right')
 
         # --- Panel 2: p6 poly + targets ---
         self.ax2.cla()
-        self.ax2.plot(t_dense, y_poly, color='purple', lw=2.0, label='p6 poly')
-        self.ax2.scatter(troughs[:n_peak] * dt, r['deltas'][:n_peak],
+        self.ax2.plot(t_dense_r, y_poly, color='purple', lw=2.0, label='p6 poly')
+        self.ax2.scatter(troughs[:n_peak] * dt + skip_t, r['deltas'][:n_peak],
                          color='black', zorder=5, s=18, label='fit pts (delta)')
         self.ax2.axhline(r['sbp_target'], color='tomato',     lw=1.5, ls='--',
                          label='55%% SBP target = %.2f' % r['sbp_target'])
@@ -445,58 +468,67 @@ class DebugBPApp(tk.Tk):
                          label='85%% DBP target = %.2f' % r['dbp_target'])
         self.ax2.axhline(r['peak_fit'],   color='purple',     lw=1.0, ls=':',
                          label='MAP peak = %.2f' % r['peak_fit'])
-        self.ax2.axvline(r['map_time'], color='purple', lw=1.0, ls=':', alpha=0.7)
-        self.ax2.plot(r['map_time'], r['peak_fit'], 'P', color='purple', ms=9,
-                      zorder=6, label='MAP @ %.2fs' % r['map_time'])
+        self.ax2.axvline(map_time_r, color='purple', lw=1.0, ls=':', alpha=0.7)
+        self.ax2.plot(map_time_r, r['peak_fit'], 'P', color='purple', ms=9,
+                      zorder=6, label='MAP @ %.2fs' % map_time_r)
+        self.ax2.axvline(0,      color='red',   lw=1.0, ls='--', alpha=0.4)
+        self.ax2.axvline(skip_t, color='green', lw=1.0, ls='--', alpha=0.4)
 
-        if r['sbp_time'] is not None:
-            self.ax2.axvline(r['sbp_time'], color='tomato', lw=1.2, ls=':', alpha=0.8)
-            self.ax2.plot(r['sbp_time'], r['sbp_target'], 'o', color='tomato', ms=8,
-                          zorder=6, label='SBP @ %.2fs -> %d mmHg' % (r['sbp_time'], r['sbp_val']))
+        if sbp_time_r is not None:
+            self.ax2.axvline(sbp_time_r, color='tomato', lw=1.2, ls=':', alpha=0.8)
+            self.ax2.plot(sbp_time_r, r['sbp_target'], 'o', color='tomato', ms=8,
+                          zorder=6, label='SBP @ %.2fs -> %d mmHg' % (sbp_time_r, r['sbp_val']))
         else:
             self.ax2.text(0.5, 0.5, 'SBP NOT FOUND', transform=self.ax2.transAxes,
                           ha='center', color='red', fontsize=12, fontweight='bold')
 
-        if r['dbp_time'] is not None:
-            self.ax2.axvline(r['dbp_time'], color='dodgerblue', lw=1.2, ls=':', alpha=0.8)
-            self.ax2.plot(r['dbp_time'], r['dbp_target'], 'o', color='dodgerblue', ms=8,
-                          zorder=6, label='DBP @ %.2fs -> %d mmHg' % (r['dbp_time'], r['dbp_val']))
+        if dbp_time_r is not None:
+            self.ax2.axvline(dbp_time_r, color='dodgerblue', lw=1.2, ls=':', alpha=0.8)
+            self.ax2.plot(dbp_time_r, r['dbp_target'], 'o', color='dodgerblue', ms=8,
+                          zorder=6, label='DBP @ %.2fs -> %d mmHg' % (dbp_time_r, r['dbp_val']))
         else:
             self.ax2.text(0.5, 0.4, 'DBP NOT FOUND', transform=self.ax2.transAxes,
                           ha='center', color='blue', fontsize=12, fontweight='bold')
 
-        self.ax2.set_ylabel('Peak-to-trough\n delta (mmHg)')
-        self.ax2.set_title('p6 polynomial fit — 55%%/85%% SBP/DBP targets', fontsize=9)
+        self.ax2.set_ylabel('Peak-to-trough\ndelta (mmHg)')
+        self.ax2.set_title('p6 polynomial fit — 55%%/85%% SBP/DBP targets  [t=0 = release]', fontsize=9)
         self.ax2.legend(fontsize=7, loc='upper right')
 
         # --- Panel 3: cuff pressure read-off ---
         self.ax3.cla()
         self.ax3.plot(t_llp, llp, color='darkorange', lw=1.5, label='Cuff LLP (descent)')
-        self.ax3.axvline(r['map_time'], color='purple', lw=1.0, ls=':', alpha=0.7)
-        self.ax3.axhline(r['MAP6'],    color='purple', lw=1.0, ls=':', alpha=0.7)
-        self.ax3.plot(r['map_time'], r['MAP6'], 'P', color='purple', ms=9,
+        self.ax3.axvline(0,         color='red',   lw=1.0, ls='--', alpha=0.4)
+        self.ax3.axvline(skip_t,    color='green', lw=1.0, ls='--', alpha=0.4)
+        self.ax3.axvline(map_time_r, color='purple', lw=1.0, ls=':', alpha=0.7)
+        self.ax3.axhline(r['MAP6'], color='purple', lw=1.0, ls=':', alpha=0.7)
+        self.ax3.plot(map_time_r, r['MAP6'], 'P', color='purple', ms=9,
                       zorder=6, label='MAP = %d mmHg' % r['MAP6'])
 
-        if r['sbp_time'] is not None:
-            self.ax3.axvline(r['sbp_time'], color='tomato', lw=1.2, ls=':', alpha=0.8)
+        if sbp_time_r is not None:
+            self.ax3.axvline(sbp_time_r, color='tomato', lw=1.2, ls=':', alpha=0.8)
             self.ax3.axhline(r['sbp_val'], color='tomato', lw=1.0, ls=':', alpha=0.6)
-            self.ax3.plot(r['sbp_time'], r['sbp_val'], 'o', color='tomato', ms=8,
+            self.ax3.plot(sbp_time_r, r['sbp_val'], 'o', color='tomato', ms=8,
                           zorder=6, label='SBP = %d mmHg' % r['sbp_val'])
 
-        if r['dbp_time'] is not None:
-            self.ax3.axvline(r['dbp_time'], color='dodgerblue', lw=1.2, ls=':', alpha=0.8)
+        if dbp_time_r is not None:
+            self.ax3.axvline(dbp_time_r, color='dodgerblue', lw=1.2, ls=':', alpha=0.8)
             self.ax3.axhline(r['dbp_val'], color='dodgerblue', lw=1.0, ls=':', alpha=0.6)
-            self.ax3.plot(r['dbp_time'], r['dbp_val'], 'o', color='dodgerblue', ms=8,
+            self.ax3.plot(dbp_time_r, r['dbp_val'], 'o', color='dodgerblue', ms=8,
                           zorder=6, label='DBP = %d mmHg' % r['dbp_val'])
 
         self.ax3.set_xlabel('Time from release (s)')
         self.ax3.set_ylabel('Cuff pressure\n(mmHg)')
-        self.ax3.set_title('Cuff pressure — MAP / SBP / DBP read-off', fontsize=9)
+        self.ax3.set_title('Cuff pressure — MAP / SBP / DBP read-off  [t=0 = release]', fontsize=9)
         self.ax3.legend(fontsize=7, loc='upper right')
+
+        # Share x-axis limits across all panels
+        x_min = t_full[0]
+        x_max = max(t_full[-1], t_llp[-1])
+        for ax in (self.ax0, self.ax1, self.ax2, self.ax3):
+            ax.set_xlim(x_min, x_max)
 
         self.fig.tight_layout(pad=2.0)
         self.canvas.draw()
-
     # --------------------------------------------------------- helpers
     def _done(self):
         self.progress.stop()

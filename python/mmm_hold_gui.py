@@ -27,6 +27,9 @@ Run on the Mac mini with the uControl board attached:
     python3 mmm_hold_gui.py
 """
 
+import argparse
+import atexit
+import signal
 import time
 import threading
 import collections
@@ -58,6 +61,40 @@ except Exception as e:
     raise RuntimeError(
         f"Failed to import drive.py / connect to mmM board: {e}"
     )
+
+
+# ---------------------------------------------------------------------------
+# Module-level emergency vent
+# ---------------------------------------------------------------------------
+def _emergency_vent(reason=""):
+    """Best-effort vent: open both valves, pump off, stop streaming.
+
+    Called by atexit and SIGTERM/SIGINT handlers so the cuff is never left
+    pressurised after any Python exit path -- clean shutdown, Ctrl-C,
+    unhandled exception, or kill.
+    """
+    try:
+        drive.send_cmd(interval=0, pump_rate=0,
+                       valve=drive.getValveByte(valve0=True, valve1=True))
+    except Exception:
+        pass
+    if reason:
+        print(f"[mmM] emergency vent: {reason}")
+
+
+atexit.register(_emergency_vent, "process exit")
+
+
+def _signal_handler(signum, frame):
+    _emergency_vent(f"signal {signum}")
+    raise SystemExit(signum)
+
+
+for _sig in (signal.SIGTERM, signal.SIGINT):
+    try:
+        signal.signal(_sig, _signal_handler)
+    except (OSError, ValueError):
+        pass  # non-main thread or platform restriction; atexit still fires
 
 
 # ---------------------------------------------------------------------------
@@ -100,11 +137,7 @@ class StreamingBandpass:
 
 
 class StreamingLowpass:
-    """Causal Butterworth lowpass with persistent state.
-
-    Used during inflation to suppress pump-impulse spikes when deciding
-    whether the cuff has reached target. Sample-rate ~200 Hz, fc=1 Hz default.
-    """
+    """Causal Butterworth lowpass with persistent state."""
     def __init__(self, fs, fc=1.0, order=2):
         nyq = fs / 2
         self.b, self.a = butter(order, fc/nyq, btype="low")
@@ -125,16 +158,11 @@ class StreamingLowpass:
 
 
 class SpectrumComputer:
-    """Rolling-window FFT for waterfall display.
-
-    Holds the most recent `nfft` samples; on demand, computes a Hann-windowed
-    power spectrum in dB. Caller decides update cadence.
-    """
+    """Rolling-window FFT for waterfall display."""
     def __init__(self, fs, nfft=256):
         self.fs = fs
         self.nfft = nfft
         self.window = np.hanning(nfft)
-        # Window normalization for power preservation
         self._win_norm = np.sum(self.window**2)
         self.buf = collections.deque(maxlen=nfft)
         self.freqs = np.fft.rfftfreq(nfft, 1.0/fs)
@@ -147,21 +175,20 @@ class SpectrumComputer:
         return len(self.buf) == self.nfft
 
     def spectrum_db(self):
-        """Return power spectrum in dB. Returns None until buffer is full."""
         if not self.ready():
             return None
         x = np.array(self.buf)
-        x = x - x.mean()  # remove DC so it doesn't dominate dB scale
+        x = x - x.mean()
         x = x * self.window
         X = np.fft.rfft(x)
-        # Power, normalized for window energy
         P = (np.abs(X)**2) / (self._win_norm * self.fs)
-        # dB with floor to avoid log(0)
         return 10.0 * np.log10(P + 1e-12)
 
 
 # ---------------------------------------------------------------------------
-# Beat tracker: detect peaks on streaming AC pressure, emit delta_p per beat
+# Beat tracker: detect peaks on streaming signal, emit delta_p per beat.
+# Fed from the 0-5 Hz LP signal so pump noise is suppressed while retaining
+# full pulse amplitude.
 # ---------------------------------------------------------------------------
 class BeatTracker:
     def __init__(self, fs, min_hr=40, max_hr=180, prom_mmHg=0.15, win_s=6.0):
@@ -199,26 +226,23 @@ class BeatTracker:
         return events
 
     def reset(self):
-        """Clear rolling buffer; call on Hold press to start fresh."""
         self.t_buf.clear()
         self.ac_buf.clear()
         self.last_emitted_t = -1.0
 
 
 # ---------------------------------------------------------------------------
-# Hardware adapter: handles drive.py subscribe loop in a thread, exposes
-# pump/valve setters.
+# Hardware adapter
 # ---------------------------------------------------------------------------
 class Hardware:
     def __init__(self, sample_q):
-        self.sample_q = sample_q          # (t_s, p_mmHg, flow_sccm) tuples
+        self.sample_q = sample_q
         self.stop_evt = threading.Event()
         self.last_packet_time = 0.0
 
-        # control state (target hardware state, written by control loop)
         self._pump = 0
-        self._valve1 = False
-        self._valve2 = False
+        self._valve1 = True   # default OPEN: safe state
+        self._valve2 = True   # default OPEN: safe state
         self._lock = threading.Lock()
 
         drive.subscribe(drive.MeasurementsPID.PID, self._on_packet)
@@ -226,64 +250,74 @@ class Hardware:
         self._ctrl_thr = threading.Thread(target=self._control_writer, daemon=True)
 
     def start(self):
-        # Bring up the serial reader and the control writer threads first, so
-        # the reset()/send_cmd handshake actually has somebody pumping bytes
-        # off the wire.
         self._thr.start()
         self._ctrl_thr.start()
-
-        # Reset the uControl board to a known state. drive.reset() toggles RTS
-        # (or GPIO18 on Pi) to reboot the AVR, then waits for the 'R','!' ack.
-        # This guarantees the firmware is freshly in setup() and streaming.
-        try:
-            drive.reset()
-        except Exception as e:
-            print(f"[warn] drive.reset() failed: {e}; trying without reset")
-
-        # Send our streaming config (sample interval, all status fields).
+        # Open valves first so they start in a known-safe state,
+        # then close them only once we confirm the board is responding.
         drive.send_cmd(interval=INTERVAL,
                        pump_rate=0,
-                       valve=drive.getValveByte(valve0=False, valve1=False),
+                       valve=drive.getValveByte(valve0=True, valve1=True),
                        cuff_pressure=True,
                        flow_rate=True,
                        pulse=True)
-
-        # Wait for first packet to confirm the board is actually responding.
-        deadline = time.time() + 5.0
+        deadline = time.time() + 30
         while time.time() < deadline:
             if self.last_packet_time > 0:
+                # Board confirmed alive: close valves for normal idle state
+                with self._lock:
+                    self._valve1 = False
+                    self._valve2 = False
+                drive.send_cmd(interval=INTERVAL,
+                               pump_rate=0,
+                               valve=drive.getValveByte(valve0=False, valve1=False),
+                               cuff_pressure=True,
+                               flow_rate=True,
+                               pulse=True)
                 return
             time.sleep(0.05)
-        # No packets arrived -- vent and raise
         try:
             drive.send_cmd(interval=0, pump_rate=0,
                            valve=drive.getValveByte(valve0=True, valve1=True))
         except Exception:
             pass
         raise RuntimeError(
-            "mmM board imported but no measurement packets received in 5s. "
-            "Check that the board has power and the firmware is running. "
-            "If the issue persists, unplug and replug the FTDI cable."
+            "mmM board imported but no measurement packets received in 3s. "
+            "Check that the board has power and the firmware is running."
         )
 
     def stop(self):
-        try:
-            self.set_actuators(pump=0, valve_open=True)
-            time.sleep(0.05)
-            drive.send_cmd(interval=0, pump_rate=0,
-                           valve=drive.getValveByte(valve0=True, valve1=True))
-        except Exception:
-            pass
+        """Vent both valves, stop pump, stop streaming. Called on all
+        normal exit paths; _emergency_vent() covers abnormal ones.
+
+        Order matters:
+          1. Set stop_evt FIRST so _control_writer exits its loop immediately
+             and cannot issue any further send_cmd calls.
+          2. Update internal state to open so anything that reads _valve* sees
+             the correct final state.
+          3. Send the vent command 3x directly from this thread -- no thread
+             can now race us.
+        """
+        # Step 1: kill the writer thread before touching the serial port
         self.stop_evt.set()
+        time.sleep(0.06)   # one _control_writer sleep cycle (0.05 s) + margin
+
+        # Step 2: canonical internal state
+        with self._lock:
+            self._pump = 0
+            self._valve1 = True
+            self._valve2 = True
+
+        # Step 3: send vent 3x; USB serial can drop a frame
+        for _ in range(3):
+            try:
+                drive.send_cmd(interval=0, pump_rate=0,
+                               valve=drive.getValveByte(valve0=True, valve1=True))
+            except Exception:
+                pass
+            time.sleep(0.05)
 
     def set_actuators(self, pump, valve1_open=None, valve2_open=None,
                       valve_open=None):
-        """Set pump duty and per-valve states.
-
-        For backward compatibility, valve_open=X sets both valves the same.
-        Otherwise pass valve1_open / valve2_open independently. Bit 7 (enable)
-        of the valve byte is always set by drive.getValveByte.
-        """
         if valve_open is not None:
             valve1_open = valve_open if valve1_open is None else valve1_open
             valve2_open = valve_open if valve2_open is None else valve2_open
@@ -296,7 +330,6 @@ class Hardware:
             self._valve1 = bool(valve1_open)
             self._valve2 = bool(valve2_open)
 
-    # ---- drive.py-side -----------------------------------------------------
     def _on_packet(self, pkt):
         t = pkt.millis / 1000.0
         self.last_packet_time = time.time()
@@ -313,10 +346,7 @@ class Hardware:
                 print("serial_interact error:", e)
             time.sleep(0.001)
 
-    # ---- control-output thread --------------------------------------------
     def _control_writer(self):
-        # Periodically push the current desired pump/valve state to the device.
-        # Re-sending keeps the device in the requested state if a cmd was lost.
         last_sent = (None, None, None)
         last_resend = 0.0
         while not self.stop_evt.is_set():
@@ -348,44 +378,50 @@ class Hardware:
 # GUI
 # ---------------------------------------------------------------------------
 class HoldGUI:
-    def __init__(self, root):
+    def __init__(self, root, initial_target=80.0):
         self.root = root
         root.title("mmM pressure hold")
         root.protocol("WM_DELETE_WINDOW", self._on_close)
 
         self.sample_q = queue.Queue(maxsize=10000)
         self.hw = Hardware(self.sample_q)
+        self._shutting_down = False
+        self._tick_after_id = None
 
         n_buf = int(DISPLAY_WINDOW_S * NOMINAL_FS)
         self.t_buf = collections.deque(maxlen=n_buf)
         self.p_buf = collections.deque(maxlen=n_buf)
+        self.lp5_buf = collections.deque(maxlen=n_buf)   # 0-5 Hz LP trace
         self.dp_t = []
         self.dp_v = []
 
         self.bp = StreamingBandpass(NOMINAL_FS, fl=0.7, fh=12.0, order=2)
         self.lp_inflate = StreamingLowpass(NOMINAL_FS, fc=1.0, order=2)
-        self.p_lp = None  # latest lowpassed pressure (used during inflate)
+        self.lp_5hz    = StreamingLowpass(NOMINAL_FS, fc=5.0, order=2)
+        self.p_lp = None  # latest 1 Hz lowpassed pressure (inflate gating)
+
+        # BeatTracker is now fed from the 0-5 Hz LP signal.
+        # Prominence stays at 0.15 mmHg; LP retains full pulse amplitude.
         self.beats = BeatTracker(NOMINAL_FS, prom_mmHg=0.15)
 
         # Waterfall plumbing
         self.spec = SpectrumComputer(NOMINAL_FS, nfft=WF_NFFT)
         self.wf_enabled = False
-        self.wf_n_cols = int(WF_SPAN_S / WF_UPDATE_S)         # ~30
-        self.wf_n_freq_full = WF_NFFT // 2 + 1                # rfft bins
-        # Restrict displayed frequency axis to <= WF_FMAX
+        self.wf_n_cols = int(WF_SPAN_S / WF_UPDATE_S)
+        self.wf_n_freq_full = WF_NFFT // 2 + 1
         self.wf_freqs_full = self.spec.freqs
         self.wf_fmask = self.wf_freqs_full <= WF_FMAX
         self.wf_n_freq = int(self.wf_fmask.sum())
         self.wf_image = np.full((self.wf_n_cols, self.wf_n_freq), WF_DB_LO,
                                 dtype=float)
         self.wf_last_update = 0.0
-        self.wf_axis = None        # created lazily when toggled on
+        self.wf_axis = None
         self.wf_im = None
 
         self.hold_active = False
         self.inflating = False
         self.bleeding = False
-        self.target_mmHg = 80.0
+        self.target_mmHg = float(initial_target)
 
         self._build_ui()
         self.hw.start()
@@ -396,7 +432,7 @@ class HoldGUI:
         top.pack(fill=tk.X)
 
         ttk.Label(top, text="Target (mmHg):").pack(side=tk.LEFT)
-        self.target_var = tk.StringVar(value="80")
+        self.target_var = tk.StringVar(value=str(int(self.target_mmHg)))
         ttk.Entry(top, width=6, textvariable=self.target_var).pack(side=tk.LEFT, padx=4)
 
         self.hold_btn = ttk.Button(top, text="Hold", command=self._on_hold)
@@ -411,10 +447,6 @@ class HoldGUI:
         self.wf_btn = ttk.Button(top, textvariable=self.wf_btn_var,
                                  command=self._on_toggle_waterfall)
         self.wf_btn.pack(side=tk.LEFT, padx=4)
-
-        self.shot_btn = ttk.Button(top, text="Screenshot",
-                                   command=self._on_screenshot)
-        self.shot_btn.pack(side=tk.LEFT, padx=4)
 
         ttk.Separator(top, orient=tk.VERTICAL).pack(side=tk.LEFT, fill=tk.Y, padx=10)
 
@@ -456,18 +488,13 @@ class HoldGUI:
         self.ax_p = self.fig.add_subplot(2, 1, 1)
         self.ax_dp = self.fig.add_subplot(2, 1, 2)
 
-        self.ax_p.set_ylabel("cuff P (mmHg)")
-        self.ax_p.set_title("Live cuff pressure")
-        self.ax_p.grid(alpha=0.3)
-        (self.line_p,) = self.ax_p.plot([], [], lw=1.0)
+        self._restyle_axes()
+        (self.line_p,) = self.ax_p.plot([], [], lw=1.0, color="steelblue")
+        (self.line_lp5,) = self.ax_p.plot([], [], lw=1.4, color="darkorange",
+                                           alpha=0.85)
         self.target_hline = self.ax_p.axhline(self.target_mmHg, ls="--",
                                               color="r", alpha=0.5)
-        self.ax_p.set_xlim(-DISPLAY_WINDOW_S, 0)
 
-        self.ax_dp.set_ylabel("\u0394p peak-to-trough (mmHg)")
-        self.ax_dp.set_xlabel("time (s)")
-        self.ax_dp.set_title("Per-beat oscillation amplitude")
-        self.ax_dp.grid(alpha=0.3)
         (self.line_dp,) = self.ax_dp.plot([], [], "o-", ms=4, lw=1.0)
 
         self.fig.tight_layout()
@@ -504,11 +531,9 @@ class HoldGUI:
             return
         self.target_mmHg = tgt
         self.target_hline.set_ydata([tgt, tgt])
-        # Prime the lowpass to current pressure so it doesn't ring up from 0
         if self.p_buf:
             self.lp_inflate.reset(self.p_buf[-1])
             self.p_lp = float(self.p_buf[-1])
-        # Fresh beat tracking and history for this hold session
         self.beats.reset()
         self.dp_t.clear()
         self.dp_v.clear()
@@ -525,17 +550,13 @@ class HoldGUI:
         self.log_var.set(f"inflating to {tgt:.1f} mmHg")
 
     def _on_bleed(self):
-        # Toggle V1 (bleed). Pump stays off, V2 (release) stays closed.
-        # Beat detection keeps running as long as hold_active is True.
         if self.bleeding:
-            # Currently bleeding -> close V1, return to held state
             self.bleeding = False
             self.hw.set_actuators(pump=0, valve1_open=False, valve2_open=False)
             self.state_var.set("BLEED PAUSED")
             self.state_lbl.configure(foreground="dark green")
             self.log_var.set("V1 closed; pressure held at current level.")
         else:
-            # Not bleeding -> open V1, start descent
             self.inflating = False
             self.bleeding = True
             self.hold_active = True
@@ -548,46 +569,25 @@ class HoldGUI:
         self.hold_active = False
         self.inflating = False
         self.bleeding = False
-        # Both valves open: V1 bleed + V2 fast dump
         self.hw.set_actuators(pump=0, valve1_open=True, valve2_open=True)
         self.state_var.set("VENTING")
         self.state_lbl.configure(foreground="firebrick")
         self.log_var.set("V1 + V2 open, pump off; beat detection stopped.")
 
-    def _on_screenshot(self):
-        import os
-        from datetime import datetime
-        outdir = os.path.expanduser("~/mmM_screenshots")
-        try:
-            os.makedirs(outdir, exist_ok=True)
-        except OSError as e:
-            self.log_var.set(f"screenshot dir error: {e}")
-            return
-        stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        path = os.path.join(outdir, f"mmM_{stamp}.png")
-        try:
-            self.fig.savefig(path, dpi=150, bbox_inches="tight")
-        except Exception as e:
-            self.log_var.set(f"screenshot failed: {e}")
-            return
-        self.log_var.set(f"saved {path}")
-
     def _on_toggle_waterfall(self):
         self.wf_enabled = not self.wf_enabled
         if self.wf_enabled:
-            # Re-layout figure with 3 rows: live P, delta_p, waterfall
             self.fig.clear()
             self.ax_p = self.fig.add_subplot(3, 1, 1)
             self.ax_dp = self.fig.add_subplot(3, 1, 2)
             self.wf_axis = self.fig.add_subplot(3, 1, 3)
             self._restyle_axes()
-            # Fresh waterfall image
             self.wf_image[:] = WF_DB_LO
             self.wf_im = self.wf_axis.imshow(
                 self.wf_image,
                 aspect="auto",
-                origin="upper",                       # newest row at bottom
-                extent=[0, WF_FMAX, 0, WF_SPAN_S],    # x: freq, y: time-ago
+                origin="upper",
+                extent=[0, WF_FMAX, 0, WF_SPAN_S],
                 vmin=WF_DB_LO, vmax=WF_DB_HI,
                 cmap="viridis",
                 interpolation="nearest",
@@ -595,12 +595,11 @@ class HoldGUI:
             self.wf_axis.set_xlabel("freq (Hz)")
             self.wf_axis.set_ylabel("time ago (s)")
             self.wf_axis.set_title("Cuff pressure spectrogram (dB)")
-            self.wf_axis.invert_yaxis()               # 0 (newest) at top
+            self.wf_axis.invert_yaxis()
             self.fig.colorbar(self.wf_im, ax=self.wf_axis,
                               fraction=0.04, pad=0.02, label="dB")
             self.wf_btn_var.set("Waterfall: on")
         else:
-            # Collapse back to 2-row layout
             self.fig.clear()
             self.ax_p = self.fig.add_subplot(2, 1, 1)
             self.ax_dp = self.fig.add_subplot(2, 1, 2)
@@ -608,8 +607,11 @@ class HoldGUI:
             self.wf_im = None
             self._restyle_axes()
             self.wf_btn_var.set("Waterfall: off")
-        # Re-attach the data lines to the freshly created axes
-        (self.line_p,) = self.ax_p.plot([], [], lw=1.0)
+
+        # Re-create all data lines on the fresh axes
+        (self.line_p,) = self.ax_p.plot([], [], lw=1.0, color="steelblue")
+        (self.line_lp5,) = self.ax_p.plot([], [], lw=1.4, color="darkorange",
+                                           alpha=0.85)
         self.target_hline = self.ax_p.axhline(self.target_mmHg, ls="--",
                                               color="r", alpha=0.5)
         (self.line_dp,) = self.ax_dp.plot([], [], "o-", ms=4, lw=1.0)
@@ -623,18 +625,42 @@ class HoldGUI:
         self.ax_p.set_xlim(-DISPLAY_WINDOW_S, 0)
         self.ax_dp.set_ylabel("\u0394p peak-to-trough (mmHg)")
         self.ax_dp.set_xlabel("time (s)")
-        self.ax_dp.set_title("Per-beat oscillation amplitude")
+        self.ax_dp.set_title("Per-beat oscillation amplitude  [LP 0–5 Hz signal]")
         self.ax_dp.grid(alpha=0.3)
 
     def _on_close(self):
-        self.log_var.set("shutting down...")
+        self._shutting_down = True          # stop _tick from re-arming
+        if self._tick_after_id is not None:
+            try:
+                self.root.after_cancel(self._tick_after_id)
+            except Exception:
+                pass
+            self._tick_after_id = None
+        self.log_var.set("shutting down -- venting cuff...")
         self.root.update_idletasks()
-        self.hw.stop()
-        time.sleep(0.2)
+        self.hold_active = False
+        self.inflating = False
+        self.bleeding = False
+        self.hw.stop()          # kills writer thread, then sends vent cmd 3×
         self.root.destroy()
 
     # ---- main UI tick -----------------------------------------------------
     def _tick(self):
+        if self._shutting_down:
+            return
+        try:
+            self._tick_body()
+        except Exception as exc:
+            # Unhandled exception in the UI loop: vent immediately, then
+            # surface the error so it isn't swallowed silently.
+            _emergency_vent(f"unhandled tick exception: {exc}")
+            try:
+                self.hw.stop()
+            except Exception:
+                pass
+            raise
+
+    def _tick_body(self):
         new_t, new_p = [], []
         try:
             while True:
@@ -645,13 +671,20 @@ class HoldGUI:
             pass
 
         if new_t:
+            np_new_p = np.array(new_p)
+
             for t, p in zip(new_t, new_p):
                 self.t_buf.append(t)
                 self.p_buf.append(p)
 
-            ac_block = self.bp.step(np.array(new_p))
-            lp_block = self.lp_inflate.step(np.array(new_p))
+            # 1 Hz LP for inflate gating
+            lp_block = self.lp_inflate.step(np_new_p)
             self.p_lp = float(lp_block[-1])
+
+            # 0–5 Hz LP: stored for display and fed to BeatTracker
+            lp5_block = self.lp_5hz.step(np_new_p)
+            for v in lp5_block:
+                self.lp5_buf.append(float(v))
 
             # Feed raw pressure to the spectrum (DC removed inside FFT)
             if self.wf_enabled:
@@ -661,16 +694,15 @@ class HoldGUI:
                     self.wf_last_update = now
                     spec_full = self.spec.spectrum_db()
                     spec = spec_full[self.wf_fmask]
-                    # Roll image down by one row, write newest row at top
                     self.wf_image[1:, :] = self.wf_image[:-1, :]
                     self.wf_image[0, :] = spec
                     if self.wf_im is not None:
                         self.wf_im.set_data(self.wf_image)
 
-            # Detect beats only between Hold press and Release press,
-            # and only after inflation has completed (skip pump-noise phase).
+            # Beat detection: use LP 0-5 Hz signal (pump noise suppressed,
+            # full pulse amplitude retained)
             if self.hold_active and not self.inflating:
-                events = self.beats.update(np.array(new_t), ac_block)
+                events = self.beats.update(np.array(new_t), lp5_block)
             else:
                 events = []
             for t_mid, dp in events:
@@ -684,7 +716,6 @@ class HoldGUI:
 
             p_now = new_p[-1]
             self.p_var.set(f"P: {p_now:6.1f} mmHg")
-            # Reflect commanded actuator state
             with self.hw._lock:
                 pump_state = self.hw._pump
                 v1 = self.hw._valve1
@@ -705,9 +736,17 @@ class HoldGUI:
 
             t_arr = np.array(self.t_buf)
             p_arr = np.array(self.p_buf)
+            lp5_arr = np.array(self.lp5_buf)
             if t_arr.size:
                 t_now = t_arr[-1]
-                self.line_p.set_data(t_arr - t_now, p_arr)
+                t_rel = t_arr - t_now
+                self.line_p.set_data(t_rel, p_arr)
+                # lp5_buf may lag t_buf by a few samples during startup
+                if lp5_arr.size == t_arr.size:
+                    self.line_lp5.set_data(t_rel, lp5_arr)
+                else:
+                    n = lp5_arr.size
+                    self.line_lp5.set_data(t_rel[-n:], lp5_arr)
                 self.ax_p.set_xlim(-DISPLAY_WINDOW_S, 0)
                 p_lo = min(p_arr.min(), self.target_mmHg) - 5
                 p_hi = max(p_arr.max(), self.target_mmHg) + 5
@@ -719,12 +758,9 @@ class HoldGUI:
                 self.ax_dp.set_ylim(0, max(self.dp_v) * 1.15 + 0.1)
 
             self.canvas.draw_idle()
-
             self._control_step(p_now)
 
-        # Pressure-based watchdog: only trips on a real measurement above
-        # WATCHDOG_MMHG. Noise on the time-of-arrival of packets is no longer
-        # part of the trip condition.
+        # Pressure watchdog
         if new_t and new_p[-1] > WATCHDOG_MMHG:
             if self.hold_active or self.inflating or self.bleeding:
                 self.hold_active = False
@@ -736,11 +772,10 @@ class HoldGUI:
                 self.log_var.set(
                     f"watchdog: pressure {new_p[-1]:.0f} > {WATCHDOG_MMHG:.0f}, venting.")
 
-        self.root.after(UI_REFRESH_MS, self._tick)
+        self._tick_after_id = self.root.after(UI_REFRESH_MS, self._tick)
 
     # ---- inflate-to-target then idle -------------------------------------
     def _control_step(self, p_now):
-        # Hard upper limit always wins (vent both)
         if p_now > HARD_MAX_MMHG:
             self.hold_active = False
             self.inflating = False
@@ -753,12 +788,9 @@ class HoldGUI:
         if not self.hold_active:
             return
 
-        # During bleed, _on_bleed has set the desired actuator state;
-        # the control loop must not overwrite it.
         if self.bleeding:
             return
 
-        # Inflating phase: pump on, both valves closed, until lowpassed P >= target
         if self.inflating:
             p_decide = self.p_lp if self.p_lp is not None else p_now
             if p_decide >= self.target_mmHg:
@@ -775,15 +807,38 @@ class HoldGUI:
 
 # ---------------------------------------------------------------------------
 def main():
+    parser = argparse.ArgumentParser(description="mmM pressure-hold GUI")
+    parser.add_argument(
+        "target", nargs="?", type=float, default=80.0,
+        metavar="MMHG",
+        help="initial hold target in mmHg (default: 80)"
+    )
+    args = parser.parse_args()
+    if not (0 < args.target < HARD_MAX_MMHG - 5):
+        parser.error(f"target must be between 0 and {HARD_MAX_MMHG-5:.0f} mmHg")
     root = tk.Tk()
+    gui = None
     try:
-        HoldGUI(root)
+        gui = HoldGUI(root, initial_target=args.target)
+        root.mainloop()
     except RuntimeError as e:
-        from tkinter import messagebox
-        messagebox.showerror("mmM hardware error", str(e))
-        root.destroy()
+        _emergency_vent(f"RuntimeError in main: {e}")
+        try:
+            messagebox.showerror("mmM hardware error", str(e))
+        except Exception:
+            pass
+        try:
+            root.destroy()
+        except Exception:
+            pass
         raise
-    root.mainloop()
+    except Exception as e:
+        _emergency_vent(f"unexpected exception in main: {e}")
+        try:
+            root.destroy()
+        except Exception:
+            pass
+        raise
 
 
 if __name__ == "__main__":
