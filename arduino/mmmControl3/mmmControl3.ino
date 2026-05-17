@@ -74,7 +74,13 @@ void pump_off(){
 }
 
 void control_valve(int state){
-  if (!state & 0x80) return;
+  // Bit 7 (0x80) is the "enable" bit. If not set, ignore this command
+  // and leave valves in their current state. Note: original code was
+  //     if (!state & 0x80) return;
+  // which due to C precedence parses as  (!state) & 0x80,  always 0,
+  // so the early-return never fired and a state=0 command would still
+  // command both valves CLOSED. Parentheses make the intent explicit.
+  if (!(state & 0x80)) return;
   if((state & 0x01) == VALVE_OPEN){
     valve_is_closed = false;
     pressure_start = -1;
@@ -363,7 +369,10 @@ void bpc_setup(){
   Wire.write(0x00);
   Wire.endTransmission();
 #endif
-  valves_close();
+  // Safety: end setup with valves OPEN. The cuff should never be pressurized
+  // when no test is actively running. The host commands valves CLOSED only
+  // when actively inflating or holding. Removed `valves_close();` here so
+  // power-up / reset / any setup re-invocation leaves the cuff vented.
 #ifdef TEMPSTS21
   Wire.beginTransmission(STS_ADDR);
   Wire.write(STS_HOLD_MASTER);
