@@ -4,3 +4,48 @@
 **/*~
 **/\#*
 
+# KiCad temporary files
+*.000
+*.bak
+*.bck
+*~
+_autosave-*
+*.tmp
+
+# Netlist files
+*.net
+
+# Autorouter files
+.dsn
+
+# Exported BOM files
+*.xml
+*.csv
+
+# Plot output (Gerbers, etc.)
+*.gbr
+*.drl
+*-drl.gbr
+*.pos
+*.rpt
+*.ps
+
+# CADSTAR files
+*.cst
+
+# Eagle files
+*.brd
+*.sch
+
+# Backup directory
+*-backups/
+
+# JLC PCB generated files
+/jlcpcb/
+
+# Version Control History
+.history/
+
+# macOS Finder metadata
+.DS_Store
+
